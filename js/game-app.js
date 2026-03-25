@@ -733,7 +733,7 @@ Whether one column always swallowed the other, none would swear. The close chose
       const winterPlain = recapWinterSentencePlain(lastEv);
       const framingP = `<p class="run-recap-line run-recap-framing">${recapFramingHtml(lean)}</p>`;
 
-      return `<section class="run-recap" aria-labelledby="run-recap-h"><h4 id="run-recap-h">Your argument, in society and politics</h4><p class="run-recap-lead">Track: <strong>${escapeHtmlPlain(
+      return `<!-- mlcs599-recap-narrative-v2 --><section class="run-recap" aria-labelledby="run-recap-h"><h4 id="run-recap-h">Your argument, in society and politics</h4><p class="run-recap-lead">Track: <strong>${escapeHtmlPlain(
         pathLabels[path] || path
       )}</strong>. The ending below is one closing <em>lens</em> on the same winter. This box names what that track meant for Russian public life before the salon’s last scene.</p><div class="run-recap-path-narr">${pathNarr}</div><p class="run-recap-line"><strong>This winter in play:</strong> ${escapeHtmlPlain(
         winterPlain
