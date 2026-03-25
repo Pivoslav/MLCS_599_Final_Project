@@ -330,8 +330,8 @@
      *       McNally & Tempest (Letter I), Arndt (Bronze Horseman), SOURCES.md.
      *   (b) Read alongside + scene glue: replace ornamental glosses with text-grounded lines (what the
      *       passage does, who speaks, concrete link to the branch)—not filler connectives.
-     *   (c) EPILOGUE_TWELVE: bodies rewritten to in-scene salon voice (no “This text appears because…”);
-     *       winter flavor appended via winterEcho[event]. Continue tuning with Read alongside pass (b).
+     *   (c) EPILOGUE_TWELVE: in-scene salon voice shipped; winter block = optional misfit lead-in,
+     *       event-keyed winterEcho, path coda (west | slav | statist | med). Tune with Read pass (b).
      *
      * (2) Scene imagery item 2b: diversify center-panel art where scenes still reuse the same file; keep
      *     period-appropriate picks and rails ≠ center (see SCENE_IMAGES / SCENE_RAIL_IMAGES comments).
@@ -786,17 +786,35 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const event = state.lastEvent || "event_censor";
       const winterEcho = {
         event_salon:
-          "Outside, the wax-and-tea smell of the governor’s hall still clung to someone’s cuff—one sanctioned night when letter and poem had shared a candle, and no one could quite file it away.",
+          "Outside, the wax-and-tea smell of the governor’s hall still clung to someone’s cuff—one sanctioned night when letter and poem had shared a candle, and no one could quite file it away. <strong>Vera</strong> said the breakthrough had felt like air; <strong>Andrei</strong> said air that sweet usually meant someone upstairs had opened a vent on purpose.",
         event_flood_echo:
-          "North-country letters had soaked every argument; cold water, they muttered, does not ask which program you defended before it breaks the sill.",
+          "North-country letters had soaked every argument; cold water, they muttered, does not ask which program you defended before it breaks the sill. <strong>Father Dimitri</strong> crossed himself for drowned rooms named only in postscripts; <strong>Stepan</strong> swore the Neva had drafted their metaphors without asking.",
         event_censor:
-          "Seals and missing pages sat in the middle of the table like a fifth guest nobody had invited.",
+          "Seals and missing pages sat in the middle of the table like a fifth guest nobody had invited. <strong>Stepan</strong> could still taste ash from proofs pulled mid-phrase; <strong>Andrei</strong> argued continuity required some pages to stay blank, then hated himself a little for saying it aloud.",
         event_rural_gentry:
-          "Provincial obstinacy still rattled in Stepan’s throat—the ministry’s neat map had torn on a gentry nail.",
+          "Provincial obstinacy still rattled in <strong>Stepan’s</strong> throat—the ministry’s neat map had torn on a gentry nail. <strong>Vera</strong> translated the resistance into rents and tutors; <strong>Father Dimitri</strong> wondered aloud whose icon corner the decree had skipped.",
         event_zemstvo_clash:
-          "The struck pilot fund left a bruise no manifesto could paint over; trust and paper had divorced in daylight."
+          "The struck pilot fund left a bruise no manifesto could paint over; trust and paper had divorced in daylight. <strong>Andrei</strong> called it triage; <strong>Stepan</strong> called it a lesson in which ledger ate the other when budgets met mercy."
       };
-      body += "\n\n" + (winterEcho[event] || "Winter had left its own punctuation; no two of them quoted it the same way.");
+      const pathWinterCoda = {
+        west:
+          "From the Westernizing bench, Europe still sounded like verdict as much as model—winter had not let them file that habit away.",
+        slav:
+          "The Slavophile corner kept testing whether soil-talk could still sound humble once it had survived a ministry winter.",
+        statist:
+          "The filing instinct in the room had won its morning; whether mercy lived in the margin was a question they shelved with the ink.",
+        med:
+          "Mediator habits died hard—they still heard two ledgers arguing under one roof while the horses were called."
+      };
+      let winterBlock = "";
+      if (state.crisisMisfit) {
+        winterBlock +=
+          "The room had bet on a different kind of winter; the seal on the courier’s packet did not match the rehearsal—contingency had walked in wearing another track’s coat.\n\n";
+      }
+      winterBlock +=
+        winterEcho[event] || "Winter had left its own punctuation; no two of them quoted it the same way—and each swore the other had misheard the postscript.";
+      winterBlock += "\n\n" + (pathWinterCoda[path] || pathWinterCoda.west);
+      body += "\n\n" + winterBlock;
 
       if (state.evgenyChorus) {
         body += `\n\n<strong>Vera</strong> had pressed them to stop treating letter, poem, and clerk as separate files; the circle let her have the last inch of ink—one moral ledger, one winter, no more polite partitions.`;

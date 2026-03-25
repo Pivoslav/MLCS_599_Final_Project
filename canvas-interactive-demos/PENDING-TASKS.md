@@ -41,8 +41,8 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 ## B. Narrative & primary-text quality
 
 - [x] **Read alongside pass** — Edition pointer on every **Read alongside** block (`READ_ALONG_EDITION_NOTE` in `game-scenes.js`). *(Deeper quote rewrites / EPILOGUE voice remain optional.)*
-- [ ] **EPILOGUE_TWELVE** — Salon voice; winter echo per event.
-- [ ] **Scene imagery** — `SCENE_IMAGES` / rails variety.
+- [x] **EPILOGUE_TWELVE** — Salon voice; winter block: misfit lead-in + `winterEcho` + path coda (`game-app.js`).
+- [x] **Scene imagery** — `SCENE_IMAGES` / rails: diversified centers + `beat_med_bridge` rail swap (`game-config.js`).
 - [x] **Optional palette** — `SCENE_COLOR_SCHEME` (`event_flood_echo`, `event_censor`); more scenes optional.
 
 ## C. Authoring & structure docs
@@ -53,7 +53,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 ## D. Course / LMS operations
 
 - [x] **Canvas Page (authoring pack)** — Fragment (new-tab), checklist, `teaching-notes.html`. *Confirm link in Student View.*
-- [ ] **Module item** — External URL to Pages if preferred.
+- [x] **Module item** — External URL path documented in `HOSTING-AND-INTEGRATION.md` §1 checklist item 8.
 - [x] **Accessibility (bundle spot-check)** — Skip link, keyboard focus rings, copy feedback live region (see queue #10). *Full WCAG audit still optional.*
 
 ## E. Repository / legal (optional)

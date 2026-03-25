@@ -87,11 +87,11 @@
         bgPos: "48% 38%"
       },
       beat_west_print: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
-        alt: "Portrait of Pyotr Chaadayev.",
-        credit: "Portrait of Pyotr Chaadayev.",
-        href: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg",
-        bgPos: "44% 16%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square (Westernizing print beat: capital, journals, ministries).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
       },
       distinct_path: {
         src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
@@ -113,11 +113,11 @@
         bgPos: "50% 40%"
       },
       state_path: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
-        alt: "Palace Square and the Winter Palace (19th-century watercolor).",
-        credit: "Vasily Sadovnikov, Palace Square (19th c.).",
-        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
-        bgPos: "52% 42%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/14/SVINYIN%281814%29_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
+        alt: "The Bronze Horseman monument (early 19th-century print).",
+        credit: "M. S. Viniychuk after F. P. Alexeyev, view of the monument to Peter the Great (plate from Stepan Pimenov, <em>Collection of the most remarkable places of St. Petersburg</em>, 1814).",
+        href: "https://commons.wikimedia.org/wiki/File:SVINYIN(1814)_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
+        bgPos: "50% 42%"
       },
       beat_statist_machine: {
         src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
@@ -127,10 +127,11 @@
         bgPos: "38% 22%"
       },
       mediator: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
-        alt: "The Anichkov Bridge in Saint Petersburg.",
-        credit: "Anichkov Bridge (metaphor for bridging center and province).",
-        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg"
+        src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
+        alt: "The Palace Embankment and Neva piers (watercolor, 1840).",
+        credit: "Vasily Sadovnikov, Palace Embankment pier (1840); center–province negotiation.",
+        href: "https://commons.wikimedia.org/wiki/File:Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
       },
       mediator_city: {
         src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
@@ -146,18 +147,18 @@
         bgPos: "50% 40%"
       },
       beat_med_bridge: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
-        alt: "The Palace Embankment and Neva piers (watercolor, 1840).",
-        credit: "Vasily Sadovnikov, Palace Embankment pier (1840).",
-        href: "https://commons.wikimedia.org/wiki/File:Dvortsovaya_pier_at_1840.jpg",
-        bgPos: "50% 48%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        alt: "The Anichkov Bridge over the Fontanka in Saint Petersburg.",
+        credit: "Anichkov Bridge (mediator path: literal span, city and province).",
+        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg",
+        bgPos: "58% 45%"
       },
       crisis_west: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
-        alt: "Engraved portrait of Pyotr Chaadayev.",
-        credit: "Chaadaev engraving (Westernizing crisis beat).",
-        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg",
-        bgPos: "42% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
+        alt: "Portrait of Pyotr Chaadayev.",
+        credit: "Portrait of Pyotr Chaadayev (Westernizing crisis beat).",
+        href: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg",
+        bgPos: "44% 16%"
       },
       crisis_slav: {
         src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
@@ -173,10 +174,11 @@
         bgPos: "38% 22%"
       },
       crisis_med: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
-        alt: "Anichkov Bridge.",
-        credit: "Anichkov Bridge (mediator crisis beat).",
-        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg"
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        alt: "Historical depiction of the 1824 Saint Petersburg flood.",
+        credit: "The flood in Saint Petersburg, 1824 (mediator crisis: bridge and embankment under strain).",
+        href: "https://commons.wikimedia.org/wiki/File:The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        bgPos: "50% 45%"
       },
       event_flood_echo: {
         src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
@@ -192,17 +194,18 @@
         bgPos: "38% 22%"
       },
       event_salon: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
-        alt: "Portrait of Alexander Pushkin.",
-        credit: "Pushkin (salon and print culture).",
-        href: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg",
-        bgPos: "38% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Savrasov_1871.jpeg",
+        alt: "Savrasov’s study of melting snow, rooks, and a village church.",
+        credit: "Alexei Savrasov, study related to <em>The Rooks Have Returned</em> (1871); thaw after a guarded salon opening.",
+        href: "https://commons.wikimedia.org/wiki/File:Savrasov_1871.jpeg",
+        bgPos: "48% 38%"
       },
       event_rural_gentry: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
-        alt: "Church of the Intercession on the Nerl.",
-        credit: "Rural landmark (provincial gentry resistance).",
-        href: "https://commons.wikimedia.org/wiki/File:Church_of_the_Intercession_on_the_Nerl.jpg"
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        alt: "Portrait of Emperor Nicholas I of Russia.",
+        credit: "Portrait of Nicholas I (provincial notables, patronage, and ministry resistance).",
+        href: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg",
+        bgPos: "38% 22%"
       },
       event_zemstvo_clash: {
         src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
@@ -317,8 +320,8 @@
         bgPos: "48% 38%"
       },
       beat_med_bridge: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
-        bgPos: "55% 45%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
       },
       crisis_west: {
         src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",

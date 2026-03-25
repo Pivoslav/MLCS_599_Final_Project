@@ -29,6 +29,7 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 5. **Save** (and **Publish** when ready).
 6. **Student View** (or an incognito window): confirm the **Open game in new tab** control and the plain URL both reach the live game.
 7. Optional: add the page to a **Module** as a “Page” item, or create a **Module → External URL** item pointing at the same GitHub Pages root if you prefer not to use the RCE at all.
+8. **External URL module item (instructor):** In **Modules → + → External URL**, paste the **GitHub Pages** game URL (or your course’s public Canvas Page URL if students can open it without login). Enable **Load in New Tab** (recommended). Title it like the assignment syllabus. Use this when you want zero RCE paste and a single link in the module outline.
 
 See also **`teaching-notes.html`** (short TA summary with links to this file and the fragment).
 
