@@ -368,11 +368,11 @@
         bgPos: "50% 42%"
       },
       resolve_endings: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Imperial_Academy_of_Arts.jpg/1280px-Imperial_Academy_of_Arts.jpg",
-        alt: "Photograph of the neoclassical Imperial Academy of Arts on the Neva embankment in Saint Petersburg.",
-        credit: "Imperial Academy of Arts building (sorting the outcome: training, taste, and which story graduates).",
-        href: "https://commons.wikimedia.org/wiki/File:Imperial_Academy_of_Arts.jpg",
-        bgPos: "48% 38%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/The_winter_Palace_%28North_facade%29_in_St._Petersburg_in_the_19th_century.jpg/1280px-The_winter_Palace_%28North_facade%29_in_St._Petersburg_in_the_19th_century.jpg",
+        alt: "Nineteenth-century lithograph of the Winter Palace north façade in snow, Saint Petersburg.",
+        credit: "Lithograph after Iosif Charlemagne, Winter Palace north façade in winter (sorting the outcome: capital in snow, no modern photograph).",
+        href: "https://commons.wikimedia.org/wiki/File:The_winter_Palace_(North_facade)_in_St._Petersburg_in_the_19th_century.jpg",
+        bgPos: "50% 42%"
       },
       final_route_order: {
         src: "https://upload.wikimedia.org/wikipedia/commons/2/27/Palace_Embankment_near_Hermitage_Theatre_%28Beggrov%29.jpg",

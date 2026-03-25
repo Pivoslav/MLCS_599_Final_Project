@@ -40,7 +40,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 - [x] **URL `?scene=`**
 - [x] **Copy summary** (+ Run ID; + optional co-op reveal line)
 - [x] **Coupled sliders (epilogue debrief toy)**
-- [x] **Point budget pilot:** `resolve_endings` when co-op tools on (`getRealmBudgetPoolPoints`: 3/5/8 from winter total)
+- [x] **Point budget pilot:** `resolve_endings` for every run (`getRealmBudgetPoolPoints`: 3/5/8 from winter total); co-op gating is for seat ballots only.
 
 ## B. Narrative & primary-text quality
 
