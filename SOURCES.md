@@ -1,10 +1,10 @@
 # Sources Used in This Project
 
-This document tracks the primary and secondary works used to build **`index.html`** (Chaadaev + *Bronze Horseman* CYOA) and **`README.md`** (teaching notes).
+This document tracks the primary and secondary works used to build the **CYOA game** (shell `index.html` plus `js/` and `css/` bundles) and **`README.md`** (teaching notes).
 
 ---
 
-## 1) Chaadaev + Pushkin: Choose-Your-Own Adventure (`index.html`)
+## 1) Chaadaev + Pushkin: Choose-Your-Own Adventure (game bundle)
 
 ### Primary texts
 
@@ -57,5 +57,5 @@ These items informed a **separate** presentation in the wider course; they are *
 
 ## Notes on Use
 
-- The creative branching narrative in `index.html` is an **interpretive educational adaptation**, not a direct translation of Chaadaev.
+- The creative branching narrative in the game bundle is an **interpretive educational adaptation**, not a direct translation of Chaadaev.
 - If needed, this source list can be expanded into a formal MLA/Chicago bibliography.
