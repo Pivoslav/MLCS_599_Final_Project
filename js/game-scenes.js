@@ -1,4 +1,25 @@
     const scenes = {
+      session_format: {
+        title: "At the table",
+        text: `Before the letter lands in your hands, settle <strong>how your group will run choices</strong>.
+
+If <strong>three players</strong> will take the Order, Reform, and People seats and vote before locking each beat, choose <strong>Three seats</strong>. If one person will tap the buttons alone, choose <strong>Solo</strong>—the story is the same either way.
+
+You can still change this later with the <strong>Enable co-op gating</strong> checkbox above the choice buttons.`,
+        choices: [
+          {
+            text: "<strong>Three seats</strong> — use the co-op ballot (vote, then reveal and apply) on choice beats.",
+            next: "intro",
+            sessionCoop: true
+          },
+          {
+            text: "<strong>Solo / one voice</strong> — choose directly; keep co-op tools off.",
+            next: "intro",
+            sessionCoop: false
+          }
+        ]
+      },
+
       intro: {
         title: "Moscow, Autumn 1836",
         text: `The latest issue of Teleskop has just circulated. Inside is a letter by Pyotr Chaadaev.

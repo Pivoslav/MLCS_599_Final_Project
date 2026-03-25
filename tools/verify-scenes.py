@@ -71,7 +71,7 @@ def main() -> int:
     if "ending_computed" not in scene_keys:
         errors.append('Missing scene "ending_computed"')
 
-    referenced = {"intro"}
+    referenced = {"intro", "session_format"}
     for m in re.finditer(r'next:\s*"([a-z0-9_]+)"', text):
         t = m.group(1)
         if t != "ending_computed":

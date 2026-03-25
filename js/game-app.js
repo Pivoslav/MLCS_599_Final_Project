@@ -199,7 +199,7 @@
     }
 
     const state = {
-      current: "intro",
+      current: "session_format",
       steps: 0,
       history: [],
       pathId: null,
@@ -725,6 +725,25 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         return;
       }
 
+      if (choice.sessionCoop !== undefined) {
+        persistCoopToolsPref(!!choice.sessionCoop);
+        applyCoopPrefToDomAndState();
+        refreshCoopBallotUI();
+        state.history.push(state.current);
+        state.current = choice.next || "intro";
+        state.steps += 1;
+        pushToast(
+          choice.sessionCoop
+            ? "Co-op gating on—use the three seats and reveal card on choice beats."
+            : "Solo mode—tap the choice buttons directly."
+        );
+        statBars();
+        flushNewAchievementsToasts();
+        renderInventory();
+        renderScene();
+        return;
+      }
+
       state.history.push(state.current);
       if (choice.path) state.pathId = choice.path;
       if (choice.stateTag) state.runTags.add(choice.stateTag);
@@ -1147,6 +1166,14 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         clearCoopSeatsContextEl();
         return;
       }
+      if (state.current === "session_format") {
+        actionBar.hidden = true;
+        mount.innerHTML = "";
+        setCoopBallotWrapVisible(false);
+        if (sumEl) sumEl.textContent = "";
+        clearCoopSeatsContextEl();
+        return;
+      }
       const list = state._coopChoicesSnapshot || [];
       if (!list.length) {
         actionBar.hidden = true;
@@ -1272,7 +1299,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           ? `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span></span>`
           : `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}</span>`;
         button.addEventListener("click", () => {
-          if (state.coopToolsEnabled) {
+          if (state.coopToolsEnabled && state.current !== "session_format") {
             pushToast("Co-op gating on: each seat votes to match an option below, then Reveal → commit → Apply under the buttons.");
             return;
           }
@@ -1696,7 +1723,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const cb = document.getElementById("coopToolsEnable");
       if (cb) cb.checked = readCoopToolsPrefEnabled();
       state.coopToolsEnabled = !!(cb && cb.checked);
-      state.current = "intro";
+      state.current = "session_format";
       state.steps = 0;
       state.history = [];
       state.stats = { order: 50, reform: 50, people: 50 };

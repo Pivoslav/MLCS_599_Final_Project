@@ -525,6 +525,7 @@
 
     /** Colour wash bucket per scene (see .content[data-ambient] in CSS). */
     const SCENE_AMBIENT = {
+      session_format: "salon",
       intro: "salon",
       salon_pushkin: "print",
       petersburg_pressure: "neva",
