@@ -44,7 +44,7 @@ Three questions will keep surfacing: Does Russia belong to “universal” histo
 
 <strong>Father Dimitri</strong>: “The letter began as counsel to a soul in pain. Have we turned her into kindling?”
 
-You answer them in the moment, not in policy headlines. (The real Letter I is a <strong>pastoral epistle</strong> to “Madame”; here the salon <strong>dramatizes</strong> its ideas. See Terms.)`,
+You answer in character, not only in abstract policy. (The real Letter I is a <strong>pastoral epistle</strong> to “Madame”; here the salon <strong>dramatizes</strong> its ideas. See Terms.) <strong>Choose one reply below</strong>; it sets whether you join Westernizers, seek a non-European path, try a middle course, or open with Pushkin before the Europe debate hardens.`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (outside universal history):</strong> “Placed, as it were, outside of the times, we have not been affected by the universal education of mankind.”<br><span class="read-gloss">After comforting Madame, Chaadaev widens to the nation: Russia missed the centuries-long moral formation other peoples absorbed. The first button treats that gap as work for law, schools, and press over time, not a single leap.</span><br><br><strong>Letter I (neither West nor East):</strong> “We belong neither to the West nor to the East, and we possess the traditions of neither.”<br><span class="read-gloss">He denies Russia a seat in either “family” of world civilization. The second button refuses his verdict as final: you will seek a non-European footing (Slavophile or statist branches follow). The third splits the difference: borrow only what takes root.</span><br><br><strong>Letter I (imitation):</strong> “This is a natural consequence of a culture based wholly upon importation and imitation.”<br><span class="read-gloss">Import without inner growth is the hollow culture Chaadaev names. The Westernizing button explicitly promises institutions that are more than costume, the letter will keep testing that promise.</span><br><br><strong>Letter I (no heritage):</strong> “We Russians… have come into the world like illegitimate children without a heritage, without a link with the men who preceded us on earth.”<br><span class="read-gloss">Illegitimacy here means no usable continuity with past generations, memory and habit do not add up to a patrimony. The fourth button opens Pushkin’s poem next: Part One will set that abstract shame beside a poor clerk, a fiancée, and a Neva flood that erases rooms, concrete loss alongside Chaadaev’s argument.</span>`
@@ -143,7 +143,9 @@ Conservative elites accuse reformers of importing alien values. Someone quotes t
 
 <strong>Vera</strong>: “A constitution on this table is a warrant for the Third Section.”
 
-<strong>Stepan</strong>: “Or we do what the law allows; petition in order, wait our season.”`,
+<strong>Stepan</strong>: “Or we do what the law allows; petition in order, wait our season.”
+
+The room will not move until <strong>you</strong> pick a lane: Vera’s gradual charters, Andrei’s constitutional scandal, or Stepan’s petitions (knowing petitions may cost the season).`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (duty, justice, law, order):</strong> “They are the ideas of duty, justice, law, and order… This is the atmosphere of the West…”<br><span class="read-gloss">Chaadaev’s West is moral atmosphere, not gadgets. <strong>Vera</strong>’s gradual charters match that mood; <strong>Andrei</strong>’s constitutional scandal risks the “one stroke” mimicry Chaadaev mocked; <strong>Stepan</strong>’s petition path tests whether procedure without pressure is another hollow form.</span><br><br><strong><em>The Bronze Horseman</em>, Part One (after the flood):</strong> tradesmen rush “To surcharge their neighbor / For their grave loss” while the city moves on. (<em>The Bronze Horseman</em>, Part One, after the flood.)<br><span class="read-gloss">Pushkin’s tradesmen profit from neighbors’ flood losses, markets move on while bodies are remembered. That greed undercuts naive gradualism <em>and</em> faith that petitions alone moralize the capital.</span>`
@@ -164,7 +166,9 @@ Vera stops attending after the second week; her note cites an indisposed aunt.
 
 Father Dimitri says dryly that Russia already had enough paper before Chaadaev.
 
-You proved a different hollowness than the one you meant: procedure without pressure stalls; the Third Section’s file on your circle grows thicker for the delay, not thinner. This branch is a <strong>dead end, not a game-over</strong>; you may still reach winter journals, one season poorer.`,
+You proved a different hollowness than the one you meant: procedure without pressure stalls; the Third Section’s file on your circle grows thicker for the delay, not thinner. This branch is a <strong>dead end, not a game-over</strong>; you may still reach winter journals, one season poorer.
+
+<strong>To continue,</strong> abandon the petition track and return to journals and risk (the only way forward from here).`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (restlessness, no fixed sphere):</strong> “We all resemble travellers. There is no definite sphere of existence for anyone… In our families we look like strangers…”<br><span class="read-gloss">Chaadaev sketches a society without settled habit or home, your autumn lost inside copies and seals matches his image. The only way out offered is to abandon the waiting room and return to print, poorer and watched.</span>`
@@ -184,7 +188,9 @@ Pushkin’s Yevgeny, who “found the great unnerving,” dwelled in poor Kolomn
 
 <strong>Vera</strong> asks who pays compensation.
 
-<strong>Andrei Mikhailovich</strong> mutters about Poland and precedent.`,
+<strong>Andrei Mikhailovich</strong> mutters about Poland and precedent.
+
+<strong>Your move:</strong> work the land question through noble alliances and administrators, or force a public scandal until the capital cannot pretend serfdom is a private affair.`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (master and slave):</strong> “…forces which dominate everything here from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Chaadaev names power from court down to the enslaved person. That is the moral ladder Father Dimitri pointed at: promising elections while people are still serfs is empty.</span><br><br><strong><em>The Bronze Horseman</em>, Part One (Yevgeny before the flood):</strong> “Our hero dwelled / In poor Kolomna… / Some office, found the great unnerving…” (<em>The Bronze Horseman</em>, Part One.)<br><span class="read-gloss">Pushkin’s Yevgeny is a small clerk under the great plan. The two choices on this screen are whether you build careful noble alliances or force a public scandal. Both are also about whether <em>he</em> counts in politics.</span>`
@@ -201,7 +207,9 @@ Pushkin’s Yevgeny, who “found the great unnerving,” dwelled in poor Kolomn
 
 Chaadaev asked: “Where are our wise men, where are our <strong>thinkers</strong>? Who is there who has ever <strong>thought for us</strong>?” Your journals wager that a reading minority can become that elite; for enlightenment or for sedition, depending on who writes the report.
 
-Pushkin’s Neva is a counter-image: the state’s plan and the clerk’s room are not the same story. Winter will test whether print or ranks decide what Russia becomes next. <strong>When you roll for winter</strong>, a few dice totals deliberately pull in <strong>another track’s</strong> crisis (see the preview box: die <strong>1</strong> with total still <strong>7+</strong>, or die <strong>6</strong> with total <strong>5 or below</strong>). Expect odd mail, not a neat story that always matches your convictions.`,
+Pushkin’s Neva is a counter-image: the state’s plan and the clerk’s room are not the same story. Winter will test whether print or ranks decide what Russia becomes next. <strong>When you roll for winter</strong>, a few dice totals deliberately pull in <strong>another track’s</strong> crisis (see the preview box: die <strong>1</strong> with total still <strong>7+</strong>, or die <strong>6</strong> with total <strong>5 or below</strong>). Expect odd mail, not a neat story that always matches your convictions.
+
+<strong>Decide for this circle:</strong> keep the journals and reading societies loud, or throttle print until you secure ministry cover and salaries?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (who thinks for Russia?):</strong> “Now I ask you, where are our wise men, where are our thinkers? Who is there who has ever thought for us, who is there who thinks for us today?”<br><span class="read-gloss">Chaadaev demands a thinking public, not a mute crowd. Keeping the journals loud claims the salon as that minority; quieting them trades thought for patronage and a thinner file, at the cost of conceding the mind to chiefs who stamp in triplicate.</span>`
@@ -220,7 +228,9 @@ You know Letter I also attacked a moral code drawn from “<strong>miserable Byz
 
 <strong>Stepan</strong> worries you are swapping one borrowed slogan for another.
 
-<strong>Father Dimitri</strong> listens for whether “destiny” still reaches the poor.`,
+<strong>Father Dimitri</strong> listens for whether “destiny” still reaches the poor.
+
+<strong>Fork the path:</strong> commit to a Slavophile moral community in public, or align with throne and ministries and keep national-religious talk private unless rank invites it?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (Byzantium and schism):</strong> “…we proceeded to seek the moral code which was to constitute our education in miserable Byzantium…” / “…the vivifying principle of unity animated everything.”<br><span class="read-gloss">Chaadaev attacks Orthodox separation from Latin Christendom and lost “unity.” Any Slavophile answer on the next screen still has to answer <em>that</em> charge, not only praise the village.</span><br><br><strong>Letter I (Russia between East and West):</strong> “…situated between the two great divisions of the world, between the East and the West, leaning with one elbow on China and another on Germany, we should have united within us the two great principles of intelligent nature…”<br><span class="read-gloss">Chaadaev says Russia could have fused East and West in one people but missed its vocation. If you pick the statist branch next, you are trading that romantic myth for loyalty to throne and ministries.</span>`
@@ -256,7 +266,9 @@ Which answer do you hazard aloud?`,
         title: "Aksakov at the Edge of the Letter",
         text: `<strong>Konstantin Aksakov</strong> (1817–1860) does not answer Chaadaev with European timelines. He treats the Russian people as a moral-historical subject in its own right: communal bonds, Orthodox conscience, and native speech against the abstract “rights” chatter of the West. Petersburg’s granite plan; Pushkin’s bronze rider; is for him a symbol of uprooted, state-driven power alien to the soil.
 
-This <em>inverts</em> much of Chaadaev’s prescription while sometimes echoing his shame: Russia may have failed Europe’s exam without thereby owing Europe its soul. The tension is live: can Slavophile language protect Evgeny, or only the idea of the village?`,
+This <em>inverts</em> much of Chaadaev’s prescription while sometimes echoing his shame: Russia may have failed Europe’s exam without thereby owing Europe its soul. The tension is live: can Slavophile language protect Evgeny, or only the idea of the village?
+
+<strong>Before winter:</strong> do you take Aksakov’s soil-first line boldly in public, or soften it and admit selective borrowing in practice?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (exceptional people):</strong> “…we are an exceptional people. We are one of those nations which do not seem to form an integral part of humanity, but which exist only to teach some great lesson for the world.”<br><span class="read-gloss">Chaadaev links exception to misery before Russia rejoins “humanity.” Soil-first pride sometimes borrows “exception” without his warning; winter tests whether your public line was conviction or another cloak.</span><br><br><strong>Letter I (cloak and false progress):</strong> “…he threw us the cloak of civilization: we took up the cloak but did not so much as touch civilization.”<br><span class="read-gloss">Even soil-first rhetoric can wear Chaadaev’s “cloak.” The hard public line risks costume; the softened line admits selective borrowing, winter will test which was honest.</span><br><br><strong>Letter I (sterile soil):</strong> “…not one useful idea has germinated in the sterile soil of our fatherland…”<br><span class="read-gloss">Chaadaev’s barren soil taunt hangs over both stances: proclaim native truth loudly, or temper the edge while still importing technique.</span>`
@@ -277,7 +289,9 @@ Chaadaev’s “<strong>cloak of civilization</strong>” hangs in the air: the 
 
 <strong>Andrei</strong> has a brother in the Ministry of Education.
 
-<strong>Stepan</strong> asks whether you are advising power or flattering it.`,
+<strong>Stepan</strong> asks whether you are advising power or flattering it.
+
+<strong>Choose a tactic:</strong> draft sponsored readings for Andrei’s patron so thought looks governable, or urge contacts to brand Chaadaev’s circle seditious and feed the crackdown?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (cloak of civilization):</strong> “…he threw us the cloak of civilization: we took up the cloak but did not so much as touch civilization.”<br><span class="read-gloss">Chaadaev warns the state can wear the cloak of civilization without touching the real thing. The two choices below are opposite ways your circle tries to “fix” that image: loyal sponsored readings versus urging crackdown.</span>`
@@ -294,7 +308,9 @@ Chaadaev’s “<strong>cloak of civilization</strong>” hangs in the air: the 
 
 Reform, upstairs, exists only where it thickens the chain of command. Letter I asked who would <strong>think for Russia</strong>. The answer in the corridors is the minister and the clerk with the stamp, not you, unless you marry into the chain or draft its language.
 
-Here the Bronze Horseman is read as state majesty, not as Evgeny’s tragedy; unless someone in <em>your</em> circle dares say so, which costs him the next favor from a patron.`,
+Here the Bronze Horseman is read as state majesty, not as Evgeny’s tragedy; unless someone in <em>your</em> circle dares say so, which costs him the next favor from a patron.
+
+<strong>Your hand on the file:</strong> help steer dissent into commissions and ranked memos, or give the Third Section names and let arrests do the talking?`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (who thinks for the nation?):</strong> “…where are our wise men, where are our thinkers? Who is there who has ever thought for us…”<br><span class="read-gloss">On this track the file often answers Chaadaev before the salon speaks: memos route dissent into ranks, or names feed the Third Section, two ways of “thinking for Russia” that cost different friendships.</span><br><br><strong><em>The Bronze Horseman</em>, Part Two (statue as power):</strong> “Oh, Destiny’s great potentate! / Was it not thus, a towering idol…” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">Pushkin’s idol is state majesty raised above human scale. The informer choice sharpens that machinery against your own circle, Pushkin’s clerk stays the moral counterweight if anyone still dares say his name.</span>`
@@ -311,7 +327,9 @@ Here the Bronze Horseman is read as state majesty, not as Evgeny’s tragedy; un
 
 Chaadaev once imagined Russia between East and West; “leaning with one elbow on <strong>China</strong> and another on <strong>Germany</strong>”; called to unite imagination and reason; he concluded Providence had “left us completely on our own.” Your path is a stubborn attempt to build the synthesis that history denied.
 
-The same autumn questions persist, but the answer is neither abject imitation nor proud isolation. Pushkin’s flood already taught that borrowed granite and fleets need foundations that ordinary lives can survive.`,
+The same autumn questions persist, but the answer is neither abject imitation nor proud isolation. Pushkin’s flood already taught that borrowed granite and fleets need foundations that ordinary lives can survive.
+
+<strong>First fork:</strong> pilot the mix where power and money already concentrate (the capitals), or seed zemstvo-style councils and schools in the provinces first?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (between East and West):</strong> “…leaning with one elbow on China and another on Germany, we should have united within us the two great principles of intelligent nature - imagination and reason…”<br><span class="read-gloss">Chaadaev wanted imagination and reason fused in one Russia; history never delivered it. The mediator’s first fork is whether you try that fusion in cities first or in the provinces first.</span><br><br><strong>Letter I (Providence and solitude):</strong> “…Providence has left us completely on our own, has refused all involvement in any of our affairs…”<br><span class="read-gloss">Providence left Russia alone in Chaadaev’s text. Your wager here answers that abandonment: borrow law and technique, but root them in local voice, neither pure copy nor proud isolation.</span><br><br><strong>Discuss:</strong> Can law and technique be rooted so that clerks and provinces recognize themselves in them, not as decorations dropped from the capital?<br><span class="read-gloss">The Discuss line is the moral test for the two forks below: will provinces and clerks recognize themselves in your pilot, or only see another capital ornament?</span>`
@@ -325,7 +343,9 @@ The same autumn questions persist, but the answer is neither abject imitation no
 
       mediator_city: {
         title: "Pilot Modernization",
-        text: `St. Petersburg and Moscow glitter; the periphery lags. Inequality feeds resentment. The Bronze Horseman’s shadow: magnificence for some, drowning rooms for others. Chaadaev had already called Russian life a restless drift: a <strong>narrow present</strong>, houses like <strong>camping</strong>, families like strangers; the capitals shine while ordinary rooms feel provisional.`,
+        text: `St. Petersburg and Moscow glitter; the periphery lags. Inequality feeds resentment. The Bronze Horseman’s shadow: magnificence for some, drowning rooms for others. Chaadaev had already called Russian life a restless drift: a <strong>narrow present</strong>, houses like <strong>camping</strong>, families like strangers; the capitals shine while ordinary rooms feel provisional.
+
+<strong>How do you widen the pilot?</strong> Bargain rollout with conservatives who fear a rush, or apply public pressure so clerks and provincials cannot be ignored?`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (narrow present, provisional homes):</strong> “We live only in the most narrow kind of present without a past and without a future in the midst of a shallow calm.” / “In our houses we seem to be camping; in our families we look like strangers…”<br><span class="read-gloss">Chaadaev ties social restlessness to time and domestic life. City-first pilots risk locking in that pattern if glitter sets the tempo and the provinces stay an afterthought.</span><br><br><strong>Prologue (capital’s glory):</strong> “Peter’s own creation,” granite, Nevá’s “carapace.”<br><span class="read-gloss">Pushkin’s prologue is showpiece capital. The “negotiate with conservatives” button accepts that capital splendor still sets the political tempo for your pilot.</span><br><br><strong>Part One (ordinary life vs. plan):</strong> Yevgeny in “poor Kolomna,” the flood “Leaped on the city.” (<em>The Bronze Horseman</em>, prologue and Part One.)<br><span class="read-gloss">Yevgeny in poor Kolomna is periphery <em>inside</em> the capital. The “public pressure” choice argues that his kind of life, not only salons, must shape any national rollout.</span>`
@@ -338,7 +358,9 @@ The same autumn questions persist, but the answer is neither abject imitation no
 
       mediator_province: {
         title: "From the Ground Up",
-        text: `Teachers and local councils reshape life outside the capitals. Trust grows where institutions feel familiar, not dropped from above like a decree in a storm.`,
+        text: `Teachers and local councils reshape life outside the capitals. Trust grows where institutions feel familiar, not dropped from above like a decree in a storm.
+
+<strong>Choose the pace:</strong> keep building slowly from the district up, or invite St. Petersburg to speed things with central directives (and accept the trust cost)?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (peoples mature slowly):</strong> “Peoples are moral beings just as individuals are. It takes centuries to educate them, just as it takes years to educate a person.”<br><span class="read-gloss">Chaadaev says nations mature slowly: moral cover for slow provincial schools and councils. The “central directives” choice trades that patience for speed ordered from St. Petersburg.</span>`
@@ -356,7 +378,9 @@ The same autumn questions persist, but the answer is neither abject imitation no
 
 His image of Russia between <strong>East and West</strong>, a country called to merge two principles yet left to find its own way, haunts your compromise: neither pure Brussels nor pure Moscow, but a ledger both can sign.
 
-The bridge strains: local trust is your asset; central jealousy is the weather.`,
+The bridge strains: local trust is your asset; central jealousy is the weather.
+
+<strong>When push comes to shove,</strong> do you defend local budgets in public against a ministerial veto, or trade away the spotlight for a smaller trial with written guarantees?`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (East/West mission):</strong> “…leaning with one elbow on China and another on Germany…” (full passage in <em>Between Imitation and Isolation</em> read-along).<br><span class="read-gloss">You promised locals a hybrid East–West synthesis. The ministry-veto winter event tests whether that promise was ever real power or only talk.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> flood vs. embankments; clerk vs. statue (<em>The Bronze Horseman</em>, Part One and Part Two).<br><span class="read-gloss">Pushkin gives the image set for center (statue, embankments) vs. periphery (clerk, flood). Ask who pays when budgets and blame move upstairs to ministers.</span>`
@@ -374,7 +398,9 @@ The bridge strains: local trust is your asset; central jealousy is the weather.`
 
 You roll <strong>1d6</strong> and add an <strong>Order</strong> bonus (higher Order helps; the preview box shows your band). <strong>Usually</strong> the total picks an event that fits this Westernizing path. <strong>Two exceptions:</strong> if the die shows <strong>1</strong> but your total is still <strong>7 or higher</strong>, or the die shows <strong>6</strong> but your total is only <strong>5 or below</strong>, you get a crisis scripted for <em>another</em> argument track instead. That is deliberate in the rules: history can feel like the wrong packet on your desk.
 
-Roll once: d6 + Order bonus. High totals normally mean a salon breakthrough or a Neva echo; low totals normally mean the censor. (Slavophile, statist, and mediator tables in the same winter would sort the gossip differently.)`,
+Roll once: d6 + Order bonus. High totals normally mean a salon breakthrough or a Neva echo; low totals normally mean the censor. (Slavophile, statist, and mediator tables in the same winter would sort the gossip differently.)
+
+<strong>When the table is ready,</strong> use the roll button; check the preview box if you want the bands before the die lands.`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
@@ -391,7 +417,9 @@ Roll once: d6 + Order bonus. High totals normally mean a salon breakthrough or a
 
 The same <strong>misfit rule</strong> applies as on the Westernizing winter screen: if the die shows <strong>1</strong> while your total is still <strong>7+</strong>, or shows <strong>6</strong> while your total is only <strong>5 or below</strong>, you draw another path’s event. It can feel as if someone else’s scandal were pasted onto your name.
 
-Roll once: d6 + Order bonus. Middling totals favor gentry and clergy digging in against Petersburg’s school maps; a high throw may still buy a guarded salon hour, if the gendarmes are watching another staircase.`,
+Roll once: d6 + Order bonus. Middling totals favor gentry and clergy digging in against Petersburg’s school maps; a high throw may still buy a guarded salon hour, if the gendarmes are watching another staircase.
+
+<strong>Roll when ready;</strong> the preview box lists Slavophile bands and the same misfit rule as the Westernizing winter.`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
@@ -408,7 +436,9 @@ Roll once: d6 + Order bonus. Middling totals favor gentry and clergy digging in 
 
 This winter you may get another Neva alarm (proclamations, barges, daylight movement at the center) or only the slow rhythm of seized proofs and closed rooms. <strong>Do not assume the die always lines up with that pattern.</strong> The same misfit pairs as elsewhere apply: die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, can still hand you an event from a different track.
 
-Roll once: d6 + Order bonus. For this path, <strong>usually</strong> a high total means flood-style emergency and a low total means censorship and fear; the misfit rule above is the exception.`,
+Roll once: d6 + Order bonus. For this path, <strong>usually</strong> a high total means flood-style emergency and a low total means censorship and fear; the misfit rule above is the exception.
+
+<strong>Roll when ready;</strong> use the preview box for statist bands (only two outcome levels) and misfits.`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
@@ -423,7 +453,9 @@ Roll once: d6 + Order bonus. For this path, <strong>usually</strong> a high tota
         title: "Winter 1837: The Bridge Under Strain",
         text: `Provincial pilots meet winter shortages and ministry ledgers. Chaadaev’s question and Pushkin’s clerk refuse to stay in separate rooms. Will a mixed salon win a night, will zemstvo ambition trigger a central slapdown, will pure censorship erase a pilot you thought safe, or will couriers mistake your patchwork for someone else’s feud, and leave you answering a petition you never signed?
 
-Roll once: d6 + Order bonus. Mid-range totals are where Petersburg’s ink and the district ledger usually meet. <strong>If you hit a misfit</strong> (die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>), you may get another path’s winter beat. The middle road does not block strange mail.`,
+Roll once: d6 + Order bonus. Mid-range totals are where Petersburg’s ink and the district ledger usually meet. <strong>If you hit a misfit</strong> (die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>), you may get another path’s winter beat. The middle road does not block strange mail.
+
+<strong>Roll when ready;</strong> the preview box shows mediator bands (salon / zemstvo clash / censor) plus misfits.`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
@@ -445,7 +477,9 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
 
 <strong>Asymmetric sting:</strong> reform-minded voices may seize the scandal to demand change, yet the <strong>People</strong> meter still dives; panic and loss outrun rhetoric. One axis improving does not spare the others.
 
-(Automatic: Order −5, Reform +5, People −8.)`,
+(Automatic: Order −5, Reform +5, People −8.)
+
+<strong>How do you move next?</strong> Use the disaster to push relief and reform in the open, or work through chiefs to steady ranks and control how the story spreads?`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (nomads in the cities):</strong> “In our cities we look like nomads, even more than the nomads who let their herds graze on our steppes, for they are more attached to their deserts than we to our cities.”<br><span class="read-gloss">The scene text already linked this image to the flood: metaphor becomes wet plaster when roofs go. Chaadaev’s wording sits beside Pushkin’s river, which also ignores whose address is “home.”</span><br><br><strong>Letter I (forces from court to bonded labor):</strong> “…forces which dominate everything here from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Letter I opens with this ladder of power before it widens to “universal history.” A northern flood sorts who gets relief and who counts in the file: the same structure, different weather.</span><br><br><strong>Part One (flood):</strong> “Nevá, engorged, with swell and roaring… / Leaped on the city.” “Into the deeply hollowed basements, / Canals rose gushing to the casements.” “There streamed Petropolis, foam-laced…” (<em>The Bronze Horseman</em>, Part One.)<br><span class="read-gloss">Pushkin’s lines are raw destruction. The “useful scandal” choice below tries to turn that pain into reform rhetoric; the other choice calms chiefs and controls the story.</span><br><br><strong>Part One (aftermath and sovereign):</strong> The Emperor’s generals went speeding “To save the people, who, unheeding / With fear, were drowning where they dwelled.” Compare the sovereign’s speech on czars and the Lord in the same passage (<em>The Bronze Horseman</em>, Part One).<br><span class="read-gloss">The Emperor’s speech is throne theology plus rescue theater. Calming chiefs (second button) matches controlling how that narrative spreads.</span>`
@@ -461,7 +495,9 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
         title: "The Censor’s Visit",
         text: `A packet of Chaadaev’s letters is seized. Someone’s Pushkin is “lost.” Order tightens; Reform bleeds.
 
-(Automatic: Order +6, Reform −10, People −4.)`,
+(Automatic: Order +6, Reform −10, People −4.)
+
+<strong>The circle must decide:</strong> answer with a formal legal protest while you still can, or disband into private parlors and hope the file stops growing?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (imitation and hollowness):</strong> “This is a natural consequence of a culture based wholly upon importation and imitation.”<br><span class="read-gloss">After the censor seizes letters, “protest legally” claims Chaadaev’s ideas were serious; “retreat private” admits the salon was only dressing up.</span>`
@@ -477,7 +513,9 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
         title: "Salon Victory",
         text: `A sympathetic governor allows a reading; <strong>his</strong> indulgence, not yours. Excerpts from <em>The Bronze Horseman</em> (Arndt; flood, statue, pursuit) and Chaadaev share one evening: granite hymn, drowned streets, and history’s verdict.
 
-(Automatic: Order −3, Reform +8, People +6.)`,
+(Automatic: Order −3, Reform +8, People +6.)
+
+<strong>After the candles burn low,</strong> do you try to turn this night into a provincial tour, or thank the host and vanish before envy reaches the wrong desk?`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong><em>The Bronze Horseman</em> (salon-sized excerpts):</strong> Prologue “window to the West”; Part One “Leaped on the city”; Part Two “The Bronze Horseman in pursuit.” (<em>The Bronze Horseman</em>, prologue, Part One, and Part Two.)<br><span class="read-gloss">The poem runs pride → disaster → pursuit in one arc. “Provincial circuit” bets that whole arc can travel beyond one governor’s salon.</span><br><br><strong>Letter I (program in one room):</strong> “…repeat the whole education of mankind…”<br><span class="read-gloss">Chaadaev’s “repeat mankind’s education” is a long haul, not one reading night. Thanking the host and vanishing protects his patronage; a circuit risks it.</span>`
@@ -493,7 +531,9 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
         title: "Provincial Notables Dig In",
         text: `Gentry assemblies balk at a ministry school plan: too foreign, too fast. Orthodoxy and local patronage are invoked against “borrowed” classrooms. Order in the provinces looks like inertia; reformers call it sabotage.
 
-(Automatic: Order +2, Reform −5, People +4.)`,
+(Automatic: Order +2, Reform −5, People +4.)
+
+<strong>Your response:</strong> negotiate parish schools and local boards the assemblies might accept, or bypass them with ministry pressure (and wear the cost in trust)?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (borrowed codes):</strong> “…seek the moral code which was to constitute our education in miserable Byzantium…” / “…the vivifying principle of unity…”<br><span class="read-gloss">Chaadaev’s “Byzantium” and “unity” lines are cousins of the gentry cry “too foreign.” The buttons are the policy fork: negotiate parish schools with locals, or lobby the ministry to crush the assembly.</span>`
@@ -509,7 +549,9 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
         title: "Ministry vs. Local Budget",
         text: `A pilot zemstvo’s school fund is struck from above. Central ledgers win the day; provincial trust cracks. Chaadaev’s “borrowing” accusation returns in a new key: mimicry of Western institutions without local teeth.
 
-(Automatic: Order +4, Reform −4, People −6.)`,
+(Automatic: Order +4, Reform −4, People −6.)
+
+<strong>What now?</strong> Appeal in public with reform allies in the capital, or shrink to small charity and keep a shell of the pilot alive for another season?`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (importation and imitation):</strong> “This is a natural consequence of a culture based wholly upon importation and imitation.”<br><span class="read-gloss">Chaadaev says import-and-imitate cultures hollow out meaning. A ministry canceling a local school fund is exactly that charge in bureaucratic form.</span><br><br><strong>Letter I (no inner progression):</strong> “With us there is no inner development, no natural progression; new ideas sweep away the old…”<br><span class="read-gloss">Chaadaev says new ideas sweep away the old with no inner progression. Cutting the pilot fund feels like betrayal because another reform idea just got erased from below.</span>`
@@ -530,7 +572,9 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
 
 Chaadaev’s Letter I asked whether Russia gets an honest place in “universal” history; Pushkin’s <em>Bronze Horseman</em> asked who survives when the state builds in granite and the river rises.
 
-Below, three friends name <em>which of those two questions should close the story you tell about this winter</em>. That choice tilts the voice of the closing scenes, not which dispatch “really” carried the day in Petersburg.`,
+If your table uses the <strong>realm budget</strong> pool above the buttons, spend those points first; they nudge Order, Reform, and People before you frame the ending.
+
+Then <strong>choose one friend’s emphasis</strong> below. That pick sets whether the epilogue stresses state survival (Andrei), institutions and Letter I as program (Stepan), or clerks and peasants (Father Dimitri). It changes the voice of the close, not “what really happened” in Petersburg.`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (outside the times):</strong> “Placed, as it were, outside of the times, we have not been affected by the universal education of mankind.” / “We belong neither to the West nor to the East, and we possess the traditions of neither.”<br><span class="read-gloss">Chaadaev’s coordinates for Russia in world history. <strong>Stepan</strong>’s closing choice names law and schools as the long answer; <strong>Andrei</strong> and <strong>Father Dimitri</strong> tilt the same letter toward ranks or toward the clerk and the bonded laborer.</span><br><br><strong>Letter I (no heritage):</strong> “But, as for us Russians, who have come into the world like illegitimate children without a heritage, without a link with the men who preceded us on earth…”<br><span class="read-gloss">Broken continuity with the past is the personal face of his historical argument. The three voices below pick which thread of this winter’s story should dominate the epilogue.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> Prologue through Part Two (see <em>The Salon Turns to Pushkin</em> for excerpts keyed to those sections).<br><span class="read-gloss">Pushkin runs from Peter’s vow to Yevgeny’s pauper grave. Granite, flood, and pauper grave are the poem’s answer to who counts when the plan is grand.</span>`
@@ -544,7 +588,9 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_order: {
         title: "Closing: The Weight of Order",
-        text: `The lamps are low. <strong>Andrei</strong> lays his hand flat: ranks have to read the same upstairs and down, or nothing else holds. In Pushkin’s poem the statue still hears destiny, “<strong>Destiny’s great potentate</strong>,” not Yevgeny; the clerk has no vote in the official story of the city. Chaadaev, elsewhere in Letter I, described nations where a few thinkers steer the rest; Andrei is not wrong that stability flows from the summit, only that the summit rarely asks the clerk.`,
+        text: `The lamps are low. <strong>Andrei</strong> lays his hand flat: ranks have to read the same upstairs and down, or nothing else holds. In Pushkin’s poem the statue still hears destiny, “<strong>Destiny’s great potentate</strong>,” not Yevgeny; the clerk has no vote in the official story of the city. Chaadaev, elsewhere in Letter I, described nations where a few thinkers steer the rest; Andrei is not wrong that stability flows from the summit, only that the summit rarely asks the clerk.
+
+<strong>If the table agrees</strong> that Order should frame how you retell this winter, confirm below; otherwise step back and pick another voice on the previous screen.`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (minority meditates, majority feels):</strong> “They do not think for themselves; among them there is a certain number of thinkers who do the thinking for them… While the minority meditates, the rest feel, and the general movement occurs.”<br><span class="read-gloss">Chaadaev’s sociology of elites and masses fits Andrei’s Order frame: the file and the ranks move when someone upstairs thinks for everyone. The gloss is the cost Pushkin assigns to the clerk who is not in that minority.</span><br><br><strong>Part Two (direct address to the statue):</strong> “Oh, Destiny’s great potentate! / Was it not thus, a towering idol…” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">Pushkin addresses the statue as fate-like power. Saying yes here lets that majesty, not Yevgeny’s counter-voice, name the moral center of the tale you take out of the winter.</span>`
@@ -557,7 +603,9 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_reform: {
         title: "Closing: The Weight of Reform",
-        text: `<strong>Stepan</strong> speaks as if Chaadaev’s letter were a syllabus, not only a wound: law, schools, print, Russia doing mankind’s long homework in the open. The winter cost what it cost; he wants the close to name institutions, not only sighs.`,
+        text: `<strong>Stepan</strong> speaks as if Chaadaev’s letter were a syllabus, not only a wound: law, schools, print, Russia doing mankind’s long homework in the open. The winter cost what it cost; he wants the close to name institutions, not only sighs.
+
+<strong>If the table agrees</strong> that Reform should frame the retelling, confirm below.`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (program):</strong> “…we must, in a certain sense, repeat the whole education of mankind.”<br><span class="read-gloss">“Repeat mankind’s education” is the banner for Stepan’s Reform frame: Russia’s long homework inside world history.</span><br><br><strong>Letter I (duty, justice, law, order):</strong> same theme in <em>The Reformist Circle</em> read-along.<br><span class="read-gloss">For Chaadaev, “education” includes duty and law breathed like air, not scandal headlines alone. That is what Stepan’s closing is claiming.</span>`
@@ -570,7 +618,9 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_people: {
         title: "Closing: The Weight of the People",
-        text: `<strong>Father Dimitri</strong> keeps returning to roofs and waterlines. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the granite story outran. He asks the table to let that burial sit in the last line: ordinary bodies on the ledger, not only emperors in bronze.`,
+        text: `<strong>Father Dimitri</strong> keeps returning to roofs and waterlines. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the granite story outran. He asks the table to let that burial sit in the last line: ordinary bodies on the ledger, not only emperors in bronze.
+
+<strong>If the table agrees</strong> that clerks and peasants should frame how you remember the winter, confirm below.`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (slave and master):</strong> “…from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Chaadaev names the whole ladder from court to bonded laborer. Father Dimitri’s closing insists the bottom rung stay in sight, not an afterthought to granite and file.</span><br><br><strong><em>The Bronze Horseman</em>, Part Two (close):</strong> “…Here lay asprawl my luckless knave, / And here in charity they buried / The chill corpse in a pauper’s grave.” (<em>The Bronze Horseman</em>, Part Two, closing.)<br><span class="read-gloss">Yevgeny’s pauper grave is what triumphal history skips. Saying yes here keeps that burial in the tale’s last line, ordinary bodies before monuments.</span>`
