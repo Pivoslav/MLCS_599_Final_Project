@@ -22,6 +22,18 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 - **Always** include a prominent **“Open in new tab”** link to the same URL. Some institutions **block third-party iframes** while still allowing **external links**; the game remains playable.
 - **Paste source:** `canvas-rce-embed-fragment.html` — copy the outer `<div>…</div>` into **Page → Edit → HTML View**.
 
+### Canvas Page checklist (instructor)
+
+1. **Course → Pages → + Page** (or edit an existing module page).
+2. **Title** e.g. “Russia at the Crossroads (game)”.
+3. **Edit** → open the **HTML / raw code** editor (Canvas labels vary: “HTML Editor,” “</>,” or “Switch to raw HTML editor”).
+4. Paste the **entire** contents of **`canvas-rce-embed-fragment.html`** (one outer `<div>…</div>` wrapper).
+5. **Save** (and **Publish** when ready).
+6. **Student View** (or an incognito window): confirm the green **Play the game (new tab)** link works; check whether the **iframe** renders or is blank (iframe block = use new-tab link only).
+7. Optional: add the page to a **Module** as a “Page” item, or create a **Module → External URL** item pointing at the same GitHub Pages root if you prefer not to use the RCE at all.
+
+See also **`teaching-notes.html`** (short TA summary with links to this file and the fragment).
+
 ### Iframe size (common complaint: “windows a bit small”)
 
 - Default **`height`** in the fragment is a balance; **increase** the numeric `height` on each `<iframe>` (e.g. **900–1000** for the game, **700+** for demos) until it feels right in your course layout.
