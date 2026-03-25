@@ -699,7 +699,7 @@
     }
 
     .content[data-ambient="sorting"] .content-scene-bg {
-      opacity: 0.88;
+      opacity: 0.94;
     }
 
     .content-scene-veil {
@@ -757,7 +757,7 @@
       }
 
       .content[data-ambient="sorting"] .content-scene-bg {
-        opacity: 0.74;
+        opacity: 0.88;
       }
     }
 

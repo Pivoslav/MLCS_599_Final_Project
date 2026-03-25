@@ -165,9 +165,9 @@
     };
 
     /**
-     * Per-scene art: direct upload.wikimedia.org URLs (Commons /thumb/ paths often 404 in browsers).
-     * Optional bgPos: background-position for cover crops. Portraits use a lower horizontal % so the
-     * subject sits in the clearer band to the right of the text-column veil (see .content-scene-veil).
+     * Per-scene art: prefer Commons /thumb/…/1280px-… (or 1920px) URLs for very large masters so mobile
+     * browsers decode reliably; keep href on the canonical file page. Optional bgPos for cover crops.
+     * Portraits use a lower horizontal % so the subject sits in the clearer band to the right of the veil.
      *
      * BACKLOG (item 2; scene imagery):
      * - Period appropriateness (critical): assets should fit ~1830s imperial Russia and the game’s
@@ -181,7 +181,7 @@
      */
     const SCENE_IMAGES = {
       session_format: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/5/50/Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg/1280px-Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
         alt: "Oil painting of a lamp-lit interior with figures seated in a nineteenth-century salon.",
         credit: "Olga Kotchetova, <em>Intérieur de salon</em> (late 19th c.; salon-as-table metaphor for co-op setup).",
         href: "https://commons.wikimedia.org/wiki/File:Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
@@ -202,7 +202,7 @@
         bgPos: "38% 20%"
       },
       petersburg_pressure: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg/1280px-Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
         alt: "Nineteenth-century view of a bridge over the Fontanka in Saint Petersburg.",
         credit: "Karl Beggrov, view of Panteleymonovsky Bridge, Fontanka.",
         href: "https://commons.wikimedia.org/wiki/File:Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg"
@@ -236,11 +236,11 @@
         bgPos: "48% 38%"
       },
       beat_west_print: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/6/65/Fyodor_Alexeyev_-_View_of_the_Peter_and_Paul_Fortress_and_Palace_Embankment_-_Google_Art_Project.jpg",
-        alt: "Painting of the Neva embankment, Peter and Paul Fortress, and imperial quays in Saint Petersburg.",
-        credit: "Fyodor Alexeyev, <em>View of the Peter and Paul Fortress and Palace Embankment</em> (Westernizing print beat: capital, ministries, Neva logic).",
-        href: "https://commons.wikimedia.org/wiki/File:Fyodor_Alexeyev_-_View_of_the_Peter_and_Paul_Fortress_and_Palace_Embankment_-_Google_Art_Project.jpg",
-        bgPos: "52% 44%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/PalaceSquare-Sadovnikov.jpg/1280px-PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace in Saint Petersburg (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square (journals, Third Section, capital: ministry facades and the public stage).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
       },
       distinct_path: {
         src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
@@ -255,7 +255,7 @@
         href: "https://commons.wikimedia.org/wiki/File:Church_of_the_Intercession_on_the_Nerl.jpg"
       },
       beat_aksakov: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Gorskii_04449u.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Gorskii_04449u.jpg/1280px-Gorskii_04449u.jpg",
         alt: "Church of St. Boris and Gleb near Suzdal (early color photograph, ca. 1910).",
         credit: "Sergey Prokudin-Gorsky, Church of St. Boris and Gleb near Suzdal (ca. 1910).",
         href: "https://commons.wikimedia.org/wiki/File:Gorskii_04449u.jpg",
@@ -283,7 +283,7 @@
         bgPos: "50% 48%"
       },
       mediator_city: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/0/04/Columns_and_Kazan_Kathedral_behiind.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Columns_and_Kazan_Kathedral_behiind.jpg/1280px-Columns_and_Kazan_Kathedral_behiind.jpg",
         alt: "Watercolor view of Kazan Cathedral with colonnade (scan of an 1847 Sadovnikov watercolor).",
         credit: "After Vasily Sadovnikov (1847 watercolor); scan and restoration by Vitold Muratov, CC BY-SA 3.0 (mediator city beat: imperial public church and square).",
         href: "https://commons.wikimedia.org/wiki/File:Columns_and_Kazan_Kathedral_behiind.jpg",
@@ -353,7 +353,7 @@
         bgPos: "52% 38%"
       },
       event_rural_gentry: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg/1280px-Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg",
         alt: "Painting of the Moscow Kremlin towers seen from the Foundling Hospital embankment.",
         credit: "Fyodor Alexeyev, Kremlin from the Foundling Hospital (provincial notables eyeing the vertical center).",
         href: "https://commons.wikimedia.org/wiki/File:Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg",
@@ -367,7 +367,7 @@
         bgPos: "50% 42%"
       },
       resolve_endings: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/d/dd/Imperial_Academy_of_Arts.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Imperial_Academy_of_Arts.jpg/1280px-Imperial_Academy_of_Arts.jpg",
         alt: "Photograph of the neoclassical Imperial Academy of Arts on the Neva embankment in Saint Petersburg.",
         credit: "Imperial Academy of Arts building (sorting the outcome: training, taste, and which story graduates).",
         href: "https://commons.wikimedia.org/wiki/File:Imperial_Academy_of_Arts.jpg",
@@ -421,7 +421,7 @@
         bgPos: "42% 20%"
       },
       petersburg_pressure: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Anichkov_bridge.jpg/1280px-Anichkov_bridge.jpg",
         bgPos: "50% 45%"
       },
       reformist: {
@@ -441,8 +441,8 @@
         bgPos: "48% 35%"
       },
       beat_west_print: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
-        bgPos: "52% 42%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg/1280px-RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        bgPos: "38% 22%"
       },
       distinct_path: {
         src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
@@ -517,7 +517,7 @@
         bgPos: "55% 45%"
       },
       resolve_endings: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Anichkov_bridge.jpg/1280px-Anichkov_bridge.jpg",
         bgPos: "55% 45%"
       },
       final_route_order: {

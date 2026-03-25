@@ -1351,6 +1351,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           refreshCoopBallotUI();
           statBars();
           renderInventory();
+          updateSceneVisuals(state.current);
           updateSalometry();
           animateChoiceButtonsIfNeeded();
           return;
@@ -1424,6 +1425,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         state.realmBudgetDraft = { order: 0, reform: 0, people: 0 };
       }
       syncAppChrome(state.current, scene);
+      updateSceneVisuals(state.current);
       endingBlock.innerHTML = "";
 
       if (scene.computed) {
