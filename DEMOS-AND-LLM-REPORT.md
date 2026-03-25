@@ -111,7 +111,7 @@ Use this as a single turn or system note for whoever (human or Copilot) owns **`
 
 You are working on **Russia at the Crossroads** (MLCS 599 CYOA). Canonical repo facts live in **`Final/.github/copilot-instructions.md`**, **`Final/HOSTING-AND-INTEGRATION.md`**, and **`Final/canvas-interactive-demos/PENDING-TASKS.md`**.
 
-**Demos:** The folder **`Final/canvas-interactive-demos/`** is a **vanilla hub** (CDN-free) for prototypes. **Most mechanic demos listed there are already merged** into **`js/game-app.js`**, **`css/game.css`**, and **`index.html`**. Before proposing a “new” mechanic, grep the live bundle and read **`PENDING-TASKS.md` §A** — the main **optional** gap called out there is **point budget** (`realm-triangle-budget.html`), not yet wired in the shipped game.
+**Demos:** The folder **`Final/canvas-interactive-demos/`** is a **vanilla hub** (CDN-free) for prototypes. **§A mechanics in `PENDING-TASKS.md` are merged** into **`js/game-app.js`**, **`css/game.css`**, and **`index.html`**, including **point budget** on **`resolve_endings`** (co-op on) and **three-seat ballot**. **Ideas not on the execution queue:** **`BACKLOG.md`**. Grep the bundle before proposing new systems; follow **`PENDING-TASKS.md`** execution queue.
 
 **Non-negotiables:** Realms **`order` / `reform` / `people`** (0–100); paths **`west` | `slav` | `statist` | `med`**; respect **`prefers-reduced-motion`**; no full copyrighted primary text in-repo (see **`SOURCES.md`**).
 
@@ -119,7 +119,7 @@ You are working on **Russia at the Crossroads** (MLCS 599 CYOA). Canonical repo 
 
 **LLM:** Author-facing only. **`tools/dev_server.py`** + **`Final/llm-lab.html`** + **`.env`** (`GITHUB_TOKEN`) — **local machine**. Never embed tokens in **`js/`** or ship them on Pages. GitHub Models **chat** works for our Grok art-direct flow; **image generations** on `models.github.ai` have been **404** in practice — treat image output as **external** or preview-only. Full inventory: **`Final/DEMOS-AND-LLM-REPORT.md`**.
 
-**Suggested next code task:** Pilot **point budget** in **one** scene (co-op), or **§B** narrative pass if mechanics are frozen for the term.
+**Suggested next code task:** **§B** read-along pass (see **`PENDING-TASKS.md`** execution queue) or **`GAMEPLAN.md` Phase 2b** (static character art pipeline).
 
 **Suggested next ops task:** Canvas fragment height pass + **`canvas-self-test.html`** in the target LMS; **`cyoa-structure-map.html`** sync after any structural narrative edit.
 
@@ -134,6 +134,8 @@ You are working on **Russia at the Crossroads** (MLCS 599 CYOA). Canonical repo 
 | Path | Purpose |
 |------|---------|
 | `Final/DEMOS-AND-LLM-REPORT.md` | This document |
+| `Final/BACKLOG.md` | Ideas / overhauls (deferred work) |
+| `Final/teaching-notes.html` | Instructor quick reference (LMS + links) |
 | `Final/canvas-interactive-demos/index.html` | Demos hub |
 | `Final/canvas-interactive-demos/PENDING-TASKS.md` | Checklist |
 | `Final/HOSTING-AND-INTEGRATION.md` | Deploy + merge table |

@@ -201,7 +201,8 @@
       _coopChoicesSnapshot: null,
       realmBudgetCommittedResolveEndings: false,
       realmBudgetDraft: { order: 0, reform: 0, people: 0 },
-      _prevSceneForBudget: null
+      _prevSceneForBudget: null,
+      lastCoopBallotReveal: ""
     };
 
     const REALM_BUDGET_POOL_POINTS = 30;
@@ -531,6 +532,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         visited || "(start only)"
       ];
       if (ep.ach && ep.ach.length) lines.push("", "Unlocked: " + ep.ach.join("; "));
+      if (state.lastCoopBallotReveal) lines.push("", "Co-op ballot (last reveal): " + state.lastCoopBallotReveal);
       return lines.join("\n");
     }
 
@@ -1429,6 +1431,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.realmBudgetCommittedResolveEndings = false;
       state.realmBudgetDraft = { order: 0, reform: 0, people: 0 };
       state._prevSceneForBudget = null;
+      state.lastCoopBallotReveal = "";
       hideEventBanner();
       refreshCoopBallotUI();
       renderScene();
@@ -1505,13 +1508,16 @@ Whether one ledger always became footnote to the other, none would swear; the cl
             const ch = list[+v];
             return `${labels[j]} → ${stripChoiceLabel(ch && ch.text).slice(0, 42)}`;
           });
-          if (sumEl) sumEl.textContent = parts.join(" · ");
+          const line = parts.join(" · ");
+          if (sumEl) sumEl.textContent = line;
+          state.lastCoopBallotReveal = line;
         });
       }
       if (hide) {
         hide.addEventListener("click", () => {
           const sumEl = document.getElementById("coopBallotSummary");
           if (sumEl) sumEl.textContent = "";
+          state.lastCoopBallotReveal = "";
         });
       }
       if (apply) {

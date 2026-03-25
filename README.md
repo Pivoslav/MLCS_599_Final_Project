@@ -112,4 +112,6 @@ Summary: wrapper + **`iframe`** (GitHub Pages or Canvas Files **`/preview`**) + 
 - `SOURCES.md`: citations and editions.
 - `LICENSE`: MIT (redistribution; adjust copyright if your program requires a different notice).
 - `cyoa-structure-map.html`: branch map and teaching companion.
-- `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`. Backlog: `canvas-interactive-demos/PENDING-TASKS.md`.
+- `teaching-notes.html`: **Instructor/TA** page (Canvas fragment, new tab, `?scene=`, links to queues).
+- `BACKLOG.md`: deferred ideas and overhauls (execution queue lives in `canvas-interactive-demos/PENDING-TASKS.md`).
+- `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`. **Next tasks:** `canvas-interactive-demos/PENDING-TASKS.md`.

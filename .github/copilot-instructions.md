@@ -35,6 +35,8 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 - **`HOSTING-AND-INTEGRATION.md`** — Canvas, GitHub Pages, iframe sizing, merge roadmap.
 - **`DEMOS-AND-LLM-REPORT.md`** — Full demo/tool inventory, needs vs costs, design leverage, handoff block for agents.
 - **`GAMEPLAN.md`** — Phased delivery (Canvas + Pages + optional LLM-assisted character art pipeline).
+- **`BACKLOG.md`** — Ideas and overhauls not on the execution queue.
+- **`teaching-notes.html`** — Instructor/TA page (embed fragment, `?scene=`, links to queues).
 - **`co-op-cyoa-mechanics-report.html`** — Design report (effort vs payoff, co-op patterns).
 
 ## Implementation rules

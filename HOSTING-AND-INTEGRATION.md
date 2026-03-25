@@ -120,6 +120,8 @@ Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_
 | `SOURCES.md` | Editions and citations |
 | `HOSTING-AND-INTEGRATION.md` | This document |
 | `GAMEPLAN.md` | Phased ship plan (Canvas fragment, ops, optional character-art pipeline) |
+| `BACKLOG.md` | Ideas / overhauls (not on `PENDING-TASKS` execution queue) |
+| `teaching-notes.html` | Instructor page: Canvas paste, new tab, `?scene=`, doc links |
 | `DEMOS-AND-LLM-REPORT.md` | Demos + local LLM tooling inventory |
 
 **Deploy note:** GitHub Pages and any **iframe `src`** must keep **`index.html`, `css/`, and `js/`** together at the same base URL. Relative paths (`css/game.css`, `js/…`) assume that layout.

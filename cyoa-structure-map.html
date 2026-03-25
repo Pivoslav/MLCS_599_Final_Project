@@ -111,7 +111,7 @@
   <h2>0. Sources and how to use this map</h2>
   <ul class="compact">
     <li><strong>Live graph:</strong> <a href="index.html"><code>index.html</code></a> — <code>scenes</code> in <code>js/game-scenes.js</code>; <code>pickCrisisEvent</code>, <code>resolveEndingText</code>, <code>EPILOGUE_TWELVE</code> in <code>js/game-app.js</code>.</li>
-    <li><strong>Header path + tension:</strong> breadcrumb of recent scene titles and realm <em>spread</em> bar (<code>#salometry</code>, <code>updateSalometry()</code> in <code>js/game-app.js</code>; teaching prototype <code>canvas-interactive-demos/demos/mechanic-breadcrumb-tension.html</code>).</li>
+    <li><strong>Header path + tension:</strong> breadcrumb of recent scene titles and realm <em>spread</em> bar (<code>#salometry</code>, <code>updateSalometry()</code> in <code>js/game-app.js</code>; prototype <code>canvas-interactive-demos/demos/mechanic-breadcrumb-tension.html</code>). <strong>Task split:</strong> actionable queue in <a href="canvas-interactive-demos/PENDING-TASKS.md"><code>canvas-interactive-demos/PENDING-TASKS.md</code></a>; ideas in <a href="BACKLOG.md"><code>BACKLOG.md</code></a>.</li>
     <li><strong>Primary alignment:</strong> McNally &amp; Tempest (Letter I) and Arndt (<em>The Bronze Horseman</em>); see <a href="SOURCES.md"><code>SOURCES.md</code></a>.</li>
     <li><strong>Teaching notes:</strong> <a href="README.md"><code>README.md</code></a> (co-op roles, activities, in-game tools).</li>
     <li><strong>Path IDs in code:</strong> <code>west</code> (Westernizing), <code>slav</code>, <code>statist</code>, <code>med</code> (mediator). <code>pathId</code> is set on the <em>first</em> choice that assigns a path; Pushkin-first routes can delay or complicate meter shape before the path locks.</li>
@@ -401,7 +401,7 @@ flowchart TB
       <tr><th>Scene key</th><th>Title</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>resolve_endings</code></td><td>Sorting the Outcome</td><td>Prepends <code>RESOLVE_PATH_LEAD[pathId]</code>. Three framing buttons → <code>final_route_*</code>. <strong>Rare fourth:</strong> inventory letter + Pushkin and People ≥ 55 → Vera’s “Evgeny’s chorus” → <code>final_route_people</code> + <code>evgenyChorus</code>.</td></tr>
+      <tr><td><code>resolve_endings</code></td><td>Sorting the Outcome</td><td>Prepends <code>RESOLVE_PATH_LEAD[pathId]</code>. <strong>Co-op tools on:</strong> shared <strong>realm budget</strong> (30 pts across meters, cap 100) then framing choices; <strong>three-seat ballot</strong> above choices + sidebar timer/reveal/apply. Three framing buttons → <code>final_route_*</code>. <strong>Rare fourth:</strong> letter + Pushkin + People ≥ 55 → Vera → <code>final_route_people</code> + <code>evgenyChorus</code>.</td></tr>
       <tr><td><code>final_route_*</code></td><td>Closing: Weight of…</td><td>One confirm each; +5 to framed meter.</td></tr>
       <tr><td><code>ending_computed</code></td><td>Epilogue</td><td><code>EPILOGUE_TWELVE</code>; historiography nudge; discussion; unresolved; copy summary.</td></tr>
     </tbody>
