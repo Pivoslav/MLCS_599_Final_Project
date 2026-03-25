@@ -15,7 +15,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 3. [x] **Co-op ballot → run summary** — Last **Reveal votes** line appended to **Copy run summary** when present (`state.lastCoopBallotReveal`).
 4. [x] **`teaching-notes.html`** — Static TA page: embed fragment, new tab, `?scene=`, links to docs.
 5. [x] **Read-along pilot (intro)** — Edition pointer in first **Read alongside** block (McNally & Tempest; Arndt) per `SOURCES.md`.
-6. [x] **Read-along pass (rest of game)** — §B below. *Shipped: shared `READ_ALONG_EDITION_NOTE` (McNally & Tempest Letter I; Arndt Bronze Horseman; `SOURCES.md`) prepended to every `primaryRead.body` in `game-scenes.js`.*
+6. [x] **Read-along pass (rest of game)** — §B below. *Edition/citation guidance lives in syllabus, `README.md`, and `SOURCES.md`—not repeated in every Read alongside panel.*
 7. [x] **Canvas course Page** — Paste `canvas-rce-embed-fragment.html`; verify link in **your** LMS. *Fragment is new-tab hero (no iframe); confirm in Student View.*
 8. [x] **Playthrough smoke** — One run per `pathId` after substantive changes (§F). *Automated graph check: `python tools/verify-scenes.py` (or `node tools/verify-scenes.js`); manual path runs still useful after big edits.*
 9. [x] **Mobile / narrow pass** — Co-op strip, realm budget panel, sidebar (§F). *Shipped: story-first column order ≤900px, safe-area padding/viewport-fit, realm budget stacks ≤560px, touch targets ≤480px, toasts respect safe area.*
@@ -40,7 +40,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## B. Narrative & primary-text quality
 
-- [x] **Read alongside pass** — Edition pointer on every **Read alongside** block (`READ_ALONG_EDITION_NOTE` in `game-scenes.js`). *(Deeper quote rewrites / EPILOGUE voice remain optional.)*
+- [x] **Read alongside pass** — In-panel glosses only; no repeated McNally/Arndt boilerplate on each `primaryRead.body`. *(Deeper quote rewrites / EPILOGUE voice remain optional.)*
 - [x] **EPILOGUE_TWELVE** — Salon voice; winter block: misfit lead-in + `winterEcho` + path coda (`game-app.js`).
 - [x] **Scene imagery** — `SCENE_IMAGES` / rails: diversified centers + `beat_med_bridge` rail swap (`game-config.js`).
 - [x] **Optional palette** — `SCENE_COLOR_SCHEME` (`event_flood_echo`, `event_censor`); more scenes optional.

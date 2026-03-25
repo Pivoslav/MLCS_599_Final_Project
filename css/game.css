@@ -1081,17 +1081,6 @@
       font-style: italic;
     }
 
-    .primary-read-body .read-edition-note {
-      margin: 0 0 12px;
-      padding: 8px 10px;
-      font-size: clamp(0.84rem, 0.8rem + 0.1vw, 0.92rem);
-      line-height: 1.45;
-      color: #4a5060;
-      background: color-mix(in srgb, var(--card-muted) 88%, transparent);
-      border-radius: 6px;
-      border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
-    }
-
     .run-title-banner {
       margin-bottom: 12px;
       padding: 10px 14px;
