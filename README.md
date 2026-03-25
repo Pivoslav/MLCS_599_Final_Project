@@ -99,6 +99,7 @@ Summary: wrapper + **`iframe`** (GitHub Pages or Canvas Files **`/preview`**) + 
 
 ## Files (public repo)
 
+- `co-op-cyoa-mechanics-report.html`: **Visual report** (effort vs payoff chart, flow diagram, per-mechanic bars + learning notes) for multiplayer CYOA ideas.
 - `HOSTING-AND-INTEGRATION.md`: **Canvas + GitHub Pages lessons**, iframe sizing tips, public-repo notes, **mechanics/integration roadmap** vs `canvas-interactive-demos/`.
 - `index.html` + `css/game.css` + `js/game-config.js`, `js/game-scenes.js`, `js/game-app.js`: shipped game (open `index.html` locally or host the whole `Final/` folder on GitHub Pages).
 - `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload). Increase `height` on `<iframe>` if the embedded player feels small.
