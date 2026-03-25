@@ -152,7 +152,7 @@
       state.crisisMisfit = false;
       state.crisisMisfitKind = null;
 
-      /* Option 5: “wrong” rumor; high total but snake eyes, or weak total but a 6. Contingency, not a neat parable. */
+      /* Misfit: raw d6 === 1 with total >= 7, or raw d6 === 6 with total <= 5; swaps in another path’s event. */
       if (rawRoll === 1 && total >= 7) {
         state.crisisMisfit = true;
         state.crisisMisfitKind = "snake";
@@ -178,7 +178,7 @@
         med: "Total <strong>≥8</strong> → salon · <strong>5–7</strong> → zemstvo-style pilot vs. ministry · <strong>≤4</strong> → censor."
       };
       return `<details class="crisis-die-table"><summary>Winter roll: how <strong>d6 + Order bonus</strong> maps to rumors</summary>
-        <p class="crisis-die-lead">Roll <strong>1d6</strong>, add <strong>${bonus}</strong> (Order ÷ 25, rounded down). The game uses <strong>total</strong> with your path column below. <em>Misfits</em> can override: raw die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, swap in another path’s scandal.</p>
+        <p class="crisis-die-lead">Roll <strong>1d6</strong>, add <strong>${bonus}</strong> (Order ÷ 25, rounded down). The game uses <strong>total</strong> with your path column below. <em>Misfits</em> override that table: if the die shows <strong>1</strong> but total is still <strong>≥7</strong>, or the die shows <strong>6</strong> but total is <strong>≤5</strong>, you get another path’s event instead.</p>
         <p class="crisis-path-rule"><strong>Your track (${path}):</strong> ${rules[path] || rules.west}</p>
         <table class="crisis-grid" aria-label="Baseline totals by path">
           <thead><tr><th scope="col">Path</th><th scope="col">High (≥8)</th><th scope="col">Mid (5–7)</th><th scope="col">Low (≤4)</th></tr></thead>
@@ -216,7 +216,7 @@
         <h3 class="crisis-preview-title">Crisis preview (before you roll)</h3>
         <p class="crisis-preview-lead">You will roll <strong>1d6 + ${bonus}</strong> (Order is ${O} → bonus ${bonus}). Possible totals this throw: <strong>${minT}</strong> through <strong>${maxT}</strong>.</p>
         <p class="crisis-preview-band">${bands[path] || bands.west}</p>
-        <p class="crisis-preview-misfit"><strong>Misfits:</strong> raw die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, can force <em>another path’s</em> scandal, contingency, not the parable you rehearsed.</p>
+        <p class="crisis-preview-misfit"><strong>Misfits:</strong> If the die shows <strong>1</strong> but your <strong>total</strong> is still <strong>7+</strong>, or the die shows <strong>6</strong> but your <strong>total</strong> is <strong>5 or below</strong>, the game may assign a crisis meant for a <em>different</em> path. Unlucky routing in the rumor mill, not an outcome that always matches your argument.</p>
         <p class="crisis-preview-meters">Current meters: Order ${O} · Reform ${R} · People ${P} · spread ${spread}.</p>
       </aside>`;
     }
@@ -339,7 +339,7 @@
         pre += `<p class="callback-note"><strong>Scar:</strong> The petition detour wasted weeks; Stepan speaks more softly, and the Third Section’s file on the salon is thicker.</p>`;
       }
       if (sceneId.startsWith("event_") && state.crisisMisfit) {
-        pre += `<p class="crisis-misfit"><strong>Winter misfit:</strong> The rumor that reached you was meant for another table: hard luck when you felt safe, easy luck when you felt weak. Treat it as couriers and old scores crossing wires, not the story you rehearsed by the lamp.</p>`;
+        pre += `<p class="crisis-misfit"><strong>Winter misfit:</strong> This event usually belongs to another argument track. In the rules, that happens when the die shows <strong>1</strong> with a <strong>high</strong> total, or <strong>6</strong> with a <strong>low</strong> total. Treat it as confused couriers or someone else’s feud landing on your desk, not as the crisis your group was set up to expect.</p>`;
       }
       return pre;
     }
@@ -475,7 +475,7 @@ No answer landed. They agreed only that their winter would end on <strong>Stepan
         },
         people: {
           title: "Ending: The Soil and the Roof",
-          body: `<strong>Father Dimitri</strong> made <em>narod</em> a question of <strong>roofs and bellies</strong>, not embroidery. Clerks who shivered; peasants whose tithe paid for someone else’s church silver; if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; talk of throne and soil had never rehearsed Kolomna. <strong>Vera</strong> turned grief into lines a future local fund might someday pay for. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was any less strange now.
+          body: `<strong>Father Dimitri</strong> made <em>narod</em> a question of <strong>roofs and bellies</strong>, not embroidery. Clerks who shivered; peasants whose tithe paid for someone else’s church silver; if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; talk of throne and soil had never named Kolomna. <strong>Vera</strong> turned grief into lines a future local fund might someday pay for. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was any less strange now.
 
 Pushkin and the letter would not let a pretty idea float where someone had drowned. They closed on <strong>Father Dimitri’s</strong> rule: <strong>soil that matters means roofs the chronicles skip</strong>, or their Slav year was only a prettier way to dodge Chaadaev’s shame.`,
           specQ: "Does Slavophile language force you to help the capital’s clerk, or only the village you imagine?",
@@ -1068,7 +1068,7 @@ Whether one column always swallowed the other, none would swear. The close chose
       let winterBlock = "";
       if (state.crisisMisfit) {
         winterBlock +=
-          "They had rehearsed one kind of crisis; the seal on the courier’s packet did not match what they had prepared for: wrong rumor, wrong coat, and the night had to go on anyway.\n\n";
+          "The winter news did not match what they had braced for: wrong dispatch, wrong seal, and they still had to answer it.\n\n";
       }
       winterBlock +=
         winterEcho[event] ||
@@ -1107,7 +1107,7 @@ Whether one column always swallowed the other, none would swear. The close chose
         extras.push(`After the seizure debate, <strong>Vera</strong> had stopped coming. The circle lost an honest conservative voice; the corners of the ending felt colder.`);
       }
       if (state.crisisMisfit) {
-        extras.push(`Winter’s courier wore the wrong coat: history arrived as a mix-up, not as the parable they had rehearsed by the lamp.`);
+        extras.push(`Winter delivered another circle’s scandal to their door: a mix-up in the rumor mill, not the ending they had prepared for.`);
       }
       if (state.runTags.has("intro_pushkin_first")) {
         extras.push(`They had opened with Pushkin’s clerk; prose and policy stayed knotted in one bundle from the first scene, order of reading mattered.`);

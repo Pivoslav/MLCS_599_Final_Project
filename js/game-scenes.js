@@ -201,7 +201,7 @@ Pushkin’s Yevgeny, who “found the great unnerving,” dwelled in poor Kolomn
 
 Chaadaev asked: “Where are our wise men, where are our <strong>thinkers</strong>? Who is there who has ever <strong>thought for us</strong>?” Your journals wager that a reading minority can become that elite; for enlightenment or for sedition, depending on who writes the report.
 
-Pushkin’s Neva is a counter-image: the state’s plan and the clerk’s room are not the same story. Winter will test whether print or ranks decide what Russia becomes next. <strong>Sometimes the mail contradicts your rehearsed moral</strong>; the die can cross-wire rumor and path.`,
+Pushkin’s Neva is a counter-image: the state’s plan and the clerk’s room are not the same story. Winter will test whether print or ranks decide what Russia becomes next. <strong>When you roll for winter</strong>, a few dice totals deliberately pull in <strong>another track’s</strong> crisis (see the preview box: die <strong>1</strong> with total still <strong>7+</strong>, or die <strong>6</strong> with total <strong>5 or below</strong>). Expect odd mail, not a neat story that always matches your convictions.`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (who thinks for Russia?):</strong> “Now I ask you, where are our wise men, where are our thinkers? Who is there who has ever thought for us, who is there who thinks for us today?”<br><span class="read-gloss">Chaadaev demands a thinking public, not a mute crowd. Keeping the journals loud claims the salon as that minority; quieting them trades thought for patronage and a thinner file, at the cost of conceding the mind to chiefs who stamp in triplicate.</span>`
@@ -370,11 +370,11 @@ The bridge strains: local trust is your asset; central jealousy is the weather.`
 
       crisis_west: {
         title: "Winter 1837: The Westernizing Wager",
-        text: `Ice, journals, spies: the reformers’ winter. Will a reading society survive, will the Neva echo in the capital’s nerves, will a ministry strike a provincial budget you never championed, or will the censor end the season?
+        text: `Ice, journals, spies: the reformers’ winter. Rumor may spare a reading society, echo the Neva in the capital, cut a provincial budget you never defended, or let the censor end the season.
 
-You spent the season in print, law, and the Europe-facing case, but couriers do not ask which lamp you read by. Which whisper hardens into “what everyone knows” owes something to whether your friends still move in step with the ministries (the <strong>Order</strong> on your meter), and something to plain ill luck at the threshold. <strong>Two ones when you felt sure of yourself, or a six from nowhere when you felt invisible, can force the wrong crisis through the door</strong>. The sort of mess later lectures call “contingency,” but tonight is only dread and bad timing.
+You roll <strong>1d6</strong> and add an <strong>Order</strong> bonus (higher Order helps; the preview box shows your band). <strong>Usually</strong> the total picks an event that fits this Westernizing path. <strong>Two exceptions:</strong> if the die shows <strong>1</strong> but your total is still <strong>7 or higher</strong>, or the die shows <strong>6</strong> but your total is only <strong>5 or below</strong>, you get a crisis scripted for <em>another</em> argument track instead. That is deliberate in the rules: history can feel like the wrong packet on your desk.
 
-Roll once: d6 + Order bonus. Strong totals lean toward a salon breakthrough or a Neva echo from the north; a Slavophile or statist circle, in this same frost, would be untangling different gossip entirely.`,
+Roll once: d6 + Order bonus. High totals normally mean a salon breakthrough or a Neva echo; low totals normally mean the censor. (Slavophile, statist, and mediator tables in the same winter would sort the gossip differently.)`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
@@ -389,7 +389,7 @@ Roll once: d6 + Order bonus. Strong totals lean toward a salon breakthrough or a
         title: "Winter 1837: Soil, Censor, and the Provinces",
         text: `Land committees, clergy, and provincial gentry watch the capital. Aksakov’s language circulates in copies; the Third Section reads “narod” as a code for unrest. Will an Orthodox-sympathetic governor host a reading, will rural notables block a ministry school plan, will flood gossip from the capital derail your soil-first story, or will the packet burn?
 
-The provinces do not file their fears in your order. <strong>Snake eyes on a night you thought won, or a six when you had no pull, can paste someone else’s scandal onto your soil-first story</strong>. Raw contingency that syllabi will later call “background noise,” but your table will remember as the wrong name on the seal.
+The same <strong>misfit rule</strong> applies as on the Westernizing winter screen: if the die shows <strong>1</strong> while your total is still <strong>7+</strong>, or shows <strong>6</strong> while your total is only <strong>5 or below</strong>, you draw another path’s event. It can feel as if someone else’s scandal were pasted onto your name.
 
 Roll once: d6 + Order bonus. Middling totals favor gentry and clergy digging in against Petersburg’s school maps; a high throw may still buy a guarded salon hour, if the gendarmes are watching another staircase.`,
         crisisRoll: true,
@@ -406,9 +406,9 @@ Roll once: d6 + Order bonus. Middling totals favor gentry and clergy digging in 
         title: "Winter 1837: The Apparatus Closes Ranks",
         text: `From your salon’s window, the letter is already a file number. Troops stand by embankments; floods become logistics, not moral drama. Reformers are “managed” by people you do not command. When someone asks who “thinks for Russia” now, the garrison and the <strong>Chief Directorate of Censorship</strong> have ready answers; your circle only hears the echo.
 
-Will winter hand you another Neva alarm: proclamations, barges, the <em>center</em> forced to move in daylight, or only the dull rhythm of seized proofs and closed rooms? Or will a sideways whisper slip the latch: <strong>a permissive rumor when you prayed for discipline, or a clamp when you needed breathing room</strong>. The kind of misfire files never quite explain?
+This winter you may get another Neva alarm (proclamations, barges, daylight movement at the center) or only the slow rhythm of seized proofs and closed rooms. <strong>Do not assume the die always lines up with that pattern.</strong> The same misfit pairs as elsewhere apply: die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, can still hand you an event from a different track.
 
-Roll once: d6 + Order bonus. High totals sound like flood and emergency; low ones, like censors and ordinary fear. <strong>When fortune crosses the wires, even those patterns lie.</strong>`,
+Roll once: d6 + Order bonus. For this path, <strong>usually</strong> a high total means flood-style emergency and a low total means censorship and fear; the misfit rule above is the exception.`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
@@ -423,11 +423,11 @@ Roll once: d6 + Order bonus. High totals sound like flood and emergency; low one
         title: "Winter 1837: The Bridge Under Strain",
         text: `Provincial pilots meet winter shortages and ministry ledgers. Chaadaev’s question and Pushkin’s clerk refuse to stay in separate rooms. Will a mixed salon win a night, will zemstvo ambition trigger a central slapdown, will pure censorship erase a pilot you thought safe, or will couriers mistake your patchwork for someone else’s feud, and leave you answering a petition you never signed?
 
-Roll once: d6 + Order bonus. The middling throws are where Petersburg’s ink and the district ledger collide. <strong>If fate misfires, you may inherit another salon’s winter entirely. Compromise, it turns out, does not buy immunity from the wrong rumor.</strong>`,
+Roll once: d6 + Order bonus. Mid-range totals are where Petersburg’s ink and the district ledger usually meet. <strong>If you hit a misfit</strong> (die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>), you may get another path’s winter beat. The middle road does not block strange mail.`,
         crisisRoll: true,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
-          body: `<strong>Letter I:</strong> China/Germany / “left us completely on our own” (mediator path).<br><span class="read-gloss">Hybrid mission, lonely execution in Chaadaev’s terms. When the winter die misfires, another salon’s rumor can still land on you, compromise did not seal the door.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> clerk, flood, statue; center vs. periphery read through Part One–Two.<br><span class="read-gloss">Clerk, flood, and statue are one Pushkin story; the mediator winter beat keeps them on the same page, not in separate files.</span>`
+          body: `<strong>Letter I:</strong> China/Germany / “left us completely on our own” (mediator path).<br><span class="read-gloss">Hybrid mission, lonely execution in Chaadaev’s terms. A misfit roll can still assign another track’s scandal; compromise does not seal you off from odd news.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> clerk, flood, statue; center vs. periphery read through Part One–Two.<br><span class="read-gloss">Clerk, flood, and statue are one Pushkin story; the mediator winter beat keeps them on the same page, not in separate files.</span>`
         },
         counterfactualNote: `Zemstvo “ambition” in dialogue belongs chiefly to later decades; here it stands in for any pilot local fund the ministry might crush.`,
         choices: [
