@@ -37,7 +37,7 @@ Concise phased plan for **Russia at the Crossroads**. Canonical constraints and 
 
 | Task | Detail | Done when |
 |------|--------|-----------|
-| **Point-budget pilot** | Wire `realm-triangle-budget.html` pattern to **one** high-stakes scene; gate with existing **co-op** flow where possible; show spend + unlock choices after commit. | **Done:** `resolve_endings` + co-op tools on (`REALM_BUDGET_POOL_POINTS` = 30). Extend to other scenes only if playtests ask. |
+| **Point-budget pilot** | Wire `realm-triangle-budget.html` pattern to **one** high-stakes scene; gate with existing **co-op** flow where possible; show spend + unlock choices after commit. | **Done:** `resolve_endings` + co-op tools on; pool is **3 / 5 / 8** from the same winter totals as `pickCrisisEvent` (`getRealmBudgetPoolPoints`). Extend to other scenes only if playtests ask. |
 
 **Track B — Narrative / copy**
 

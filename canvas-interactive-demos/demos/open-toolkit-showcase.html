@@ -54,10 +54,45 @@
     }
     #mvHost model-viewer {
       width: 100%;
-      height: 280px;
+      height: min(52vh, 360px);
       border-radius: 8px;
-      background: #222;
+      background: linear-gradient(180deg, #1e2430 0%, #12151c 100%);
     }
+    .mv-caption {
+      margin: 0.5rem 0 0;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .curated-picks {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed color-mix(in srgb, var(--line) 80%, transparent);
+    }
+    .curated-picks h3 { font-size: 1rem; margin: 0 0 0.5rem; }
+    .curated-fig {
+      margin: 0.75rem 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .curated-fig img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: min(48vh, 420px);
+      object-fit: contain;
+    }
+    .curated-fig figcaption {
+      padding: 0.5rem 0.65rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      background: var(--surface);
+    }
+    .unit-links { margin: 0.5rem 0 0; padding-left: 1.1rem; font-size: 0.9rem; }
+    .unit-links li { margin: 0.25rem 0; }
     .btn-row { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
     button {
       font: inherit;
@@ -120,28 +155,41 @@ flowchart TB
   <section class="panel" aria-labelledby="mv-h">
     <h2 id="mv-h">3. model-viewer — GLB/GLTF (lighter than raw STL for the web)</h2>
     <p>
-      Google’s <code>&lt;model-viewer&gt;</code> handles AR on some devices. Swap <code>src</code> for your own CC-licensed GLB (e.g. simplified architectural prop).
+      Google’s <code>&lt;model-viewer&gt;</code> handles AR on some devices. This demo loads the Khronos <strong>Lantern</strong> sample (CC-friendly glTF sample model)—a stand-in for <em>lamplight in the salon</em>, not a historical replica. Swap <code>src</code> for your own CC-licensed GLB (e.g. simplified church or monument mesh from Commons-derived photogrammetry, with rights checked).
       <a href="https://modelviewer.dev/">modelviewer.dev</a>
     </p>
     <div id="mvHost">
       <model-viewer
-        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-        alt="Sample GLB from model-viewer (replace with period-appropriate prop)"
+        src="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@main/2.0/Lantern/glTF-Binary/Lantern.glb"
+        alt="Khronos sample lantern mesh — didactic prop for lamplight / salon atmosphere"
         camera-controls
         auto-rotate
         shadow-intensity="1"
-        style="width:100%;height:280px;"
+        exposure="1.2"
+        tone-mapping="commerce"
+        environment-image="https://modelviewer.dev/shared-assets/environments/spruit_sunrise_1k_HDR.hdr"
+        style="width:100%;height:min(52vh,360px);"
       ></model-viewer>
     </div>
-    <p class="demo-note" style="font-size:0.88rem;">Demo asset is a placeholder astronaut—not thematic; it proves the embed path.</p>
+    <p class="mv-caption">
+      <strong>Source:</strong> <a href="https://github.com/KhronosGroup/glTF-Sample-Models/tree/main/2.0/Lantern">Khronos glTF Sample Models — Lantern</a> (typically <strong>CC BY 4.0</strong>; confirm in that folder’s README before redistributing). HDR environment from <a href="https://modelviewer.dev/">model-viewer shared assets</a>. <strong>Fallback:</strong> if a CDN blocks GLB, download <code>Lantern.glb</code> and set <code>src</code> to a relative path.
+    </p>
   </section>
 
   <section class="panel" aria-labelledby="audio-h">
     <h2 id="audio-h">4. Web Audio — one-shot ambient without MP3 files</h2>
-    <p>Oscillator + gain envelope: no external audio file; works offline once the page is loaded. Use sparingly; respect <code>prefers-reduced-motion</code> for auto-play.</p>
-    <div class="btn-row">
-      <button type="button" id="windBtn">Play “cold Neva” tone (2s)</button>
+    <p>
+      Oscillators, short noise bursts, and envelopes only—<strong>no MP3</strong>. Useful for tiny UI stingers in the CYOA (winter beat, library token). All play on <strong>button click</strong> (user gesture unlocks audio). Do not auto-play beds; pair any future loop with <code>prefers-reduced-motion</code> and a visible mute.
+    </p>
+    <div class="btn-row" role="group" aria-label="Web Audio one-shots">
+      <button type="button" id="windBtn">Cold Neva wind (~2s)</button>
+      <button type="button" id="bellBtn">Church bell ping (~0.5s)</button>
+      <button type="button" id="paperBtn">Folio / paper rustle (~0.2s)</button>
+      <button type="button" id="salonBtn">Salon chord swell (~1.2s)</button>
     </div>
+    <p class="demo-note" style="margin-top:0.65rem;font-size:0.86rem;">
+      Pedagogy: these are <em>evocative</em>, not documentary—discuss sound as framing, not as period recording. For real period music or speech, use licensed files and cite in <cite>SOURCES.md</cite>.
+    </p>
   </section>
 
   <section class="panel" aria-labelledby="gh-h">
@@ -160,7 +208,42 @@ flowchart TB
 
   <section class="panel" aria-labelledby="open-h">
     <h2 id="open-h">6. Open collections to level up primary-text + visuals</h2>
-    <p>All are useful for <strong>sourcing</strong> (not automatic paste into narrative—check copyright).</p>
+    <p>All are useful for <strong>sourcing</strong> (not automatic paste into narrative—check copyright). Your shipped game already credits images in <cite>SOURCES.md</cite>; this block is for <strong>author tooling</strong> and student research prompts.</p>
+
+    <div class="curated-picks">
+      <h3>Curated for this unit (start here)</h3>
+      <figure class="curated-fig">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg"
+          width="600"
+          height="503"
+          loading="lazy"
+          decoding="async"
+          alt="19th-century print: St. Petersburg during the 1824 flood"
+        />
+        <figcaption>
+          <strong>Pushkin’s Neva context:</strong> anonymous / early C19 print of the <strong>1824 flood</strong> (same event behind <em>The Bronze Horseman</em>). Public domain; file page:
+          <a href="https://commons.wikimedia.org/wiki/File:The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg">Commons</a>.
+          On file pages, use <strong>IIIF</strong> / zoom tools when available for close reading of architecture and crowds.
+        </figcaption>
+      </figure>
+      <ul class="unit-links">
+        <li>
+          <a href="https://commons.wikimedia.org/wiki/Category:Saint_Petersburg_flood_of_1824">Commons category: Saint Petersburg flood of 1824</a> — engravings, maps, photographs of monuments.
+        </li>
+        <li>
+          <a href="https://archive.org/search?query=chaadaev&and[]=mediatype%3A%22texts%22">Internet Archive — “Chaadaev” texts</a> — parallel editions, scans (verify edition against your assigned translation).
+        </li>
+        <li>
+          <a href="https://www.europeana.eu/en/search?page=1&query=Saint%20Petersburg%201830">Europeana — St. Petersburg 1830s</a> — prints, objects; filter by rights for reuse.
+        </li>
+        <li>
+          <a href="https://iiif.io/">IIIF</a> — compare two flood images side-by-side in a Mirador / Universal Viewer embed (advanced stretch goal; see §7).
+        </li>
+      </ul>
+    </div>
+
+    <p style="margin:1rem 0 0.35rem;font-weight:600;font-size:0.95rem;">General hubs (bookmark)</p>
     <div class="res-grid">
       <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>
       <a href="https://archive.org/">Internet Archive</a>
@@ -307,22 +390,125 @@ endsolid cyoa_marker
 
   <script>
     (function () {
-      var btn = document.getElementById("windBtn");
-      if (!btn) return;
-      btn.addEventListener("click", function () {
-        var ctx = new (window.AudioContext || window.webkitAudioContext)();
-        var o = ctx.createOscillator();
-        var g = ctx.createGain();
+      var ctx = null;
+      function audioCtx() {
+        if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (ctx.state === "suspended") ctx.resume();
+        return ctx;
+      }
+
+      function playWind() {
+        var c = audioCtx();
+        var now = c.currentTime;
+        var dur = 2;
+        var o = c.createOscillator();
+        var g = c.createGain();
         o.type = "sine";
-        o.frequency.value = 180;
+        o.frequency.setValueAtTime(165, now);
+        o.frequency.linearRampToValueAtTime(95, now + dur);
         o.connect(g);
-        g.connect(ctx.destination);
-        var now = ctx.currentTime;
+        var nLen = Math.floor(c.sampleRate * dur);
+        var noise = c.createBuffer(1, nLen, c.sampleRate);
+        var data = noise.getChannelData(0);
+        for (var i = 0; i < nLen; i++) data[i] = (Math.random() * 2 - 1) * 0.35;
+        var src = c.createBufferSource();
+        src.buffer = noise;
+        var f = c.createBiquadFilter();
+        f.type = "lowpass";
+        f.frequency.setValueAtTime(420, now);
+        f.frequency.exponentialRampToValueAtTime(180, now + dur);
+        src.connect(f);
+        var ng = c.createGain();
+        f.connect(ng);
+        ng.connect(c.destination);
+        ng.gain.setValueAtTime(0, now);
+        ng.gain.linearRampToValueAtTime(0.045, now + 0.2);
+        ng.gain.exponentialRampToValueAtTime(0.0008, now + dur);
         g.gain.setValueAtTime(0, now);
-        g.gain.linearRampToValueAtTime(0.08, now + 0.15);
-        g.gain.exponentialRampToValueAtTime(0.001, now + 2);
+        g.gain.linearRampToValueAtTime(0.06, now + 0.18);
+        g.gain.exponentialRampToValueAtTime(0.0008, now + dur);
         o.start(now);
-        o.stop(now + 2.05);
+        o.stop(now + dur + 0.02);
+        src.start(now);
+        src.stop(now + dur);
+      }
+
+      function playBell() {
+        var c = audioCtx();
+        var now = c.currentTime;
+        var d = 0.55;
+        function strike(freq, vol) {
+          var o = c.createOscillator();
+          var g = c.createGain();
+          o.type = "sine";
+          o.frequency.value = freq;
+          o.connect(g);
+          g.connect(c.destination);
+          g.gain.setValueAtTime(0, now);
+          g.gain.linearRampToValueAtTime(vol, now + 0.008);
+          g.gain.exponentialRampToValueAtTime(0.0006, now + d);
+          o.start(now);
+          o.stop(now + d + 0.02);
+        }
+        strike(523.25, 0.11);
+        strike(784.0, 0.06);
+      }
+
+      function playPaper() {
+        var c = audioCtx();
+        var now = c.currentTime;
+        var len = Math.floor(c.sampleRate * 0.22);
+        var buf = c.createBuffer(1, len, c.sampleRate);
+        var ch = buf.getChannelData(0);
+        for (var i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * 0.5;
+        var src = c.createBufferSource();
+        src.buffer = buf;
+        var f = c.createBiquadFilter();
+        f.type = "bandpass";
+        f.frequency.value = 2400;
+        f.Q.value = 0.85;
+        var g = c.createGain();
+        src.connect(f);
+        f.connect(g);
+        g.connect(c.destination);
+        g.gain.setValueAtTime(0, now);
+        g.gain.linearRampToValueAtTime(0.07, now + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0006, now + 0.18);
+        src.start(now);
+        src.stop(now + 0.2);
+      }
+
+      function playSalon() {
+        var c = audioCtx();
+        var now = c.currentTime;
+        var t = 1.15;
+        var freqs = [196.0, 246.94, 293.66];
+        freqs.forEach(function (hz, j) {
+          var o = c.createOscillator();
+          var g = c.createGain();
+          o.type = "triangle";
+          o.frequency.value = hz;
+          o.connect(g);
+          g.connect(c.destination);
+          var v = 0.028 - j * 0.006;
+          g.gain.setValueAtTime(0, now);
+          g.gain.linearRampToValueAtTime(v, now + 0.25 + j * 0.04);
+          g.gain.setValueAtTime(v, now + t - 0.35);
+          g.gain.exponentialRampToValueAtTime(0.0006, now + t);
+          o.start(now);
+          o.stop(now + t + 0.02);
+        });
+      }
+
+      var map = [
+        ["windBtn", playWind],
+        ["bellBtn", playBell],
+        ["paperBtn", playPaper],
+        ["salonBtn", playSalon]
+      ];
+      map.forEach(function (pair) {
+        var el = document.getElementById(pair[0]);
+        if (el) el.addEventListener("click", pair[1]);
       });
     })();
   </script>

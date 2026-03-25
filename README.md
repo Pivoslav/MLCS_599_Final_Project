@@ -6,7 +6,7 @@
 
 **Canvas / iframe:** Third-party or RCE embeds may **block or partition `sessionStorage`**; the game degrades (e.g. run ID falls back in **Copy run summary**). **Co-op** and wide layout are intended for a **new tab**—see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (Phase 0 checklist + `canvas-self-test.html`).
 
-**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles, and a **realm spread** bar (max − min meter) in the header. All motion respects **`prefers-reduced-motion`**. On many **dialogue-heavy** beats (paths, crises, key events), a small **dialogue portrait** (Wikimedia Commons, with alt text and caption) appears under the scene title — see **`IMAGE_CREDITS.md`** and **`SCENE_DIALOGUE_PORTRAITS`** in `game-config.js`.
+**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles in the header, and compact **O / R / P** meter values (0–100) beside scene meta. All motion respects **`prefers-reduced-motion`**. On many **dialogue-heavy** beats (paths, crises, key events), a small **dialogue portrait** (Wikimedia Commons, with alt text and caption) appears under the scene title — see **`IMAGE_CREDITS.md`** and **`SCENE_DIALOGUE_PORTRAITS`** in `game-config.js`.
 
 ## Coherence of the narrative
 
@@ -93,7 +93,7 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 - **Historical staging:** notes on counterfactual compression (e.g. zemstvo language).
 - **Before you roll:** path recap and stat context on winter 1837 crisis screens.
 - **Rare choice** at sorting: if the library has both Chaadaev and Pushkin and People ≥ 55, a fourth framing option appears (“Evgeny’s chorus”).
-- **Epilogue:** session title, Walicki-style historiography nudge, rare “letter + poem + People 60+” insight, **Copy run summary** for forum or reflection.
+- **Epilogue:** session title, discussion prompts, rare “letter + poem + People 60+” insight, **Copy run summary** for forum or reflection.
 
 ## Extending beyond Letter I (optional unit)
 

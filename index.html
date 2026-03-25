@@ -3,21 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Russia at the Crossroads: A Chaadaev Adventure</title>
+  <title>Russia's Troubled Future Past</title>
   <!-- Bump ?v= on css/js when students may see stale copies (browser cache). -->
-  <link rel="stylesheet" href="css/game.css?v=20260328h" />
+  <link rel="stylesheet" href="css/game.css?v=20260329e" />
 </head>
 <body>
   <a href="#title" class="skip-link">Skip to story</a>
   <main class="app">
     <header class="header">
-      <h1>Russia at the Crossroads</h1>
+      <h1>Russia's Troubled Future Past</h1>
       <p class="subtitle">Chaadaev, <em>The Bronze Horseman</em>, and choices that shift Order, Reform, and People, with discussion prompts at each ending</p>
       <div class="header-bar">
         <div class="meta">
           <span id="sceneId"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span><span id="sceneIdText">Scene: Moscow, Autumn 1836</span></span>
           <span id="steps"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01M9 15c1.5 1 4 1 6 0"/></svg></span><span id="stepsText">Turn: 0</span></span>
           <span id="era"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l3 2"/></svg></span><span id="eraText">Era: 1836</span></span>
+          <span id="realmMetersMeta" class="realm-meters-meta" aria-label="Meters 0 to 100: Order, Reform, People">
+            <span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-6"/><path d="M22 20v-9"/></svg></span>
+            <span><abbr title="Order">O</abbr> <strong id="valOrder">50</strong></span>
+            <span class="realm-meters-sep" aria-hidden="true">·</span>
+            <span><abbr title="Reform">R</abbr> <strong id="valReform">50</strong></span>
+            <span class="realm-meters-sep" aria-hidden="true">·</span>
+            <span><abbr title="People">P</abbr> <strong id="valPeople">50</strong></span>
+          </span>
         </div>
         <div class="header-actions actions">
           <a href="llm-lab.html" class="ghost" title="Local dev: run python tools/dev_server.py first">Art lab</a>
@@ -26,49 +34,13 @@
           <button type="button" class="primary" id="restartBtn">Restart</button>
         </div>
       </div>
-      <div class="salometry" id="salometry" aria-label="Path and realm tension">
+      <div class="salometry" id="salometry" aria-label="Recent scenes">
         <div class="scene-crumb" id="sceneCrumb"></div>
-        <div class="tension-col">
-          <p class="tension-desc" id="tensionDesc">
-            <span class="tension-desc-label">Realm spread</span>
-            <span class="tension-desc-hint">max − min across Order, Reform, People</span>
-            <span class="tension-val" id="tensionVal" aria-live="polite">0</span>
-          </p>
-          <p class="tension-flavor" id="tensionFlavor" aria-live="polite"></p>
-          <div class="tension-bar" role="img" aria-labelledby="tensionDesc">
-            <div class="tension-fill" id="tensionFill"></div>
-          </div>
-          <details class="tension-explainer">
-            <summary>Salon temperature — what spread means</summary>
-            <p class="tension-explainer-body">Spread is how far apart your three meters are. <strong>High spread</strong> means one realm (Order, Reform, or People) is pulling much harder than the others—the salon’s “benches” disagree. <strong>Low spread</strong> means the circle is more aligned. Open <strong>Terms</strong> in the header for full definitions. Co-op: when spread is high, consider letting the player whose <em>seat realm</em> is lowest speak to the gap.</p>
-          </details>
-        </div>
       </div>
     </header>
 
     <div class="app-main">
-      <aside class="realm-legend" aria-label="Game state">
-        <h3>Realm</h3>
-        <div class="legend-meters" role="img" aria-label="Order, Reform, and People from 0 to 100">
-          <div class="legend-item">
-            <span class="legend-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V8l6-4 6 4v13"/><path d="M9 21v-6h6v6"/><path d="M10 12h4"/></svg></span>
-            <div class="legend-track"><div class="legend-fill order" id="barOrder" style="height:50%"></div></div>
-            <span class="legend-label">Order</span>
-            <span class="legend-val" id="valOrder">50</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h8l4 4v12a2 2 0 01-2 2H6a2 2 0 01-2-2V5z"/><path d="M14 3v5h5"/><path d="M8 13h4"/><path d="M8 17h6"/></svg></span>
-            <div class="legend-track"><div class="legend-fill reform" id="barReform" style="height:50%"></div></div>
-            <span class="legend-label">Reform</span>
-            <span class="legend-val" id="valReform">50</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="2.5"/><path d="M3 21v-1.5A3.5 3.5 0 016.5 16h5a3.5 3.5 0 013.5 3.5V21"/><path d="M14 21v-1.2a2.8 2.8 0 012.5-2.8h1"/></svg></span>
-            <div class="legend-track"><div class="legend-fill people" id="barPeople" style="height:50%"></div></div>
-            <span class="legend-label">People</span>
-            <span class="legend-val" id="valPeople">50</span>
-          </div>
-        </div>
+      <aside class="realm-legend" aria-label="Library and events">
         <div class="inventory" id="inventoryBlock">
           <strong style="display:block;margin-bottom:6px;font-size:0.78rem;">Library &amp; tokens</strong>
           <ul id="inventoryList"><li class="empty">Nothing yet.</li></ul>
@@ -183,6 +155,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
   <script src="js/game-config.js?v=20260329a"></script>
   <script src="js/game-scenes.js?v=20260329a"></script>
-  <script src="js/game-app.js?v=20260329a"></script>
+  <script src="js/game-app.js?v=20260329e"></script>
 </body>
 </html>

@@ -38,7 +38,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 - [x] **URL `?scene=`**
 - [x] **Copy summary** (+ Run ID; + optional co-op reveal line)
 - [x] **Coupled sliders (epilogue debrief toy)**
-- [x] **Point budget pilot** — `resolve_endings` when co-op tools on (`REALM_BUDGET_POOL_POINTS` = 30)
+- [x] **Point budget pilot** — `resolve_endings` when co-op tools on (`getRealmBudgetPoolPoints`: 3/5/8 from winter total)
 
 ## B. Narrative & primary-text quality
 

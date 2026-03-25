@@ -208,6 +208,7 @@
       inventory: new Set(),
       achievements: new Set(),
       lastRoll: null,
+      lastWinterTotal: null,
       sceneApplied: new Set(),
       keepBanner: false,
       finalLean: null,
@@ -232,7 +233,20 @@
 
     const COURIER_WHISPER_SCENES = ["beat_west_print", "beat_aksakov", "beat_statist_machine", "beat_med_bridge"];
 
-    const REALM_BUDGET_POOL_POINTS = 30;
+    /**
+     * Shared “winter attention” pool at resolve_endings (co-op tools on). Sizes are tied to the same totals as
+     * pickCrisisEvent: west/slav/med use T≤4, 5≤T≤7, T≥8; statist uses T≤7 vs T≥8 only. Uses only magnitudes
+     * that appear on that ruler: 3 (= three mid totals {5,6,7}), 5 (mid floor), 8 (high floor). Minimum pool = 3.
+     */
+    function getRealmBudgetPoolPoints() {
+      const T = state.lastWinterTotal;
+      const p = state.pathId || "west";
+      if (T == null || T < 1) return 5;
+      if (p === "statist") return T >= 8 ? 8 : 3;
+      if (T >= 8) return 8;
+      if (T >= 5) return 5;
+      return 3;
+    }
 
     /** Co-op gating preference for this tab (sessionStorage); mirrors checkbox #coopToolsEnable. "1" on, "0" off; missing = default on (class play). */
     const COOP_TOOLS_PREF_KEY = "mlcs599_coop_tools_enabled";
@@ -318,35 +332,6 @@
       return html;
     }
 
-    function buildUnresolvedEpilogue(O, R, P) {
-      const path = state.pathId || "west";
-      const event = state.lastEvent || "event_censor";
-      const lines = [];
-      const minV = Math.min(O, R, P);
-      if (minV === P && P < 50) {
-        lines.push("People stayed weak on the meter; Pushkin’s receipt for drowned rooms went mostly uncollected in this outcome.");
-      }
-      if (minV === R && R < 50) {
-        lines.push("Reform never quite anchored as ‘program’; Chaadaev’s call to relearn mankind’s education still sounds like salon noise.");
-      }
-      if (path === "west" && event === "event_censor" && !state.crisisMisfit) {
-        lines.push("Print never won the hearing Westernizers drafted; censorship closed the season on paper.");
-      }
-      if (state.crisisMisfit) {
-        lines.push("Winter threw a ‘wrong’ rumor across the path you were on; the table improvised without its scripted moral.");
-      }
-      if (state.walkouts.has("vera")) {
-        lines.push("Vera stopped coming after the seizure talk; trust in the room did not fully restitch.");
-      }
-      if (state.runTags.has("intro_pushkin_first")) {
-        lines.push("You opened with literature before locking a program; wisdom or evasion remains disputed.");
-      }
-      if (!lines.length) {
-        lines.push("Chaadaev’s mission question and Pushkin’s ‘who pays’ question still pull in different directions.");
-      }
-      return `<div class="unresolved-block"><h4>Still open after this session</h4><ul>${lines.map((l) => `<li>${l}</li>`).join("")}</ul></div>`;
-    }
-
     /** Session banner title; keyed by path × framing (twelve endings). */
     function computeRunTitle(endingKey, pathId, O, R, P) {
       const p = pathId || "west";
@@ -368,24 +353,6 @@
       if (O >= 75 && p === "west") return "Salon Firebrand";
       if (P >= 75) return "Neva’s Witnesses";
       return "No Single Verdict";
-    }
-
-    function historiographyNudge(endingKey) {
-      const H = {
-        west_order: "Historiography hook: Nicholas-era administration often framed “progress” as discipline first. Compare that to Westernizer hopes for open debate. Whose archive survives?",
-        west_reform: "Historiography hook: censorship and educational expansion under autocracy are paired themes; ask whether institutions “Europeanize” society or only its elite paperwork.",
-        west_people: "Historiography hook: social historians stress who benefits from reform rhetoric. Does this People-framed ending put the clerk in the same story as the statute?",
-        slav_order: "Historiography hook: Orthodox and statist imaginaries sometimes merged. When does <em>narod</em> language serve the village, and when the ministry?",
-        slav_reform: "Historiography hook: selective borrowing without liberal “rights” talk is a real 19th-c. pattern. Trace parallels to parish schools and local elites.",
-        slav_people: "Historiography hook: material life vs. idealized village; compare to populist and later narodnik genealogies (without equating eras).",
-        statist_order: "Historiography hook: police and file culture as modern statecraft. Does continuity equal legitimacy in the secondary readings you assign for this unit?",
-        statist_reform: "Historiography hook: reform “from above” via commissions. Walicki and others ask whether mimicry can thicken into substance.",
-        statist_people: "Historiography hook: imperial charity vs. rights. How do historians narrate famine, flood, and mercy rhetoric?",
-        med_order: "Historiography hook: center–periphery tension in imperial Russia. The mediator path stages local budgets and schools as “zemstvo-style” pilots in the 1830s (real zemstvo law came later; see Historical staging). Ask whether post-1864 zemstvo historiography still helps students interpret that teaching device.",
-        med_reform: "Historiography hook: hybrid institutions. When does a borrowed law become “native” in historical narrative?",
-        med_people: "Historiography hook: fiscal accountability to communities. Link this to debates on who counted in the reform coalition."
-      };
-      return H[endingKey] || H.west_people;
     }
 
     function formatEpilogueDiscussion(specQ, bullets, path) {
@@ -488,7 +455,7 @@ No answer satisfied. They agreed only that their winter would end on <strong>Ste
 Pushkin and the letter refused to let the abstract float where someone drowned. They closed on <strong>Father Dimitri’s</strong> frame: soil that mattered had to mean roofs the chronicles skipped—or their Slav year was only a prettier exile from Chaadaev’s shame.`,
           specQ: "Does Slavophile language obligate policy for the capital’s clerk, or only for the imagined village?",
           bullets: [
-            "Material life vs. idealized village: where does historiography place the clerk in narodnik genealogies (without equating eras)?",
+            "Material life vs. idealized village: where would later populist readings place the clerk (without equating eras)?",
             "Can soil-based legitimacy answer Evgeny’s fate, or only the gentry’s conscience?",
             "Letter I’s upper-class vices: does a People-first Slavophile reading change how fair Chaadaev sounds?"
           ]
@@ -579,7 +546,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const visited = state.history.map((id) => (scenes[id] ? scenes[id].title : id)).join(" → ");
       const inv = Array.from(state.inventory).map((id) => ITEMS[id] || id).join("; ") || "(none)";
       const lines = [
-        "Russia at the Crossroads (run summary)",
+        "Russia's Troubled Future Past (run summary)",
         "────────────────────────────",
         "Course: MLCS-599",
         `Run ID: ${getRunId()}`,
@@ -703,6 +670,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const roll = 1 + Math.floor(Math.random() * 6);
         state.lastRoll = roll;
         const total = roll + bonus;
+        state.lastWinterTotal = total;
         const nextKey = pickCrisisEvent(total, roll);
         state.lastEvent = nextKey;
         state.history.push(state.current);
@@ -825,8 +793,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const cap = k.charAt(0).toUpperCase() + k.slice(1);
         const barEl = document.getElementById("bar" + cap);
         const valEl = document.getElementById("val" + cap);
-        barEl.style.height = v + "%";
-        valEl.textContent = String(v);
+        if (barEl) barEl.style.height = v + "%";
+        if (valEl) valEl.textContent = String(v);
       });
     }
 
@@ -971,7 +939,6 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       }
 
       const runTitle = computeRunTitle(endingKey, path, O, R, P);
-      const historiography = historiographyNudge(endingKey);
 
       const achBefore = new Set(state.achievements);
       checkAchievements();
@@ -1002,8 +969,6 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         extras.push(`The petition detour scarred the autumn: forms ate time the journals could have used.`);
       }
 
-      const unresolvedHtml = buildUnresolvedEpilogue(O, R, P);
-
       const ach = [];
       if (state.achievements.has("bronze_reader")) ach.push("Engaged Pushkin's Petersburg poem");
       if (state.achievements.has("people_champion")) ach.push("People's advocate (75+)");
@@ -1019,7 +984,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (state.achievements.has("aligned_benches")) ach.push("Tight realm spread (≤12)");
       if (state.achievements.has("triple_satchel")) ach.push("All three library voices (Chaadaev, Pushkin, Aksakov)");
 
-      return { title, body, extras, ach, discussion, runTitle, historiography, secretHtml, unresolvedHtml };
+      return { title, body, extras, ach, discussion, runTitle, secretHtml };
     }
 
     const titleEl = document.getElementById("title");
@@ -1043,9 +1008,6 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     const eraTextEl = document.getElementById("eraText");
     const endingBlock = document.getElementById("endingBlock");
     const sceneCrumbEl = document.getElementById("sceneCrumb");
-    const tensionValEl = document.getElementById("tensionVal");
-    const tensionFillEl = document.getElementById("tensionFill");
-    const tensionFlavorEl = document.getElementById("tensionFlavor");
 
     function updateSalometry() {
       const trail = state.history.slice(-4);
@@ -1063,22 +1025,6 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         sceneCrumbEl.innerHTML =
           parts.join("") ||
           `<span class="crumb-chip is-current">${truncateNavTitle((scenes[state.current] && scenes[state.current].title) || state.current, 32)}</span>`;
-      }
-      const { order: O, reform: R, people: P } = state.stats;
-      const spread = Math.max(O, R, P) - Math.min(O, R, P);
-      if (tensionValEl) tensionValEl.textContent = String(spread);
-      if (tensionFillEl) tensionFillEl.style.width = spread + "%";
-      const high = spread >= 40;
-      document.documentElement.setAttribute("data-tension", high ? "high" : "low");
-      if (tensionFlavorEl) {
-        let line = high
-          ? "The salon is pulled wide—one realm is running much hotter than the others."
-          : "The circle is relatively aligned; no single bench owns the whole argument yet.";
-        if (high && state.coopToolsEnabled) {
-          line +=
-            " Co-op: ask the player on the lowest-meter seat to name what the gap costs the room.";
-        }
-        tensionFlavorEl.textContent = line;
       }
     }
 
@@ -1115,13 +1061,25 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       el.hidden = true;
     }
 
+    /** Narrative-only plain text for co-op excerpt: omit Read-along, counterfactual, and winter-roll chrome (those flatten oddly in textContent and break tail slices). */
+    function sceneColumnPlainTextForCoopExcerpt() {
+      if (!textEl) return "";
+      const clone = textEl.cloneNode(true);
+      clone
+        .querySelectorAll(
+          ".primary-read, .counterfactual-note, .crisis-preview-card, .path-recap, .crisis-die-table, .random-beat-courier"
+        )
+        .forEach((n) => n.remove());
+      return clone.textContent.replace(/\s+/g, " ").trim();
+    }
+
     /** Plain excerpt of the beat players see in the story column (tail-biased so the decision moment is likelier to appear). */
     function updateCoopSeatsContextEl() {
       const el = document.getElementById("coopSeatsContext");
       if (!el) return;
       let body = "";
-      if (textEl && textEl.textContent) {
-        body = textEl.textContent.replace(/\s+/g, " ").trim();
+      if (textEl) {
+        body = sceneColumnPlainTextForCoopExcerpt();
       }
       if (!body && scenes[state.current]) {
         body = stripChoiceLabel(scenes[state.current].text || "");
@@ -1328,12 +1286,18 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     function mountResolveEndingsRealmBudget(choicesToRender, icoDice, icoBranch) {
       stashCoopActionBarBeforeChoicesWipe();
       choicesEl.innerHTML = "";
+      const poolMax = getRealmBudgetPoolPoints();
+      const T = state.lastWinterTotal;
+      const winterLine =
+        T != null && T >= 1
+          ? `Winter total <strong>${T}</strong> → <strong>${poolMax}</strong> shared points (scarce pools <strong>3</strong> / <strong>5</strong> / <strong>8</strong> from the same rumor bands as the crisis die). `
+          : "";
       const wrap = document.createElement("div");
       wrap.className = "realm-budget-pilot";
       wrap.setAttribute("role", "region");
       wrap.setAttribute("aria-label", "Shared realm budget before final framing");
       wrap.innerHTML = `<h3 class="realm-budget-title">Co-op beat: spend winter attention</h3>
-<p class="realm-budget-lead">With <strong>co-op tools on</strong>, your group shares <strong>${REALM_BUDGET_POOL_POINTS} points</strong> to add across Order, Reform, and People before choosing how to <em>frame</em> the story. Each bar stays capped at 100. Negotiate, spend the full pool, then commit—the three framing choices appear next.</p>
+<p class="realm-budget-lead">${winterLine}With <strong>co-op tools on</strong>, place those points across Order, Reform, and People before choosing how to <em>frame</em> the story. Each bar stays capped at 100. Negotiate, spend the full pool, then commit—the three framing choices appear next.</p>
 <p class="realm-budget-pool-live" role="status" aria-live="polite"></p>
 <div class="realm-budget-rows">
 <div class="realm-budget-row" data-key="order"><span class="realm-budget-label order">Order</span><span class="realm-budget-combined"></span><div class="realm-budget-btns"><button type="button" class="ghost realm-budget-minus" aria-label="Remove one budget point from Order">−</button><button type="button" class="ghost realm-budget-plus" aria-label="Add one budget point to Order">+</button></div></div>
@@ -1349,8 +1313,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       }
       function refreshBudgetUI() {
         const d = state.realmBudgetDraft;
-        const left = REALM_BUDGET_POOL_POINTS - poolUsed();
-        live.textContent = `Points remaining: ${left} / ${REALM_BUDGET_POOL_POINTS}`;
+        const left = poolMax - poolUsed();
+        live.textContent = `Points remaining: ${left} / ${poolMax}`;
         wrap.querySelectorAll(".realm-budget-row").forEach((row) => {
           const key = row.getAttribute("data-key");
           const add = d[key];
@@ -1369,11 +1333,11 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         if (!btn) return;
         if (btn.classList.contains("realm-budget-commit")) {
           const used = poolUsed();
-          if (used < REALM_BUDGET_POOL_POINTS && canAddAnywhere()) {
-            pushToast(`Spend the full ${REALM_BUDGET_POOL_POINTS} points (use +/− to move weight) before you commit.`);
+          if (used < poolMax && canAddAnywhere()) {
+            pushToast(`Spend the full ${poolMax} points (use +/− to move weight) before you commit.`);
             return;
           }
-          if (used < REALM_BUDGET_POOL_POINTS && !canAddAnywhere()) {
+          if (used < poolMax && !canAddAnywhere()) {
             pushToast("Bars are at or near 100—committing the budget you could place.");
           }
           applyEffects({ order: state.realmBudgetDraft.order, reform: state.realmBudgetDraft.reform, people: state.realmBudgetDraft.people });
@@ -1391,7 +1355,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         if (!row) return;
         const key = row.getAttribute("data-key");
         const d = state.realmBudgetDraft;
-        const left = REALM_BUDGET_POOL_POINTS - poolUsed();
+        const left = poolMax - poolUsed();
         if (btn.classList.contains("realm-budget-plus") && left > 0 && state.stats[key] + d[key] < 100) {
           d[key] += 1;
           refreshBudgetUI();
@@ -1471,12 +1435,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         if (ep.ach.length) {
           html += `<div class="achievements"><strong>Unlocked</strong>: ${ep.ach.join(" · ")}</div>`;
         }
-        html += `<div class="historio-nudge">${ep.historiography}</div>`;
         if (ep.discussion) {
           html += `<div class="discussion-box">${ep.discussion}</div>`;
-        }
-        if (ep.unresolvedHtml) {
-          html += ep.unresolvedHtml;
         }
         html += `<div class="ending-actions"><button type="button" class="ghost" id="copySummaryBtn">Copy run summary</button> <span class="copy-toast" id="copyToast" role="status" aria-live="polite" hidden>Copied.</span></div>`;
         const path = state.pathId || "west";
@@ -1732,6 +1692,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.inventory = new Set();
       state.achievements = new Set();
       state.lastRoll = null;
+      state.lastWinterTotal = null;
       state.sceneApplied = new Set();
       state.keepBanner = false;
       state.finalLean = null;

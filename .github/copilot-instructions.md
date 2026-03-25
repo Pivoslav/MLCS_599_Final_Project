@@ -10,7 +10,7 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 
 ## Status (game bundle vs demos)
 
-- Most mechanic merges listed in **`canvas-interactive-demos/PENDING-TASKS.md`** §A are **already implemented** in **`js/game-app.js`**, **`css/game.css`**, **`index.html`**. **Point-budget pilot:** **`resolve_endings`** when **co-op tools** are enabled (`coopRealmBudgetBeforeChoices`, `REALM_BUDGET_POOL_POINTS`). Before adding a “new” feature, read the live code.
+- Most mechanic merges listed in **`canvas-interactive-demos/PENDING-TASKS.md`** §A are **already implemented** in **`js/game-app.js`**, **`css/game.css`**, **`index.html`**. **Point-budget pilot:** **`resolve_endings`** when **co-op tools** are enabled (`coopRealmBudgetBeforeChoices`, `getRealmBudgetPoolPoints`). Before adding a “new” feature, read the live code.
 
 ## What this is
 
