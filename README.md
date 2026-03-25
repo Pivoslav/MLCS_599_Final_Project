@@ -2,6 +2,8 @@
 
 **Hosting, Canvas (new-tab fragment), and roadmap for merging demos into the game:** see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (on `main` for GitHub and collaborators).
 
+**Stale page after an update?** Browsers often keep an old `game-scenes.js` (same URL). The shipped **`index.html`** appends **`?v=…`** to `css/` and `js/` requests—**bump that date** whenever you need everyone to pull fresh script. Use a **hard refresh** (Ctrl+Shift+R / Cmd+Shift+R) or a **private window**. If you use the Canvas fragment, **re-paste** `canvas-rce-embed-fragment.html` when the published link’s query string changes.
+
 **Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles, and a **realm spread** bar (max − min meter) in the header. All motion respects **`prefers-reduced-motion`**.
 
 ## Coherence of the narrative
