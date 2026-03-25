@@ -384,7 +384,9 @@
           ? `<li><strong>Aksakov vs. Chaadaev:</strong> Does rooting legitimacy in <em>narod</em> and soil answer Chaadaev’s shame about “universal history,” or only change the subject? Can Slavophile thought protect Evgeny, or only prettify the village?</li>`
           : "";
       const lis = bullets.map((b) => `<li>${b}</li>`).join("");
-      return `<h4>Speculative question</h4><p><em>${specQ}</em></p><h4>For class discussion</h4><ul>${lis}${aks}</ul>`;
+      const q = specQ != null ? String(specQ).trim() : "";
+      const specBlock = q ? `<h4>Speculative question</h4><p><em>${q}</em></p>` : "";
+      return `${specBlock}<h4>For class discussion</h4><ul>${lis}${aks}</ul>`;
     }
 
     /**
@@ -554,8 +556,6 @@ Their winter ended on <strong>Stepan’s</strong> bet: <strong>hybrid from day o
           body: `<strong>Father Dimitri</strong> laid two columns side by side as if they could be one story: <strong>a line for ministry grain, a line for parish rye</strong>, a total a hungry household could read. <strong>Stepan</strong> called it holy bookkeeping. <strong>Andrei</strong> called it staying alive. <strong>Vera</strong> said Chaadaev had named a gap; Pushkin had named <strong>bodies</strong>. They agreed to tell the winter as something <strong>material</strong>, not only a middle in talk: budgets a clerk and a priest could audit together.
 
 Whether one column always swallowed the other, none would swear. The close chose <strong>hope over a neat diagram</strong>: two books, one satchel, one argument still walking beside them.`,
-          specQ:
-            "Two account books, one countryside: must one always become the small print, or is the overlap itself the answer Chaadaev could not sketch?",
           bullets: [
             "Who counted in the reform mix this ending implies: clerks, priests, landlords?",
             "Does shared money talk answer Pushkin’s “who pays” without erasing Order?",
