@@ -875,6 +875,18 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     const titleEl = document.getElementById("title");
     const textEl = document.getElementById("text");
     const choicesEl = document.getElementById("choices");
+
+    /** Detach before choicesEl.innerHTML = "" so the node is not destroyed; re-append after buttons. */
+    function stashCoopActionBarBeforeChoicesWipe() {
+      const bar = document.getElementById("coopToolsActionBar");
+      if (bar && bar.parentNode) bar.remove();
+    }
+
+    function appendCoopActionBarIntoChoices() {
+      const bar = document.getElementById("coopToolsActionBar");
+      if (bar && choicesEl) choicesEl.appendChild(bar);
+    }
+
     const sceneIdTextEl = document.getElementById("sceneIdText");
     const stepsTextEl = document.getElementById("stepsText");
     const eraTextEl = document.getElementById("eraText");
@@ -1048,6 +1060,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     }
 
     function mountChoiceButtons(choicesToRender, icoDice, icoBranch) {
+      stashCoopActionBarBeforeChoicesWipe();
       choicesEl.innerHTML = "";
       choicesToRender.forEach((choice) => {
         const button = document.createElement("button");
@@ -1068,6 +1081,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         });
         choicesEl.appendChild(button);
       });
+      appendCoopActionBarIntoChoices();
       if (choicesToRender.length > 0 && !(choicesToRender.length === 1 && choicesToRender[0].roll)) {
         const ped = document.createElement("details");
         ped.className = "choice-pedagogy";
@@ -1079,6 +1093,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     }
 
     function mountResolveEndingsRealmBudget(choicesToRender, icoDice, icoBranch) {
+      stashCoopActionBarBeforeChoicesWipe();
       choicesEl.innerHTML = "";
       const wrap = document.createElement("div");
       wrap.className = "realm-budget-pilot";
@@ -1154,6 +1169,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         }
       });
       refreshBudgetUI();
+      appendCoopActionBarIntoChoices();
     }
 
     function renderScene() {
@@ -1314,12 +1330,14 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         sceneIdTextEl.textContent = `Scene: ${scene.title}`;
         stepsTextEl.textContent = `Turn: ${state.steps}`;
         eraTextEl.textContent = `Era: 1836–37`;
+        stashCoopActionBarBeforeChoicesWipe();
         choicesEl.innerHTML = "";
         const endBtn = document.createElement("button");
         endBtn.className = "choice-btn";
         endBtn.textContent = "Play again";
         endBtn.addEventListener("click", restart);
         choicesEl.appendChild(endBtn);
+        appendCoopActionBarIntoChoices();
         state._coopChoicesSnapshot = [];
         refreshCoopBallotUI();
         statBars();
@@ -1345,6 +1363,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       stepsTextEl.textContent = `Turn: ${state.steps}`;
       eraTextEl.textContent = state.steps >= 4 ? "Era: 1836–37" : "Era: 1836";
 
+      stashCoopActionBarBeforeChoicesWipe();
       choicesEl.innerHTML = "";
 
       if (scene.forcedEffects && !state.sceneApplied.has(state.current)) {
@@ -1359,6 +1378,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         endBtn.textContent = "Return to start";
         endBtn.addEventListener("click", restart);
         choicesEl.appendChild(endBtn);
+        appendCoopActionBarIntoChoices();
         state._coopChoicesSnapshot = [];
         refreshCoopBallotUI();
         statBars();

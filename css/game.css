@@ -876,6 +876,11 @@
 
     .choices { display: grid; gap: 10px; }
 
+    /* Co-op reveal/apply bar is moved into #choices after buttons so it always stacks below them in DOM order. */
+    .choices > .coop-tools-actions {
+      grid-column: 1 / -1;
+    }
+
     .choice-btn {
       display: flex;
       align-items: flex-start;
