@@ -104,13 +104,7 @@
       source.hidden = false;
     }
 
-    /** After crisis, the “sorting” scene gets a path-specific lead-in. */
-    const RESOLVE_PATH_LEAD = {
-      west: `You have been arguing from the Westernizing side of the room: law, print, universities, and the hope that Russia can, in Chaadaev’s phrase, <strong>repeat the whole education of mankind</strong> using the history of humanity before it, not “in one stroke” mimic progress it never helped build.`,
-      slav: `You have been arguing from the Slavophile side, sharpened by voices such as <strong>Konstantin Aksakov</strong> (1817–1860): the Russian people (<em>narod</em>), the land, and Orthodox moral community as the true seat of renewal, not a code imported from abroad. Chaadaev’s shame is sometimes accepted; his remedy is rejected, yet his Letter I also indicted <strong>schism</strong> and a moral code drawn from “miserable Byzantium,” so every position the salon took still wrestles with Chaadaev’s premises, not only his conclusions.`,
-      statist: `You have been arguing <strong>for</strong> the throne’s logic, not <em>as</em> the autocrat. Your circle is gentry, clerks, officers who defend unity, legible ranks, and the containment of dangerous print. You draft memoranda, cultivate patrons in ministries, self-censor, or urge superiors to act. The <strong>sovereign and the ministers</strong> still hold the pen that signs decrees; you only supply the climate in which they move. Someone remembers Chaadaev’s <strong>cloak of civilization</strong>. Your camp prefers order in half-modern garb to another hollow leap.`,
-      med: `You have been arguing the mediator’s wager: borrow European law and technique, but root them in local councils, schools, and provincial trust: neither pure imitation nor proud isolation. (When the text says “zemstvo-style,” that names a <em>later</em> institution used here as shorthand; see Historical staging on any mediator beat.) Chaadaev imagined Russia between East and West, meant to fuse imagination and reason; he concluded Providence had “left us completely on our own.” The mediator track is the game’s name for trying to finish that unfinished synthesis.`
-    };
+    /** Path lead-ins for <code>resolve_endings</code> live in <code>game-config.js</code> as <code>RESOLVE_PATH_LEAD</code>. */
 
     function pickCrisisEvent(total, rawRoll) {
       const p = state.pathId || "west";
