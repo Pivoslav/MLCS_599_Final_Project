@@ -1,5 +1,7 @@
 # Russia at the Crossroads (CYOA): Teaching notes
 
+**Hosting, Canvas embed, iframe sizing, and roadmap for merging demos into the game:** see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (on `main` for GitHub and collaborators).
+
 ## Coherence of the narrative
 
 The game is built around **one provocation** (Chaadaev’s *First Philosophical Letter*, 1836, in **McNally & Tempest**, *Philosophical Works of Peter Chaadaev*, Springer 1991) and **one literary counterweight** (Pushkin’s *The Bronze Horseman*, **Walter Arndt** translation, 1993—use your library edition for assigned passages). In-game copy tracks Letter I and Arndt’s poem where quoted (e.g. “window to the West,” flood lines, “Bronze Horseman in pursuit,” pauper’s grave; **Yevgeny** in source vs. **Evgeny** in some UI copy; see Terms). The candlelit **salon** is still a **dramatization**: the real Letter I is a long **epistle to “Madame.”** See **Terms** in the footer.
@@ -89,30 +91,15 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 
 The Springer volume includes **Letters II–VIII**, ***Apologia of a Madman***, and **fragments** with editors’ commentaries. The CYOA stays **Letter-I-first** for coherence; a second week can assign e.g. *Apologia* (response to the “madness” decree) or Letter VIII alongside a second playthrough. See **`SOURCES.md`** for the edition.
 
-## Embedding in a Canvas Page (UAlberta / Instructure RCE)
+## Embedding in Canvas
 
-Do **not** paste the entire game into the HTML editor: Canvas **sanitizes** content and will break scripts. Use a **short wrapper** plus either **GitHub Pages** or **Canvas Files preview** inside an `iframe`, and always offer **open in new tab**.
-
-### A. No Files upload in this course (common for designers / limited roles)
-
-If you **cannot** upload to **Course Files**, point students at the **public site** (e.g. GitHub Pages):
-
-1. Enable **Pages** on the repo (branch `main`, folder `/ (root)`). The game should load at  
-   `https://<user>.github.io/<repo>/`  
-   and the demos at  
-   `https://<user>.github.io/<repo>/canvas-interactive-demos/`.
-2. In a **Page** → **Edit** → **HTML View**, paste **`canvas-rce-embed-fragment.html`** and replace the URLs if your GitHub username or repo name differs from the sample.
-3. Keep the big **“Play the game (new tab)”** button: if the `iframe` is blank, your institution may **block third-party iframes** while still allowing **external links**—the link is enough.
-4. Optional: ask the **instructor** to add the same URL as a **Module** item (**External URL**) so students see it in the flow even without a custom Page.
-
-### B. You have Files upload (e.g. another course / instructor)
-
-Same pattern as DSC: upload **`index.html`**, copy the file’s **`…/preview`** URL, and use it as both the **link** and the **`iframe src`**. Upload **`canvas-interactive-demos/`** with paths preserved if you want the demos hub from Files too; otherwise keep demos on GitHub only.
+Summary: wrapper + **`iframe`** (GitHub Pages or Canvas Files **`/preview`**) + **new-tab link**; never paste the whole game into the RCE. Full walkthrough, iframe sizing, and permissions: **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)**. Paste-ready markup: **`canvas-rce-embed-fragment.html`**.
 
 ## Files (public repo)
 
+- `HOSTING-AND-INTEGRATION.md`: **Canvas + GitHub Pages lessons**, iframe sizing tips, public-repo notes, **mechanics/integration roadmap** vs `canvas-interactive-demos/`.
 - `index.html`: self-contained game (open in a browser or host on GitHub Pages).
-- `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload).
+- `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload). Increase `height` on `<iframe>` if the embedded player feels small.
 - `SOURCES.md`: citations and editions.
 - `cyoa-structure-map.html`: branch map and teaching companion.
 - `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`.
