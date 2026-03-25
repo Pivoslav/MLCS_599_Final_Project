@@ -503,6 +503,8 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
 
       resolve_endings: {
         title: "Sorting the Outcome",
+        /** Co-op pilot: spend a shared pool across meters before framing choices (see `REALM_BUDGET_*` in game-app.js). Solo / gating off: skipped. */
+        coopRealmBudgetBeforeChoices: true,
         text: `The winter crisis scene is over. The three colored bars (Order, Reform, People) are the running score for how your choices leaned, not a grade, just a portrait.
 
 Chaadaev’s Letter I asked whether Russia gets an honest place in “universal” history; Pushkin’s <em>Bronze Horseman</em> asked who survives when the state builds in granite and the river rises.

@@ -2,7 +2,7 @@
 
 Checklist of work **not** done yet—merge into the **game bundle** (`index.html` + `css/`, `js/`), narrative, course ops. Update this file as items close.
 
-**Suggested next implementation (code):** §A **point budget** pilot in one scene (`realm-triangle-budget.html` pattern), or jump to §B **Read alongside** pass (content-heavy). **Optional:** **`GAMEPLAN.md` Phase 2b** — LLM-assisted character briefs locally, **static** portraits in-bundle for dialogue scenes (no runtime API). **Suggested next ops:** §D Canvas fragment refresh + §F smoke tests.
+**Suggested next implementation (code):** §B **Read alongside** pass (content-heavy), or **`GAMEPLAN.md` Phase 2b** (LLM-assisted character briefs + static portraits). **Suggested next ops:** §D Canvas fragment refresh + §F smoke tests.
 
 ---
 
@@ -19,7 +19,7 @@ Checklist of work **not** done yet—merge into the **game bundle** (`index.html
 - [x] **URL `?scene=`** — `applySceneFromQuery` in `game-app.js`; allowed ids = keys of `scenes` in `game-scenes.js` (see README).
 - [x] **Copy summary** — Run summary includes **Course: MLCS-599** and **Run ID** (`sessionStorage`).
 - [x] **Coupled sliders (optional)** — Epilogue **Debrief toy: coupled realm sliders** (labeled; does not replace saved meters).
-- [ ] **Point budget (optional)** — Pilot one scene (`realm-triangle-budget.html`); not wired in the bundle yet.
+- [x] **Point budget (pilot)** — **`resolve_endings`** when **co-op tools** are on: spend **30** shared points across Order / Reform / People (cap 100), then framing choices appear (`REALM_BUDGET_POOL_POINTS` in `game-app.js`). Solo or co-op off: unchanged. Pattern: `realm-triangle-budget.html`.
 
 ## B. Narrative & primary-text quality (from `js/game-app.js` BACKLOG comment)
 
@@ -59,5 +59,5 @@ When a section completes, move bullets to a “Done” appendix or delete them�
 ## Done (shipped or superseded)
 
 - **Breadcrumb + realm spread** — Live in `index.html` / `css/game.css` and `js/game-app.js`; View Transitions + GSAP stagger where supported.
-- **Demo merges (A, except point budget)** — Toasts, crisis table, co-op panel, epilogue debrief lab + peek dialog, `?scene=`, choice icons/hints, realm debrief sliders, run summary fields — see `js/game-app.js`, `css/game.css`, `index.html`.
+- **Demo merges (§A)** — Toasts, crisis table, co-op panel + seats, epilogue debrief + peek, `?scene=`, choice icons/hints, realm debrief sliders, run summary, **point budget on `resolve_endings` (co-op on)** — see `js/game-app.js`, `css/game.css`, `index.html`.
 - **Three-player layout** — **Three seat cards** above the choice column when co-op gating is on (speak order + per-seat vote + sidebar timer / reveal / apply).

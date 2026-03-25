@@ -68,7 +68,7 @@ Most rows below are **merged** in the bundle; demos stay as vanilla labs for Can
 | Prototype (`demos/`) | Idea in the live game | Touch points (mainly `js/game-app.js`, styles in `css/game.css`) |
 |----------------------|------------------------|------------------------------|
 | `realm-balance-slider.html` | **Shipped (epilogue):** coupled realm sliders labeled as debrief toy only. | `resolveEndingText` → `.realm-debrief-lab`; `wireRealmDebriefSliders`. |
-| `realm-triangle-budget.html` | **Co-op budget** (optional pilot; not in bundle yet). | Future: before major forks; gate choice until “committed.” |
+| `realm-triangle-budget.html` | **Shipped (pilot):** co-op-gated budget on **`resolve_endings`** before final framing choices (`REALM_BUDGET_POOL_POINTS`). | `mountResolveEndingsRealmBudget` in `js/game-app.js`; flag `coopRealmBudgetBeforeChoices` on scene. |
 | `icons-showcase.html` | **Partial:** choice-row **dice / branch** SVGs + titles. | `renderChoices` / `.choice-ico`; inventory/glossary polish optional. |
 | `interactive-widgets.html` | **Toast**, `<dialog>` peek, **details/summary**, stance pattern. | `#toastRegion`, `#debriefPeekDlg`, co-op stance checkbox. |
 | `canvas-self-test.html` | Not for players—**support** checklist when embedding. | N/A (keep as separate file for authors). |

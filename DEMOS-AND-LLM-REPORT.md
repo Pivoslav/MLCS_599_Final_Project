@@ -39,7 +39,7 @@ All live under `canvas-interactive-demos/demos/`. **Needs:** modern browser; ope
 | Demo | What it needs | What it takes | Shipped in bundle? | Gameplay / rethink opportunities |
 |------|----------------|---------------|--------------------|-----------------------------------|
 | **realm-balance-slider.html** | Same | Toy: redistributes fixed total | **Partial** — epilogue **debrief toy** only (not canonical meters) | Keep **non-canon**; could add “export sliders → forum post” for reflection. |
-| **realm-triangle-budget.html** | Same | Co-op negotiation time | **No** — §A still open | **Pilot one scene:** spend budget before a fork; forces **explicit scarcity**; pairs with co-op timer. |
+| **realm-triangle-budget.html** | Same | Co-op negotiation time | **Yes (pilot)** — **`resolve_endings`** when co-op tools on | **Extend** only if playtests want another beat; pairs with co-op timer + seats. |
 | **icons-showcase.html** | Same | Visual scan | **Partial** — choice-row dice/branch SVGs | Extend to **inventory rows**, glossary; **icon legend** page for TAs. |
 | **interactive-widgets.html** | Same | Pattern catalog | Patterns ported | Reference for **new** modals / toasts without framework drift. |
 | **canvas-self-test.html** | LMS iframe context | Author time | N/A — support | Run before term; documents **storage / button / SVG** quirks. |

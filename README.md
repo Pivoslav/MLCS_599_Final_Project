@@ -45,7 +45,7 @@ The **sorting** scene before the final framing choice prepends a short recap of 
 
 One shared screen. **Three fixed roles** align with the game’s meters. Before **every** choice, each player speaks once from their lens. The group decides which option to take (consensus or majority: your call).
 
-**In the UI:** enable **Co-op tools** in the sidebar for **gating**, a **timer**, **reveal / clear summary**, **stance**, and **Apply winning choice**. While gating is on, **three seat cards** (Order → Reform → People) appear **above the choice buttons** in the story column—each player speaks in turn, then locks a vote there so every voice is visible next to the options the group is debating.
+**In the UI:** enable **Co-op tools** in the sidebar for **gating**, a **timer**, **reveal / clear summary**, **stance**, and **Apply winning choice**. While gating is on, **three seat cards** (Order → Reform → People) appear **above the choice buttons** in the story column—each player speaks in turn, then locks a vote there so every voice is visible next to the options the group is debating. On **Sorting the Outcome** (`resolve_endings`), co-op groups also **spend a shared 30-point budget** across the three meters before the final framing choices unlock (solo play or co-op off skips this step).
 
 | Player | Role | Argue from… |
 |--------|------|----------------|

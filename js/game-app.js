@@ -198,8 +198,13 @@
       walkouts: new Set(),
       coopToolsEnabled: false,
       _coopReveal: false,
-      _coopChoicesSnapshot: null
+      _coopChoicesSnapshot: null,
+      realmBudgetCommittedResolveEndings: false,
+      realmBudgetDraft: { order: 0, reform: 0, people: 0 },
+      _prevSceneForBudget: null
     };
+
+    const REALM_BUDGET_POOL_POINTS = 30;
 
     function isCrisisScene(id) {
       return id === "crisis_west" || id === "crisis_slav" || id === "crisis_statist" || id === "crisis_med";
@@ -1024,12 +1029,125 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       applyBtn.disabled = !(stance.checked && idx >= 0 && list[idx]);
     }
 
+    function mountChoiceButtons(choicesToRender, icoDice, icoBranch) {
+      choicesEl.innerHTML = "";
+      choicesToRender.forEach((choice) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "choice-btn";
+        const fx = choice.effects ? formatEffects(choice.effects) : "";
+        if (fx) button.title = `Meter shift if you choose this: ${fx}`;
+        const ico = choice.roll ? icoDice : icoBranch;
+        button.innerHTML = choice.roll
+          ? `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span></span>`
+          : `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}</span>`;
+        button.addEventListener("click", () => {
+          if (state.coopToolsEnabled) {
+            pushToast("Co-op gating on: each seat votes above, then sidebar → stance → Apply winning choice.");
+            return;
+          }
+          commitChoice(choice);
+        });
+        choicesEl.appendChild(button);
+      });
+      if (choicesToRender.length > 0 && !(choicesToRender.length === 1 && choicesToRender[0].roll)) {
+        const ped = document.createElement("details");
+        ped.className = "choice-pedagogy";
+        const track = state.pathId ? `<strong>${state.pathId}</strong> (argument track locked)` : "<strong>not locked</strong> until you take a forking choice";
+        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move—institutional costs, not a hidden “correct” score. Track: ${track}. Hover or focus a button for a plain-language <strong>title</strong> preview.</p>`;
+        choicesEl.appendChild(ped);
+      }
+      state._coopChoicesSnapshot = choicesToRender;
+    }
+
+    function mountResolveEndingsRealmBudget(choicesToRender, icoDice, icoBranch) {
+      choicesEl.innerHTML = "";
+      const wrap = document.createElement("div");
+      wrap.className = "realm-budget-pilot";
+      wrap.setAttribute("role", "region");
+      wrap.setAttribute("aria-label", "Shared realm budget before final framing");
+      wrap.innerHTML = `<h3 class="realm-budget-title">Co-op beat: spend winter attention</h3>
+<p class="realm-budget-lead">With <strong>co-op tools on</strong>, your group shares <strong>${REALM_BUDGET_POOL_POINTS} points</strong> to add across Order, Reform, and People before choosing how to <em>frame</em> the story. Each bar stays capped at 100. Negotiate, spend the full pool, then commit—the three framing choices appear next.</p>
+<p class="realm-budget-pool-live" role="status" aria-live="polite"></p>
+<div class="realm-budget-rows">
+<div class="realm-budget-row" data-key="order"><span class="realm-budget-label order">Order</span><span class="realm-budget-combined"></span><div class="realm-budget-btns"><button type="button" class="ghost realm-budget-minus" aria-label="Remove one budget point from Order">−</button><button type="button" class="ghost realm-budget-plus" aria-label="Add one budget point to Order">+</button></div></div>
+<div class="realm-budget-row" data-key="reform"><span class="realm-budget-label reform">Reform</span><span class="realm-budget-combined"></span><div class="realm-budget-btns"><button type="button" class="ghost realm-budget-minus" aria-label="Remove one budget point from Reform">−</button><button type="button" class="ghost realm-budget-plus" aria-label="Add one budget point to Reform">+</button></div></div>
+<div class="realm-budget-row" data-key="people"><span class="realm-budget-label people">People</span><span class="realm-budget-combined"></span><div class="realm-budget-btns"><button type="button" class="ghost realm-budget-minus" aria-label="Remove one budget point from People">−</button><button type="button" class="ghost realm-budget-plus" aria-label="Add one budget point to People">+</button></div></div>
+</div>
+<button type="button" class="primary realm-budget-commit">Commit budget and show framing choices</button>`;
+      choicesEl.appendChild(wrap);
+      const live = wrap.querySelector(".realm-budget-pool-live");
+      function poolUsed() {
+        const d = state.realmBudgetDraft;
+        return d.order + d.reform + d.people;
+      }
+      function refreshBudgetUI() {
+        const d = state.realmBudgetDraft;
+        const left = REALM_BUDGET_POOL_POINTS - poolUsed();
+        live.textContent = `Points remaining: ${left} / ${REALM_BUDGET_POOL_POINTS}`;
+        wrap.querySelectorAll(".realm-budget-row").forEach((row) => {
+          const key = row.getAttribute("data-key");
+          const add = d[key];
+          const base = state.stats[key];
+          row.querySelector(".realm-budget-combined").textContent = `${base} → ${base + add} (+${add})`;
+          row.querySelector(".realm-budget-plus").disabled = left <= 0 || base + add >= 100;
+          row.querySelector(".realm-budget-minus").disabled = add <= 0;
+        });
+      }
+      function canAddAnywhere() {
+        const d = state.realmBudgetDraft;
+        return ["order", "reform", "people"].some((k) => state.stats[k] + d[k] < 100);
+      }
+      wrap.addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        if (btn.classList.contains("realm-budget-commit")) {
+          const used = poolUsed();
+          if (used < REALM_BUDGET_POOL_POINTS && canAddAnywhere()) {
+            pushToast(`Spend the full ${REALM_BUDGET_POOL_POINTS} points (use +/− to move weight) before you commit.`);
+            return;
+          }
+          if (used < REALM_BUDGET_POOL_POINTS && !canAddAnywhere()) {
+            pushToast("Bars are at or near 100—committing the budget you could place.");
+          }
+          applyEffects({ order: state.realmBudgetDraft.order, reform: state.realmBudgetDraft.reform, people: state.realmBudgetDraft.people });
+          state.realmBudgetCommittedResolveEndings = true;
+          showEventBanner("<strong>Budget committed:</strong> " + formatEffects(state.realmBudgetDraft));
+          mountChoiceButtons(choicesToRender, icoDice, icoBranch);
+          refreshCoopBallotUI();
+          statBars();
+          renderInventory();
+          updateSalometry();
+          animateChoiceButtonsIfNeeded();
+          return;
+        }
+        const row = btn.closest(".realm-budget-row");
+        if (!row) return;
+        const key = row.getAttribute("data-key");
+        const d = state.realmBudgetDraft;
+        const left = REALM_BUDGET_POOL_POINTS - poolUsed();
+        if (btn.classList.contains("realm-budget-plus") && left > 0 && state.stats[key] + d[key] < 100) {
+          d[key] += 1;
+          refreshBudgetUI();
+        }
+        if (btn.classList.contains("realm-budget-minus") && d[key] > 0) {
+          d[key] -= 1;
+          refreshBudgetUI();
+        }
+      });
+      refreshBudgetUI();
+    }
+
     function renderScene() {
       if (!state.keepBanner) hideEventBanner();
       state.keepBanner = false;
 
       const paint = () => {
       const scene = scenes[state.current];
+      if (state.current !== "resolve_endings") state.realmBudgetCommittedResolveEndings = false;
+      if (state.current === "resolve_endings" && state._prevSceneForBudget !== "resolve_endings") {
+        state.realmBudgetDraft = { order: 0, reform: 0, people: 0 };
+      }
       syncAppChrome(state.current, scene);
       endingBlock.innerHTML = "";
 
@@ -1191,6 +1309,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         updateSceneVisuals(state.current);
         updateSalometry();
         animateChoiceButtonsIfNeeded();
+        state._prevSceneForBudget = state.current;
         return;
       }
 
@@ -1229,6 +1348,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         updateSceneVisuals(state.current);
         updateSalometry();
         animateChoiceButtonsIfNeeded();
+        state._prevSceneForBudget = state.current;
         return;
       }
 
@@ -1250,43 +1370,21 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const icoBranch =
         '<span class="choice-ico choice-ico--branch" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v12"/><circle cx="6" cy="3" r="2"/><circle cx="6" cy="15" r="2"/><path d="M6 9h8l4 4"/><circle cx="18" cy="15" r="2"/></svg></span>';
 
-      choicesToRender.forEach((choice) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "choice-btn";
-        const fx = choice.effects ? formatEffects(choice.effects) : "";
-        if (fx) button.title = `Meter shift if you choose this: ${fx}`;
-        const ico = choice.roll ? icoDice : icoBranch;
-        button.innerHTML = choice.roll
-          ? `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span></span>`
-          : `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}</span>`;
-
-        button.addEventListener("click", () => {
-          if (state.coopToolsEnabled) {
-            pushToast("Co-op gating on: each seat votes above, then sidebar → stance → Apply winning choice.");
-            return;
-          }
-          commitChoice(choice);
-        });
-        choicesEl.appendChild(button);
-      });
-
-      if (choicesToRender.length > 0 && !(choicesToRender.length === 1 && choicesToRender[0].roll)) {
-        const ped = document.createElement("details");
-        ped.className = "choice-pedagogy";
-        const track = state.pathId ? `<strong>${state.pathId}</strong> (argument track locked)` : "<strong>not locked</strong> until you take a forking choice";
-        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move—institutional costs, not a hidden “correct” score. Track: ${track}. Hover or focus a button for a plain-language <strong>title</strong> preview.</p>`;
-        choicesEl.appendChild(ped);
+      if (scene.coopRealmBudgetBeforeChoices && state.coopToolsEnabled && !state.realmBudgetCommittedResolveEndings) {
+        mountResolveEndingsRealmBudget(choicesToRender, icoDice, icoBranch);
+        state._coopChoicesSnapshot = [];
+        refreshCoopBallotUI();
+      } else {
+        mountChoiceButtons(choicesToRender, icoDice, icoBranch);
+        refreshCoopBallotUI();
       }
-
-      state._coopChoicesSnapshot = choicesToRender;
-      refreshCoopBallotUI();
 
       statBars();
       renderInventory();
       updateSceneVisuals(state.current);
       updateSalometry();
       animateChoiceButtonsIfNeeded();
+      state._prevSceneForBudget = state.current;
       };
 
       if (skipViewTransition()) {
@@ -1326,6 +1424,11 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.runTags = new Set();
       state.scars = new Set();
       state.walkouts = new Set();
+      state._coopReveal = false;
+      state._coopChoicesSnapshot = null;
+      state.realmBudgetCommittedResolveEndings = false;
+      state.realmBudgetDraft = { order: 0, reform: 0, people: 0 };
+      state._prevSceneForBudget = null;
       hideEventBanner();
       refreshCoopBallotUI();
       renderScene();

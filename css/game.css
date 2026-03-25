@@ -1531,3 +1531,94 @@
     .debrief-peek-body p {
       margin: 0 0 0.65rem;
     }
+
+    .realm-budget-pilot {
+      max-width: min(72ch, 100%);
+      padding: 1rem 1.1rem 1.15rem;
+      margin-bottom: 0.5rem;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--line) 85%, var(--dynamic-accent) 15%);
+      background: color-mix(in srgb, var(--card-muted) 90%, transparent);
+    }
+
+    .realm-budget-title {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.02rem, 0.96rem + 0.2vw, 1.12rem);
+      color: var(--dynamic-accent);
+    }
+
+    .realm-budget-lead {
+      margin: 0 0 0.75rem;
+      font-size: clamp(0.88rem, 0.84rem + 0.1vw, 0.95rem);
+      line-height: 1.5;
+      color: #5a5046;
+    }
+
+    .realm-budget-pool-live {
+      margin: 0 0 0.75rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .realm-budget-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .realm-budget-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--card);
+      border: 1px solid var(--line);
+    }
+
+    .realm-budget-label {
+      min-width: 4.5rem;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .realm-budget-label.order {
+      color: var(--bar-order);
+    }
+
+    .realm-budget-label.reform {
+      color: var(--bar-reform);
+    }
+
+    .realm-budget-label.people {
+      color: var(--bar-people);
+    }
+
+    .realm-budget-combined {
+      flex: 1;
+      min-width: 10rem;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.86rem;
+      color: #4a5060;
+    }
+
+    .realm-budget-btns {
+      display: flex;
+      gap: 6px;
+    }
+
+    .realm-budget-btns .ghost {
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      padding: 0;
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .realm-budget-commit {
+      width: 100%;
+      margin-top: 4px;
+    }
