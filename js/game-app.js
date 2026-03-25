@@ -337,7 +337,7 @@
         pre += `<p class="callback-note"><strong>Scar:</strong> The petition detour wasted weeks; Stepan speaks more softly, and the Third Section’s file on the salon is thicker.</p>`;
       }
       if (sceneId.startsWith("event_") && state.crisisMisfit) {
-        pre += `<p class="crisis-misfit"><strong>Winter misfit:</strong> The rumor that reached you was meant for another table—hard luck when you felt safe, easy luck when you felt weak. Treat it as couriers and old scores crossing wires, not the story you rehearsed by the lamp.</p>`;
+        pre += `<p class="crisis-misfit"><strong>Winter misfit:</strong> The rumor that reached you was meant for another table: hard luck when you felt safe, easy luck when you felt weak. Treat it as couriers and old scores crossing wires, not the story you rehearsed by the lamp.</p>`;
       }
       return pre;
     }
@@ -408,13 +408,13 @@
       west: {
         order: {
           title: "Ending: The Ranks of Civilization",
-          body: `The fire had burned to ash long before anyone admitted the winter was over. In the gray light, <strong>Andrei</strong> spoke last and spoke plainly. Whatever had happened at the door—censor, high water, rumor from the north—the story he would carry to his cousins had one spine: <strong>the offices had to hold first</strong>. Papers had to read the same upstairs and down; ranks had to mean something. You could not feed a country on salon talk about Europe if the table itself was tipping.
+          body: `The fire had burned to ash long before anyone admitted the winter was over. In the gray light, <strong>Andrei</strong> spoke last and spoke plainly. Whatever had happened at the door (censor, high water, rumor from the north), the story he would carry to his cousins had one spine: <strong>the offices had to hold first</strong>. Papers had to read the same upstairs and down; ranks had to mean something. You could not feed a country on salon talk about Europe if the table itself was tipping.
 
-<strong>Stepan</strong> turned the Chaadaev copy face-down on the table. That, he said, was the hollow dignity the letter had mocked: beautiful stationery, no air in the room. <strong>Vera</strong> asked whether Pushkin’s Neva had ever waited for a minister’s signature before it rose. <strong>Father Dimitri</strong> scrubbed ink from his cuff and named, under his breath, rooms that had flooded—rooms no one on Andrei’s side of the argument had mentioned aloud.
+<strong>Stepan</strong> turned the Chaadaev copy face-down on the table. That, he said, was the hollow dignity the letter had mocked: beautiful stationery, no air in the room. <strong>Vera</strong> asked whether Pushkin’s Neva had ever waited for a minister’s signature before it rose. <strong>Father Dimitri</strong> scrubbed ink from his cuff and named, under his breath, rooms that had flooded, rooms no one on Andrei’s side of the argument had mentioned aloud.
 
 When the horses were called, they still rode out on <strong>Andrei’s</strong> version: Russia has to <strong>live through</strong> its masters before it can deserve its teachers. If that leaves Chaadaev in the police file instead of the schoolroom, each of them would have to sleep with the choice.`,
           specQ:
-            "If stability has to come first, are you proving Chaadaev wrong about Russia’s gap—or showing that his “cloak of civilization” fits the police office better than the classroom?",
+            "If stability has to come first, are you proving Chaadaev wrong about Russia’s gap, or showing that his “cloak of civilization” fits the police office better than the classroom?",
           bullets: [
             "Does running the state smoothly count as joining “universal history” if real debate never leaves the waiting room?",
             "In <em>The Bronze Horseman</em>, who counts as the face of “progress” when you end the winter on Order?",
@@ -423,9 +423,9 @@ When the horses were called, they still rode out on <strong>Andrei’s</strong> 
         },
         reform: {
           title: "Ending: The Syllabus and the Censor",
-          body: `<strong>Stepan</strong> would not let the night end on sighs about fate. He rested his hand on the dog-eared pages they had risked printing and said the winter had shown, again, what Chaadaev meant: a country is “educated” in its <strong>laws</strong> and in whether people can use their own language in public—and the Third Section still guarded both doors. <strong>Andrei</strong> warned him not to mistake a few permissions for a constitution. <strong>Father Dimitri</strong> added that if letters from the north had brought flood news, then whatever reform they drafted in Petersburg had once more arrived <strong>soaking</strong> on someone else’s step. <strong>Vera</strong> said nothing. She did not put out the lamp.
+          body: `<strong>Stepan</strong> would not let the night end on sighs about fate. He rested his hand on the dog-eared pages they had risked printing and said the winter had shown, again, what Chaadaev meant: a country is “educated” in its <strong>laws</strong> and in whether people can use their own language in public, and the Third Section still guarded both doors. <strong>Andrei</strong> warned him not to mistake a few permissions for a constitution. <strong>Father Dimitri</strong> added that if letters from the north had brought flood news, then whatever reform they drafted in Petersburg had once more arrived <strong>soaking</strong> on someone else’s step. <strong>Vera</strong> said nothing. She did not put out the lamp.
 
-They did not settle the fight. They agreed, sourly, to close the year on <strong>Stepan’s</strong> terms: the part of the winter they would be proud of was syllabi, petitions, and the war on the page—not bronze parades—while every one of them knew the censor’s lamp still burned in the next corridor.`,
+They did not settle the fight. They agreed, sourly, to close the year on <strong>Stepan’s</strong> terms: the part of the winter they would be proud of was syllabi, petitions, and the war on the page, not bronze parades, while every one of them knew the censor’s lamp still burned in the next corridor.`,
           specQ: "Can you really study “universal history” in rooms the secret police still own?",
           bullets: [
             "Were Westernizers right that Russia had to risk disorder to join world history, or does Chaadaev overstate the break with the past?",
@@ -437,7 +437,7 @@ They did not settle the fight. They agreed, sourly, to close the year on <strong
           title: "Ending: Evgeny’s Europeans",
           body: `<strong>Father Dimitri</strong> blocked the door until someone in the room said <strong>clerk</strong> out loud and meant it. Pushkin’s poor clerk had haunted their autumn; now the priest made him flesh. If “Europe” meant only laws and drawing rooms, he said, then ordinary streets could <strong>starve</strong> while the argument stayed elegant. <strong>Vera</strong>, who had opened the season with French novels, quoted Chaadaev’s ladder from the court down to the owned life and asked which line of any syllabus touched the bottom rung. <strong>Andrei</strong> called that line beautiful and said he could not administer it. <strong>Stepan</strong>, wiping soot from the shutter, admitted that foreign models mean nothing if the river never reaches the account book.
 
-They left with a fragile pact: the winter they would retell is one that <strong>weighed bodies before abstractions</strong>—Chaadaev’s mirror held up to Pushkin’s pauper grave until the carriage wheels turned.`,
+They left with a fragile pact: the winter they would retell is one that <strong>weighed bodies before abstractions</strong>: Chaadaev’s mirror held up to Pushkin’s pauper grave until the carriage wheels turned.`,
           specQ: "Who is “Europe” for if the lesson plan never reaches the clerk’s street?",
           bullets: [
             "If institutions help real lives, can they still be “borrowed” in Chaadaev’s sense, or does he demand a kind of cultural depth law cannot supply?",
@@ -449,9 +449,9 @@ They left with a fragile pact: the winter they would retell is one that <strong>
       slav: {
         order: {
           title: "Ending: The Vertical Iconostasis",
-          body: `Lamplight slid across the icons. <strong>Andrei</strong>—no one had expected him to speak for the soil party—drew one clean line with his finger in the air: altar, throne, <em>narod</em>, no gap for scandal merchants. The Slavophile voices warmed to it until <strong>Vera</strong> asked a simple question: when the ministry uses the same words, <strong>who speaks for the hamlet</strong>? The pages on schism and “miserable Byzantium” stayed open; no one pretended they answered each other. <strong>Father Dimitri</strong> asked whether Pushkin’s clerk could live inside a story told as humble faith, or whether he would always catch on the silk like a burr.
+          body: `Lamplight slid across the icons. <strong>Andrei</strong> (no one had expected him to speak for the soil party) drew one clean line with his finger in the air: altar, throne, <em>narod</em>, no gap for scandal merchants. The Slavophile voices warmed to it until <strong>Vera</strong> asked a simple question: when the ministry uses the same words, <strong>who speaks for the hamlet</strong>? The pages on schism and “miserable Byzantium” stayed open; no one pretended they answered each other. <strong>Father Dimitri</strong> asked whether Pushkin’s clerk could live inside a story told as humble faith, or whether he would always catch on the silk like a burr.
 
-They packed the doubt away for the ride. In <strong>Andrei’s</strong> retelling, winter had shown Holy Russia and good order <strong>in one story</strong>. Whether that story still left room for correction from below—the road would test.`,
+They packed the doubt away for the ride. In <strong>Andrei’s</strong> retelling, winter had shown Holy Russia and good order <strong>in one story</strong>. Whether that story still left room for correction from below; the road would test.`,
           specQ: "When the crown says it speaks for the land, who is left to correct it from underneath?",
           bullets: [
             "When does talk of the <em>narod</em> serve the village, and when does it decorate a ministry dispatch?",
@@ -461,7 +461,7 @@ They packed the doubt away for the ride. In <strong>Andrei’s</strong> retellin
         },
         reform: {
           title: "Ending: Parish Ink, Capital Light",
-          body: `<strong>Stepan</strong> surprised the table: he kept Aksakov’s words but not Aksakov’s quiet. Parish schools; stewards the district could actually name; German textbooks read aloud in Russian—as long as no one waved a foreign charter like a holy relic. <strong>Vera</strong> said “a little borrowing” never stayed little once Petersburg counted the rubles. <strong>Andrei</strong> listened for treason, heard none, and allowed that maybe “rights” could stay in Latin while the silver stayed local. <strong>Father Dimitri</strong> asked when the mix would harden into a new costume Chaadaev would strip off the same way.
+          body: `<strong>Stepan</strong> surprised the table: he kept Aksakov’s words but not Aksakov’s quiet. Parish schools; stewards the district could actually name; German textbooks read aloud in Russian, as long as no one waved a foreign charter like a holy relic. <strong>Vera</strong> said “a little borrowing” never stayed little once Petersburg counted the rubles. <strong>Andrei</strong> listened for treason, heard none, and allowed that maybe “rights” could stay in Latin while the silver stayed local. <strong>Father Dimitri</strong> asked when the mix would harden into a new costume Chaadaev would strip off the same way.
 
 No answer landed. They agreed only that their winter would end on <strong>Stepan’s</strong> picture: <strong>ink in the parish, light from the capital</strong>, argument honest and still open.`,
           specQ: "At what point does “we only borrow a little” turn into a new hollow shell Chaadaev would still recognize?",
@@ -473,23 +473,23 @@ No answer landed. They agreed only that their winter would end on <strong>Stepan
         },
         people: {
           title: "Ending: The Soil and the Roof",
-          body: `<strong>Father Dimitri</strong> made <em>narod</em> a question of <strong>roofs and bellies</strong>, not embroidery. Clerks who shivered; peasants whose tithe paid for someone else’s church silver—if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; talk of throne and soil had never rehearsed Kolomna. <strong>Vera</strong> turned grief into lines a future local fund might someday pay for. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was any less strange now.
+          body: `<strong>Father Dimitri</strong> made <em>narod</em> a question of <strong>roofs and bellies</strong>, not embroidery. Clerks who shivered; peasants whose tithe paid for someone else’s church silver; if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; talk of throne and soil had never rehearsed Kolomna. <strong>Vera</strong> turned grief into lines a future local fund might someday pay for. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was any less strange now.
 
-Pushkin and the letter would not let a pretty idea float where someone had drowned. They closed on <strong>Father Dimitri’s</strong> rule: <strong>soil that matters means roofs the chronicles skip</strong>—or their Slav year was only a prettier way to dodge Chaadaev’s shame.`,
+Pushkin and the letter would not let a pretty idea float where someone had drowned. They closed on <strong>Father Dimitri’s</strong> rule: <strong>soil that matters means roofs the chronicles skip</strong>, or their Slav year was only a prettier way to dodge Chaadaev’s shame.`,
           specQ: "Does Slavophile language force you to help the capital’s clerk, or only the village you imagine?",
           bullets: [
             "Material life versus the ideal village: where would later readers put the clerk (without mixing up centuries)?",
             "Can “soil” as a moral base answer Evgeny’s fate, or only soothe the gentry?",
-            "Letter I attacks upper-class vice. Does a People-first Slav reading make Chaadaev sound fairer—or harsher?"
+            "Letter I attacks upper-class vice. Does a People-first Slav reading make Chaadaev sound fairer, or harsher?"
           ]
         }
       },
       statist: {
         order: {
           title: "Ending: The File Outlives the Salon",
-          body: `The dossier on the sideboard was thick enough to shame the fire. <strong>Andrei’s</strong> friends—statists by habit, not by crown—agreed on what had survived the winter: what lasted was <strong>stamped, numbered, in triplicate</strong>. Some names in the file sat in someone’s throat like stones; others shrugged and said continuity was its own kind of civilization. <strong>Stepan</strong> looked ill; reform with no air died faster than he liked to admit. <strong>Vera</strong> asked whether “who thinks for Russia?” had been answered a little too neatly by police ink. <strong>Father Dimitri</strong> whispered Evgeny’s name once, then folded it into protocol.
+          body: `The dossier on the sideboard was thick enough to shame the fire. <strong>Andrei’s</strong> friends, statists by habit and not by crown, agreed on what had survived the winter: what lasted was <strong>stamped, numbered, in triplicate</strong>. Some names in the file sat in someone’s throat like stones; others shrugged and said continuity was its own kind of civilization. <strong>Stepan</strong> looked ill; reform with no air died faster than he liked to admit. <strong>Vera</strong> asked whether “who thinks for Russia?” had been answered a little too neatly by police ink. <strong>Father Dimitri</strong> whispered Evgeny’s name once, then folded it into protocol.
 
-The story they would tell in public: <strong>ranks held</strong>; the salon had been sorted into a case number; for now, thought lived only in the margins a chief allowed. Chaadaev’s question was still inside the cover sheet—unread, not gone.`,
+The story they would tell in public: <strong>ranks held</strong>; the salon had been sorted into a case number; for now, thought lived only in the margins a chief allowed. Chaadaev’s question was still inside the cover sheet, unread, not gone.`,
           specQ: "Is following the process a kind of civilization, or a uniform while real thought stays rented?",
           bullets: [
             "Police files and routine: in your readings, does smooth continuity equal legitimacy?",
@@ -499,10 +499,10 @@ The story they would tell in public: <strong>ranks held</strong>; the salon had 
         },
         reform: {
           title: "Ending: Commissioned Progress",
-          body: `<strong>Stepan’s</strong> bitter joke fell flat: Europe had arrived as <strong>memoranda</strong>. Commissions, letters from patrons, reform only where chiefs allowed ribbon and triplicate—that was the harvest they chose to tell. <strong>Andrei</strong> called it sensible triage. <strong>Vera</strong> named friends who would never sign anything bold again. <strong>Father Dimitri</strong> asked whether mankind’s long “education” could happen only upstairs; when no one answered, his voice thinned.
+          body: `<strong>Stepan’s</strong> bitter joke fell flat: Europe had arrived as <strong>memoranda</strong>. Commissions, letters from patrons, reform only where chiefs allowed ribbon and triplicate, that was the harvest they chose to tell. <strong>Andrei</strong> called it sensible triage. <strong>Vera</strong> named friends who would never sign anything bold again. <strong>Father Dimitri</strong> asked whether mankind’s long “education” could happen only upstairs; when no one answered, his voice thinned.
 
-Paper could <strong>look</strong> like borrowing and still be hollow—Letter I’s curse in fair copy. Still <strong>Stepan</strong> carried the close: Russia would change <strong>where the margin allowed</strong>; dignity would be counted in folders; nothing would move faster than the corridor could bear.`,
-          specQ: "If reform lives only in triplicate copies, does mankind’s “education” happen—or does paperwork stand in for it?",
+Paper could <strong>look</strong> like borrowing and still be hollow: Letter I’s curse in fair copy. Still <strong>Stepan</strong> carried the close: Russia would change <strong>where the margin allowed</strong>; dignity would be counted in folders; nothing would move faster than the corridor could bear.`,
+          specQ: "If reform lives only in triplicate copies, does mankind’s “education” happen, or does paperwork stand in for it?",
           bullets: [
             "When borrowing is managed from above, at what point does the form fill in with real life?",
             "Is “managed change” a moral share in civilization, or mimicry with a seal?",
@@ -511,23 +511,23 @@ Paper could <strong>look</strong> like borrowing and still be hollow—Letter I�
         },
         people: {
           title: "Ending: Relief Without Receipt",
-          body: `<strong>Father Dimitri</strong> framed <strong>mercy</strong> on purpose, because talk of rights would have split them from the people who paid their rent. Flood-year letters; petitions for imperial relief; the emperor as father who might soften—he told the winter as <strong>grace</strong>, not as structure. <strong>Andrei</strong> relaxed; mercy read well in letters to patrons. <strong>Stepan</strong> said softly that begging saves no one the law forgets. <strong>Vera</strong> asked who the story had rescued—the drowned clerk, or only the <strong>portrait</strong> of a merciful throne.
+          body: `<strong>Father Dimitri</strong> framed <strong>mercy</strong> on purpose, because talk of rights would have split them from the people who paid their rent. Flood-year letters; petitions for imperial relief; the emperor as father who might soften. He told the winter as <strong>grace</strong>, not as structure. <strong>Andrei</strong> relaxed; mercy read well in letters to patrons. <strong>Stepan</strong> said softly that begging saves no one the law forgets. <strong>Vera</strong> asked who the story had rescued: the drowned clerk, or only the <strong>portrait</strong> of a merciful throne.
 
 They left that question folded like sealed paper. The tale they agreed on: <strong>people had shown up this season as objects of grace</strong>; whether grace ever became justice, the file would not say.`,
-          specQ: "When you beg the center for flood victims, who is saved—them, or the story that the throne is kind?",
+          specQ: "When you beg the center for flood victims, who is saved, them, or the story that the throne is kind?",
           bullets: [
             "Imperial charity versus rights: how do historians tell mercy after disaster?",
             "Does Pushkin ask the state for more than symbolic relief?",
-            "Can you keep People high while you tell a story of grace instead of entitlement—and does that hold?"
+            "Can you keep People high while you tell a story of grace instead of entitlement, and does that hold?"
           ]
         }
       },
       med: {
         order: {
           title: "Ending: The Minister’s Bridge",
-          body: `<strong>Andrei</strong> said what they had built felt like a bridge with <strong>one stone pier and one rope pier</strong>: the ministry owned the stone; the locals got rope and thanks. Mediator hopes went thin but did not snap. <strong>Stepan</strong> said rope could hold if traffic stayed light; <strong>Vera</strong> said traffic never stayed light. <strong>Father Dimitri</strong> prayed—half seriously—for engineers honest enough to weigh both ends in one breath. They had tried to join Chaadaev’s borrowed forms with local trust; winter had taught them <strong>order under veto</strong>.
+          body: `<strong>Andrei</strong> said what they had built felt like a bridge with <strong>one stone pier and one rope pier</strong>: the ministry owned the stone; the locals got rope and thanks. Mediator hopes went thin but did not snap. <strong>Stepan</strong> said rope could hold if traffic stayed light; <strong>Vera</strong> said traffic never stayed light. <strong>Father Dimitri</strong> prayed, half seriously, for engineers honest enough to weigh both ends in one breath. They had tried to join Chaadaev’s borrowed forms with local trust; winter had taught them <strong>order under veto</strong>.
 
-The story <strong>Andrei</strong> set for the road: <strong>center first</strong>, local voice as a concession, blunt about power and cruel about equality—maybe the only bridge that stood in mud season.`,
+The story <strong>Andrei</strong> set for the road: <strong>center first</strong>, local voice as a concession, blunt about power and cruel about equality, maybe the only bridge that stood in mud season.`,
           specQ: "If one pier is stone and one is rope, is compromise only collapse postponed?",
           bullets: [
             "Center versus provinces: the game uses zemstvo-style images before those laws existed. Does scholarship on the real zemstvo era still sharpen this fight?",
@@ -537,10 +537,10 @@ The story <strong>Andrei</strong> set for the road: <strong>center first</strong
         },
         reform: {
           title: "Ending: Borrowed Law, Local Accent",
-          body: `<strong>Stepan</strong> closed with a picture anyone could repeat: <strong>law in foreign words on the page, Russian in the schoolyard</strong>—neither pure import nor locked autarchy. <strong>Father Dimitri</strong> liked the sound of it. <strong>Vera</strong> asked how many local accents a code could carry before chiefs called it chaos. <strong>Andrei</strong> wanted timetables; impatience, he said, was always what killed compromise. Someone quoted Letter I on slow inner growth, and the room laughed once, without cheer.
+          body: `<strong>Stepan</strong> closed with a picture anyone could repeat: <strong>law in foreign words on the page, Russian in the schoolyard</strong>: neither pure import nor locked autarchy. <strong>Father Dimitri</strong> liked the sound of it. <strong>Vera</strong> asked how many local accents a code could carry before chiefs called it chaos. <strong>Andrei</strong> wanted timetables; impatience, he said, was always what killed compromise. Someone quoted Letter I on slow inner growth, and the room laughed once, without cheer.
 
-Their winter ended on <strong>Stepan’s</strong> bet: <strong>hybrid from day one</strong>—borrowed until daily life proves it native, not slogans—with the ugly knowledge that whoever holds the ink may decide the proof.`,
-          specQ: "How long must a law stay “borrowed” before it counts as Russian—and who gets to say when?",
+Their winter ended on <strong>Stepan’s</strong> bet: <strong>hybrid from day one</strong>, borrowed until daily life proves it native, not slogans, with the ugly knowledge that whoever holds the ink may decide the proof.`,
+          specQ: "How long must a law stay “borrowed” before it counts as Russian, and who gets to say when?",
           bullets: [
             "Hybrid rules: when does a statute sound Russian instead of European in the story you tell?",
             "Same primary texts, mediator reform versus Westernizer or statist close: what changes?",
@@ -549,13 +549,13 @@ Their winter ended on <strong>Stepan’s</strong> bet: <strong>hybrid from day o
         },
         people: {
           title: "Ending: The Ledger They Share",
-          body: `<strong>Father Dimitri</strong> laid two columns side by side as if they could be one story: <strong>a line for ministry grain, a line for parish rye</strong>, a total a hungry household could read. <strong>Stepan</strong> called it holy bookkeeping. <strong>Andrei</strong> called it staying alive. <strong>Vera</strong> said Chaadaev had named a gap; Pushkin had named <strong>bodies</strong>. They agreed to tell the winter as something <strong>material</strong>, not only a middle in talk—budgets a clerk and a priest could audit together.
+          body: `<strong>Father Dimitri</strong> laid two columns side by side as if they could be one story: <strong>a line for ministry grain, a line for parish rye</strong>, a total a hungry household could read. <strong>Stepan</strong> called it holy bookkeeping. <strong>Andrei</strong> called it staying alive. <strong>Vera</strong> said Chaadaev had named a gap; Pushkin had named <strong>bodies</strong>. They agreed to tell the winter as something <strong>material</strong>, not only a middle in talk: budgets a clerk and a priest could audit together.
 
 Whether one column always swallowed the other, none would swear. The close chose <strong>hope over a neat diagram</strong>: two books, one satchel, one argument still walking beside them.`,
           specQ:
             "Two account books, one countryside: must one always become the small print, or is the overlap itself the answer Chaadaev could not sketch?",
           bullets: [
-            "Who counted in the reform mix this ending implies—clerks, priests, landlords?",
+            "Who counted in the reform mix this ending implies: clerks, priests, landlords?",
             "Does shared money talk answer Pushkin’s “who pays” without erasing Order?",
             "Letter I as salon essay versus pastoral care: does the genre change how fair this synthesis sounds?"
           ]
@@ -925,15 +925,15 @@ Whether one column always swallowed the other, none would swear. The close chose
         const event = state.lastEvent || "event_censor";
       const winterEcho = {
         event_salon:
-          "Someone still carried governor’s hall on his cuff—wax, tea, that one sanctioned night when letter and poem had shared one candle and no copy quite matched memory. <strong>Vera</strong> said the room had tasted air; <strong>Andrei</strong> said air that sweet usually meant someone upstairs had opened a vent on purpose.",
+          "Someone still carried governor’s hall on his cuff: wax, tea, that one sanctioned night when letter and poem had shared one candle and no copy quite matched memory. <strong>Vera</strong> said the room had tasted air; <strong>Andrei</strong> said air that sweet usually meant someone upstairs had opened a vent on purpose.",
         event_flood_echo:
           "North-country post had soaked every argument. Cold water, they said, does not ask which program you defended before it breaks the sill. <strong>Father Dimitri</strong> crossed himself for drowned rooms named only in letter margins; <strong>Stepan</strong> swore the Neva had picked their metaphors without asking.",
         event_censor:
           "Seals and torn proofs sat in the middle like a fifth guest. <strong>Stepan</strong> could still taste ash from pages pulled mid-phrase; <strong>Andrei</strong> said some continuity needed blank leaves, then wished he had not said it aloud.",
         event_rural_gentry:
-          "<strong>Stepan’s</strong> throat still held provincial grit—the ministry map had snagged on a gentry nail. <strong>Vera</strong> turned the fight into rent and tutors; <strong>Father Dimitri</strong> asked whose icon corner the decree had never visited.",
+          "<strong>Stepan’s</strong> throat still held provincial grit; the ministry map had snagged on a gentry nail. <strong>Vera</strong> turned the fight into rent and tutors; <strong>Father Dimitri</strong> asked whose icon corner the decree had never visited.",
         event_zemstvo_clash:
-          "The struck pilot fund had left a bruise no manifesto could hide—money and trust had split in daylight. <strong>Andrei</strong> called it triage; <strong>Stepan</strong> said it showed which ledger ate the other when budgets met mercy."
+          "The struck pilot fund had left a bruise no manifesto could hide; money and trust had split in daylight. <strong>Andrei</strong> called it triage; <strong>Stepan</strong> said it showed which ledger ate the other when budgets met mercy."
       };
       const pathWinterCoda = {
         west:
@@ -943,12 +943,12 @@ Whether one column always swallowed the other, none would swear. The close chose
         statist:
           "The filing habit had won the morning; whether mercy lived in the margin was a question they shelved with the ink.",
         med:
-          "Mediator habits died hard—they still heard two ledgers arguing under one roof while someone called the horses."
+          "Mediator habits died hard, they still heard two ledgers arguing under one roof while someone called the horses."
       };
       let winterBlock = "";
       if (state.crisisMisfit) {
         winterBlock +=
-          "They had rehearsed one kind of crisis; the seal on the courier’s packet did not match what they had prepared for—wrong rumor, wrong coat—and the night had to go on anyway.\n\n";
+          "They had rehearsed one kind of crisis; the seal on the courier’s packet did not match what they had prepared for: wrong rumor, wrong coat, and the night had to go on anyway.\n\n";
       }
       winterBlock +=
         winterEcho[event] ||
@@ -962,7 +962,7 @@ Whether one column always swallowed the other, none would swear. The close chose
 
       let secretHtml = "";
       if (state.inventory.has("chaadaev_letter") && state.inventory.has("pushkin_bronze") && P >= 60) {
-        secretHtml = `<div class="secret-insight"><strong>Rare alignment:</strong> Chaadaev and Pushkin both ride in the satchel, and the room would not treat People as a footnote. If “civilization” never reaches the clerk’s roof, the bronze rider reads as threat, not partner—and someone had said so aloud before the lamps went out.</div>`;
+        secretHtml = `<div class="secret-insight"><strong>Rare alignment:</strong> Chaadaev and Pushkin both ride in the satchel, and the room would not treat People as a footnote. If “civilization” never reaches the clerk’s roof, the bronze rider reads as threat, not partner, and someone had said so aloud before the lamps went out.</div>`;
       }
 
       const runTitle = computeRunTitle(endingKey, path, O, R, P);
@@ -978,7 +978,7 @@ Whether one column always swallowed the other, none would swear. The close chose
         extras.push(`The <em>Bronze Horseman</em> stayed with them: one city map shared by granite glory and a clerk’s grief.`);
       }
       if (state.inventory.has("chaadaev_letter")) {
-        extras.push(`Chaadaev’s letter stayed the cold mirror—borrowed forms, broken continuity, and the insistence that Russia still owes a moral future.`);
+        extras.push(`Chaadaev’s letter stayed the cold mirror: borrowed forms, broken continuity, and the insistence that Russia still owes a moral future.`);
       }
       if (state.inventory.has("aksakov_note")) {
         extras.push(`Aksakov’s note stayed in the satchel: <em>narod</em> and soil set against borrowed law. Whether that answers Chaadaev or ducks him stayed open.`);
@@ -990,7 +990,7 @@ Whether one column always swallowed the other, none would swear. The close chose
         extras.push(`Winter’s courier wore the wrong coat: history arrived as a mix-up, not as the parable they had rehearsed by the lamp.`);
       }
       if (state.runTags.has("intro_pushkin_first")) {
-        extras.push(`They had opened with Pushkin’s clerk; prose and policy stayed knotted in one bundle from the first scene—order of reading mattered.`);
+        extras.push(`They had opened with Pushkin’s clerk; prose and policy stayed knotted in one bundle from the first scene, order of reading mattered.`);
       }
       if (state.scars.has("petition_winter")) {
         extras.push(`The petition winter had eaten weeks the journals never got back; autumn felt shorter than it should have.`);

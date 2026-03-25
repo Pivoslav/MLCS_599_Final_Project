@@ -544,7 +544,7 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_order: {
         title: "Closing: The Weight of Order",
-        text: `The lamps are low. <strong>Andrei</strong> lays his hand flat: ranks have to read the same upstairs and down, or nothing else holds. In Pushkin’s poem the statue still hears destiny—“<strong>Destiny’s great potentate</strong>”—not Yevgeny; the clerk has no vote in the official story of the city.`,
+        text: `The lamps are low. <strong>Andrei</strong> lays his hand flat: ranks have to read the same upstairs and down, or nothing else holds. In Pushkin’s poem the statue still hears destiny, “<strong>Destiny’s great potentate</strong>,” not Yevgeny; the clerk has no vote in the official story of the city.`,
         primaryRead: {
           title: "Read alongside: The Bronze Horseman",
           body: `<strong>Part Two (direct address to the statue):</strong> “Oh, Destiny’s great potentate! / Was it not thus, a towering idol…” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">Pushkin addresses the statue as fate-like power. Saying yes here lets that majesty, not Yevgeny’s counter-voice, name the moral center of the tale you take out of the winter.</span>`
@@ -570,7 +570,7 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_people: {
         title: "Closing: The Weight of the People",
-        text: `<strong>Father Dimitri</strong> keeps returning to roofs and waterlines. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the granite story outran. He asks the table to let that burial sit in the last line—ordinary bodies on the ledger, not only emperors in bronze.`,
+        text: `<strong>Father Dimitri</strong> keeps returning to roofs and waterlines. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the granite story outran. He asks the table to let that burial sit in the last line: ordinary bodies on the ledger, not only emperors in bronze.`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (slave and master):</strong> “…from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Chaadaev names the whole ladder from court to bonded laborer. Father Dimitri’s closing insists the bottom rung stay in sight, not an afterthought to granite and file.</span><br><br><strong><em>The Bronze Horseman</em>, Part Two (close):</strong> “…Here lay asprawl my luckless knave, / And here in charity they buried / The chill corpse in a pauper’s grave.” (<em>The Bronze Horseman</em>, Part Two, closing.)<br><span class="read-gloss">Yevgeny’s pauper grave is what triumphal history skips. Saying yes here keeps that burial in the tale’s last line, ordinary bodies before monuments.</span>`
