@@ -2,34 +2,36 @@
 
 Checklist of work **not** done yet—merge into the **game bundle** (`index.html` + `css/`, `js/`), narrative, course ops. Update this file as items close.
 
+**Suggested next implementation (code):** §A **point budget** pilot in one scene (`realm-triangle-budget.html` pattern), or jump to §B **Read alongside** pass (content-heavy). **Suggested next ops:** §D Canvas fragment refresh + §F smoke tests.
+
 ---
 
 ## A. Merge demos into the shipped game (bundle)
 
-- [ ] **Icons** — Lift SVGs from `demos/icons-showcase.html` into choice rows, inventory, glossary; add `aria-label` / `title`.
-- [ ] **Toast + achievements** — Pattern from `mechanic-achievement-flash.html` + `interactive-widgets.html`; hook rare `sceneId` / inventory combos.
-- [ ] **Path-weighted delta preview** — On choice focus/hover, show effects (from `mechanic-path-deltas-and-hints.html`); wire to real `pathId` and choice handlers.
-- [ ] **Pedagogy hint** — Optional `details` under high-stakes choices; copy style from path-deltas demo.
-- [ ] **Crisis / winter transparency** — Eligibility preview + `details` die table (`mechanic-winter-crisis-lab.html`); align text with real `pickCrisisEvent` tables.
-- [x] **Breadcrumb + tension** — **Done in production:** header `#salometry`, `updateSalometry()`, spread = max − min meters, `html[data-tension="high"]` when spread ≥ 40, `prefers-reduced-motion` respected. Lab page: `mechanic-breadcrumb-tension.html` (vanilla only; no GSAP).
-- [ ] **Co-op timer + ballot + stance** — gated controls for 3-player mode (`mechanic-co-op-timer-ballot.html`); respect reduced motion.
-- [ ] **Debrief thesis picker + epilogue compare** — Post-run UI (`mechanic-debrief-epilogues.html`); read-only branch peek must not mutate `state`.
-- [ ] **URL `?scene=`** — Parse query in `index.html`, jump or highlight (`mechanic-url-and-summary.html`); document allowed keys in README.
-- [ ] **Copy summary** — Align with game’s existing copy; add course code / run id if instructors want (`mechanic-url-and-summary.html`).
-- [ ] **Coupled sliders (optional)** — Only as labeled “debrief lab,” not replacing canonical meters (`realm-balance-slider.html`).
-- [ ] **Point budget (optional)** — One pilot scene (`realm-triangle-budget.html`).
+- [x] **Icons** — Choice rows use **dice / branch** inline SVGs + `title` / meter hints; optional polish: inventory rows, glossary headers (see `demos/icons-showcase.html`).
+- [x] **Toast + achievements** — `pushToast`, achievement map, reduced-motion handling for toast stack.
+- [x] **Path-weighted delta preview** — Effect summaries on **`.choice-btn`** via `title` (and pedagogy `details`); wired to real `pathId` / `commitChoice`.
+- [x] **Pedagogy hint** — `details.choice-pedagogy` under choices.
+- [x] **Crisis / winter transparency** — Collapsible die explanation + table in crisis recap; aligned with `pickCrisisEvent`.
+- [x] **Breadcrumb + tension** — `#salometry`, spread, `data-tension="high"`. Lab: `mechanic-breadcrumb-tension.html`.
+- [x] **Co-op timer + ballot + stance** — Sidebar panel (enable checkbox, timer, ballot, reveal, stance, apply majority); `prefers-reduced-motion` on toasts/co-op-adjacent CSS.
+- [x] **Debrief compare + epilogue branch peek** — Post-run `details` + read-only `<dialog>` (backdrop click closes); no `state` mutation.
+- [x] **URL `?scene=`** — `applySceneFromQuery` in `game-app.js`; allowed ids = keys of `scenes` in `game-scenes.js` (see README).
+- [x] **Copy summary** — Run summary includes **Course: MLCS-599** and **Run ID** (`sessionStorage`).
+- [x] **Coupled sliders (optional)** — Epilogue **Debrief toy: coupled realm sliders** (labeled; does not replace saved meters).
+- [ ] **Point budget (optional)** — Pilot one scene (`realm-triangle-budget.html`); not wired in the bundle yet.
 
 ## B. Narrative & primary-text quality (from `js/game-app.js` BACKLOG comment)
 
 - [ ] **Read alongside pass** — Text-grounded glosses; remove ornamental filler; crosswalk to McNally & Tempest + Arndt (library editions).
 - [ ] **EPILOGUE_TWELVE** — Continue in-scene salon voice tuning; winter echo per event.
 - [ ] **Scene imagery** — Diversify `SCENE_IMAGES` / rails where scenes reuse art; keep period-appropriate picks.
-- [ ] **Optional palette** — `SCENE_COLOR_SCHEME` or per-`data-scene-id` tweaks once moods are locked.
+- [x] **Optional palette** — `SCENE_COLOR_SCHEME` entries for `event_flood_echo` (frost) and `event_censor` (ember); more scenes can be keyed as moods lock.
 
 ## C. Authoring & structure docs
 
-- [ ] **`cyoa-structure-map.html`** — Sync with any `scenes` / crisis / epilogue edits after merges.
-- [ ] **`HOSTING-AND-INTEGRATION.md`** — Refresh prototype table if demo filenames or merge order change.
+- [ ] **`cyoa-structure-map.html`** — Re-sync after any `scenes` / crisis / epilogue edits (spot-check §7 vs `EPILOGUE_TWELVE`).
+- [x] **`HOSTING-AND-INTEGRATION.md`** — Prototype table + notes refreshed for merged mechanics.
 
 ## D. Course / LMS operations
 
@@ -40,12 +42,12 @@ Checklist of work **not** done yet—merge into the **game bundle** (`index.html
 ## E. Repository / legal (optional)
 
 - [ ] **Git history** — If a full-text PDF ever landed in old commits, purge history (BFG / git-filter-repo) per policy—only if required.
-- [ ] **LICENSE** — Add explicit license file if course requires redistribution terms.
+- [x] **`LICENSE`** — MIT `LICENSE` in `Final/` for redistribution terms (adjust copyright line if your institution requires it).
 
 ## F. Testing
 
 - [ ] **Playthrough smoke** — One run per path after each mechanical merge.
-- [ ] **Mobile / narrow** — Sidebar + choice layout on small viewports.
+- [ ] **Mobile / narrow** — Sidebar + choice layout on small viewports (`.app-main` stacks ≤900px).
 - [ ] **GitHub Pages** — Verify all new demo links from hub after each push.
 
 ---
@@ -56,4 +58,6 @@ When a section completes, move bullets to a “Done” appendix or delete them�
 
 ## Done (shipped or superseded)
 
-- **Breadcrumb + realm spread** — Live in `index.html` / `css/game.css` (`.salometry`, `.scene-crumb`, `.tension-*`) and `js/game-app.js` (`updateSalometry`, `animateChoiceButtonsIfNeeded`). Scene changes also use the **View Transitions API** where supported; **GSAP** (jsDelivr) staggers choice buttons only—demos intentionally stay CDN-free for Canvas paste tests.
+- **Breadcrumb + realm spread** — Live in `index.html` / `css/game.css` and `js/game-app.js`; View Transitions + GSAP stagger where supported.
+- **Demo merges (A, except point budget)** — Toasts, crisis table, co-op panel, epilogue debrief lab + peek dialog, `?scene=`, choice icons/hints, realm debrief sliders, run summary fields — see `js/game-app.js`, `css/game.css`, `index.html`.
+- **Next design pass (not started here)** — Richer **three-player layout / agency** (votes and voice beyond the sidebar ballot): product request for a future iteration.

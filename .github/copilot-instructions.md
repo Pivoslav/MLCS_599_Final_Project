@@ -2,6 +2,16 @@
 
 Treat this file as the **canonical briefing** for this repository. Prefer it over generic CYOA or React patterns.
 
+## Use for your project objectives
+
+- **Course outcomes, Canvas delivery, and narrative quality are not moved by this file.** It does not run in the browser and students never see it.
+- **It only helps** when a contributor uses **GitHub Copilot** (or similar) **in this repo**: fewer off-pattern suggestions (wrong stack, wrong stat names, citation slips).
+- **Safe to ignore** if you edit without Copilot; delete the file if you prefer zero extra noise.
+
+## Status (game bundle vs demos)
+
+- Most mechanic merges listed in **`canvas-interactive-demos/PENDING-TASKS.md`** §A are **already implemented** in **`js/game-app.js`**, **`css/game.css`**, **`index.html`**. Before adding a “new” feature, read the live code; the optional **point-budget** pilot is still **not** wired in the bundle.
+
 ## What this is
 
 - **Course artifact:** Interactive historical CYOA about Chaadaev’s *First Philosophical Letter* and Pushkin’s *The Bronze Horseman* (1830s Russian thought).
