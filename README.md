@@ -2,13 +2,13 @@
 
 ## Coherence of the narrative
 
-The game is built around **one provocation** (Chaadaev’s *First Philosophical Letter*, 1836, in **McNally & Tempest**, *Philosophical Works of Peter Chaadaev*, Springer 1991) and **one literary counterweight** (Pushkin’s *The Bronze Horseman*, **Walter Arndt** translation, 1993, in-repo as **`bronze_horseman.txt`**). In-game copy tracks Letter I and Arndt’s poem where quoted (e.g. “window to the West,” flood lines, “Bronze Horseman in pursuit,” pauper’s grave; **Yevgeny** in source vs. **Evgeny** in some UI copy; see Terms). The candlelit **salon** is still a **dramatization**: the real Letter I is a long **epistle to “Madame.”** See **Terms** in the footer.
+The game is built around **one provocation** (Chaadaev’s *First Philosophical Letter*, 1836, in **McNally & Tempest**, *Philosophical Works of Peter Chaadaev*, Springer 1991) and **one literary counterweight** (Pushkin’s *The Bronze Horseman*, **Walter Arndt** translation, 1993—use your library edition for assigned passages). In-game copy tracks Letter I and Arndt’s poem where quoted (e.g. “window to the West,” flood lines, “Bronze Horseman in pursuit,” pauper’s grave; **Yevgeny** in source vs. **Evgeny** in some UI copy; see Terms). The candlelit **salon** is still a **dramatization**: the real Letter I is a long **epistle to “Madame.”** See **Terms** in the footer.
 
 Early scenes state **three recurring questions**:
 
-1. Does Russia belong to “universal” history or stand outside it?  
-2. Can reform mean **borrowing** without moral hollowness?  
-3. **Who pays** when the state builds its future (Peter / statue / capital vs. Evgeny / flood)?  
+1. Does Russia belong to “universal” history or stand outside it?
+2. Can reform mean **borrowing** without moral hollowness?
+3. **Who pays** when the state builds its future (Peter / statue / capital vs. Evgeny / flood)?
 
 Mid-game branches **diverge mechanically and narratively**:
 
@@ -31,10 +31,10 @@ The **sorting** scene before the final framing choice prepends a short recap of 
 
 **Suggested activities**
 
-- **Compare endings:** Have students who reached different epilogues pair up and argue whether Chaadaev would have been “satisfied” with each outcome.  
-- **Primary text tie-in:** Assign short passages from the letter and from Arndt’s *Bronze Horseman* in `bronze_horseman.txt` (prologue; Part One flood; Part Two statue and pursuit) and map phrases to Order / Reform / People. See **`BRONZE-HORSEMAN-TEXT-NOTES.md`** for game ↔ file alignment.  
-- **Stats debrief:** Ask whether the **meters** feel fair as models of nineteenth-century tension, or what they leave out (e.g. church, nationality, economy).  
-- **Write in voice:** After a run, each student writes one short paragraph **as Chaadaev** reacting to the epilogue they reached (satisfied? scathing? divided?).  
+- **Compare endings:** Have students who reached different epilogues pair up and argue whether Chaadaev would have been “satisfied” with each outcome.
+- **Primary text tie-in:** Assign short passages from the letter and from Arndt’s *Bronze Horseman* (prologue; Part One flood; Part Two statue and pursuit) and map phrases to Order / Reform / People. Full citations: **`SOURCES.md`**.
+- **Stats debrief:** Ask whether the **meters** feel fair as models of nineteenth-century tension, or what they leave out (e.g. church, nationality, economy).
+- **Write in voice:** After a run, each student writes one short paragraph **as Chaadaev** reacting to the epilogue they reached (satisfied? scathing? divided?).
 - **Redesign a beat:** Pick one choice node and add a footnote to a **real** 1836–37 event or constraint; discuss whether the game’s fork is fair or too clean.
 
 ## Three-player co-op mode (class of 3)
@@ -49,49 +49,49 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 
 **Flow**
 
-1. Read the scene aloud (rotate narrator each turn if you like).  
-2. **Order → Reform → People:** each role gives a 30–60 second take on which option fits their priority (they may disagree with “their” stat effect; argue anyway).  
-3. Choose as a committee; one person operates the mouse.  
-4. Before the **winter 1837** fate roll, the **Order** player restates how high or low Order has been and why that might matter for salons, censors, or flood echoes.  
-5. At **final framing** (Order vs. Reform vs. People), each player advocates for *their* lens. Pick the closing frame **deliberately**: it is a reading of the same history, not a “win.”  
+1. Read the scene aloud (rotate narrator each turn if you like).
+2. **Order → Reform → People:** each role gives a 30–60 second take on which option fits their priority (they may disagree with “their” stat effect; argue anyway).
+3. Choose as a committee; one person operates the mouse.
+4. Before the **winter 1837** fate roll, the **Order** player restates how high or low Order has been and why that might matter for salons, censors, or flood echoes.
+5. At **final framing** (Order vs. Reform vs. People), each player advocates for *their* lens. Pick the closing frame **deliberately**: it is a reading of the same history, not a “win.”
 6. Debrief using the epilogue’s green discussion box, then ask: *Did any of us feel the game forced our role to lose, or could every role claim a partial victory?*
 
 **Why three players:** The roles mirror the UI stats so the room always voices all three tensions; no one “rides along” silently.
 
 ## Optional teaching layers (no code required)
 
-- **Micro-primary-text moments:** Project or hand out 2–4 lines from Chaadaev (borrowing / history) or Pushkin (Peter / flood / Evgeny) **before** a major branch; map diction to the next choice.  
-- **Name the counterfactual:** When the text mentions zemstvo-style pilots or salons, say aloud: *This is plausible debate in the 1830s; some institutions belong to a later period; we’re staging the argument, not simulating a year-by-year replay.*  
-- **Historiography nudge at endings:** Tie an epilogue to one secondary reading (e.g. Walicki on Westernizers vs. Slavophiles; see `SOURCES.md`). Ask: *Which interpretation of Russia’s path does this ending privilege?*  
-- **Concept glossary (prep):** Short definitions for *Teleskop*, Third Section, *sobornost*, Neva flood of 1824, *narod* (handout or slide) so terms don’t block play.  
-- **Path recap before the roll:** Instructor or **Order** player summarizes: *We’ve favored Reform over People since…* so the d6 feels connected to prior choices, not arbitrary.  
-- **Post-game reading:** After the run, assign 1–2 pages keyed to ending type (e.g. *Unity Without the Many*: hollow state / Evgeny readings; *Reform in the Teeth*: Westernizers and repression).  
-- **Named run titles (debrief):** Invent a memorable label for the session (*“The Bronze Bureaucrat,”* *“Soil and Censor”*) from path + highest stat. Useful for comparing if the group replays.  
-- **Rare-run challenge (replay incentive):** Aim for an unusual combo (e.g. high People + Slavophile path + salon event); discuss whether that outcome is coherent historically.  
+- **Micro-primary-text moments:** Project or hand out 2–4 lines from Chaadaev (borrowing / history) or Pushkin (Peter / flood / Evgeny) **before** a major branch; map diction to the next choice.
+- **Name the counterfactual:** When the text mentions zemstvo-style pilots or salons, say aloud: *This is plausible debate in the 1830s; some institutions belong to a later period; we’re staging the argument, not simulating a year-by-year replay.*
+- **Historiography nudge at endings:** Tie an epilogue to one secondary reading (e.g. Walicki on Westernizers vs. Slavophiles; see `SOURCES.md`). Ask: *Which interpretation of Russia’s path does this ending privilege?*
+- **Concept glossary (prep):** Short definitions for *Teleskop*, Third Section, *sobornost*, Neva flood of 1824, *narod* (handout or slide) so terms don’t block play.
+- **Path recap before the roll:** Instructor or **Order** player summarizes: *We’ve favored Reform over People since…* so the d6 feels connected to prior choices, not arbitrary.
+- **Post-game reading:** After the run, assign 1–2 pages keyed to ending type (e.g. *Unity Without the Many*: hollow state / Evgeny readings; *Reform in the Teeth*: Westernizers and repression).
+- **Named run titles (debrief):** Invent a memorable label for the session (*“The Bronze Bureaucrat,”* *“Soil and Censor”*) from path + highest stat. Useful for comparing if the group replays.
+- **Rare-run challenge (replay incentive):** Aim for an unusual combo (e.g. high People + Slavophile path + salon event); discuss whether that outcome is coherent historically.
 - **Exportable run summary:** After the epilogue, copy scene flow + final stats + inventory into the forum or a doc for a one-paragraph reflection.
 
 ## Scope notes (what we are not adding)
 
-- **No optional *Gypsies* branch** in the CYOA: the game stays anchored on Chaadaev + *The Bronze Horseman* (see `SUMMARY.md` for how *Gypsies* fits the wider course).  
+- **No optional *Gypsies* branch** in the CYOA: the game stays anchored on Chaadaev + *The Bronze Horseman*.
 - **No “historian mode” toggle** (e.g. hiding stat previews): keep the current UI for clarity and pace.
 
 ## In-game teaching tools (`index.html`)
 
-- **Terms** (footer): glossary modal for *Teleskop*, Third Section, *sobornost*, *narod*, Neva flood, zemstvo staging, meters.  
-- **3-player co-op:** collapsible role card in the side panel (Order → Reform → People).  
-- **Read alongside:** collapsible anchors on (almost) every story scene; after each short quotation, a one-line **gloss** (`.read-gloss` in the panel) names **who and what** (Chaadaev, Pushkin, Stepan, the meters, the next buttons) so players are not left guessing. Glosses use explicit connectives (*that*, *whether*, *while*, and the like). Section cues (prologue, Part One, Part Two), not line numbers. **Epilogues** are in-scene (the four friends close the winter in voice); **session title** above the body still signals which track and framing the run used. **Still planned:** tighten Read alongside glosses using `NARRATIVE-FOUNDATION-NOTES.md` (see BACKLOG above `EPILOGUE_TWELVE` in `index.html`).  
-- **Historical staging:** notes on counterfactual compression (e.g. zemstvo language).  
-- **Before you roll:** path recap and stat context on winter 1837 crisis screens.  
-- **Rare choice** at sorting: if the library has both Chaadaev and Pushkin and People ≥ 55, a fourth framing option appears (“Evgeny’s chorus”).  
+- **Terms** (footer): glossary modal for *Teleskop*, Third Section, *sobornost*, *narod*, Neva flood, zemstvo staging, meters.
+- **3-player co-op:** collapsible role card in the side panel (Order → Reform → People).
+- **Read alongside:** collapsible anchors on (almost) every story scene; after each short quotation, a one-line **gloss** (`.read-gloss` in the panel) names **who and what** (Chaadaev, Pushkin, Stepan, the meters, the next buttons) so players are not left guessing. Glosses use explicit connectives (*that*, *whether*, *while*, and the like). Section cues (prologue, Part One, Part Two), not line numbers. **Epilogues** are in-scene (the four friends close the winter in voice); **session title** above the body still signals which track and framing the run used.
+- **Historical staging:** notes on counterfactual compression (e.g. zemstvo language).
+- **Before you roll:** path recap and stat context on winter 1837 crisis screens.
+- **Rare choice** at sorting: if the library has both Chaadaev and Pushkin and People ≥ 55, a fourth framing option appears (“Evgeny’s chorus”).
 - **Epilogue:** session title, Walicki-style historiography nudge, rare “letter + poem + People 60+” insight, **Copy run summary** for forum or reflection.
 
 ## Extending beyond Letter I (optional unit)
 
-The Springer volume includes **Letters II–VIII**, ***Apologia of a Madman***, and **fragments** with editors’ commentaries. The CYOA stays **Letter-I-first** for coherence; a second week can assign e.g. *Apologia* (response to the “madness” decree) or Letter VIII alongside a second playthrough. See `CHAADAEV-PRIMARY-TEXT-NOTES.md` and `978-94-011-3166-7.txt` (from `scripts/pdf_to_text.py`).
+The Springer volume includes **Letters II–VIII**, ***Apologia of a Madman***, and **fragments** with editors’ commentaries. The CYOA stays **Letter-I-first** for coherence; a second week can assign e.g. *Apologia* (response to the “madness” decree) or Letter VIII alongside a second playthrough. See **`SOURCES.md`** for the edition.
 
-## Files
+## Files (public repo)
 
-- `index.html`: self-contained game (open in a browser).
-- `canvas-interactive-demos/`: handoff package for a separate agent — Canvas-ready UI/mechanic prototypes; start with `canvas-interactive-demos/AGENT_INSTRUCTIONS.md` and stub `canvas-interactive-demos/index.html`.
-- `NARRATIVE-FOUNDATION-NOTES.md`: synthesized intel for the priority Read alongside + epilogue rewrite (primary texts + orientation summaries); use before editing glosses in `index.html`.
-- `cyoa-structure-map.html`: verbose branch map, per-path scene tables, critical lens (mechanics/teaching opportunities), rebuild insights; companion to `index.html` for authors.
+- `index.html`: self-contained game (open in a browser or host on GitHub Pages).
+- `SOURCES.md`: citations and editions.
+- `cyoa-structure-map.html`: branch map and teaching companion.
+- `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`.
