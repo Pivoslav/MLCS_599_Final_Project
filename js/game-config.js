@@ -62,14 +62,14 @@
         src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
         alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length, facing slightly right.",
         caption:
-          "Pyotr Chaadayev — author of the First Philosophical Letter (engraving, 19th c., catalogue portrait).",
+          "Pyotr Chaadayev; author of the First Philosophical Letter (engraving, 19th c., catalogue portrait).",
         creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
       },
       salon_pushkin: {
         src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
         alt: "Portrait of Alexander Pushkin with dark curly hair and a high collar.",
         caption:
-          "Alexander Pushkin — the salon turns to The Bronze Horseman (commonly reproduced portrait).",
+          "Alexander Pushkin; the salon turns to The Bronze Horseman (commonly reproduced portrait).",
         creditHref: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg"
       },
       reformist: {
@@ -81,85 +81,85 @@
       reform_education: {
         src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
         alt: "Portrait of Pyotr Chaadayev, oil or print after a nineteenth-century likeness.",
-        caption: "Chaadayev — schools, charters, and petitions on the Westernizing path.",
+        caption: "Chaadayev; schools, charters, and petitions on the Westernizing path.",
         creditHref: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg"
       },
       beat_west_print: {
         src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
         alt: "Engraved portrait of Count Alexander von Benckendorff in uniform.",
-        caption: "Count Benckendorff — shorthand for files, salons, and Third Section pressure on print.",
+        caption: "Count Benckendorff; shorthand for files, salons, and Third Section pressure on print.",
         creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg"
       },
       petersburg_pressure: {
         src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
         alt: "Portrait of Alexander Pushkin with dark curly hair and a high collar.",
-        caption: "Pushkin’s Neva and clerk — the capital’s flood logic beside Chaadaev’s nomads.",
+        caption: "Pushkin’s Neva and clerk; the capital’s flood logic beside Chaadaev’s nomads.",
         creditHref: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg"
       },
       distinct_path: {
         src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
         alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length.",
-        caption: "Chaadayev’s verdict still hangs in the air — the room seeks a separate destiny.",
+        caption: "Chaadayev’s verdict still hangs in the air; the room seeks a separate destiny.",
         creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
       },
       slavophile: {
         src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
         alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length.",
-        caption: "Soil and faith answers still argue with Chaadaev’s letter — foil, not wallpaper.",
+        caption: "Soil and faith answers still argue with Chaadaev’s letter; foil, not wallpaper.",
         creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
       },
       beat_aksakov: {
         src: "https://upload.wikimedia.org/wikipedia/commons/f/f8/KonstantinAksakov.jpg",
         alt: "Photograph of Konstantin Sergeyevich Aksakov, seated, nineteenth-century print reproduction.",
-        caption: "Konstantin Aksakov (1817–1860) — narod, soil, and spirit vs. borrowed law (Commons scan).",
+        caption: "Konstantin Aksakov (1817–1860); narod, soil, and spirit vs. borrowed law (Commons scan).",
         creditHref: "https://commons.wikimedia.org/wiki/File:KonstantinAksakov.jpg"
       },
       state_path: {
         src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
         alt: "Portrait of Emperor Nicholas I of Russia in military dress.",
-        caption: "Nicholas I — the offstage sovereign your circle lobbies, never replaces (portrait).",
+        caption: "Nicholas I; the offstage sovereign your circle lobbies, never replaces (portrait).",
         creditHref: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg"
       },
       beat_statist_machine: {
         src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
         alt: "Engraved portrait of Count Alexander von Benckendorff in uniform.",
-        caption: "Benckendorff and the file — memoranda, names, and the climate of the Third Section.",
+        caption: "Benckendorff and the file; memoranda, names, and the climate of the Third Section.",
         creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg"
       },
       crisis_west: {
         src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
         alt: "Portrait of Pyotr Chaadayev, nineteenth-century likeness.",
-        caption: "Westernizing winter — Chaadayev’s questions under salon, censor, and flood rumors.",
+        caption: "Westernizing winter; Chaadayev’s questions under salon, censor, and flood rumors.",
         creditHref: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg"
       },
       crisis_slav: {
         src: "https://upload.wikimedia.org/wikipedia/commons/f/f8/KonstantinAksakov.jpg",
         alt: "Photograph of Konstantin Sergeyevich Aksakov, nineteenth-century reproduction.",
-        caption: "Slavophile winter — parish, provinces, and censor in Aksakov’s key.",
+        caption: "Slavophile winter; parish, provinces, and censor in Aksakov’s key.",
         creditHref: "https://commons.wikimedia.org/wiki/File:KonstantinAksakov.jpg"
       },
       crisis_statist: {
         src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
         alt: "Portrait of Emperor Nicholas I of Russia in military dress.",
-        caption: "Statist winter — logistics, files, and flood echo under Nicholas’s reign.",
+        caption: "Statist winter; logistics, files, and flood echo under Nicholas’s reign.",
         creditHref: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg"
       },
       event_censor: {
         src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
         alt: "Engraved portrait of Count Alexander von Benckendorff in uniform.",
-        caption: "Censor’s visit — political police and seizure climate (Benckendorff engraving).",
+        caption: "Censor’s visit; political police and seizure climate (Benckendorff engraving).",
         creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg"
       },
       event_salon: {
         src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
         alt: "Portrait of Alexander Pushkin with dark curly hair and a high collar.",
-        caption: "Salon breakthrough — print and poetry still face the same corridors.",
+        caption: "Salon breakthrough; print and poetry still face the same corridors.",
         creditHref: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg"
       },
       event_rural_gentry: {
         src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
         alt: "Portrait of Emperor Nicholas I of Russia in military dress.",
-        caption: "Provincial notables and ministry schools — patronage logic under the autocrat.",
+        caption: "Provincial notables and ministry schools; patronage logic under the autocrat.",
         creditHref: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg"
       }
     };
@@ -169,13 +169,13 @@
      * Optional bgPos: background-position for cover crops. Portraits use a lower horizontal % so the
      * subject sits in the clearer band to the right of the text-column veil (see .content-scene-veil).
      *
-     * BACKLOG (item 2 — scene imagery):
+     * BACKLOG (item 2; scene imagery):
      * - Period appropriateness (critical): assets should fit ~1830s imperial Russia and the game’s
      *   salon / Neva / province frame. Avoid anachronisms (e.g. cars, modern street furniture, obvious
      *   contemporary photos of historic sites). Prefer period paintings, engravings, documented
      *   architecture views, and early photography only when the scene is clearly pre-modern.
      * - Reduce recycling: prefer distinct center (main column) images per scene where feasible.
-     * - Side rails (.scene-rail): MUST use different image files than the center panel — not the same
+     * - Side rails (.scene-rail): MUST use different image files than the center panel; not the same
      *   URL with a different crop. When implementing, add e.g. railSrc / SCENE_RAIL_IMAGES keyed by
      *   sceneId (left/right may share one rail image or differ; still ≠ center src).
      */

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open toolkit showcase — Mermaid, STL/3D, GitHub-adjacent ideas</title>
+  <title>Open toolkit showcase; Mermaid, STL/3D, GitHub-adjacent ideas</title>
   <link rel="stylesheet" href="../assets/demo-common.css" />
   <style>
     .lab-wide { max-width: 56rem; margin-inline: auto; }
@@ -28,6 +28,13 @@
       height: min(52vh, 420px);
       border-radius: 8px;
       background: linear-gradient(160deg, #1a1d24 0%, #2d3544 100%);
+      touch-action: none;
+    }
+    #mockSalonHost {
+      width: 100%;
+      height: min(52vh, 420px);
+      border-radius: 8px;
+      background: #0d0e12;
       touch-action: none;
     }
     .mermaid-wrap {
@@ -113,12 +120,12 @@
     Other demos in this folder stay CDN-free for picky LMS hosts; use this lab on <strong>GitHub Pages</strong> or when your course allows external script.
   </p>
   <div class="warn" role="note">
-    <strong>Ideas, not course requirements:</strong> STL/3D, diagrams, and archive embeds are <em>spice</em>—pair with
+    <strong>Ideas, not course requirements:</strong> STL/3D, diagrams, and archive embeds are <em>spice</em>, pair with
     <cite>SOURCES.md</cite> for rights. For 3D prints of real monuments, prefer models you have permission to redistribute or CC-licensed meshes.
   </div>
 
   <section class="panel" aria-labelledby="mermaid-h">
-    <h2 id="mermaid-h">1. Mermaid — structure without a build step</h2>
+    <h2 id="mermaid-h">1. Mermaid; structure without a build step</h2>
     <p>
       Render flowcharts, sequence diagrams, and Gantt charts from plain text in the repo. Students can edit diagrams in GitHub’s web UI;
       you can export SVG for slides. <a href="https://mermaid.js.org/">mermaid.js.org</a>
@@ -141,10 +148,10 @@ flowchart TB
   </section>
 
   <section class="panel" aria-labelledby="stl-h">
-    <h2 id="stl-h">2. Embedded STL — 3D in the syllabus (and at the makerspace)</h2>
+    <h2 id="stl-h">2. Embedded STL; 3D in the syllabus (and at the makerspace)</h2>
     <p>
       <strong>ASCII STL</strong> is just text; you can version it in GitHub, diff it, and parse it in the browser with Three.js.
-      Same mesh can feed a slicer for a tactile “Bronze Horseman” / Neva flood discussion object—<strong>STL is not only for engineering courses.</strong>
+      Same mesh can feed a slicer for a tactile “Bronze Horseman” / Neva flood discussion object, <strong>STL is not only for engineering courses.</strong>
     </p>
     <div id="stlHost" aria-label="Rotatable 3D preview of embedded STL geometry"></div>
     <p class="demo-note" style="margin-top:0.5rem;font-size:0.88rem;">
@@ -152,11 +159,31 @@ flowchart TB
     </p>
   </section>
 
+  <section class="panel" aria-labelledby="mockscene-h">
+    <h2 id="mockscene-h">3. Composite mock scene — free layers in one frame</h2>
+    <p>
+      A <strong>didactic collage</strong>, not a game asset: combine <strong>(a)</strong> a <strong>Wikimedia Commons</strong> texture (public-domain flood print, same URL as §7),
+      <strong>(b)</strong> procedural geometry (floor, table, “candle” stub) from Three.js,
+      <strong>(c)</strong> warm point light + slight emissive “flame,” and optionally <strong>(d)</strong> your
+      <code>assets/medieval-table-lantern.glb</code> if you exported it from
+      <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld #1066715</a>.
+      Drag to orbit. This is a <em>pattern</em> for syllabus “set dressing,” not historical reenactment.
+    </p>
+    <div id="mockSalonHost" aria-label="Composite 3D vignette: table, lamp, and flood print backdrop"></div>
+    <p class="demo-note" style="margin-top:0.5rem;font-size:0.88rem;">
+      <span id="mockSalonStatus" aria-live="polite">Loading…</span>
+    </p>
+    <p class="mv-caption">
+      <strong>Backdrop image:</strong> Commons —
+      <a href="https://commons.wikimedia.org/wiki/File:The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg">1824 St. Petersburg flood</a> (PD). <strong>Geometry / lights:</strong> generated in-browser (no extra mesh files). <strong>Optional GLB:</strong> same path as model-viewer section; if missing, the stub candle carries the composition.
+    </p>
+  </section>
+
   <section class="panel" aria-labelledby="mv-h">
-    <h2 id="mv-h">3. model-viewer — GLB/GLTF (lighter than raw STL for the web)</h2>
+    <h2 id="mv-h">4. model-viewer; GLB/GLTF (lighter than raw STL for the web)</h2>
     <p>
       Google’s <code>&lt;model-viewer&gt;</code> handles AR on some devices. For this course lab, the <strong>intended</strong> mesh is a <strong>table lantern</strong> (salon candlelight), not a street lamp:
-      <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld — medieval table lantern (LED candle)</a>.
+      <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld; medieval table lantern (LED candle)</a>.
       MakerWorld/Bambu models ship as print files; export to <strong>GLB</strong> yourself (e.g. Blender: import STL/3MF → export glTF binary), then drop it next to this demo as <code>canvas-interactive-demos/assets/medieval-table-lantern.glb</code>. This page <strong>auto-loads</strong> that file when it exists; otherwise it falls back to a generic Khronos lantern sample.
       <a href="https://modelviewer.dev/">modelviewer.dev</a>
     </p>
@@ -176,16 +203,16 @@ flowchart TB
     </div>
     <p id="mvSourceNote" class="mv-caption" aria-live="polite"></p>
     <p class="mv-caption">
-      <strong>Preferred mesh:</strong> <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld #1066715</a> — follow the <strong>license / terms on that page</strong> before redistributing; this repo does not bundle their geometry.
+      <strong>Preferred mesh:</strong> <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld #1066715</a>; follow the <strong>license / terms on that page</strong> before redistributing; this repo does not bundle their geometry.
       <strong>Local path:</strong> <code>../assets/medieval-table-lantern.glb</code> (from this HTML file).
-      <strong>Fallback mesh:</strong> <a href="https://github.com/KhronosGroup/glTF-Sample-Models/tree/main/2.0/Lantern">Khronos Lantern</a> (sample street-style lantern; <strong>CC BY 4.0</strong> — confirm in folder README). HDR environment from <a href="https://modelviewer.dev/">model-viewer shared assets</a>.
+      <strong>Fallback mesh:</strong> <a href="https://github.com/KhronosGroup/glTF-Sample-Models/tree/main/2.0/Lantern">Khronos Lantern</a> (sample street-style lantern; <strong>CC BY 4.0</strong>; confirm in folder README). HDR environment from <a href="https://modelviewer.dev/">model-viewer shared assets</a>.
     </p>
   </section>
 
   <section class="panel" aria-labelledby="audio-h">
-    <h2 id="audio-h">4. Web Audio — one-shot ambient without MP3 files</h2>
+    <h2 id="audio-h">5. Web Audio: one-shot demos without MP3 files</h2>
     <p>
-      Oscillators, short noise bursts, and envelopes only—<strong>no MP3</strong>. Useful for tiny UI stingers in the CYOA (winter beat, library token). All play on <strong>button click</strong> (user gesture unlocks audio). Do not auto-play beds; pair any future loop with <code>prefers-reduced-motion</code> and a visible mute.
+      Oscillators, short noise bursts, and envelopes only, <strong>no MP3</strong>. The shipped game’s header <strong>Ambient</strong> toggle uses the same idea for optional scene beds (keyed to <code>SCENE_AMBIENT</code> in <code>game-config.js</code>; see <code>js/game-ambient-audio.js</code>). This panel keeps <strong>one-shot</strong> demos on button click (user gesture unlocks audio). Do not auto-play loud beds without <code>prefers-reduced-motion</code> handling and a visible mute.
     </p>
     <div class="btn-row" role="group" aria-label="Web Audio one-shots">
       <button type="button" id="windBtn">Cold Neva wind (~2s)</button>
@@ -194,19 +221,19 @@ flowchart TB
       <button type="button" id="salonBtn">Salon chord swell (~1.2s)</button>
     </div>
     <p class="demo-note" style="margin-top:0.65rem;font-size:0.86rem;">
-      Pedagogy: these are <em>evocative</em>, not documentary—discuss sound as framing, not as period recording. For real period music or speech, use licensed files and cite in <cite>SOURCES.md</cite>.
+      Pedagogy: these are <em>evocative</em>, not documentary, discuss sound as framing, not as period recording. For real period music or speech, use licensed files and cite in <cite>SOURCES.md</cite>.
     </p>
   </section>
 
   <section class="panel" aria-labelledby="gh-h">
-    <h2 id="gh-h">5. GitHub-native affordances (no extra hosting)</h2>
+    <h2 id="gh-h">6. GitHub-native affordances (no extra hosting)</h2>
     <ul>
-      <li><strong>GitHub Pages</strong> — you already ship the CYOA; add <code>docs/</code> or branch builds for student micro-sites.</li>
-      <li><strong>Discussions</strong> — Q&amp;A templates per week; link a run summary from the game.</li>
-      <li><strong>Issues + forms</strong> — structured bug reports for “which scene / path / browser.”</li>
-      <li><strong>Actions</strong> — lint JSON scenes, spell-check narrative, deploy Pages on tag.</li>
-      <li><strong>Gist</strong> — paste anonymized run exports for TA review.</li>
-      <li><strong>Shields.io</strong> — badges in README (build, license, Pages).</li>
+      <li><strong>GitHub Pages</strong>; you already ship the CYOA; add <code>docs/</code> or branch builds for student micro-sites.</li>
+      <li><strong>Discussions</strong>; Q&amp;A templates per week; link a run summary from the game.</li>
+      <li><strong>Issues + forms</strong>; structured bug reports for “which scene / path / browser.”</li>
+      <li><strong>Actions</strong>; lint JSON scenes, spell-check narrative, deploy Pages on tag.</li>
+      <li><strong>Gist</strong>; paste anonymized run exports for TA review.</li>
+      <li><strong>Shields.io</strong>; badges in README (build, license, Pages).</li>
     </ul>
     <pre class="snippet" aria-label="Example README badges markdown">![Pages](https://img.shields.io/badge/GitHub-Pages-222?logo=github)
 ![License](https://img.shields.io/badge/license-MIT-green)</pre>
@@ -214,7 +241,7 @@ flowchart TB
 
   <section class="panel" aria-labelledby="open-h">
     <h2 id="open-h">6. Open collections to level up primary-text + visuals</h2>
-    <p>All are useful for <strong>sourcing</strong> (not automatic paste into narrative—check copyright). Your shipped game already credits images in <cite>SOURCES.md</cite>; this block is for <strong>author tooling</strong> and student research prompts.</p>
+    <p>All are useful for <strong>sourcing</strong> (not automatic paste into narrative, check copyright). Your shipped game already credits images in <cite>SOURCES.md</cite>; this block is for <strong>author tooling</strong> and student research prompts.</p>
 
     <div class="curated-picks">
       <h3>Curated for this unit (start here)</h3>
@@ -235,16 +262,16 @@ flowchart TB
       </figure>
       <ul class="unit-links">
         <li>
-          <a href="https://commons.wikimedia.org/wiki/Category:Saint_Petersburg_flood_of_1824">Commons category: Saint Petersburg flood of 1824</a> — engravings, maps, photographs of monuments.
+          <a href="https://commons.wikimedia.org/wiki/Category:Saint_Petersburg_flood_of_1824">Commons category: Saint Petersburg flood of 1824</a>; engravings, maps, photographs of monuments.
         </li>
         <li>
-          <a href="https://archive.org/search?query=chaadaev&and[]=mediatype%3A%22texts%22">Internet Archive — “Chaadaev” texts</a> — parallel editions, scans (verify edition against your assigned translation).
+          <a href="https://archive.org/search?query=chaadaev&and[]=mediatype%3A%22texts%22">Internet Archive; “Chaadaev” texts</a>; parallel editions, scans (verify edition against your assigned translation).
         </li>
         <li>
-          <a href="https://www.europeana.eu/en/search?page=1&query=Saint%20Petersburg%201830">Europeana — St. Petersburg 1830s</a> — prints, objects; filter by rights for reuse.
+          <a href="https://www.europeana.eu/en/search?page=1&query=Saint%20Petersburg%201830">Europeana; St. Petersburg 1830s</a>; prints, objects; filter by rights for reuse.
         </li>
         <li>
-          <a href="https://iiif.io/">IIIF</a> — compare two flood images side-by-side in a Mirador / Universal Viewer embed (advanced stretch goal; see §7).
+          <a href="https://iiif.io/">IIIF</a>; compare two flood images side-by-side in a Mirador / Universal Viewer embed (advanced stretch goal; see §7).
         </li>
       </ul>
     </div>
@@ -265,7 +292,7 @@ flowchart TB
   </section>
 
   <section class="panel">
-    <h2>7. Course-sized stretch goals</h2>
+    <h2>8. Course-sized stretch goals</h2>
     <ul>
       <li><strong>Print + play:</strong> one STL token per path; co-op table has physical “votes.”</li>
       <li><strong>IIIF compare:</strong> embed two flood engravings side by side with zoom/pan.</li>
@@ -296,7 +323,7 @@ flowchart TB
           mv.src = localUrl;
           if (note) {
             note.innerHTML =
-              "<strong>Loaded:</strong> local <code>assets/medieval-table-lantern.glb</code> — export from <a href=\"https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826\">MakerWorld #1066715</a> per that site’s license; not redistributed by this repo.";
+              "<strong>Loaded:</strong> local <code>assets/medieval-table-lantern.glb</code>; export from <a href=\"https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826\">MakerWorld #1066715</a> per that site’s license; not redistributed by this repo.";
           }
         })
         .catch(function () {});
@@ -309,7 +336,7 @@ flowchart TB
     import { STLLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/STLLoader.js";
     import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
-    /* Minimal square pyramid: apex + base in xz — versionable as .stl in repo */
+    /* Minimal square pyramid: apex + base in xz; versionable as .stl in repo */
     const PYRAMID_STL = `solid cyoa_marker
 facet normal 0 0.4472135955 0.894427191
   outer loop
@@ -389,7 +416,7 @@ endsolid cyoa_marker
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    statusEl.textContent = "Ready — embedded ASCII STL (pyramid token).";
+    statusEl.textContent = "Ready; embedded ASCII STL (pyramid token).";
 
     function onResize() {
       const w = host.clientWidth;
@@ -411,6 +438,181 @@ endsolid cyoa_marker
       renderer.render(scene, camera);
     }
     tick();
+  </script>
+
+  <!-- Composite vignette: Commons texture + procedural room + optional GLB -->
+  <script type="module">
+    import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+    import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+    import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+
+    const FLOOD_TEX =
+      "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg";
+    const LANTERN_REL = "../assets/medieval-table-lantern.glb";
+
+    const host = document.getElementById("mockSalonHost");
+    const statusEl = document.getElementById("mockSalonStatus");
+    if (host && statusEl) {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x1a1c22, 0.008);
+
+      const camera = new THREE.PerspectiveCamera(42, host.clientWidth / host.clientHeight, 0.1, 500);
+      camera.position.set(38, 28, 52);
+      camera.lookAt(0, 14, -18);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+      renderer.setSize(host.clientWidth, host.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
+      host.appendChild(renderer.domElement);
+
+      const amb = new THREE.AmbientLight(0x8a9ab8, 0.35);
+      scene.add(amb);
+      const moon = new THREE.DirectionalLight(0xd4e0f5, 0.28);
+      moon.position.set(-30, 50, 20);
+      scene.add(moon);
+
+      const floorG = new THREE.PlaneGeometry(140, 100);
+      const floorM = new THREE.MeshStandardMaterial({
+        color: 0x3d2e22,
+        roughness: 0.88,
+        metalness: 0.05,
+      });
+      const floor = new THREE.Mesh(floorG, floorM);
+      floor.rotation.x = -Math.PI / 2;
+      floor.position.y = 0;
+      scene.add(floor);
+
+      const legG = new THREE.BoxGeometry(2.2, 18, 2.2);
+      const wood = new THREE.MeshStandardMaterial({ color: 0x4a3528, roughness: 0.82, metalness: 0.04 });
+      [[-14, 9, -4], [14, 9, -4], [-14, 9, 8], [14, 9, 8]].forEach(([x, y, z]) => {
+        const leg = new THREE.Mesh(legG, wood);
+        leg.position.set(x, y, z);
+        scene.add(leg);
+      });
+      const topG = new THREE.BoxGeometry(38, 1.4, 26);
+      const tableTop = new THREE.Mesh(topG, wood);
+      tableTop.position.set(0, 18.7, 2);
+      scene.add(tableTop);
+
+      const flameGeo = new THREE.SphereGeometry(1.1, 16, 12);
+      const flameMat = new THREE.MeshStandardMaterial({
+        color: 0xffcc66,
+        emissive: 0xffaa44,
+        emissiveIntensity: 1.8,
+        roughness: 0.4,
+        metalness: 0,
+      });
+      const flame = new THREE.Mesh(flameGeo, flameMat);
+      flame.position.set(10, 20.2, 0);
+      scene.add(flame);
+
+      const lamp = new THREE.PointLight(0xffaa77, 2.2, 55, 1.9);
+      lamp.position.copy(flame.position);
+      scene.add(lamp);
+
+      const wallGroup = new THREE.Group();
+      wallGroup.position.set(0, 26, -42);
+      scene.add(wallGroup);
+
+      const texLoader = new THREE.TextureLoader();
+      texLoader.crossOrigin = "anonymous";
+      texLoader.load(
+        FLOOD_TEX,
+        (tex) => {
+          tex.colorSpace = THREE.SRGBColorSpace;
+          tex.minFilter = THREE.LinearMipmapLinearFilter;
+          const wallG = new THREE.PlaneGeometry(72, 48);
+          const wallM = new THREE.MeshStandardMaterial({
+            map: tex,
+            roughness: 0.95,
+            metalness: 0,
+            emissive: 0x111118,
+            emissiveIntensity: 0.12,
+          });
+          const wall = new THREE.Mesh(wallG, wallM);
+          wallGroup.add(wall);
+          statusEl.textContent =
+            "Backdrop: Commons flood print · table + candle stub · optional GLB loads if present.";
+        },
+        undefined,
+        () => {
+          const wallG = new THREE.PlaneGeometry(72, 48);
+          const wallM = new THREE.MeshStandardMaterial({ color: 0x2c3140, roughness: 1, metalness: 0 });
+          wallGroup.add(new THREE.Mesh(wallG, wallM));
+          statusEl.textContent =
+            "Backdrop texture blocked (CORS/offline); using flat wall. Table + lamp stub still active.";
+        }
+      );
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.target.set(-2, 16, -12);
+      controls.enableDamping = true;
+      controls.maxPolarAngle = Math.PI * 0.49;
+
+      let lanternAdded = false;
+      const localUrl = new URL(LANTERN_REL, window.location.href).href;
+      fetch(LANTERN_REL, { headers: { Range: "bytes=0-0" }, cache: "no-store" })
+        .then((res) => {
+          if (res.status !== 206 && res.status !== 200) return;
+          const loader = new GLTFLoader();
+          return new Promise((resolve, reject) => {
+            loader.load(localUrl, resolve, undefined, reject);
+          });
+        })
+        .then((gltf) => {
+          if (!gltf || lanternAdded) return;
+          lanternAdded = true;
+          const root = gltf.scene;
+          root.traverse((o) => {
+            if (o.isMesh) {
+              o.castShadow = true;
+              o.receiveShadow = true;
+            }
+          });
+          const box = new THREE.Box3().setFromObject(root);
+          const size = new THREE.Vector3();
+          box.getSize(size);
+          const s = 14 / Math.max(size.x, size.y, size.z);
+          root.scale.setScalar(s);
+          root.position.set(6, 19.2, -2);
+          root.rotation.y = 0.35;
+          scene.add(root);
+          flame.visible = false;
+          lamp.position.set(6, 22, -2);
+          lamp.intensity = 1.6;
+          statusEl.textContent +=
+            " MakerWorld lantern GLB merged into scene (hide stub flame).";
+        })
+        .catch(() => {});
+
+      function onResize() {
+        const w = host.clientWidth;
+        const h = host.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+      window.addEventListener("resize", onResize);
+
+      let t = 0;
+      function tick() {
+        requestAnimationFrame(tick);
+        controls.update();
+        if (!reduceMotion) {
+          t += 0.05;
+          const wobble = 0.92 + Math.sin(t) * 0.06;
+          flameMat.emissiveIntensity = 1.5 * wobble;
+          lamp.intensity = 2 * wobble;
+        }
+        renderer.render(scene, camera);
+      }
+      tick();
+    }
   </script>
 
   <script>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Co-op CYOA mechanics — implementation & learning report</title>
+  <title>Co-op CYOA mechanics; implementation & learning report</title>
   <style>
     :root {
       --ink: #16181d;
@@ -171,7 +171,7 @@
 <body>
   <div class="wrap">
     <header class="report-head">
-      <h1>Co-op CYOA mechanics — what it takes, what it looks like, why it teaches</h1>
+      <h1>Co-op CYOA mechanics; what it takes, what it looks like, why it teaches</h1>
       <p class="sub">
         Report for <cite>Russia at the Crossroads</cite> (three fixed roles: Order, Reform, People). Each idea below draws on published patterns
         (e.g. vote-based interactive drama, prompt-driven story games, classroom ethics branching) and maps to a <strong>low-complexity</strong> implementation path in your existing static stack (<code>index.html</code> + <code>js/game-app.js</code> + <code>css/game.css</code>), with prototypes already sketched in <code>canvas-interactive-demos/demos/</code> where noted.
@@ -230,7 +230,7 @@
           <circle cx="220" cy="150" r="8" fill="#6b4a5d" stroke="#fff" stroke-width="2" /><text x="232" y="154" font-size="8" font-family="system-ui,sans-serif">Path Δ</text>
           <circle cx="130" cy="175" r="8" fill="#4a6b4f" stroke="#fff" stroke-width="2" /><text x="142" y="179" font-size="8" font-family="system-ui,sans-serif">Breadcrumb</text>
         </svg>
-        <figcaption>Not a precise estimate—relative placement for planning. Favor items <strong>upper-left</strong> first when you want maximum teaching return with minimal new systems.</figcaption>
+        <figcaption>Not a precise estimate, relative placement for planning. Favor items <strong>upper-left</strong> first when you want maximum teaching return with minimal new systems.</figcaption>
       </figure>
       <div class="legend-grid">
         <span><span class="dot" style="background:#4a5d6b"></span> Systems / UI</span>
@@ -276,7 +276,7 @@
     <!-- Mechanic 1 -->
     <section class="block" id="m01">
       <h2>1. Plurality vote + tie-break + rare override</h2>
-      <p><span class="tag">Inspired by</span> vote-based interactive drama (e.g. <a href="https://www.asduskfalls.com/as-dusk-falls-faq/">As Dusk Falls FAQ</a> — majority wins, random tie-break, special overrides).</p>
+      <p><span class="tag">Inspired by</span> vote-based interactive drama (e.g. <a href="https://www.asduskfalls.com/as-dusk-falls-faq/">As Dusk Falls FAQ</a>; majority wins, random tie-break, special overrides).</p>
       <div class="viz-card">
         <div class="mock-ui" aria-hidden="true">
           <div class="mock-title">Group choice</div>
@@ -295,13 +295,13 @@
         <div class="track"><div class="fill learn" style="width:85%"></div></div>
       </div>
       <p><strong>What it would take:</strong> State for three votes (or reuse your ballot demo), a resolver function (majority → choice index; tie policy), optional <strong>override tokens</strong> stored in <code>state</code>. Mostly <code>game-app.js</code> + one modal or footer strip; no new narrative content required.</p>
-      <p><strong>Why learning:</strong> Students experience <em>disagreement under constraint</em>—the same skill as reading factional politics. <strong>Why fun:</strong> brief drama each beat without role-play improv. <strong>Not too complicated:</strong> one rule card on screen; hide entirely outside co-op.</p>
+      <p><strong>Why learning:</strong> Students experience <em>disagreement under constraint</em>, the same skill as reading factional politics. <strong>Why fun:</strong> brief drama each beat without role-play improv. <strong>Not too complicated:</strong> one rule card on screen; hide entirely outside co-op.</p>
       <p><strong>Prototype:</strong> <code>canvas-interactive-demos/demos/mechanic-co-op-timer-ballot.html</code></p>
     </section>
 
     <section class="block" id="m02">
       <h2>2. Advisory vote + rotating “clerk”</h2>
-      <p><span class="tag">Inspired by</span> host-decides patterns (e.g. <a href="https://www.thegamer.com/the-quarry-multiplayer-co-op-mode-guide/">The Quarry</a> — spectators advise, controller commits).</p>
+      <p><span class="tag">Inspired by</span> host-decides patterns (e.g. <a href="https://www.thegamer.com/the-quarry-multiplayer-co-op-mode-guide/">The Quarry</a>; spectators advise, controller commits).</p>
       <div class="tri-bar">
         <span class="label">Code / UI effort</span>
         <div class="track"><div class="fill impl" style="width:22%"></div></div>
@@ -316,7 +316,7 @@
 
     <section class="block" id="m03">
       <h2>3. Shared “salon heat” + talk-only beats</h2>
-      <p><span class="tag">Inspired by</span> team resource + downtime talk (e.g. team CYOA / social phases in <a href="https://www.pocketgamer.com/tales-of-treachery/tales-of-treachery-is-a-team-based-choose-your-own-adventure/">Pocket Gamer on Tales of Treachery</a> — without requiring a traitor).</p>
+      <p><span class="tag">Inspired by</span> team resource + downtime talk (e.g. team CYOA / social phases in <a href="https://www.pocketgamer.com/tales-of-treachery/tales-of-treachery-is-a-team-based-choose-your-own-adventure/">Pocket Gamer on Tales of Treachery</a>; without requiring a traitor).</p>
       <div class="viz-card">
         <div class="mock-ui" aria-hidden="true">
           <div class="mock-title">Salon heat (group)</div>
@@ -338,7 +338,7 @@
 
     <section class="block" id="m04">
       <h2>4. Prompt pass + content safety skip</h2>
-      <p><span class="tag">Inspired by</span> <a href="https://forthequeengame.com/srd/">For the Queen SRD</a> — pass prompts, optional X-Card style skip.</p>
+      <p><span class="tag">Inspired by</span> <a href="https://forthequeengame.com/srd/">For the Queen SRD</a>; pass prompts, optional X-Card style skip.</p>
       <div class="tri-bar">
         <span class="label">Code / UI effort</span>
         <div class="track"><div class="fill impl" style="width:30%"></div></div>
@@ -369,13 +369,13 @@
         <span class="label">Learning payoff</span>
         <div class="track"><div class="fill learn" style="width:92%"></div></div>
       </div>
-      <p><strong>What it would take:</strong> Extra copy fields per scene (or per role) in <code>game-scenes.js</code>; three collapsibles or tabs; <strong>content cost is the real work</strong>—keep v1 to <strong>2–3 pilot scenes</strong>.</p>
+      <p><strong>What it would take:</strong> Extra copy fields per scene (or per role) in <code>game-scenes.js</code>; three collapsibles or tabs; <strong>content cost is the real work</strong>, keep v1 to <strong>2–3 pilot scenes</strong>.</p>
       <p><strong>Why learning:</strong> Historians disagree partly because <em>sources differ</em>. <strong>Fun:</strong> “what did you see?” reveal. <strong>Scope control:</strong> ship three scenes first, not the whole graph.</p>
     </section>
 
     <section class="block" id="m06">
       <h2>6. Predict → reveal</h2>
-      <p><span class="tag">Inspired by</span> <a href="https://quandarygame.org/">Quandary</a> — anticipate reactions before locking a recommendation.</p>
+      <p><span class="tag">Inspired by</span> <a href="https://quandarygame.org/">Quandary</a>; anticipate reactions before locking a recommendation.</p>
       <div class="tri-bar">
         <span class="label">Code / UI effort</span>
         <div class="track"><div class="fill impl" style="width:38%"></div></div>
@@ -390,7 +390,7 @@
 
     <section class="block" id="m07">
       <h2>7. Role-gated choices (hard mode)</h2>
-      <p><span class="tag">Light touch</span> <a href="https://andresmrm.itch.io/coopera">Coopera</a>-style coordination — without shared avatar physics.</p>
+      <p><span class="tag">Light touch</span> <a href="https://andresmrm.itch.io/coopera">Coopera</a>-style coordination; without shared avatar physics.</p>
       <div class="tri-bar">
         <span class="label">Code / UI effort</span>
         <div class="track"><div class="fill impl" style="width:75%"></div></div>
@@ -399,8 +399,8 @@
         <span class="label">Learning payoff</span>
         <div class="track"><div class="fill learn" style="width:45%"></div></div>
       </div>
-      <p><strong>What it would take:</strong> Tag choices with <code>gate: "order"</code>; disable buttons unless “active role” matches; forces negotiation to a <strong>legal</strong> move. Edge cases: soft-lock if all gated—needs design guardrails.</p>
-      <p><strong>Why learning:</strong> Sharp illustration of <em>institutional roles</em>. <strong>Fun for some groups</strong>; <strong>can frustrate</strong> others—keep as <strong>optional difficulty</strong>, not default.</p>
+      <p><strong>What it would take:</strong> Tag choices with <code>gate: "order"</code>; disable buttons unless “active role” matches; forces negotiation to a <strong>legal</strong> move. Edge cases: soft-lock if all gated, needs design guardrails.</p>
+      <p><strong>Why learning:</strong> Sharp illustration of <em>institutional roles</em>. <strong>Fun for some groups</strong>; <strong>can frustrate</strong> others, keep as <strong>optional difficulty</strong>, not default.</p>
     </section>
 
     <section class="block" id="m08">
@@ -419,32 +419,32 @@
         <tbody>
           <tr>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;"><code>mechanic-winter-crisis-lab.html</code></td>
-            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Medium — align copy with real tables</td>
+            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Medium; align copy with real tables</td>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;">Probability as historical argument</td>
           </tr>
           <tr>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;"><code>mechanic-path-deltas-and-hints.html</code></td>
-            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Medium — data per choice</td>
+            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Medium; data per choice</td>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;">Same move, different institutions</td>
           </tr>
           <tr>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;"><code>mechanic-breadcrumb-tension.html</code></td>
-            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low — header strip</td>
+            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low; header strip</td>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;">Orientation + “who’s ahead?” debrief</td>
           </tr>
           <tr>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;"><code>mechanic-debrief-epilogues.html</code></td>
-            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low–mid — wire to real epilogue text</td>
+            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low–mid; wire to real epilogue text</td>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;">Contingency + historiography</td>
           </tr>
           <tr>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;"><code>mechanic-achievement-flash.html</code></td>
-            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low — event hooks</td>
+            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low; event hooks</td>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;">Mnemonic rewards, not grind</td>
           </tr>
           <tr>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;"><code>mechanic-url-and-summary.html</code></td>
-            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low — router + clipboard</td>
+            <td style="padding:0.4rem;border:1px solid #d4c9b8;">Low; router + clipboard</td>
             <td style="padding:0.4rem;border:1px solid #d4c9b8;">Forum / instructor deep links</td>
           </tr>
         </tbody>
@@ -454,8 +454,8 @@
     <section class="block">
       <h2>Recommended “not too complicated” stack</h2>
       <ul class="bullets">
-        <li><strong>Phase A (one sprint):</strong> breadcrumb + tension, path deltas on focus, winter transparency block — all visible teaching wins.</li>
-        <li><strong>Phase B:</strong> co-op vote + stance + rotating clerk — social play without new narrative.</li>
+        <li><strong>Phase A (one sprint):</strong> breadcrumb + tension, path deltas on focus, winter transparency block; all visible teaching wins.</li>
+        <li><strong>Phase B:</strong> co-op vote + stance + rotating clerk; social play without new narrative.</li>
         <li><strong>Phase C:</strong> asymmetric Read alongside on <strong>three pilot scenes</strong> only.</li>
         <li><strong>Defer:</strong> role-gated everything, fourth meter affecting many branches, traitor modes.</li>
       </ul>

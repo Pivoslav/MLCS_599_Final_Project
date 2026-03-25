@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Russia's Troubled Future Past</title>
   <!-- Bump ?v= on css/js when students may see stale copies (browser cache). -->
-  <link rel="stylesheet" href="css/game.css?v=20260329e" />
+  <link rel="stylesheet" href="css/game.css?v=20260329f" />
 </head>
 <body>
   <a href="#title" class="skip-link">Skip to story</a>
@@ -29,6 +29,7 @@
         </div>
         <div class="header-actions actions">
           <a href="llm-lab.html" class="ghost" title="Local dev: run python tools/dev_server.py first">Art lab</a>
+          <button type="button" class="ghost" id="ambientToggle" aria-pressed="false" title="Toggle procedural ambient (Web Audio; not a historical recording)">Ambient off</button>
           <button type="button" class="ghost glossary-header-btn" id="glossaryBtn" title="Key terms"><span class="glossary-header-btn-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5a2 2 0 012-2h7v20H4a2 2 0 01-2-2V5zm20 0a2 2 0 00-2-2h-7v20h7a2 2 0 002-2V5z"/></svg></span> Terms</button>
           <button type="button" class="ghost" id="backBtn">Back</button>
           <button type="button" class="primary" id="restartBtn">Restart</button>
@@ -74,7 +75,7 @@
                   <label class="coop-enable-row coop-enable-row--prominent"><input type="checkbox" id="coopToolsEnable" checked /> Enable co-op gating on choice scenes</label>
                   <div id="coopToolsDiscuss" class="coop-tools-discuss" hidden>
                     <div class="coop-timer-row">
-                      <div class="coop-timer-display" id="coopTimerDisplay" aria-live="polite">—</div>
+                      <div class="coop-timer-display" id="coopTimerDisplay" aria-live="polite">, </div>
                       <button type="button" class="ghost" id="coopTimerStart">30s discussion</button>
                       <button type="button" class="ghost" id="coopTimerStop">Stop</button>
                     </div>
@@ -82,7 +83,7 @@
                 </div>
                 <div id="coopMainBallotWrap" class="coop-main-ballot-wrap" hidden>
                   <div class="coop-main-ballot-inner">
-                    <h3 class="coop-seats-heading">Three seats — Order, then Reform, then People</h3>
+                    <h3 class="coop-seats-heading">Three seats; Order, then Reform, then People</h3>
                     <p class="coop-seats-flow coop-seats-context" id="coopSeatsContext" hidden aria-live="polite"></p>
                     <div id="coopBallotMount" class="coop-ballot-mount"></div>
                   </div>
@@ -155,6 +156,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
   <script src="js/game-config.js?v=20260329a"></script>
   <script src="js/game-scenes.js?v=20260329a"></script>
-  <script src="js/game-app.js?v=20260329e"></script>
+  <script src="js/game-ambient-audio.js?v=20260329f"></script>
+  <script src="js/game-app.js?v=20260329f"></script>
 </body>
 </html>

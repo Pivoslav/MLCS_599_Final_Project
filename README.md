@@ -2,17 +2,17 @@
 
 **Hosting, Canvas (new-tab fragment), and roadmap for merging demos into the game:** see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (on `main` for GitHub and collaborators).
 
-**Stale page after an update?** Browsers often keep an old `game-scenes.js` (same URL). The shipped **`index.html`** appends **`?v=…`** to `css/` and `js/` requests—**bump that date** whenever you need everyone to pull fresh script. Use a **hard refresh** (Ctrl+Shift+R / Cmd+Shift+R) or a **private window**. If you use the Canvas fragment, **re-paste** `canvas-rce-embed-fragment.html` when the published link’s query string changes.
+**Stale page after an update?** Browsers often keep an old `game-scenes.js` (same URL). The shipped **`index.html`** appends **`?v=…`** to `css/` and `js/` requests, **bump that date** whenever you need everyone to pull fresh script. Use a **hard refresh** (Ctrl+Shift+R / Cmd+Shift+R) or a **private window**. If you use the Canvas fragment, **re-paste** `canvas-rce-embed-fragment.html` when the published link’s query string changes.
 
-**Canvas / iframe:** Third-party or RCE embeds may **block or partition `sessionStorage`**; the game degrades (e.g. run ID falls back in **Copy run summary**). **Co-op** and wide layout are intended for a **new tab**—see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (Phase 0 checklist + `canvas-self-test.html`).
+**Canvas / iframe:** Third-party or RCE embeds may **block or partition `sessionStorage`**; the game degrades (e.g. run ID falls back in **Copy run summary**). **Co-op** and wide layout are intended for a **new tab**, see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (Phase 0 checklist + `canvas-self-test.html`).
 
-**Maintainer direction:** Ship as a **teaching instrument**—debrief via epilogue discussion boxes, **Copy run summary**, **Terms**, and **Read alongside**. The UI stays **lean** (compact **O / R / P** in the header, no in-game historiography card). Add chrome or URL presets only when they clearly earn their space.
+**Maintainer direction:** Ship as a **teaching instrument**, debrief via epilogue discussion boxes, **Copy run summary**, **Terms**, and **Read alongside**. The UI stays **lean** (compact **O / R / P** in the header, no in-game historiography card). Add chrome or URL presets only when they clearly earn their space.
 
-**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles in the header, and compact **O / R / P** meter values (0–100) beside scene meta. All motion respects **`prefers-reduced-motion`**. On many **dialogue-heavy** beats (paths, crises, key events), a small **dialogue portrait** (Wikimedia Commons, with alt text and caption) appears under the scene title — see **`IMAGE_CREDITS.md`** and **`SCENE_DIALOGUE_PORTRAITS`** in `game-config.js`.
+**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles in the header, and compact **O / R / P** meter values (0–100) beside scene meta. All motion respects **`prefers-reduced-motion`**. Optional **Ambient** in the header turns on a very quiet **procedural bed** (Web Audio oscillators and filtered noise only, no MP3 files): timbre shifts with each scene’s **`SCENE_AMBIENT`** bucket (salon, print, neva, winter, and so on). It is **off by default**, evocative rather than documentary, and **disabled entirely** when reduced motion is on. On many **dialogue-heavy** beats (paths, crises, key events), a small **dialogue portrait** (Wikimedia Commons, with alt text and caption) appears under the scene title; see **`IMAGE_CREDITS.md`** and **`SCENE_DIALOGUE_PORTRAITS`** in `game-config.js`.
 
 ## Coherence of the narrative
 
-The game is built around **one provocation** (Chaadaev’s *First Philosophical Letter*, 1836, in **McNally & Tempest**, *Philosophical Works of Peter Chaadaev*, Springer 1991) and **one literary counterweight** (Pushkin’s *The Bronze Horseman*, **Walter Arndt** translation, 1993—use your library edition for assigned passages). In-game copy tracks Letter I and Arndt’s poem where quoted (e.g. “window to the West,” flood lines, “Bronze Horseman in pursuit,” pauper’s grave; **Yevgeny** in source vs. **Evgeny** in some UI copy; see Terms). The candlelit **salon** is still a **dramatization**: the real Letter I is a long **epistle to “Madame.”** See **Terms** in the footer.
+The game is built around **one provocation** (Chaadaev’s *First Philosophical Letter*, 1836, in **McNally & Tempest**, *Philosophical Works of Peter Chaadaev*, Springer 1991) and **one literary counterweight** (Pushkin’s *The Bronze Horseman*, **Walter Arndt** translation, 1993, use your library edition for assigned passages). In-game copy tracks Letter I and Arndt’s poem where quoted (e.g. “window to the West,” flood lines, “Bronze Horseman in pursuit,” pauper’s grave; **Yevgeny** in source vs. **Evgeny** in some UI copy; see Terms). The candlelit **salon** is still a **dramatization**: the real Letter I is a long **epistle to “Madame.”** See **Terms** in the footer.
 
 Early scenes state **three recurring questions**:
 
@@ -74,7 +74,7 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 
 - **Micro-primary-text moments:** Project or hand out 2–4 lines from Chaadaev (borrowing / history) or Pushkin (Peter / flood / Evgeny) **before** a major branch; map diction to the next choice.
 - **Name the counterfactual:** When the text mentions zemstvo-style pilots or salons, say aloud: *This is plausible debate in the 1830s; some institutions belong to a later period; we’re staging the argument, not simulating a year-by-year replay.*
-- **Secondary reading after endings (instructor):** Tie the closing students reached to one assigned historian or chapter (e.g. Walicki); the game does **not** surface a separate historiography panel—keep this in discussion or a forum prompt.
+- **Secondary reading after endings (instructor):** Tie the closing students reached to one assigned historian or chapter (e.g. Walicki); the game does **not** surface a separate historiography panel, keep this in discussion or a forum prompt.
 - **Concept glossary (prep):** Short definitions for *Teleskop*, Third Section, *sobornost*, Neva flood of 1824, *narod* (handout or slide) so terms don’t block play.
 - **Path recap before the roll:** Instructor or **Order** player summarizes: *We’ve favored Reform over People since…* so the d6 feels connected to prior choices, not arbitrary.
 - **Post-game reading:** After the run, assign 1–2 pages keyed to ending type (e.g. *Unity Without the Many*: hollow state / Evgeny readings; *Reform in the Teeth*: Westernizers and repression).
@@ -103,7 +103,7 @@ The Springer volume includes **Letters II–VIII**, ***Apologia of a Madman***, 
 
 ## Directed start (`?scene=`)
 
-For demos, make-up play, or assigned entry points, append **`?scene=<sceneId>`** to the page URL. **`<sceneId>`** must be a key on the `scenes` object in **`js/game-scenes.js`**. The game resets path history and opens that node, with a short toast that the start was directed. This **skips** earlier story beats—use with care for first-time players.
+For demos, make-up play, or assigned entry points, append **`?scene=<sceneId>`** to the page URL. **`<sceneId>`** must be a key on the `scenes` object in **`js/game-scenes.js`**. The game resets path history and opens that node, with a short toast that the start was directed. This **skips** earlier story beats, use with care for first-time players.
 
 ## Embedding in Canvas
 
@@ -114,7 +114,7 @@ Paste **`canvas-rce-embed-fragment.html`** into a Canvas Page (HTML view): a **f
 - `co-op-cyoa-mechanics-report.html`: **Visual report** (effort vs payoff chart, flow diagram, per-mechanic bars + learning notes) for multiplayer CYOA ideas.
 - `HOSTING-AND-INTEGRATION.md`: **Canvas + GitHub Pages lessons**, optional iframe notes, public-repo notes, **mechanics/integration roadmap** vs `canvas-interactive-demos/`.
 - `index.html` + `css/game.css` + `js/game-config.js`, `js/game-scenes.js`, `js/game-app.js`: shipped game (open `index.html` locally or host the whole `Final/` folder on GitHub Pages).
-- `canvas-rce-embed-fragment.html`: paste-ready **Canvas Page** fragment — **open in new tab** (full layout); no embedded iframe by default.
+- `canvas-rce-embed-fragment.html`: paste-ready **Canvas Page** fragment; **open in new tab** (full layout); no embedded iframe by default.
 - `SOURCES.md`: citations and editions.
 - `LICENSE`: MIT (redistribution; adjust copyright if your program requires a different notice).
 - `cyoa-structure-map.html`: branch map and teaching companion.

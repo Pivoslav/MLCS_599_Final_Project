@@ -376,7 +376,7 @@
     }
 
     :root[data-scheme="ember"] {
-      /* Cool “hearth” smoke — not yellow-beige */
+      /* Cool “hearth” smoke; not yellow-beige */
       --bg: #c8c0cc;
       --bg-deep: #b4aab8;
       --page-grad-mid: #d4ced8;

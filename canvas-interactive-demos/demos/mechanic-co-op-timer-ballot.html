@@ -25,13 +25,13 @@
   <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
   <h1>Co-op: timer, secret ballot, stance gate</h1>
   <p>
-    <strong>Why it is fun:</strong> committee chaos with a fair rhythm—everyone gets a beat, then a dramatic reveal.
+    <strong>Why it is fun:</strong> committee chaos with a fair rhythm, everyone gets a beat, then a dramatic reveal.
     <strong>Why it is educational:</strong> models how salons and study groups actually disagree: time pressure, hidden preferences, and explicit commitment before a risky publish/petition move. Pedagogically it combats one student driving every click.
   </p>
 
   <div class="demo-panel">
     <p style="margin-top:0;"><strong>Timer</strong> (optional facilitator cue)</p>
-    <div class="timer" id="timer" aria-live="polite">—</div>
+    <div class="timer" id="timer" aria-live="polite">, </div>
     <div class="btn-row">
       <button type="button" id="t-start">Start 30s discussion</button>
       <button type="button" id="t-stop">Stop</button>
@@ -39,12 +39,12 @@
   </div>
 
   <div class="demo-panel">
-    <p style="margin-top:0;"><strong>Secret ballot</strong> — each role picks A / B / C; reveal together.</p>
+    <p style="margin-top:0;"><strong>Secret ballot</strong>; each role picks A / B / C; reveal together.</p>
     <div class="role-grid">
       <div class="role-card">
         <label for="v1">Player 1 · Order</label>
         <select id="v1" aria-label="Order player vote">
-          <option value="">—</option>
+          <option value="">, </option>
           <option value="A">A · Withdraw</option>
           <option value="B">B · Circulate quietly</option>
           <option value="C">C · Petition openly</option>
@@ -54,7 +54,7 @@
       <div class="role-card">
         <label for="v2">Player 2 · Reform</label>
         <select id="v2" aria-label="Reform player vote">
-          <option value="">—</option>
+          <option value="">, </option>
           <option value="A">A · Withdraw</option>
           <option value="B">B · Circulate quietly</option>
           <option value="C">C · Petition openly</option>
@@ -64,7 +64,7 @@
       <div class="role-card">
         <label for="v3">Player 3 · People</label>
         <select id="v3" aria-label="People player vote">
-          <option value="">—</option>
+          <option value="">, </option>
           <option value="A">A · Withdraw</option>
           <option value="B">B · Circulate quietly</option>
           <option value="C">C · Petition openly</option>
@@ -80,7 +80,7 @@
   </div>
 
   <div class="demo-panel">
-    <p style="margin-top:0;"><strong>Stance gate</strong> — commit before the facilitator clicks the real choice.</p>
+    <p style="margin-top:0;"><strong>Stance gate</strong>; commit before the facilitator clicks the real choice.</p>
     <label style="display:flex;gap:0.5rem;align-items:flex-start;margin:0.5rem 0;">
       <input type="checkbox" id="stance" />
       <span>Our trio has spoken; we stand behind the ballot outcome for this beat.</span>
@@ -97,7 +97,7 @@
       var left = 0;
       var elT = document.getElementById("timer");
       function showTimer() {
-        elT.textContent = left > 0 ? left + "s" : "—";
+        elT.textContent = left > 0 ? left + "s" : ", ";
       }
       document.getElementById("t-start").addEventListener("click", function () {
         if (tid) clearInterval(tid);
@@ -112,7 +112,7 @@
       document.getElementById("t-stop").addEventListener("click", function () {
         if (tid) clearInterval(tid);
         left = 0;
-        elT.textContent = "—";
+        elT.textContent = ", ";
       });
 
       var out = document.getElementById("ballot-out");
@@ -151,7 +151,7 @@
         btn.style.opacity = chk.checked ? "1" : "0.5";
       });
       btn.addEventListener("click", function () {
-        alert("Toy demo — would map majority vote to the game's choice handler.");
+        alert("Toy demo; would map majority vote to the game's choice handler.");
       });
     })();
   </script>

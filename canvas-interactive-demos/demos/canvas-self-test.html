@@ -75,7 +75,7 @@
   <p>
     Automated and manual checks (Canvas / embed compatibility): path
     relationship, errors from <strong>this page’s scripts</strong>, inline SVG, keyboard-activatable button,
-    and <code>localStorage</code> behavior. In Canvas embeds or strict iframes, storage is often blocked — that still
+    and <code>localStorage</code> behavior. In Canvas embeds or strict iframes, storage is often blocked; that still
     <strong>passes</strong> here as long as the page handles it (no crash). Extension-injected script noise is ignored.
   </p>
 
@@ -136,7 +136,7 @@
         return false;
       };
 
-      /** Count only errors likely from this document — not browser extensions or foreign origins. */
+      /** Count only errors likely from this document; not browser extensions or foreign origins. */
       function isRelevantScriptError(url, msg) {
         var u = String(url || "");
         if (/^(chrome|moz|safari|webkit)-extension:/i.test(u)) return false;
@@ -197,7 +197,7 @@
         } else {
           addItem(
             true,
-            "localStorage not usable (silent block or quota) — session-only UI is acceptable for Canvas / embeds"
+            "localStorage not usable (silent block or quota); session-only UI is acceptable for Canvas / embeds"
           );
           lsEl.textContent =
             "localStorage did not persist the probe value (common when storage is partitioned or disabled). Demos should not rely on it.";
@@ -206,7 +206,7 @@
       } catch (e) {
         addItem(
           true,
-          "localStorage threw — graceful degradation (typical in embedded LMS or strict iframe policy)"
+          "localStorage threw; graceful degradation (typical in embedded LMS or strict iframe policy)"
         );
         lsEl.textContent =
           "localStorage threw: " +
@@ -221,7 +221,7 @@
             var c = it.ok ? "status-ok" : "status-bad";
             var t = it.ok ? "PASS" : "FAIL";
             var note = it.note ? " <span class=\"status-neutral\">(" + it.note + ")</span>" : "";
-            return "<li><span class=\"" + c + "\">" + t + "</span> — " + it.label + note + "</li>";
+            return "<li><span class=\"" + c + "\">" + t + "</span>; " + it.label + note + "</li>";
           })
           .join("");
       }

@@ -1,4 +1,4 @@
-/* Shared styles for MLCS 599 canvas demos — realm bar colors match shipped css/game.css (sidebar meters). */
+/* Shared styles for MLCS 599 canvas demos; realm bar colors match shipped css/game.css (sidebar meters). */
 :root {
   --bar-order: #4a5d6b;
   --bar-reform: #6b4a5d;

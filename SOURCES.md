@@ -15,13 +15,13 @@ This document tracks the primary and secondary works used to build the **CYOA ga
 
 ### Literary mirror in the game
 
-3. **Pushkin, Aleksandr S.** *The Bronze Horseman* (*Медный всадник*, 1833). English translation by **Walter Arndt** (1993)—e.g. in the Penguin *Portable Nineteenth-Century Russian Reader* / Ardis editions cited in standard bibliographies. Branching scenes quote or gloss this wording (Petersburg, flood, Yevgeny vs. Peter’s statue). The CYOA does **not** incorporate *The Gypsies*.
+3. **Pushkin, Aleksandr S.** *The Bronze Horseman* (*Медный всадник*, 1833). English translation by **Walter Arndt** (1993), e.g. in the Penguin *Portable Nineteenth-Century Russian Reader* / Ardis editions cited in standard bibliographies. Branching scenes quote or gloss this wording (Petersburg, flood, Yevgeny vs. Peter’s statue). The CYOA does **not** incorporate *The Gypsies*.
 
 ### Supporting intellectual context used for branching themes
 
 4. 19th-century debates associated with **Westernizers vs. Slavophiles** (used as conceptual framework for story branches).
 
-5. **Aksakov, Konstantin** (1817–1860), Slavophile publicist and critic: themes of Russian **soil**, **narod**, Orthodox moral community, and suspicion of abstract Western “rights” and state-driven modernization—used in the CYOA’s **Aksakov prelude** and inventory token as an interpretive counterweight to Chaadaev’s European-facing diagnosis (not a quotation of a specific edition).
+5. **Aksakov, Konstantin** (1817–1860), Slavophile publicist and critic: themes of Russian **soil**, **narod**, Orthodox moral community, and suspicion of abstract Western “rights” and state-driven modernization, used in the CYOA’s **Aksakov prelude** and inventory token as an interpretive counterweight to Chaadaev’s European-facing diagnosis (not a quotation of a specific edition).
 
 6. Historical context around censorship/publication controversy after the 1836 publication in *Teleskop*.
 

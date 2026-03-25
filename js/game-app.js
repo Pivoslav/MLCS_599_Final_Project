@@ -60,7 +60,11 @@
       const source = document.getElementById("sceneBgSource");
       const entry = SCENE_IMAGES[sceneId] || SCENE_IMAGES.intro;
       if (contentEl) {
-        contentEl.setAttribute("data-ambient", SCENE_AMBIENT[sceneId] || "salon");
+        const amb = SCENE_AMBIENT[sceneId] || "salon";
+        contentEl.setAttribute("data-ambient", amb);
+        if (typeof MLCS599Ambient !== "undefined" && MLCS599Ambient.crossfadeTo) {
+          MLCS599Ambient.crossfadeTo(amb);
+        }
       }
       if (!bg || !credit || !source) {
         setSceneSideRails(null);
@@ -190,10 +194,10 @@
           "<strong>Mediator:</strong> <strong>≥8</strong> salon · <strong>5–7</strong> zemstvo-style pilot vs. ministry · <strong>≤4</strong> censor."
       };
       return `<aside class="crisis-preview-card" id="crisisPreviewCard" role="region" aria-label="Likely winter outcomes before you roll">
-        <h3 class="crisis-preview-title">Crisis preview — before the die</h3>
+        <h3 class="crisis-preview-title">Crisis preview (before you roll)</h3>
         <p class="crisis-preview-lead">You will roll <strong>1d6 + ${bonus}</strong> (Order is ${O} → bonus ${bonus}). Possible totals this throw: <strong>${minT}</strong> through <strong>${maxT}</strong>.</p>
         <p class="crisis-preview-band">${bands[path] || bands.west}</p>
-        <p class="crisis-preview-misfit"><strong>Misfits:</strong> raw die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, can force <em>another path’s</em> scandal—contingency, not the parable you rehearsed.</p>
+        <p class="crisis-preview-misfit"><strong>Misfits:</strong> raw die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, can force <em>another path’s</em> scandal, contingency, not the parable you rehearsed.</p>
         <p class="crisis-preview-meters">Current meters: Order ${O} · Reform ${R} · People ${P} · spread ${spread}.</p>
       </aside>`;
     }
@@ -365,13 +369,13 @@
     }
 
     /**
-     * BACKLOG — priority order (user):
+     * BACKLOG; priority order (user):
      *
-     * (1) Narrative + teaching voice — synthesized pass (do together, in this order):
+     * (1) Narrative + teaching voice; synthesized pass (do together, in this order):
      *   (a) Foundational notes from vetted plot/theme companions (SparkNotes-caliber or equivalent) plus
      *       McNally & Tempest (Letter I), Arndt (Bronze Horseman), SOURCES.md.
      *   (b) Read alongside + scene glue: replace ornamental glosses with text-grounded lines (what the
-     *       passage does, who speaks, concrete link to the branch)—not filler connectives.
+     *       passage does, who speaks, concrete link to the branch), not filler connectives.
      *   (c) EPILOGUE_TWELVE: in-scene salon voice shipped; winter block = optional misfit lead-in,
      *       event-keyed winterEcho, path coda (west | slav | statist | med). Tune with Read pass (b).
      *
@@ -387,9 +391,9 @@
       west: {
         order: {
           title: "Ending: The Ranks of Civilization",
-          body: `The coals were ash before anyone called the winter finished. <strong>Andrei</strong> had the last steady voice: whatever had crossed the threshold—censor, water, rumor from the north—the version he would carry to well-born cousins was one. Calm files and legible ranks had to eat first; salons could not digest Europe on an empty stomach. <strong>Stepan</strong> turned a Chaadaev copy face-down and said that was the very “cloak” the letter mocked—stationery dignity without breath. <strong>Vera</strong> asked whether Pushkin’s Neva had ever waited on a minister’s signature. <strong>Father Dimitri</strong> scrubbed ink from his cuff and muttered for drowned rooms nobody on the Order side had named aloud.
+          body: `The coals were ash before anyone called the winter finished. <strong>Andrei</strong> had the last steady voice: whatever had crossed the threshold, censor, water, rumor from the north, the version he would carry to well-born cousins was one. Calm files and legible ranks had to eat first; salons could not digest Europe on an empty stomach. <strong>Stepan</strong> turned a Chaadaev copy face-down and said that was the very “cloak” the letter mocked, stationery dignity without breath. <strong>Vera</strong> asked whether Pushkin’s Neva had ever waited on a minister’s signature. <strong>Father Dimitri</strong> scrubbed ink from his cuff and muttered for drowned rooms nobody on the Order side had named aloud.
 
-Still, the story they would tell on the ride home was <strong>Andrei’s</strong>: Russia must survive its teachers before it becomes worthy of them—and if that puts Chaadaev’s shame in the police ledger instead of the schoolhouse, each of them would have to live with which ledger they trusted.`,
+Still, the story they would tell on the ride home was <strong>Andrei’s</strong>: Russia must survive its teachers before it becomes worthy of them, and if that puts Chaadaev’s shame in the police ledger instead of the schoolhouse, each of them would have to live with which ledger they trusted.`,
           specQ:
             "If stability is the prerequisite Chaadaev doubted, are you proving him wrong, or are you showing that his “cloak” fits the police better than the school?",
           bullets: [
@@ -400,9 +404,9 @@ Still, the story they would tell on the ride home was <strong>Andrei’s</strong
         },
         reform: {
           title: "Ending: The Syllabus and the Censor",
-          body: `<strong>Stepan</strong> refused to let the night die on talk of fate alone. He laid his palm on the dog-eared proofs they had risked to print and said the winter proved only what Chaadaev already knew: a nation’s “education” lives in law and mother tongue—and the Third Section still owned both doors. <strong>Andrei</strong> warned him not to mistake scraps of permission for a constitution. <strong>Father Dimitri</strong> said that if couriers had brought flood-echo from the north, then reform drafted in Petersburg had once again arrived sodden on someone else’s doorstep. <strong>Vera</strong> kept her counsel, but she did not put out the lamp.
+          body: `<strong>Stepan</strong> refused to let the night die on talk of fate alone. He laid his palm on the dog-eared proofs they had risked to print and said the winter proved only what Chaadaev already knew: a nation’s “education” lives in law and mother tongue, and the Third Section still owned both doors. <strong>Andrei</strong> warned him not to mistake scraps of permission for a constitution. <strong>Father Dimitri</strong> said that if couriers had brought flood-echo from the north, then reform drafted in Petersburg had once again arrived sodden on someone else’s doorstep. <strong>Vera</strong> kept her counsel, but she did not put out the lamp.
 
-They did not settle it. They agreed, sourly, to close the chapter on <strong>Stepan’s</strong> terms: the moral center of their year would be syllabi, petitions, and the war of ink—not bronze parades—while everyone in the room knew the censor’s light still burned in the next corridor.`,
+They did not settle it. They agreed, sourly, to close the chapter on <strong>Stepan’s</strong> terms: the moral center of their year would be syllabi, petitions, and the war of ink, not bronze parades, while everyone in the room knew the censor’s light still burned in the next corridor.`,
           specQ: "Can “universal history” be studied in rooms that the censor still owns?",
           bullets: [
             "Were Westernizers right that Russia had to risk instability to join “universal history,” or does Chaadaev exaggerate discontinuity?",
@@ -412,9 +416,9 @@ They did not settle it. They agreed, sourly, to close the chapter on <strong>Ste
         },
         people: {
           title: "Ending: Evgeny’s Europeans",
-          body: `<strong>Father Dimitri</strong> would not bless the parting until the room said “clerk” without flinching. Pushkin’s Yevgeny had haunted their autumn; now the priest made him present: if “Europe” was only statutes and salons, he said, Kolomna could starve in syllogisms. <strong>Vera</strong>—who had opened with French novels—quoted Letter I’s ladder from court down to the owned soul and asked where any syllabus touched it. <strong>Andrei</strong> called the sentiment beautiful and ungovernable. <strong>Stepan</strong>, wiping soot from the shutter, conceded that borrowed institutions mean nothing if flood beds never reach the ledger.
+          body: `<strong>Father Dimitri</strong> would not bless the parting until the room said “clerk” without flinching. Pushkin’s Yevgeny had haunted their autumn; now the priest made him present: if “Europe” was only statutes and salons, he said, Kolomna could starve in syllogisms. <strong>Vera</strong>, who had opened with French novels, quoted Letter I’s ladder from court down to the owned soul and asked where any syllabus touched it. <strong>Andrei</strong> called the sentiment beautiful and ungovernable. <strong>Stepan</strong>, wiping soot from the shutter, conceded that borrowed institutions mean nothing if flood beds never reach the ledger.
 
-They left with an uneasy pact: the winter they would retell weighted bodies before abstractions—Chaadaev’s mirror held against Pushkin’s pauper grave until someone’s horse changed.`,
+They left with an uneasy pact: the winter they would retell weighted bodies before abstractions, Chaadaev’s mirror held against Pushkin’s pauper grave until someone’s horse changed.`,
           specQ: "Who is “Europe” for if the syllabus never reaches Kolomna?",
           bullets: [
             "Can borrowed institutions become authentic if they improve ordinary lives when you weighted People at the close, or does Chaadaev demand cultural continuity that reform alone cannot supply?",
@@ -426,9 +430,9 @@ They left with an uneasy pact: the winter they would retell weighted bodies befo
       slav: {
         order: {
           title: "Ending: The Vertical Iconostasis",
-          body: `Lamplight caught the icons while <strong>Andrei</strong>—an unexpected ally for soil-talk—drew one long stroke: altar, throne, <em>narod</em>, no crack for scandal-mongers. The Slavophile voices warmed until <strong>Vera</strong> asked who spoke for the hamlet when the ministry borrowed the same words. Pages on schism and “miserable Byzantium” still lay open; nobody pretended they answered each other. <strong>Father Dimitri</strong> wondered whether Pushkin’s clerk could live inside a story told as spiritual deference—or whether he would always snag the silk like a burr.
+          body: `Lamplight caught the icons while <strong>Andrei</strong>, an unexpected ally for soil-talk, drew one long stroke: altar, throne, <em>narod</em>, no crack for scandal-mongers. The Slavophile voices warmed until <strong>Vera</strong> asked who spoke for the hamlet when the ministry borrowed the same words. Pages on schism and “miserable Byzantium” still lay open; nobody pretended they answered each other. <strong>Father Dimitri</strong> wondered whether Pushkin’s clerk could live inside a story told as spiritual deference, or whether he would always snag the silk like a burr.
 
-They shelved the doubt for carriage-oaths. Winter, in <strong>Andrei’s</strong> retelling, had shown Holy Russia and good order sharing one tale—whether the tale still had room for correction from below, the road would test.`,
+They shelved the doubt for carriage-oaths. Winter, in <strong>Andrei’s</strong> retelling, had shown Holy Russia and good order sharing one tale, whether the tale still had room for correction from below, the road would test.`,
           specQ: "When the state claims to speak for the soil, who is left to correct it from below?",
           bullets: [
             "When does <em>narod</em> language serve the village, and when does it ornament the ministry?",
@@ -438,9 +442,9 @@ They shelved the doubt for carriage-oaths. Winter, in <strong>Andrei’s</strong
         },
         reform: {
           title: "Ending: Parish Ink, Capital Light",
-          body: `<strong>Stepan</strong> surprised them: he took Aksakov’s vocabulary without surrendering ink. Parish schools, stewards the district could name, German verbs in Russian mouths—so long as no one waved a foreign constitution like a relic. <strong>Vera</strong> doubted “selective” stayed selective once Petersburg counted rubles. <strong>Andrei</strong> listened for treason, heard none, and allowed that perhaps “rights” could stay in Latin while silver stayed local. <strong>Father Dimitri</strong> asked when the hybrid hardened into orthodoxy Chaadaev would still peel off as costume.
+          body: `<strong>Stepan</strong> surprised them: he took Aksakov’s vocabulary without surrendering ink. Parish schools, stewards the district could name, German verbs in Russian mouths, so long as no one waved a foreign constitution like a relic. <strong>Vera</strong> doubted “selective” stayed selective once Petersburg counted rubles. <strong>Andrei</strong> listened for treason, heard none, and allowed that perhaps “rights” could stay in Latin while silver stayed local. <strong>Father Dimitri</strong> asked when the hybrid hardened into orthodoxy Chaadaev would still peel off as costume.
 
-No answer satisfied. They agreed only that their winter would end on <strong>Stepan’s</strong> picture—parish ink, capital light, argument left honest and unfinished.`,
+No answer satisfied. They agreed only that their winter would end on <strong>Stepan’s</strong> picture, parish ink, capital light, argument left honest and unfinished.`,
           specQ: "At what moment does “selective” borrowing become a new orthodoxy Chaadaev would still call hollow?",
           bullets: [
             "Trace parallels to parish schools and local elites. When is hybrid reform substantive vs. symbolic?",
@@ -450,9 +454,9 @@ No answer satisfied. They agreed only that their winter would end on <strong>Ste
         },
         people: {
           title: "Ending: The Soil and the Roof",
-          body: `<strong>Father Dimitri</strong> made <em>narod</em> a material argument, not embroidery. Clerks who shivered, peasants whose tithe fed someone else’s church silver—if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; throne-and-soil talk had not rehearsed Kolomna. <strong>Vera</strong> translated grief into lines a zemstvo dream might someday fund. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was less strange now.
+          body: `<strong>Father Dimitri</strong> made <em>narod</em> a material argument, not embroidery. Clerks who shivered, peasants whose tithe fed someone else’s church silver, if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; throne-and-soil talk had not rehearsed Kolomna. <strong>Vera</strong> translated grief into lines a zemstvo dream might someday fund. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was less strange now.
 
-Pushkin and the letter refused to let the abstract float where someone drowned. They closed on <strong>Father Dimitri’s</strong> frame: soil that mattered had to mean roofs the chronicles skipped—or their Slav year was only a prettier exile from Chaadaev’s shame.`,
+Pushkin and the letter refused to let the abstract float where someone drowned. They closed on <strong>Father Dimitri’s</strong> frame: soil that mattered had to mean roofs the chronicles skipped, or their Slav year was only a prettier exile from Chaadaev’s shame.`,
           specQ: "Does Slavophile language obligate policy for the capital’s clerk, or only for the imagined village?",
           bullets: [
             "Material life vs. idealized village: where would later populist readings place the clerk (without equating eras)?",
@@ -464,9 +468,9 @@ Pushkin and the letter refused to let the abstract float where someone drowned. 
       statist: {
         order: {
           title: "Ending: The File Outlives the Salon",
-          body: `The dossier had grown thick enough to shame the brazier. <strong>Andrei’s</strong> circle—statists by habit, never by crown—agreed that what survived winter was stamped, numbered, triplicate. Names fed to the Third Section sat in someone’s throat like stones; others shrugged and said continuity was its own civilization. <strong>Stepan</strong> looked ill; Reform starved faster without air than he liked to admit. <strong>Vera</strong> asked whether “who thinks for Russia?” had been answered a little too neatly by police ink. <strong>Father Dimitri</strong> whispered Evgeny’s name once, then let it vanish into protocol.
+          body: `The dossier had grown thick enough to shame the brazier. <strong>Andrei’s</strong> circle, statists by habit, never by crown, agreed that what survived winter was stamped, numbered, triplicate. Names fed to the Third Section sat in someone’s throat like stones; others shrugged and said continuity was its own civilization. <strong>Stepan</strong> looked ill; Reform starved faster without air than he liked to admit. <strong>Vera</strong> asked whether “who thinks for Russia?” had been answered a little too neatly by police ink. <strong>Father Dimitri</strong> whispered Evgeny’s name once, then let it vanish into protocol.
 
-Their public story: ranks held; the salon had been a case category; thought, for the moment, lived in margins the chief allowed. Chaadaev’s question waited inside the cover sheet—unread, not gone.`,
+Their public story: ranks held; the salon had been a case category; thought, for the moment, lived in margins the chief allowed. Chaadaev’s question waited inside the cover sheet, unread, not gone.`,
           specQ: "Is obedience to process a kind of civilization, or its costume while thought stays rented?",
           bullets: [
             "Police and file culture as modern statecraft. Does continuity equal legitimacy in the secondary readings you assign?",
@@ -476,9 +480,9 @@ Their public story: ranks held; the salon had been a case category; thought, for
         },
         reform: {
           title: "Ending: Commissioned Progress",
-          body: `Europe arrived as memoranda—<strong>Stepan’s</strong> bitter joke landed flat. Commissions, patron letters, reform only where chiefs allowed ribbon and triplicate: that was the harvest they chose to narrate. <strong>Andrei</strong> praised triage; <strong>Vera</strong> named friends who would sign nothing bold again. <strong>Father Dimitri</strong> asked whether mankind’s long “education” could happen only upstairs; his voice thinned when no one answered.
+          body: `Europe arrived as memoranda, <strong>Stepan’s</strong> bitter joke landed flat. Commissions, patron letters, reform only where chiefs allowed ribbon and triplicate: that was the harvest they chose to narrate. <strong>Andrei</strong> praised triage; <strong>Vera</strong> named friends who would sign nothing bold again. <strong>Father Dimitri</strong> asked whether mankind’s long “education” could happen only upstairs; his voice thinned when no one answered.
 
-Paperwork could mimic borrowing without depth—Letter I’s curse in fair copy. Still <strong>Stepan’s</strong> closing carried: Russia would change where margins allowed, dignity measured in folders, never faster than a corridor could stomach.`,
+Paperwork could mimic borrowing without depth, Letter I’s curse in fair copy. Still <strong>Stepan’s</strong> closing carried: Russia would change where margins allowed, dignity measured in folders, never faster than a corridor could stomach.`,
           specQ: "If reform lives in triplicate copies, does mankind’s “education” happen, or does paperwork replace it?",
           bullets: [
             "Walicki and others on mimicry from above: when does borrowed form thicken into substance?",
@@ -488,7 +492,7 @@ Paperwork could mimic borrowing without depth—Letter I’s curse in fair copy.
         },
         people: {
           title: "Ending: Relief Without Receipt",
-          body: `<strong>Father Dimitri</strong> framed mercy because rights-talk would have split them from their hosts. Flood-year letters, petitions for imperial relief, the throne as father who might soften—he spun winter as grace, not structure. <strong>Andrei</strong> exhaled; mercy read well in patron letters. <strong>Stepan</strong> said quietly that supplication saves no one the law forgets. <strong>Vera</strong> asked who the story rescued—the drowned clerk or only the portrait of a merciful center.
+          body: `<strong>Father Dimitri</strong> framed mercy because rights-talk would have split them from their hosts. Flood-year letters, petitions for imperial relief, the throne as father who might soften, he spun winter as grace, not structure. <strong>Andrei</strong> exhaled; mercy read well in patron letters. <strong>Stepan</strong> said quietly that supplication saves no one the law forgets. <strong>Vera</strong> asked who the story rescued, the drowned clerk or only the portrait of a merciful center.
 
 They left the question rustling like sealed paper. Their agreed tale: people had appeared as objects of grace this season; whether grace became justice, the file would not say.`,
           specQ: "When you beg the center for flood victims, who is saved: them, or the story that the throne is merciful?",
@@ -504,7 +508,7 @@ They left the question rustling like sealed paper. Their agreed tale: people had
           title: "Ending: The Minister’s Bridge",
           body: `<strong>Andrei</strong> likened their compromise to a bridge with one stone pier and one of rope: the ministry owned the stone; locals got rope and gratitude. Mediator hopes thinned but did not snap. <strong>Stepan</strong> argued rope could hold if traffic stayed light; <strong>Vera</strong> said traffic never stayed light. <strong>Father Dimitri</strong> prayed for engineers honest enough to weigh both ends in one breath. They had tried to fuse Chaadaev’s borrowed forms with soil-trust; winter had taught them sequencing under veto.
 
-The story <strong>Andrei</strong> set for the road: order first, local voice a concession—honest about power, cruel about equality, perhaps the only span that stood in mud season.`,
+The story <strong>Andrei</strong> set for the road: order first, local voice a concession, honest about power, cruel about equality, perhaps the only span that stood in mud season.`,
           specQ: "If one pier is stone and one is rope, is “compromise” just delayed collapse?",
           bullets: [
             "Imperial center vs. provinces: this scenario borrows zemstvo-era imagery for local pilots before those laws existed. Does scholarship on the real zemstvo period still sharpen discussion of the ministry–local clashes in play?",
@@ -514,9 +518,9 @@ The story <strong>Andrei</strong> set for the road: order first, local voice a c
         },
         reform: {
           title: "Ending: Borrowed Law, Local Accent",
-          body: `<strong>Stepan</strong> closed with law translated through provincial mouths—foreign on parchment, Russian in the schoolyard; neither pure import nor sealed autarchy. <strong>Father Dimitri</strong> liked the music; <strong>Vera</strong> asked how many accents a code could bear before chiefs called it chaos. <strong>Andrei</strong> wanted schedules; compromise’s enemy was always impatience. They remembered Letter I on inner progression and laughed without mirth.
+          body: `<strong>Stepan</strong> closed with law translated through provincial mouths, foreign on parchment, Russian in the schoolyard; neither pure import nor sealed autarchy. <strong>Father Dimitri</strong> liked the music; <strong>Vera</strong> asked how many accents a code could bear before chiefs called it chaos. <strong>Andrei</strong> wanted schedules; compromise’s enemy was always impatience. They remembered Letter I on inner progression and laughed without mirth.
 
-Their winter ended on <strong>Stepan’s</strong> bet: hybrid from the first line; borrowed until proven native by lives, not slogans—knowing the moment of proof might belong to whoever held the ink.`,
+Their winter ended on <strong>Stepan’s</strong> bet: hybrid from the first line; borrowed until proven native by lives, not slogans, knowing the moment of proof might belong to whoever held the ink.`,
           specQ: "How long must a law be “borrowed” before it becomes native, and who declares the moment?",
           bullets: [
             "Hybrid institutions: when does narrative call a statute Russian rather than European?",
@@ -526,9 +530,9 @@ Their winter ended on <strong>Stepan’s</strong> bet: hybrid from the first lin
         },
         people: {
           title: "Ending: The Ledger They Share",
-          body: `<strong>Father Dimitri</strong> made the ledgers kiss—one line for ministry wheat, one for parish rye, a total a hungry eye could read. <strong>Stepan</strong> called it bookkeeping mysticism; <strong>Andrei</strong> called it survival. <strong>Vera</strong> said Chaadaev had named absence, not overlap; Pushkin had named bodies. They agreed to tell winter as material synthesis: not only a rhetorical middle, but budgets clerks and clerics could audit together.
+          body: `<strong>Father Dimitri</strong> made the ledgers kiss, one line for ministry wheat, one for parish rye, a total a hungry eye could read. <strong>Stepan</strong> called it bookkeeping mysticism; <strong>Andrei</strong> called it survival. <strong>Vera</strong> said Chaadaev had named absence, not overlap; Pushkin had named bodies. They agreed to tell winter as material synthesis: not only a rhetorical middle, but budgets clerks and clerics could audit together.
 
-Whether one ledger always became footnote to the other, none would swear; the closing chose hope over schema—the walk home carried two books, one satchel, one argument still breathing.`,
+Whether one ledger always became footnote to the other, none would swear; the closing chose hope over schema, the walk home carried two books, one satchel, one argument still breathing.`,
           specQ:
             "Two ledgers, one countryside: must one always become the footnote, or is overlap itself the synthesis Chaadaev could not name?",
           bullets: [
@@ -646,7 +650,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.stats.order = clamp(state.stats.order + 2);
       state.stats.reform = clamp(state.stats.reform - 2);
       state.achievements.add("courier_intrusion");
-      state.ephemeralScenePrefix = `<aside class="random-beat-courier" role="note"><strong>Winter mail (random event):</strong> A misrouted Ministry fair copy lands on your pile—half a decree on provincial schools, coffee-stained, dated last week. Nothing binding, but it costs an evening proving you never saw it. <em>Applied:</em> Order +2, Reform −2.</aside>`;
+      state.ephemeralScenePrefix = `<aside class="random-beat-courier" role="note"><strong>Winter mail (random event):</strong> A misrouted Ministry fair copy lands on your pile, half a decree on provincial schools, coffee-stained, dated last week. Nothing binding, but it costs an evening proving you never saw it. <em>Applied:</em> Order +2, Reform −2.</aside>`;
       pushToast(ACH_TOAST.courier_intrusion);
     }
 
@@ -702,8 +706,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         state.steps += 1;
         pushToast(
           choice.sessionCoop
-            ? "Co-op gating on—use the three seats and reveal card on choice beats."
-            : "Solo mode—tap the choice buttons directly."
+            ? "Co-op gating is on. Use the three seats and the reveal card on choice beats."
+            : "Solo mode: tap the choice buttons directly."
         );
         statBars();
         flushNewAchievementsToasts();
@@ -899,43 +903,43 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const event = state.lastEvent || "event_censor";
       const winterEcho = {
         event_salon:
-          "Outside, the wax-and-tea smell of the governor’s hall still clung to someone’s cuff—one sanctioned night when letter and poem had shared a candle, and no one could quite file it away. <strong>Vera</strong> said the breakthrough had felt like air; <strong>Andrei</strong> said air that sweet usually meant someone upstairs had opened a vent on purpose.",
+          "Outside, the wax-and-tea smell of the governor’s hall still clung to someone’s cuff, one sanctioned night when letter and poem had shared a candle, and no one could quite file it away. <strong>Vera</strong> said the breakthrough had felt like air; <strong>Andrei</strong> said air that sweet usually meant someone upstairs had opened a vent on purpose.",
         event_flood_echo:
           "North-country letters had soaked every argument; cold water, they muttered, does not ask which program you defended before it breaks the sill. <strong>Father Dimitri</strong> crossed himself for drowned rooms named only in postscripts; <strong>Stepan</strong> swore the Neva had drafted their metaphors without asking.",
         event_censor:
           "Seals and missing pages sat in the middle of the table like a fifth guest nobody had invited. <strong>Stepan</strong> could still taste ash from proofs pulled mid-phrase; <strong>Andrei</strong> argued continuity required some pages to stay blank, then hated himself a little for saying it aloud.",
         event_rural_gentry:
-          "Provincial obstinacy still rattled in <strong>Stepan’s</strong> throat—the ministry’s neat map had torn on a gentry nail. <strong>Vera</strong> translated the resistance into rents and tutors; <strong>Father Dimitri</strong> wondered aloud whose icon corner the decree had skipped.",
+          "Provincial obstinacy still rattled in <strong>Stepan’s</strong> throat, the ministry’s neat map had torn on a gentry nail. <strong>Vera</strong> translated the resistance into rents and tutors; <strong>Father Dimitri</strong> wondered aloud whose icon corner the decree had skipped.",
         event_zemstvo_clash:
           "The struck pilot fund left a bruise no manifesto could paint over; trust and paper had divorced in daylight. <strong>Andrei</strong> called it triage; <strong>Stepan</strong> called it a lesson in which ledger ate the other when budgets met mercy."
       };
       const pathWinterCoda = {
         west:
-          "From the Westernizing bench, Europe still sounded like verdict as much as model—winter had not let them file that habit away.",
+          "From the Westernizing bench, Europe still sounded like verdict as much as model, winter had not let them file that habit away.",
         slav:
           "The Slavophile corner kept testing whether soil-talk could still sound humble once it had survived a ministry winter.",
         statist:
           "The filing instinct in the room had won its morning; whether mercy lived in the margin was a question they shelved with the ink.",
         med:
-          "Mediator habits died hard—they still heard two ledgers arguing under one roof while the horses were called."
+          "Mediator habits died hard, they still heard two ledgers arguing under one roof while the horses were called."
       };
       let winterBlock = "";
       if (state.crisisMisfit) {
         winterBlock +=
-          "The room had bet on a different kind of winter; the seal on the courier’s packet did not match the rehearsal—contingency had walked in wearing another track’s coat.\n\n";
+          "The room had bet on a different kind of winter; the seal on the courier’s packet did not match the rehearsal, contingency had walked in wearing another track’s coat.\n\n";
       }
       winterBlock +=
-        winterEcho[event] || "Winter had left its own punctuation; no two of them quoted it the same way—and each swore the other had misheard the postscript.";
+        winterEcho[event] || "Winter had left its own punctuation; no two of them quoted it the same way, and each swore the other had misheard the postscript.";
       winterBlock += "\n\n" + (pathWinterCoda[path] || pathWinterCoda.west);
       body += "\n\n" + winterBlock;
 
       if (state.evgenyChorus) {
-        body += `\n\n<strong>Vera</strong> had pressed them to stop treating letter, poem, and clerk as separate files; the circle let her have the last inch of ink—one moral ledger, one winter, no more polite partitions.`;
+        body += `\n\n<strong>Vera</strong> had pressed them to stop treating letter, poem, and clerk as separate files; the circle let her have the last inch of ink, one moral ledger, one winter, no more polite partitions.`;
       }
 
       let secretHtml = "";
       if (state.inventory.has("chaadaev_letter") && state.inventory.has("pushkin_bronze") && P >= 60) {
-        secretHtml = `<div class="secret-insight"><strong>Rare alignment:</strong> Chaadaev and Pushkin both travel in the satchel, and the room has refused to let People stay an afterthought. If “civilization” never touches the clerk’s roof, the bronze rider is threat, not partner—and someone said so aloud before the lamps went out.</div>`;
+        secretHtml = `<div class="secret-insight"><strong>Rare alignment:</strong> Chaadaev and Pushkin both travel in the satchel, and the room has refused to let People stay an afterthought. If “civilization” never touches the clerk’s roof, the bronze rider is threat, not partner, and someone said so aloud before the lamps went out.</div>`;
       }
 
       const runTitle = computeRunTitle(endingKey, path, O, R, P);
@@ -979,7 +983,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (state.achievements.has("evgeny_framing")) ach.push("Evgeny’s chorus framing");
       if (state.achievements.has("evgeny_merged_insight")) ach.push("Letter + poem + strong People (60+)");
       if (state.achievements.has("courier_intrusion")) ach.push("Misrouted ministry packet (random beat)");
-      if (state.achievements.has("winter_misfit_story")) ach.push("Winter misfit — wrong rumor");
+      if (state.achievements.has("winter_misfit_story")) ach.push("Winter misfit (wrong rumor)");
       if (state.achievements.has("salon_wide_split")) ach.push("High realm spread (50+)");
       if (state.achievements.has("aligned_benches")) ach.push("Tight realm spread (≤12)");
       if (state.achievements.has("triple_satchel")) ach.push("All three library voices (Chaadaev, Pushkin, Aksakov)");
@@ -1161,7 +1165,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           step: "1",
           realm: "Order",
           title: "Player 1 · Order",
-          hint: "Speak for ranks, continuity, and ministry logic—not as the sovereign, but for the vertical everyone leans on.",
+          hint: "Speak for ranks, continuity, and ministry logic, not as the sovereign, but for the vertical everyone leans on.",
           mod: "coop-seat--order"
         },
         {
@@ -1189,7 +1193,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         h += `<p class="coop-seat-hint">${r.hint}</p>`;
         h += `<label class="coop-seat-vote-label" for="${r.id}">Lock your vote</label>`;
         h += `<select id="${r.id}" class="coop-select" autocomplete="off">`;
-        h += "<option value=\"\">— choose —</option>";
+        h += "<option value=\"\">(choose)</option>";
         list.forEach((ch, i) => {
           const t = stripChoiceLabel(ch.text).slice(0, 56);
           h += `<option value="${i}">${i + 1}. ${t}${t.length >= 56 ? "…" : ""}</option>`;
@@ -1277,7 +1281,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const ped = document.createElement("details");
         ped.className = "choice-pedagogy";
         const track = state.pathId ? `<strong>${state.pathId}</strong> (argument track locked)` : "<strong>not locked</strong> until you take a forking choice";
-        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move—institutional costs, not a hidden “correct” score. Track: ${track}. Each choice with numbers has a <strong>tooltip</strong> and a screen-reader line with the same shift. Open <strong>Terms</strong> in the header for what each meter measures.</p>`;
+        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move, institutional costs, not a hidden “correct” score. Track: ${track}. Each choice with numbers has a <strong>tooltip</strong> and a screen-reader line with the same shift. Open <strong>Terms</strong> in the header for what each meter measures.</p>`;
         choicesEl.appendChild(ped);
       }
       state._coopChoicesSnapshot = choicesToRender;
@@ -1297,7 +1301,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       wrap.setAttribute("role", "region");
       wrap.setAttribute("aria-label", "Shared realm budget before final framing");
       wrap.innerHTML = `<h3 class="realm-budget-title">Co-op beat: spend winter attention</h3>
-<p class="realm-budget-lead">${winterLine}With <strong>co-op tools on</strong>, place those points across Order, Reform, and People before choosing how to <em>frame</em> the story. Each bar stays capped at 100. Negotiate, spend the full pool, then commit—the three framing choices appear next.</p>
+<p class="realm-budget-lead">${winterLine}With <strong>co-op tools on</strong>, place those points across Order, Reform, and People before choosing how to <em>frame</em> the story. Each bar stays capped at 100. Negotiate, spend the full pool, then commit, the three framing choices appear next.</p>
 <p class="realm-budget-pool-live" role="status" aria-live="polite"></p>
 <div class="realm-budget-rows">
 <div class="realm-budget-row" data-key="order"><span class="realm-budget-label order">Order</span><span class="realm-budget-combined"></span><div class="realm-budget-btns"><button type="button" class="ghost realm-budget-minus" aria-label="Remove one budget point from Order">−</button><button type="button" class="ghost realm-budget-plus" aria-label="Add one budget point to Order">+</button></div></div>
@@ -1338,7 +1342,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
             return;
           }
           if (used < poolMax && !canAddAnywhere()) {
-            pushToast("Bars are at or near 100—committing the budget you could place.");
+            pushToast("Bars are at or near 100, committing the budget you could place.");
           }
           applyEffects({ order: state.realmBudgetDraft.order, reform: state.realmBudgetDraft.reform, people: state.realmBudgetDraft.people });
           state.realmBudgetCommittedResolveEndings = true;
@@ -1447,8 +1451,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           const snip = String(p.body).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 140);
           return `<div class="debrief-compare-card"><h4>${lab}</h4><p><strong>${p.title}</strong></p><p class="debrief-snippet">${snip}…</p></div>`;
         };
-        html += `<details class="debrief-lab"><summary>Debrief lab: compare framings (read-only)</summary><p class="debrief-lab-lead">Same path (<strong>${path}</strong>), three closing lenses. Your run used one; the others are snippets only—no stat change.</p><div class="debrief-compare-grid">${cmp("order", "Order lens")}${cmp("reform", "Reform lens")}${cmp("people", "People lens")}</div><button type="button" class="ghost" id="debriefPeekBtn">Branch peek: another path’s winter flavor (read-only)</button></details>`;
-        html += `<details class="realm-debrief-lab"><summary>Debrief toy: coupled realm sliders (does not change saved scores)</summary><p class="realm-debrief-lead">Total fixed at 150. Drag one bar; the others rebalance—useful for arguing scarcity after the run.</p><div class="realm-coupled-row"><label>Order <span id="debValO">50</span><input type="range" id="debRngO" min="0" max="150" value="50" /></label></div><div class="realm-coupled-row"><label>Reform <span id="debValR">50</span><input type="range" id="debRngR" min="0" max="150" value="50" /></label></div><div class="realm-coupled-row"><label>People <span id="debValP">50</span><input type="range" id="debRngP" min="0" max="150" value="50" /></label></div></details>`;
+        html += `<details class="debrief-lab"><summary>Debrief lab: compare framings (read-only)</summary><p class="debrief-lab-lead">Same path (<strong>${path}</strong>), three closing lenses. Your run used one; the others are snippets only, no stat change.</p><div class="debrief-compare-grid">${cmp("order", "Order lens")}${cmp("reform", "Reform lens")}${cmp("people", "People lens")}</div><button type="button" class="ghost" id="debriefPeekBtn">Branch peek: another path’s winter flavor (read-only)</button></details>`;
+        html += `<details class="realm-debrief-lab"><summary>Debrief toy: coupled realm sliders (does not change saved scores)</summary><p class="realm-debrief-lead">Total fixed at 150. Drag one bar; the others rebalance, useful for arguing scarcity after the run.</p><div class="realm-coupled-row"><label>Order <span id="debValO">50</span><input type="range" id="debRngO" min="0" max="150" value="50" /></label></div><div class="realm-coupled-row"><label>Reform <span id="debValR">50</span><input type="range" id="debRngR" min="0" max="150" value="50" /></label></div><div class="realm-coupled-row"><label>People <span id="debValP">50</span><input type="range" id="debRngP" min="0" max="150" value="50" /></label></div></details>`;
         endingBlock.innerHTML = html;
         const copyBtn = document.getElementById("copySummaryBtn");
         const toast = document.getElementById("copyToast");
@@ -1475,7 +1479,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           slav:
             "<strong>Slavophile track:</strong> mid totals stress <strong>provincial gentry</strong> resisting ministry school maps; high totals can still open a salon; soil and parish rhetoric color the rumor.",
           statist:
-            "<strong>Statist track:</strong> there is no separate mid-band in code—high totals frame <strong>flood logistics</strong>; lower totals fold into <strong>censor</strong> pressure.",
+            "<strong>Statist track:</strong> there is no separate mid-band in code, high totals frame <strong>flood logistics</strong>; lower totals fold into <strong>censor</strong> pressure.",
           med:
             "<strong>Mediator track:</strong> mid totals trigger <strong>zemstvo-style</strong> pilot funds vs. ministry veto; high totals still allow a salon night; low totals mean censor."
         };
@@ -1483,7 +1487,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           peekBtn.addEventListener("click", () => {
             const cur = state.pathId || "west";
             const alt = ["west", "slav", "statist", "med"].find((p) => p !== cur) || "west";
-            peekBody.innerHTML = `<p><strong>Branch peek</strong> — your run: <strong>${cur}</strong>. Showing <strong>${alt}</strong> winter logic (read-only):</p><p>${PEEK_TEXT[alt]}</p>`;
+            peekBody.innerHTML = `<p><strong>Branch peek:</strong> your run is <strong>${cur}</strong>. Below is <strong>${alt}</strong> winter logic (read-only).</p><p>${PEEK_TEXT[alt]}</p>`;
             if (typeof peekDlg.showModal === "function") peekDlg.showModal();
           });
         }
@@ -1679,7 +1683,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (coopTimerInterval) clearInterval(coopTimerInterval);
       coopTimerInterval = null;
       const disp = document.getElementById("coopTimerDisplay");
-      if (disp) disp.textContent = "—";
+      if (disp) disp.textContent = "-";
       const cb = document.getElementById("coopToolsEnable");
       if (cb) cb.checked = readCoopToolsPrefEnabled();
       state.coopToolsEnabled = !!(cb && cb.checked);
@@ -1767,7 +1771,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           disp.textContent = `${left}s`;
           coopTimerInterval = setInterval(() => {
             left -= 1;
-            disp.textContent = left > 0 ? `${left}s` : "—";
+            disp.textContent = left > 0 ? `${left}s` : "-";
             if (left <= 0) {
               clearInterval(coopTimerInterval);
               coopTimerInterval = null;
@@ -1779,7 +1783,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         stop.addEventListener("click", () => {
           if (coopTimerInterval) clearInterval(coopTimerInterval);
           coopTimerInterval = null;
-          disp.textContent = "—";
+          disp.textContent = "-";
         });
       }
       if (reveal) {
@@ -1825,7 +1829,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         state.current = q;
         state.history = [];
         state.steps = 0;
-        pushToast(`Deep link: scene “${q}” — default meters; not a full playthrough path.`);
+        pushToast(`Deep link: scene “${q}” with default meters; not a full playthrough path.`);
       } catch (e) {}
     })();
 

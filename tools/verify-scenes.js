@@ -140,7 +140,7 @@ function main() {
   }
 
   console.log(
-    `verify-scenes: OK — ${sceneKeys.size} scenes, ${referenced.size} referenced from choices, RESOLVE_PATH_LEAD keys present.`
+    `verify-scenes: OK; ${sceneKeys.size} scenes, ${referenced.size} referenced from choices, RESOLVE_PATH_LEAD keys present.`
   );
 }
 

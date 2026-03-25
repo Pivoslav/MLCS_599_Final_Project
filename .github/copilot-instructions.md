@@ -1,4 +1,4 @@
-# Copilot context — Russia at the Crossroads (MLCS 599)
+# Copilot context: Russia at the Crossroads (MLCS 599)
 
 Treat this file as the **canonical briefing** for this repository. Prefer it over generic CYOA or React patterns.
 
@@ -20,24 +20,24 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 
 ## Non-negotiables (game logic & copy)
 
-- **Realm meters:** `order`, `reform`, `people` — integers **0–100**, shown in UI as **Order / Reform / People** (exact words).
+- **Realm meters:** `order`, `reform`, `people`; integers **0–100**, shown in UI as **Order / Reform / People** (exact words).
 - **Path IDs:** `west` | `slav` | `statist` | `med` (Westernizing / Slavophile / statist / mediator). Do not rename casually; `cyoa-structure-map.html` and saves depend on them.
 - **Primary text:** Do **not** paste full copyrighted editions into the repo. Citations and edition pointers live in **`SOURCES.md`**. Paraphrase or short fair-use quotations only in narrative.
 - **`prefers-reduced-motion`:** Any new animation or transition must respect reduced motion (pattern exists in **`css/game.css`**).
 
 ## Repository layout (post-refactor)
 
-- **`index.html`** — Shell + glossary markup; links **`css/game.css`**, **`js/game-config.js`**, **`js/game-scenes.js`**, **`js/game-app.js`** (order matters).
-- **`js/game-scenes.js`** — `scenes` object: narrative nodes, choices, effects. Primary **content** surface for story edits.
-- **`js/game-app.js`** — State, rendering, crisis / epilogue logic (`EPILOGUE_TWELVE`, `pickCrisisEvent`, etc.). Primary **mechanics** surface.
-- **`js/game-config.js`** — Scene backgrounds (`SCENE_IMAGES`), optional title-under portraits (`SCENE_DIALOGUE_PORTRAITS`), ambient keys, inventory labels, static tables.
-- **`canvas-interactive-demos/`** — **Vanilla** prototypes for UI/mechanics **before** merging into the game; no framework; no CDN. Hub: `canvas-interactive-demos/index.html`. Backlog: **`canvas-interactive-demos/PENDING-TASKS.md`**.
-- **`HOSTING-AND-INTEGRATION.md`** — Canvas, GitHub Pages, optional iframe, merge roadmap.
-- **`DEMOS-AND-LLM-REPORT.md`** — Full demo/tool inventory, needs vs costs, design leverage, handoff block for agents.
-- **`GAMEPLAN.md`** — Phased delivery (Canvas + Pages + optional LLM-assisted character art pipeline).
-- **`BACKLOG.md`** — Ideas and overhauls not on the execution queue.
-- **`teaching-notes.html`** — Instructor/TA page (embed fragment, `?scene=`, links to queues).
-- **`co-op-cyoa-mechanics-report.html`** — Design report (effort vs payoff, co-op patterns).
+- **`index.html`:** shell + glossary markup; links **`css/game.css`**, **`js/game-config.js`**, **`js/game-scenes.js`**, **`js/game-app.js`** (order matters).
+- **`js/game-scenes.js`:** `scenes` object: narrative nodes, choices, effects. Primary **content** surface for story edits.
+- **`js/game-app.js`:** state, rendering, crisis / epilogue logic (`EPILOGUE_TWELVE`, `pickCrisisEvent`, etc.). Primary **mechanics** surface.
+- **`js/game-config.js`:** scene backgrounds (`SCENE_IMAGES`), optional title-under portraits (`SCENE_DIALOGUE_PORTRAITS`), ambient keys, inventory labels, static tables.
+- **`canvas-interactive-demos/`:** **vanilla** prototypes for UI/mechanics **before** merging into the game; no framework; no CDN. Hub: `canvas-interactive-demos/index.html`. Backlog: **`canvas-interactive-demos/PENDING-TASKS.md`**.
+- **`HOSTING-AND-INTEGRATION.md`:** Canvas, GitHub Pages, optional iframe, merge roadmap.
+- **`DEMOS-AND-LLM-REPORT.md`:** full demo/tool inventory, needs vs costs, design leverage, handoff block for agents.
+- **`GAMEPLAN.md`:** phased delivery (Canvas + Pages + optional LLM-assisted character art pipeline).
+- **`BACKLOG.md`:** ideas and overhauls not on the execution queue.
+- **`teaching-notes.html`:** instructor/TA page (embed fragment, `?scene=`, links to queues).
+- **`co-op-cyoa-mechanics-report.html`:** design report (effort vs payoff, co-op patterns).
 
 ## Implementation rules
 
