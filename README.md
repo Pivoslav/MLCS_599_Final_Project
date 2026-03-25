@@ -47,7 +47,7 @@ The **sorting** scene before the final framing choice prepends a short recap of 
 
 One shared screen. **Three fixed roles** align with the game’s meters. Before **every** choice, each player speaks once from their lens. The group decides which option to take (consensus or majority: your call).
 
-**In the UI:** enable **Co-op tools** in the sidebar for **gating**, a **timer**, **reveal / clear summary**, **stance**, and **Apply winning choice**. While gating is on, **three seat cards** (Order → Reform → People) appear **above the choice buttons** in the story column—each player speaks in turn, then locks a vote there so every voice is visible next to the options the group is debating. On **Sorting the Outcome** (`resolve_endings`), co-op groups also **spend a shared 30-point budget** across the three meters before the final framing choices unlock (solo play or co-op off skips this step).
+**In the UI:** enable **Co-op gating** in the **story column** (card above the seats) for the **timer**; **three seat cards** (Order → Reform → People) sit under that; **Reveal votes**, **stance**, and **Apply winning choice** sit in a second card **directly above the choice buttons** so the group does not reach into the sidebar. On **Sorting the Outcome** (`resolve_endings`), co-op groups also **spend a shared 30-point budget** across the three meters before the final framing choices unlock (solo play or co-op off skips this step).
 
 | Player | Role | Argue from… |
 |--------|------|----------------|
@@ -86,7 +86,7 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 ## In-game teaching tools (game bundle)
 
 - **Terms** (footer): glossary modal for *Teleskop*, Third Section, *sobornost*, *narod*, Neva flood, zemstvo staging, meters.
-- **3-player co-op:** role card in the sidebar plus, when gating is on, **three seat cards above the choices** (speak order + vote per player).
+- **3-player co-op:** role reference in the sidebar; **gating, timer, seats, reveal, and Apply** live in the **story column** next to the options.
 - **Read alongside:** collapsible anchors on (almost) every story scene; after each short quotation, a one-line **gloss** (`.read-gloss` in the panel) names **who and what** (Chaadaev, Pushkin, Stepan, the meters, the next buttons) so players are not left guessing. Glosses use explicit connectives (*that*, *whether*, *while*, and the like). Section cues (prologue, Part One, Part Two), not line numbers. **Epilogues** are in-scene (the four friends close the winter in voice); **session title** above the body still signals which track and framing the run used.
 - **Historical staging:** notes on counterfactual compression (e.g. zemstvo language).
 - **Before you roll:** path recap and stat context on winter 1837 crisis screens.

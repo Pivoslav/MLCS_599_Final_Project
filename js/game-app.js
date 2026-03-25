@@ -935,16 +935,18 @@ Whether one ledger always became footnote to the other, none would swear; the cl
 
     function refreshCoopBallotUI() {
       const mount = document.getElementById("coopBallotMount");
-      const body = document.getElementById("coopToolsBody");
+      const discuss = document.getElementById("coopToolsDiscuss");
+      const actionBar = document.getElementById("coopToolsActionBar");
       const cb = document.getElementById("coopToolsEnable");
       const sumEl = document.getElementById("coopBallotSummary");
       const stance = document.getElementById("coopStanceOk");
       const applyBtn = document.getElementById("coopApplyMajority");
-      if (!mount || !body) return;
+      if (!mount || !discuss || !actionBar) return;
       const enabled = !!(cb && cb.checked);
       state.coopToolsEnabled = enabled;
-      body.hidden = !enabled;
+      discuss.hidden = !enabled;
       if (!enabled) {
+        actionBar.hidden = true;
         mount.innerHTML = "";
         setCoopBallotWrapVisible(false);
         if (sumEl) sumEl.textContent = "";
@@ -952,11 +954,13 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       }
       const list = state._coopChoicesSnapshot || [];
       if (!list.length) {
+        actionBar.hidden = true;
         mount.innerHTML = "";
         setCoopBallotWrapVisible(false);
         if (sumEl) sumEl.textContent = "";
         return;
       }
+      actionBar.hidden = false;
       setCoopBallotWrapVisible(true);
       const roles = [
         {
@@ -1057,7 +1061,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           : `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}</span>`;
         button.addEventListener("click", () => {
           if (state.coopToolsEnabled) {
-            pushToast("Co-op gating on: each seat votes above, then sidebar → stance → Apply winning choice.");
+            pushToast("Co-op gating on: each seat votes above the buttons, then Reveal → commit → Apply winning choice.");
             return;
           }
           commitChoice(choice);

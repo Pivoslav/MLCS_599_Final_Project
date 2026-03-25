@@ -1316,17 +1316,37 @@
       }
     }
 
-    .coop-tools-panel {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    /* Co-op controls live in the story column (beside seats + choices), not the sidebar. */
+    .coop-tools-panel--story {
+      margin: 0 0 1rem;
+      max-width: min(88ch, 100%);
+      padding: 1rem 1.1rem 1.1rem;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--line) 88%, var(--dynamic-accent) 12%);
+      background: linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--card-muted) 92%, #fff) 0%,
+        var(--card) 55%
+      );
       font-size: clamp(0.78rem, 0.74rem + 0.12vw, 0.86rem);
+      box-shadow: 0 4px 22px rgba(28, 40, 62, 0.06);
+    }
+
+    .coop-story-tools-heading {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1rem, 0.94rem + 0.18vw, 1.1rem);
+      color: var(--dynamic-accent);
+      letter-spacing: 0.02em;
     }
 
     .coop-tools-lead {
       margin: 0.4rem 0 0.6rem;
       color: #556077;
       line-height: 1.45;
+    }
+
+    .coop-tools-panel--story .coop-tools-lead {
+      margin-top: 0;
     }
 
     .coop-enable-row {
@@ -1336,6 +1356,65 @@
       cursor: pointer;
       font-weight: 600;
       margin-bottom: 8px;
+    }
+
+    .coop-enable-row--prominent {
+      align-items: center;
+      min-height: 48px;
+      padding: 10px 12px;
+      margin: 10px 0 0;
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--card-muted) 78%, transparent);
+      border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+    }
+
+    .coop-enable-row--prominent input[type="checkbox"] {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      margin: 0;
+      accent-color: var(--dynamic-accent);
+    }
+
+    .coop-tools-discuss {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed color-mix(in srgb, var(--line) 65%, transparent);
+    }
+
+    .coop-tools-discuss[hidden] {
+      display: none !important;
+    }
+
+    .coop-tools-actions {
+      margin: 0 0 1rem;
+      max-width: min(88ch, 100%);
+      padding: 1rem 1.1rem 1.15rem;
+      border-radius: 12px;
+      border: 2px solid color-mix(in srgb, var(--dynamic-accent) 32%, var(--line));
+      background: color-mix(in srgb, var(--card) 92%, var(--dynamic-accent) 5%);
+      box-shadow: 0 4px 20px rgba(28, 40, 62, 0.08);
+    }
+
+    .coop-tools-actions[hidden] {
+      display: none !important;
+    }
+
+    .coop-tools-actions .coop-actions-row {
+      gap: 10px;
+    }
+
+    .coop-tools-actions .coop-actions-row .ghost {
+      min-height: 44px;
+      padding: 10px 16px;
+    }
+
+    .coop-tools-actions #coopApplyMajority {
+      width: 100%;
+      margin-top: 8px;
+      min-height: 46px;
+      padding: 12px 16px;
+      font-size: clamp(0.95rem, 0.9rem + 0.12vw, 1.02rem);
     }
 
     .coop-timer-row {
@@ -1524,11 +1603,6 @@
       gap: 8px;
       margin: 10px 0;
       cursor: pointer;
-    }
-
-    #coopApplyMajority {
-      width: 100%;
-      margin-top: 6px;
     }
 
     .choice-pedagogy {
