@@ -611,3 +611,37 @@
       statist: `You have been arguing <strong>for</strong> the throne’s logic, not <em>as</em> the autocrat. Your circle is gentry, clerks, officers who defend unity, legible ranks, and the containment of dangerous print. You draft memoranda, cultivate patrons in ministries, self-censor, or urge superiors to act. The <strong>sovereign and the ministers</strong> still hold the pen that signs decrees; you only supply the climate in which they move. Someone remembers Chaadaev’s <strong>cloak of civilization</strong>. Your camp prefers order in half-modern garb to another hollow leap.`,
       med: `You have been arguing the mediator’s wager: borrow European law and technique, but root them in local councils, schools, and provincial trust: neither pure imitation nor proud isolation. (When the text says “zemstvo-style,” that names a <em>later</em> institution used here as shorthand; see Historical staging on any mediator beat.) Chaadaev imagined Russia between East and West, meant to fuse imagination and reason; he concluded Providence had “left us completely on our own.” The mediator track is the game’s name for trying to finish that unfinished synthesis.`
     };
+
+    /**
+     * Epilogue “what this run was about”: path-level narrative (society/politics), not a scene checklist.
+     * Shown above the twelve endings; keyed by <code>state.pathId</code>.
+     */
+    const RUN_RECAP_PATH_NARRATIVE = {
+      west: `<p>Your salon walked the <strong>Westernizing</strong> wager. You treated Europe less as a costume than as a syllabus: law, print, schools, the hope that Russia might join what Chaadaev called universal history without pretending it had already paid every tuition fee.</p><p>In the politics of Nicholas’s decade, that stance buys enemies in the Third Section and impatience in drawing rooms. The autocracy wants borrowed manners it can stage; reformers want debate that can survive morning arrests. Your track keeps asking whether institutions redeem Chaadaev’s shame about imitation, or only rename it.</p><p>Pushkin’s Petersburg is the reproach in the corner: granite on the embankment, Evgeny at the waterline. A Westernizer winter is always deciding whether “progress” names a façade the state will fund or a life clerks can actually afford.</p>`,
+      slav: `<p>Your circle pressed the <strong>Slavophile</strong> counter-theme: <em>narod</em>, soil, parish voice, and a suspicion of rights-talk that sounds like foreign uniforms. You did not necessarily dismiss Chaadaev; you often argued his wound while refusing his pharmacy, or you braided both.</p><p>For Russian politics this is a fight over who may speak for the village and the altar once the ministry learns the same words. Local trust becomes an asset and a mask: it can shelter ordinary rhythm, or decorate a dispatch that still flows from Petersburg.</p><p>Aksakov’s shadow in your satchel is a reminder that “Russian spirit” is not automatically innocent of power. The same autumn still has to answer Pushkin’s clerk: does soil-talk ever reach Kolomna, or only the linden at the manor gate?</p>`,
+      statist: `<p>You played gentry and clerks who serve the <strong>vertical</strong> without holding the scepter: memoranda, patrons, files, the Third Section’s vocabulary always at the edge of hearing. Chaadaev’s letter becomes case material; Pushkin’s statue becomes majesty you file before you pity.</p><p>The political meaning is blunt. Stability trades air for ink; thought lives where chiefs allow margins. Flood years become logistics; scandals become schedules. The society you model is legible to ministers first, and only sometimes to conscience.</p><p>Your winter tests whether Chaadaev’s “cloak of civilization” fits the police office better than the classroom, and whether continuity without debate is still civilization or only its uniform.</p>`,
+      med: `<p>Your path refused the clean duel between wholesale import and proud isolation. You chased <strong>hybrid</strong> schools, hybrid ledgers, capital technique with provincial accents, the bet that law can sound Russian in the yard while foreign words still sit on the page.</p><p>In political terms you always negotiate two jealousies: Petersburg’s fear of chaos, and the provinces’ fear of ornaments dropped from above. “Zemstvo-style” talk in this game names that quarrel as an argument, not a claim that the real institution already exists in 1836.</p><p>Chaadaev asked for moral depth inside borrowed forms; your winter asks whether compromise is a bridge or only rope beside stone until the next flood.</p>`
+    };
+
+    /** One narrative sentence after “<strong>This winter in play:</strong> …” keyed by <code>state.lastEvent</code>. */
+    const RUN_RECAP_WINTER_SENTENCE = {
+      event_salon:
+        "the capital briefly allowed a sanctioned night: ideas could breathe in public form before the file closed again.",
+      event_flood_echo:
+        "northern water kept rewriting the argument: Peter’s plans met ordinary wet rooms and cold postscripts.",
+      event_censor: "the Third Section’s habit won out: torn proofs and sealed rooms decided what could travel beyond the table.",
+      event_rural_gentry:
+        "provincial gentry dragged ministry maps through local mud: central school dreams snagged on estate pride.",
+      event_zemstvo_clash:
+        "a struck pilot fund turned neighborly hope into a bruise everyone saw: local money met a chief’s veto in daylight."
+    };
+
+    /** How the player chose to <em>frame</em> the epilogue (Order / Reform / People). */
+    const RUN_RECAP_FRAMING_SENTENCE = {
+      order:
+        "At the close you framed the story with <strong>stability first</strong>: ranks and continuity as the spine, even when that leaves Chaadaev in the waiting room.",
+      reform:
+        "At the close you framed the story through <strong>law and schools</strong>: Russia’s long homework in institutions, with the censor still in the next corridor.",
+      people:
+        "At the close you refused to bury the clerk: the last word went to <strong>bodies, roofs, and flooded rooms</strong>, not only to bronze and files."
+    };

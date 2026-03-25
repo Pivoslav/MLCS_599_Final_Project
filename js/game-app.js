@@ -571,6 +571,13 @@ Whether one column always swallowed the other, none would swear. The close chose
       const visited = state.history.map((id) => (scenes[id] ? scenes[id].title : id)).join(" → ");
       const inv = Array.from(state.inventory).map((id) => ITEMS[id] || id).join("; ") || "(none)";
       const recapBeats = buildRunRecapBeatTitles();
+      const lean = state.finalLeanApplied || "order";
+      const lastEv = state.lastEvent || "event_censor";
+      const pathNarrPlain = htmlToPlain(recapPathNarrativeHtml(path));
+      const winterPlain = recapWinterSentencePlain(lastEv);
+      const framingPlain = htmlToPlain(recapFramingHtml(lean));
+      const bonusAtCrisis =
+        state.lastRoll != null && state.lastWinterTotal != null ? state.lastWinterTotal - state.lastRoll : null;
       const lines = [
         "Russia's Troubled Future Past (run summary)",
         "────────────────────────────",
@@ -580,9 +587,21 @@ Whether one column always swallowed the other, none would swear. The close chose
         `Epilogue: ${ep.title}`,
         `Track: ${pathLabels[path] || path}`,
         `Final: Order ${state.stats.order} · Reform ${state.stats.reform} · People ${state.stats.people}`,
-        `Winter event: ${rollOutcomeLabel(state.lastEvent || "event_censor")}`,
+        "",
+        "Path narrative (society and politics):",
+        pathNarrPlain,
+        "",
+        "This winter in play:",
+        winterPlain,
+        "",
+        "Closing framing:",
+        framingPlain,
+        "",
+        `Winter event key: ${lastEv} (${rollOutcomeLabel(lastEv)})`,
+        bonusAtCrisis != null
+          ? `Winter die: d6=${state.lastRoll}, Order bonus +${bonusAtCrisis}, total ${state.lastWinterTotal}`
+          : "Winter die: (not recorded)",
         `Winter misfit (wrong rumor): ${state.crisisMisfit ? state.crisisMisfitKind || "yes" : "no"}`,
-        `Framing: ${state.finalLeanApplied || "(none)"}`,
         `Evgeny chorus framing: ${state.evgenyChorus ? "yes (Vera’s one-reckoning close)" : "no"}`,
         `Run tags: ${state.runTags.size ? Array.from(state.runTags).join(", ") : "(none)"}`,
         `Scars: ${state.scars.size ? Array.from(state.scars).join(", ") : "(none)"}`,
@@ -590,7 +609,7 @@ Whether one column always swallowed the other, none would swear. The close chose
         "",
         "Library: " + inv,
         "",
-        "Beats you played through (scene titles, in order):",
+        "Scene titles (optional checklist):",
         recapBeats.length ? recapBeats.map((t, i) => `${i + 1}. ${t}`).join("\n") : "(none recorded)",
         "",
         "Scenes visited (ids):",
@@ -627,6 +646,33 @@ Whether one column always swallowed the other, none would swear. The close chose
         .replace(/"/g, "&quot;");
     }
 
+    function htmlToPlain(s) {
+      return String(s || "")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function recapPathNarrativeHtml(path) {
+      const M = typeof RUN_RECAP_PATH_NARRATIVE !== "undefined" ? RUN_RECAP_PATH_NARRATIVE : null;
+      if (M && M[path]) return M[path];
+      if (M && M.west) return M.west;
+      return "<p>Narrative recap for this path is not loaded.</p>";
+    }
+
+    function recapWinterSentencePlain(key) {
+      const W = typeof RUN_RECAP_WINTER_SENTENCE !== "undefined" ? RUN_RECAP_WINTER_SENTENCE : null;
+      if (W && W[key]) return W[key];
+      return "winter followed the path rules at the crisis roll.";
+    }
+
+    function recapFramingHtml(lean) {
+      const F = typeof RUN_RECAP_FRAMING_SENTENCE !== "undefined" ? RUN_RECAP_FRAMING_SENTENCE : null;
+      if (F && F[lean]) return F[lean];
+      if (F && F.order) return F.order;
+      return "At the close you chose how to frame the epilogue.";
+    }
+
     /** Scene titles visited, in order (skips setup-only beats). Used for epilogue recap and copy summary. */
     function buildRunRecapBeatTitles() {
       const SKIP = new Set(["session_format"]);
@@ -650,20 +696,16 @@ Whether one column always swallowed the other, none would swear. The close chose
 
     function buildRunRecapHtml() {
       const pathLabels = { west: "Westernizing", slav: "Slavophile", statist: "Statist", med: "Mediator" };
-      const leanLabels = {
-        order: "Order (stability, ranks, and the state as spine)",
-        reform: "Reform (law, schools, print, Chaadaev as program)",
-        people: "People (clerks, peasants, flood-side lives in the last word)"
-      };
       const path = state.pathId || "west";
       const lean = state.finalLeanApplied || "order";
+      const lastEv = state.lastEvent || "event_censor";
       const beats = buildRunRecapBeatTitles();
       const bonusAtCrisis =
         state.lastRoll != null && state.lastWinterTotal != null ? state.lastWinterTotal - state.lastRoll : null;
-      const rollBit =
+      const rollDetails =
         bonusAtCrisis != null
-          ? `<p class="run-recap-line"><strong>Winter die:</strong> d6 = ${state.lastRoll}, Order bonus +${bonusAtCrisis}, table total <strong>${state.lastWinterTotal}</strong> (path rules at crisis).</p>`
-          : "";
+          ? `<p class="run-recap-line">d6 = ${state.lastRoll}, Order bonus +${bonusAtCrisis}, table total <strong>${state.lastWinterTotal}</strong> (crisis rules for your track).</p>`
+          : `<p class="run-recap-line">No die record in this tab (open a run from <em>At the table</em> through the winter roll for numbers).</p>`;
       const misfit =
         state.crisisMisfit
           ? `<p class="run-recap-line"><strong>Winter misfit:</strong> Fate handed you another track’s rumor; the table answered it anyway.</p>`
@@ -686,15 +728,16 @@ Whether one column always swallowed the other, none would swear. The close chose
       const list =
         beats.length > 0
           ? `<ol class="run-recap-list">${beats.map((t) => `<li>${escapeHtmlPlain(t)}</li>`).join("")}</ol>`
-          : `<p class="run-recap-line">No scene list was recorded for this tab (try a fresh run from <em>At the table</em>).</p>`;
+          : `<p class="run-recap-line run-recap-muted">No scene list recorded.</p>`;
+      const pathNarr = recapPathNarrativeHtml(path);
+      const winterPlain = recapWinterSentencePlain(lastEv);
+      const framingP = `<p class="run-recap-line run-recap-framing">${recapFramingHtml(lean)}</p>`;
 
-      return `<section class="run-recap" aria-labelledby="run-recap-h"><h4 id="run-recap-h">What happened in your run</h4><p class="run-recap-lead">The ending below is a closing <em>lens</em> on the same winter. Here is the path your choices actually walked through.</p><p class="run-recap-line"><strong>Argument track:</strong> ${escapeHtmlPlain(
+      return `<section class="run-recap" aria-labelledby="run-recap-h"><h4 id="run-recap-h">Your argument, in society and politics</h4><p class="run-recap-lead">Track: <strong>${escapeHtmlPlain(
         pathLabels[path] || path
-      )}.</p><p class="run-recap-line"><strong>Winter scene:</strong> ${escapeHtmlPlain(
-        stripSceneTitle(rollOutcomeLabel(state.lastEvent || "event_censor"))
-      )}</p>${rollBit}${misfit}<p class="run-recap-line"><strong>Final framing:</strong> ${escapeHtmlPlain(
-        leanLabels[lean] || lean
-      )}.</p>${vera}${chorus}${lib}<p class="run-recap-sub"><strong>Beats in order</strong> (each title is a scene you left by choosing):</p>${list}</section>`;
+      )}</strong>. The ending below is one closing <em>lens</em> on the same winter. This box names what that track meant for Russian public life before the salon’s last scene.</p><div class="run-recap-path-narr">${pathNarr}</div><p class="run-recap-line"><strong>This winter in play:</strong> ${escapeHtmlPlain(
+        winterPlain
+      )}</p>${misfit}${framingP}${vera}${chorus}${lib}<details class="run-recap-details"><summary>Winter die (mechanics)</summary>${rollDetails}</details><details class="run-recap-details"><summary>Scene titles in play order (optional checklist)</summary>${list}</details></section>`;
     }
 
     const clamp = (n) => Math.max(0, Math.min(100, n));

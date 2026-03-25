@@ -1212,6 +1212,44 @@
       margin-bottom: 6px;
     }
 
+    .run-recap-path-narr p {
+      margin: 0 0 12px;
+      line-height: 1.58;
+      color: #1e293b;
+    }
+
+    .run-recap-path-narr p:last-child {
+      margin-bottom: 0;
+    }
+
+    .run-recap-details {
+      margin-top: 12px;
+      padding: 8px 0 0;
+      border-top: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+      font-size: clamp(0.88rem, 0.84rem + 0.1vw, 0.95rem);
+      color: #475569;
+    }
+
+    .run-recap-details summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--dynamic-accent-2);
+      margin-bottom: 6px;
+    }
+
+    .run-recap-details[open] summary {
+      margin-bottom: 8px;
+    }
+
+    .run-recap-muted {
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .run-recap p + p.run-recap-line {
+      margin-top: 10px;
+    }
+
     .run-title-banner {
       margin-bottom: 12px;
       padding: 10px 14px;
