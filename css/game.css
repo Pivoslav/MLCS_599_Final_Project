@@ -221,34 +221,74 @@
       height: 15px;
     }
 
-    .realm-meters-meta {
-      display: inline-flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 5px 8px;
-      background: #e8edf5;
-      border: 1px solid #c8d0de;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: clamp(0.86rem, 0.82rem + 0.12vw, 0.93rem);
-      color: #526077;
+    /* Horizontal realm meters: full header width (avoid narrow sidebar crunch). */
+    .header-realm-bars {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px 20px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid color-mix(in srgb, var(--line) 82%, var(--dynamic-accent) 10%);
     }
 
-    .realm-meters-meta abbr {
-      text-decoration: none;
+    .hdr-meter {
+      min-width: 0;
+    }
+
+    .hdr-meter-label-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .hdr-meter-name {
+      font-size: clamp(0.68rem, 0.64rem + 0.12vw, 0.76rem);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
       font-weight: 700;
-      color: #475569;
+      color: #5c677a;
     }
 
-    .realm-meters-meta strong {
+    .hdr-meter-val {
+      font-size: clamp(0.88rem, 0.82rem + 0.15vw, 0.98rem);
       font-variant-numeric: tabular-nums;
-      font-weight: 700;
       color: #1e293b;
+      font-weight: 700;
     }
 
-    .realm-meters-sep {
-      opacity: 0.55;
-      user-select: none;
+    .hdr-meter-track {
+      height: 14px;
+      border-radius: 7px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #d8e0ed 0%, #c5d0e0 100%);
+      border: 1px solid color-mix(in srgb, var(--line) 88%, var(--ink) 5%);
+    }
+
+    .hdr-meter-fill {
+      width: 50%;
+      height: 100%;
+      min-width: 0;
+      border-radius: 6px;
+      transition: width 0.35s ease;
+    }
+
+    .hdr-meter-fill--order {
+      background: var(--bar-order);
+    }
+    .hdr-meter-fill--reform {
+      background: var(--bar-reform);
+    }
+    .hdr-meter-fill--people {
+      background: var(--bar-people);
+    }
+
+    @media (max-width: 640px) {
+      .header-realm-bars {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
     }
 
     /* Recent scene titles (breadcrumb) */
@@ -411,96 +451,6 @@
       align-self: start;
       max-height: 100vh;
       overflow-y: auto;
-    }
-
-    .realm-legend h3 {
-      font-size: clamp(0.72rem, 0.68rem + 0.15vw, 0.8rem);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: #5c677a;
-      margin-bottom: 12px;
-    }
-
-    .legend-meters {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 10px;
-      margin-bottom: 14px;
-      padding: 0 2px;
-    }
-
-    .legend-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .legend-track {
-      width: 100%;
-      max-width: 22px;
-      height: 112px;
-      background: linear-gradient(180deg, #d8e0ed 0%, #c5d0e0 100%);
-      border-radius: 5px;
-      overflow: hidden;
-      border: 1px solid color-mix(in srgb, var(--line) 90%, var(--ink) 6%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .legend-fill {
-      width: 100%;
-      min-height: 0;
-      border-radius: 0 0 4px 4px;
-      transition: height 0.35s ease;
-    }
-
-    .legend-fill.order { background: var(--bar-order); }
-    .legend-fill.reform { background: var(--bar-reform); }
-    .legend-fill.people { background: var(--bar-people); }
-
-    .legend-ico {
-      display: flex;
-      justify-content: center;
-      color: #475569;
-    }
-    .legend-ico svg {
-      width: 22px;
-      height: 22px;
-      opacity: 0.92;
-    }
-    .legend-item:nth-child(1) .legend-ico { color: var(--bar-order); }
-    .legend-item:nth-child(2) .legend-ico { color: var(--bar-reform); }
-    .legend-item:nth-child(3) .legend-ico { color: var(--bar-people); }
-
-    .legend-label {
-      font-size: clamp(0.68rem, 0.62rem + 0.2vw, 0.78rem);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #526077;
-      text-align: center;
-      line-height: 1.2;
-    }
-
-    .legend-val {
-      font-size: clamp(0.82rem, 0.78rem + 0.15vw, 0.9rem);
-      font-variant-numeric: tabular-nums;
-      color: #1e293b;
-      font-weight: 600;
-    }
-
-    .realm-legend-budget-hint {
-      font-size: clamp(0.68rem, 0.64rem + 0.12vw, 0.76rem);
-      line-height: 1.45;
-      color: #5c677a;
-      margin: 0 0 14px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
     }
 
     .inventory {
@@ -773,7 +723,7 @@
     @media (prefers-reduced-motion: reduce) {
       .content-scene-bg,
       .scene-rail,
-      .legend-fill {
+      .hdr-meter-fill {
         transform: none;
         transition: none;
       }
@@ -840,13 +790,6 @@
         border-right: none;
         border-bottom: 1px solid var(--line);
         padding: 14px var(--pad-inset) 16px;
-      }
-      .legend-meters {
-        justify-content: center;
-        gap: clamp(14px, 4vw, 24px);
-        max-width: 42rem;
-        margin-left: auto;
-        margin-right: auto;
       }
     }
 

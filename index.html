@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Russia's Troubled Future Past</title>
   <!-- Bump ?v= on css/js when students may see stale copies (browser cache). -->
-  <link rel="stylesheet" href="css/game.css?v=20260330c" />
+  <link rel="stylesheet" href="css/game.css?v=20260330d" />
 </head>
 <body>
   <a href="#title" class="skip-link">Skip to story</a>
@@ -18,14 +18,6 @@
           <span id="sceneId"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span><span id="sceneIdText">Scene: Moscow, Autumn 1836</span></span>
           <span id="steps"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01M9 15c1.5 1 4 1 6 0"/></svg></span><span id="stepsText">Turn: 0</span></span>
           <span id="era"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l3 2"/></svg></span><span id="eraText">Era: 1836</span></span>
-          <span id="realmMetersMeta" class="realm-meters-meta" aria-label="Meters 0 to 100: Order, Reform, People">
-            <span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-6"/><path d="M22 20v-9"/></svg></span>
-            <span><abbr title="Order">O</abbr> <strong id="valOrder">50</strong></span>
-            <span class="realm-meters-sep" aria-hidden="true">·</span>
-            <span><abbr title="Reform">R</abbr> <strong id="valReform">50</strong></span>
-            <span class="realm-meters-sep" aria-hidden="true">·</span>
-            <span><abbr title="People">P</abbr> <strong id="valPeople">50</strong></span>
-          </span>
         </div>
         <div class="header-actions actions">
           <a href="llm-lab.html" class="ghost" title="Local dev: run python tools/dev_server.py first">Art lab</a>
@@ -35,6 +27,35 @@
           <button type="button" class="primary" id="restartBtn">Restart</button>
         </div>
       </div>
+      <div class="header-realm-bars" role="group" aria-label="Realm meters from 0 to 100: Order, Reform, People">
+        <div class="hdr-meter hdr-meter--order">
+          <div class="hdr-meter-label-row">
+            <span class="hdr-meter-name">Order</span>
+            <strong class="hdr-meter-val" id="valOrder">50</strong>
+          </div>
+          <div class="hdr-meter-track">
+            <div class="hdr-meter-fill hdr-meter-fill--order" id="barOrder"></div>
+          </div>
+        </div>
+        <div class="hdr-meter hdr-meter--reform">
+          <div class="hdr-meter-label-row">
+            <span class="hdr-meter-name">Reform</span>
+            <strong class="hdr-meter-val" id="valReform">50</strong>
+          </div>
+          <div class="hdr-meter-track">
+            <div class="hdr-meter-fill hdr-meter-fill--reform" id="barReform"></div>
+          </div>
+        </div>
+        <div class="hdr-meter hdr-meter--people">
+          <div class="hdr-meter-label-row">
+            <span class="hdr-meter-name">People</span>
+            <strong class="hdr-meter-val" id="valPeople">50</strong>
+          </div>
+          <div class="hdr-meter-track">
+            <div class="hdr-meter-fill hdr-meter-fill--people" id="barPeople"></div>
+          </div>
+        </div>
+      </div>
       <div class="salometry" id="salometry" aria-label="Recent scenes">
         <div class="scene-crumb" id="sceneCrumb"></div>
       </div>
@@ -42,34 +63,6 @@
 
     <div class="app-main">
       <aside class="realm-legend" aria-label="Library and events">
-        <h3>Realm meters</h3>
-        <div class="legend-meters" role="group" aria-label="Order, Reform, and People from 0 to 100">
-          <div class="legend-item">
-            <div class="legend-ico" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V6"/></svg>
-            </div>
-            <div class="legend-track"><div class="legend-fill order" id="barOrder"></div></div>
-            <div class="legend-label">Order</div>
-            <div class="legend-val"><span data-stat-val="order">50</span></div>
-          </div>
-          <div class="legend-item">
-            <div class="legend-ico" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V4"/></svg>
-            </div>
-            <div class="legend-track"><div class="legend-fill reform" id="barReform"></div></div>
-            <div class="legend-label">Reform</div>
-            <div class="legend-val"><span data-stat-val="reform">50</span></div>
-          </div>
-          <div class="legend-item">
-            <div class="legend-ico" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V9"/></svg>
-            </div>
-            <div class="legend-track"><div class="legend-fill people" id="barPeople"></div></div>
-            <div class="legend-label">People</div>
-            <div class="legend-val"><span data-stat-val="people">50</span></div>
-          </div>
-        </div>
-        <p class="realm-legend-budget-hint">Shared <strong>winter budget</strong> (spend a small pool across the three meters) appears on <strong>Sorting the Outcome</strong> when <strong>co-op gating</strong> is on, before the final framing choices.</p>
         <div class="inventory" id="inventoryBlock">
           <strong style="display:block;margin-bottom:6px;font-size:0.78rem;">Library &amp; tokens</strong>
           <ul id="inventoryList"><li class="empty">Nothing yet.</li></ul>
@@ -182,9 +175,9 @@
   <div id="toastRegion" class="toast-region" role="region" aria-label="Game notifications"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
-  <script src="js/game-config.js?v=20260330c"></script>
-  <script src="js/game-scenes.js?v=20260329a"></script>
+  <script src="js/game-config.js?v=20260330d"></script>
+  <script src="js/game-scenes.js?v=20260330d"></script>
   <script src="js/game-ambient-audio.js?v=20260329f"></script>
-  <script src="js/game-app.js?v=20260330c"></script>
+  <script src="js/game-app.js?v=20260330d"></script>
 </body>
 </html>

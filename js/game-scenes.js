@@ -524,7 +524,7 @@ Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down 
 
       resolve_endings: {
         title: "Sorting the Outcome",
-        /** Co-op pilot: spend a shared pool across meters before framing choices (`getRealmBudgetPoolPoints()` in game-app.js; 3/5/8 from winter total bands). Solo / gating off: skipped. */
+        /** Spend a shared pool across meters before framing choices (`getRealmBudgetPoolPoints()` in game-app.js; 3/5/8 from winter total bands). Runs for every run that reaches this scene (solo or co-op). */
         coopRealmBudgetBeforeChoices: true,
         text: `The winter crisis scene is over. The three colored bars (Order, Reform, People) are the running score for how your choices leaned, not a grade, just a portrait.
 

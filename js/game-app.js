@@ -238,9 +238,9 @@
     const COURIER_WHISPER_SCENES = ["beat_west_print", "beat_aksakov", "beat_statist_machine", "beat_med_bridge"];
 
     /**
-     * Shared “winter attention” pool at resolve_endings (co-op tools on). Sizes are tied to the same totals as
-     * pickCrisisEvent: west/slav/med use T≤4, 5≤T≤7, T≥8; statist uses T≤7 vs T≥8 only. Uses only magnitudes
-     * that appear on that ruler: 3 (= three mid totals {5,6,7}), 5 (mid floor), 8 (high floor). Minimum pool = 3.
+     * Shared “winter attention” pool at resolve_endings (before final framing choices; solo or co-op). Sizes tie to
+     * the same totals as pickCrisisEvent: west/slav/med use T≤4, 5≤T≤7, T≥8; statist uses T≤7 vs T≥8 only. Uses only
+     * magnitudes on that ruler: 3 (low / statist non-high), 5 (mid or default when winter total unknown), 8 (high).
      */
     function getRealmBudgetPoolPoints() {
       const T = state.lastWinterTotal;
@@ -797,11 +797,11 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const cap = k.charAt(0).toUpperCase() + k.slice(1);
         const barEl = document.getElementById("bar" + cap);
         const valEl = document.getElementById("val" + cap);
-        if (barEl) barEl.style.height = v + "%";
+        if (barEl) {
+          barEl.style.width = v + "%";
+          barEl.style.height = "100%";
+        }
         if (valEl) valEl.textContent = String(v);
-        document.querySelectorAll(`[data-stat-val="${k}"]`).forEach((el) => {
-          el.textContent = String(v);
-        });
       });
     }
 
@@ -1303,8 +1303,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       wrap.className = "realm-budget-pilot";
       wrap.setAttribute("role", "region");
       wrap.setAttribute("aria-label", "Shared realm budget before final framing");
-      wrap.innerHTML = `<h3 class="realm-budget-title">Co-op beat: spend winter attention</h3>
-<p class="realm-budget-lead">${winterLine}With <strong>co-op tools on</strong>, place those points across Order, Reform, and People before choosing how to <em>frame</em> the story. Each bar stays capped at 100. Negotiate, spend the full pool, then commit, the three framing choices appear next.</p>
+      wrap.innerHTML = `<h3 class="realm-budget-title">Winter attention: spend the shared pool</h3>
+<p class="realm-budget-lead">${winterLine}Place every point across <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> before you choose how to <em>frame</em> the story. Each bar stays capped at 100. Spend the full pool, then commit; the three framing choices appear next.</p>
 <p class="realm-budget-pool-live" role="status" aria-live="polite"></p>
 <div class="realm-budget-rows">
 <div class="realm-budget-row" data-key="order"><span class="realm-budget-label order">Order</span><span class="realm-budget-combined"></span><div class="realm-budget-btns"><button type="button" class="ghost realm-budget-minus" aria-label="Remove one budget point from Order">−</button><button type="button" class="ghost realm-budget-plus" aria-label="Add one budget point to Order">+</button></div></div>
@@ -1658,7 +1658,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const icoBranch =
         '<span class="choice-ico choice-ico--branch" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v12"/><circle cx="6" cy="3" r="2"/><circle cx="6" cy="15" r="2"/><path d="M6 9h8l4 4"/><circle cx="18" cy="15" r="2"/></svg></span>';
 
-      if (scene.coopRealmBudgetBeforeChoices && state.coopToolsEnabled && !state.realmBudgetCommittedResolveEndings) {
+      if (scene.coopRealmBudgetBeforeChoices && !state.realmBudgetCommittedResolveEndings) {
         mountResolveEndingsRealmBudget(choicesToRender, icoDice, icoBranch);
         state._coopChoicesSnapshot = [];
         refreshCoopBallotUI();
