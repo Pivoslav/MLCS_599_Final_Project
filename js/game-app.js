@@ -524,11 +524,36 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.inventory.add(key);
     }
 
+    function prefersReducedMotion() {
+      return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
+    (function markMotionAndViewTransitionFlags() {
+      const h = document.documentElement;
+      if (typeof document.startViewTransition === "function") h.classList.add("vt-capable");
+      if (prefersReducedMotion()) h.classList.add("vt-reduced");
+    })();
+
+    function skipViewTransition() {
+      if (prefersReducedMotion()) return true;
+      if (typeof document.startViewTransition !== "function") return true;
+      return state.steps === 0 && state.history.length === 0 && state.current === "intro";
+    }
+
+    function truncateNavTitle(s, maxLen) {
+      const t = String(s || "").replace(/\s+/g, " ").trim();
+      if (t.length <= maxLen) return t;
+      return t.slice(0, maxLen - 1) + "…";
+    }
+
     function statBars() {
       ["order", "reform", "people"].forEach((k) => {
         const v = state.stats[k];
-        document.getElementById("bar" + k.charAt(0).toUpperCase() + k.slice(1)).style.height = v + "%";
-        document.getElementById("val" + k.charAt(0).toUpperCase() + k.slice(1)).textContent = String(v);
+        const cap = k.charAt(0).toUpperCase() + k.slice(1);
+        const barEl = document.getElementById("bar" + cap);
+        const valEl = document.getElementById("val" + cap);
+        barEl.style.height = v + "%";
+        valEl.textContent = String(v);
       });
     }
 
@@ -681,11 +706,53 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     const stepsTextEl = document.getElementById("stepsText");
     const eraTextEl = document.getElementById("eraText");
     const endingBlock = document.getElementById("endingBlock");
+    const sceneCrumbEl = document.getElementById("sceneCrumb");
+    const tensionValEl = document.getElementById("tensionVal");
+    const tensionFillEl = document.getElementById("tensionFill");
+
+    function updateSalometry() {
+      const trail = state.history.slice(-4);
+      const ids = trail.concat(state.current);
+      const parts = [];
+      for (let i = 0; i < ids.length; i += 1) {
+        const sid = ids[i];
+        const sc = scenes[sid];
+        const label = truncateNavTitle(sc && sc.title ? sc.title : sid, 32);
+        const isLast = i === ids.length - 1;
+        parts.push(`<span class="crumb-chip${isLast ? " is-current" : ""}">${label}</span>`);
+        if (!isLast) parts.push('<span class="crumb-sep" aria-hidden="true">→</span>');
+      }
+      if (sceneCrumbEl) {
+        sceneCrumbEl.innerHTML =
+          parts.join("") ||
+          `<span class="crumb-chip is-current">${truncateNavTitle((scenes[state.current] && scenes[state.current].title) || state.current, 32)}</span>`;
+      }
+      const { order: O, reform: R, people: P } = state.stats;
+      const spread = Math.max(O, R, P) - Math.min(O, R, P);
+      if (tensionValEl) tensionValEl.textContent = String(spread);
+      if (tensionFillEl) tensionFillEl.style.width = spread + "%";
+      document.documentElement.setAttribute("data-tension", spread >= 40 ? "high" : "low");
+    }
+
+    function animateChoiceButtonsIfNeeded() {
+      if (prefersReducedMotion() || !window.gsap) return;
+      const nodes = choicesEl.querySelectorAll(".choice-btn");
+      if (!nodes.length) return;
+      window.gsap.from(nodes, {
+        opacity: 0,
+        y: 12,
+        stagger: 0.055,
+        duration: 0.42,
+        ease: "power2.out",
+        clearProps: "opacity,transform"
+      });
+    }
 
     function renderScene() {
       if (!state.keepBanner) hideEventBanner();
       state.keepBanner = false;
 
+      const paint = () => {
       const scene = scenes[state.current];
       syncAppChrome(state.current, scene);
       endingBlock.innerHTML = "";
@@ -738,6 +805,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         statBars();
         renderInventory();
         updateSceneVisuals(state.current);
+        updateSalometry();
+        animateChoiceButtonsIfNeeded();
         return;
       }
 
@@ -772,6 +841,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         statBars();
         renderInventory();
         updateSceneVisuals(state.current);
+        updateSalometry();
+        animateChoiceButtonsIfNeeded();
         return;
       }
 
@@ -870,6 +941,15 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       statBars();
       renderInventory();
       updateSceneVisuals(state.current);
+      updateSalometry();
+      animateChoiceButtonsIfNeeded();
+      };
+
+      if (skipViewTransition()) {
+        paint();
+      } else {
+        document.startViewTransition(paint);
+      }
     }
 
     function restart() {

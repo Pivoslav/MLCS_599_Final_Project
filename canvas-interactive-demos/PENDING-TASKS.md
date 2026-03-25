@@ -1,17 +1,17 @@
 # Pending tasks (MLCS 599 CYOA + demos)
 
-Checklist of work **not** done yet—merge to `index.html`, narrative, course ops. Update this file as items close.
+Checklist of work **not** done yet—merge into the **game bundle** (`index.html` + `css/`, `js/`), narrative, course ops. Update this file as items close.
 
 ---
 
-## A. Merge demos into the shipped game (`index.html`)
+## A. Merge demos into the shipped game (bundle)
 
 - [ ] **Icons** — Lift SVGs from `demos/icons-showcase.html` into choice rows, inventory, glossary; add `aria-label` / `title`.
 - [ ] **Toast + achievements** — Pattern from `mechanic-achievement-flash.html` + `interactive-widgets.html`; hook rare `sceneId` / inventory combos.
 - [ ] **Path-weighted delta preview** — On choice focus/hover, show effects (from `mechanic-path-deltas-and-hints.html`); wire to real `pathId` and choice handlers.
 - [ ] **Pedagogy hint** — Optional `details` under high-stakes choices; copy style from path-deltas demo.
 - [ ] **Crisis / winter transparency** — Eligibility preview + `details` die table (`mechanic-winter-crisis-lab.html`); align text with real `pickCrisisEvent` tables.
-- [ ] **Breadcrumb + tension** — Header strip + spread meter (`mechanic-breadcrumb-tension.html`); optional chrome tint when spread > threshold.
+- [x] **Breadcrumb + tension** — **Done in production:** header `#salometry`, `updateSalometry()`, spread = max − min meters, `html[data-tension="high"]` when spread ≥ 40, `prefers-reduced-motion` respected. Lab page: `mechanic-breadcrumb-tension.html` (vanilla only; no GSAP).
 - [ ] **Co-op timer + ballot + stance** — gated controls for 3-player mode (`mechanic-co-op-timer-ballot.html`); respect reduced motion.
 - [ ] **Debrief thesis picker + epilogue compare** — Post-run UI (`mechanic-debrief-epilogues.html`); read-only branch peek must not mutate `state`.
 - [ ] **URL `?scene=`** — Parse query in `index.html`, jump or highlight (`mechanic-url-and-summary.html`); document allowed keys in README.
@@ -19,7 +19,7 @@ Checklist of work **not** done yet—merge to `index.html`, narrative, course op
 - [ ] **Coupled sliders (optional)** — Only as labeled “debrief lab,” not replacing canonical meters (`realm-balance-slider.html`).
 - [ ] **Point budget (optional)** — One pilot scene (`realm-triangle-budget.html`).
 
-## B. Narrative & primary-text quality (from `index.html` BACKLOG comment)
+## B. Narrative & primary-text quality (from `js/game-app.js` BACKLOG comment)
 
 - [ ] **Read alongside pass** — Text-grounded glosses; remove ornamental filler; crosswalk to McNally & Tempest + Arndt (library editions).
 - [ ] **EPILOGUE_TWELVE** — Continue in-scene salon voice tuning; winter echo per event.
@@ -51,3 +51,9 @@ Checklist of work **not** done yet—merge to `index.html`, narrative, course op
 ---
 
 When a section completes, move bullets to a “Done” appendix or delete them—keep this file honest for the next contributor.
+
+---
+
+## Done (shipped or superseded)
+
+- **Breadcrumb + realm spread** — Live in `index.html` / `css/game.css` (`.salometry`, `.scene-crumb`, `.tension-*`) and `js/game-app.js` (`updateSalometry`, `animateChoiceButtonsIfNeeded`). Scene changes also use the **View Transitions API** where supported; **GSAP** (jsDelivr) staggers choice buttons only—demos intentionally stay CDN-free for Canvas paste tests.

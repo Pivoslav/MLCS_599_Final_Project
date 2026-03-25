@@ -38,6 +38,12 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 
 - Removed from **`main`:** full primary-text dumps (PDF/txt poem and letter extracts), internal alignment notes, PDF tooling scripts—**copyright and clutter** reasons. Citations remain in **`SOURCES.md`**.
 
+### Motion stack (shipped game, optional CDN)
+
+- **View Transitions API** (`document.startViewTransition`): cross-fades the main scene column where the browser supports it (e.g. Chromium, Safari 18+). Unsupported browsers run the same paint with no transition.
+- **GSAP 3** (pinned on **jsDelivr** in `index.html`): light **stagger** on choice buttons after each scene paint. If the CDN is blocked, the game still runs; only the entrance motion is skipped.
+- **`prefers-reduced-motion: reduce`:** turns off View Transition animations, GSAP staggers, and the CSS transitions on the realm-spread bar (tension strip). Realm column meters still update; reduced-motion also clears their height transition in CSS.
+
 ---
 
 ## 2. Long-term goal: integrate prototype tools into the game bundle (`index.html` + `js/`, `css/`)
@@ -47,7 +53,7 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 - Reuse existing **`state.stats`** (`order`, `reform`, `people`, 0–100) and **`pathId`** (`west` | `slav` | `statist` | `med`).
 - Keep **`prefers-reduced-motion`** behavior consistent with the main CSS.
 - Namespace new classes (e.g. `.demo-` → rename to match game conventions) to avoid collisions.
-- Avoid new CDNs; keep **self-contained** assets for Pages and Canvas-adjacent use.
+- **`canvas-interactive-demos/`** pages: keep **self-contained** (no extra CDNs) when possible so authors can paste snippets into picky LMS HTML views. The **shipped game** may load **GSAP** from jsDelivr for motion (see §1 “Motion stack”); that is intentional and degrades gracefully if blocked.
 
 ### Prototype → game mapping (short)
 
@@ -60,7 +66,7 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 | `canvas-self-test.html` | Not for players—**support** checklist when embedding. | N/A (keep as separate file for authors). |
 | `mechanic-winter-crisis-lab.html` | Crisis threshold **preview** + **die table** in `details`. | Before winter roll; align copy with real crisis tables. |
 | `mechanic-path-deltas-and-hints.html` | **Path-weighted** deltas + optional **why it matters** gloss. | Choice UI: focus/hover + `details` under choices. |
-| `mechanic-breadcrumb-tension.html` | **Breadcrumb** + **tension** = max(stat) − min(stat). | Header strip; optional UI chrome when spread high. |
+| `mechanic-breadcrumb-tension.html` | **Breadcrumb** + **tension** = max(stat) − min(stat). | **Shipped:** `#salometry` in `index.html`, styles in `css/game.css`, `updateSalometry()` in `js/game-app.js`; high spread → `data-tension="high"`. Demo remains a vanilla lab. |
 | `mechanic-co-op-timer-ballot.html` | **Timer**, **secret ballot** reveal, **stance** checkbox. | `state.coopMode` UI branch in `game-app.js`. |
 | `mechanic-debrief-epilogues.html` | **Thesis picker**, **compare** epilogues, **branch peek** `dialog`. | Post-`EPILOGUE_TWELVE`; read-only, no state mutation. |
 | `mechanic-achievement-flash.html` | **Toast** + **inventory icon** flash. | Rare scene/token hooks. |
@@ -80,7 +86,7 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 
 - **Crisis preview card:** before the winter roll, show **plain-language** thresholds (“If Reform is high, event X is likelier”) without spoiling prose—teaches probability as argument.
 - **Path-weighted delta preview:** on hover/focus of a choice, show **path-specific** stat effects (the game already varies by path in places; surfacing it trains “same words, different institutions”).
-- **Turn / scene breadcrumb** in the header strip (stub exists in `interactive-widgets.html`).
+- **Turn / scene breadcrumb** in the header strip (**shipped** as `#salometry`; `interactive-widgets.html` keeps a static stub for widget patterns only).
 - **“Commit to a stance”** before the final framing choice—forces the three co-op roles to speak once more.
 - **Non-destructive replay:** “View other branch” as read-only text snippet (no stat mutation)—reduces FOMO for one-shot class sessions.
 - **Copy-to-clipboard** enhancements: already present; add **short URL** or **run code** for forum posts if desired.

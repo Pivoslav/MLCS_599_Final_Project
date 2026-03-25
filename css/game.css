@@ -128,6 +128,163 @@
       height: 15px;
     }
 
+    /* Path strip + realm spread (mechanic-breadcrumb-tension, shipped) */
+    .salometry {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(140px, 220px);
+      gap: 12px 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .salometry {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scene-crumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+      font-size: clamp(0.82rem, 0.78rem + 0.12vw, 0.9rem);
+      line-height: 1.35;
+      color: #5a5046;
+    }
+
+    .scene-crumb .crumb-chip {
+      padding: 0.22rem 0.5rem;
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--card-muted) 92%, var(--dynamic-accent) 5%);
+      border: 1px solid color-mix(in srgb, var(--line) 90%, var(--dynamic-accent) 10%);
+      max-width: 100%;
+    }
+
+    .scene-crumb .crumb-chip.is-current {
+      font-weight: 600;
+      color: var(--dynamic-accent);
+      border-color: color-mix(in srgb, var(--dynamic-accent) 35%, var(--line));
+    }
+
+    .scene-crumb .crumb-sep {
+      opacity: 0.45;
+      user-select: none;
+      padding: 0 0.05rem;
+    }
+
+    .tension-col {
+      min-width: 0;
+    }
+
+    .tension-desc {
+      margin: 0 0 0.35rem;
+      font-size: clamp(0.78rem, 0.74rem + 0.1vw, 0.85rem);
+      color: #6d5f53;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.35rem 0.5rem;
+    }
+
+    .tension-desc-label {
+      font-weight: 600;
+      color: #4a433c;
+    }
+
+    .tension-desc-hint {
+      opacity: 0.82;
+      font-style: italic;
+    }
+
+    .tension-val {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--dynamic-accent);
+      margin-left: auto;
+    }
+
+    .tension-bar {
+      height: 12px;
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--line) 45%, #fff);
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .tension-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 6px;
+      background: linear-gradient(
+        90deg,
+        var(--bar-order),
+        var(--bar-reform),
+        var(--bar-people)
+      );
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html[data-tension="high"] .header {
+      box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--dynamic-accent) 22%, transparent);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tension-fill {
+        transition: none;
+      }
+    }
+
+    /* View Transitions API: scene card cross-fade (Chromium, Safari 18+) */
+    @supports (view-transition-name: none) {
+      .content-primary {
+        view-transition-name: scene-main;
+      }
+    }
+
+    @keyframes vt-scene-out {
+      from {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        filter: blur(2px);
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes vt-scene-in {
+      from {
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    ::view-transition-old(scene-main) {
+      animation: vt-scene-out 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    ::view-transition-new(scene-main) {
+      animation: vt-scene-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-old(scene-main),
+      ::view-transition-new(scene-main) {
+        animation: none !important;
+      }
+    }
+
     /* Path-tinted accents: on :root so modal and global chrome still match */
     :root[data-path="west"] {
       --dynamic-accent: #4a3d5c;
@@ -518,7 +675,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       .content-scene-bg,
-      .scene-rail {
+      .scene-rail,
+      .legend-fill {
         transform: none;
         transition: none;
       }

@@ -2,6 +2,8 @@
 
 **Hosting, Canvas embed, iframe sizing, and roadmap for merging demos into the game:** see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (on `main` for GitHub and collaborators).
 
+**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles, and a **realm spread** bar (max − min meter) in the header. All motion respects **`prefers-reduced-motion`**.
+
 ## Coherence of the narrative
 
 The game is built around **one provocation** (Chaadaev’s *First Philosophical Letter*, 1836, in **McNally & Tempest**, *Philosophical Works of Peter Chaadaev*, Springer 1991) and **one literary counterweight** (Pushkin’s *The Bronze Horseman*, **Walter Arndt** translation, 1993—use your library edition for assigned passages). In-game copy tracks Letter I and Arndt’s poem where quoted (e.g. “window to the West,” flood lines, “Bronze Horseman in pursuit,” pauper’s grave; **Yevgeny** in source vs. **Evgeny** in some UI copy; see Terms). The candlelit **salon** is still a **dramatization**: the real Letter I is a long **epistle to “Madame.”** See **Terms** in the footer.

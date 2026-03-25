@@ -44,6 +44,9 @@
 <body>
   <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
   <h1>Scene breadcrumb + tension (realm spread)</h1>
+  <p class="demo-note" style="margin-top:0;">
+    <strong>Parity with the shipped game:</strong> the live build uses the same <em>spread</em> idea (max − min of Order / Reform / People) in the header (<code>#salometry</code>), sets <code>html[data-tension="high"]</code> when spread ≥ <strong>40</strong>, and builds crumbs from recent scene titles via <code>updateSalometry()</code> in <code>../../js/game-app.js</code>. The main game also adds View Transitions + GSAP choice stagger; <strong>this demo stays vanilla</strong> so it is safe to paste into picky LMS HTML views.
+  </p>
   <p>
     <strong>Why it is fun:</strong> a quick read on “where we are” and “how brittle the trio is” without opening a modal.
     <strong>Why it is educational:</strong> the <em>spread</em> between highest and lowest meter (Order / Reform / People) is a simple proxy for ideological tension in the room. When one meter runs away, the bar widens—good prompt for co-op debrief: “Who is winning the argument numerically?”

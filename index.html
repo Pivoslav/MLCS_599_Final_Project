@@ -23,6 +23,19 @@
           <button type="button" class="primary" id="restartBtn">Restart</button>
         </div>
       </div>
+      <div class="salometry" id="salometry" aria-label="Path and realm tension">
+        <div class="scene-crumb" id="sceneCrumb"></div>
+        <div class="tension-col">
+          <p class="tension-desc" id="tensionDesc">
+            <span class="tension-desc-label">Realm spread</span>
+            <span class="tension-desc-hint">max − min across Order, Reform, People</span>
+            <span class="tension-val" id="tensionVal" aria-live="polite">0</span>
+          </p>
+          <div class="tension-bar" role="img" aria-labelledby="tensionDesc">
+            <div class="tension-fill" id="tensionFill"></div>
+          </div>
+        </div>
+      </div>
     </header>
 
     <div class="app-main">
@@ -120,6 +133,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
   <script src="js/game-config.js"></script>
   <script src="js/game-scenes.js"></script>
   <script src="js/game-app.js"></script>
