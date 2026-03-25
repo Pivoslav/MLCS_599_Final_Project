@@ -70,14 +70,31 @@
         setSceneSideRails(null);
         return;
       }
+      bg.classList.remove("content-scene-bg--gradient-only");
+      if (entry && entry.bgGradient && !entry.src) {
+        bg.style.backgroundImage = "none";
+        bg.style.background = entry.bgGradient;
+        bg.style.backgroundPosition = "";
+        bg.style.backgroundSize = "cover";
+        bg.classList.add("content-scene-bg--gradient-only");
+        setSceneSideRails(null);
+        const gNote = entry.credit || "Colour wash only (no period plate for this beat).";
+        credit.innerHTML = gNote.endsWith(".") ? gNote : gNote + ".";
+        source.hidden = false;
+        return;
+      }
       if (!entry || !entry.src) {
         bg.style.backgroundImage = "none";
+        bg.style.background = "";
         bg.style.backgroundPosition = "";
+        bg.style.backgroundSize = "";
         setSceneSideRails(null);
         source.hidden = true;
         credit.innerHTML = "";
         return;
       }
+      bg.style.background = "";
+      bg.style.backgroundSize = "";
       /* JSON.stringify so parentheses etc. in URLs cannot break CSS url() parsing */
       const urlJson = JSON.stringify(entry.src);
       bg.style.backgroundImage = "url(" + urlJson + ")";

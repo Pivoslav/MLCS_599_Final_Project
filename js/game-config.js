@@ -53,8 +53,8 @@
     };
 
     /**
-     * Optional dialogue portrait under the scene title (Phase 2b). Same static-HTTPS rule as SCENE_IMAGES.
-     * Provenance matches SCENE_IMAGES / RusPortraits where possible; Konstantin Aksakov from Commons.
+     * Optional dialogue portrait under the scene title only (not full-width SCENE_IMAGES backgrounds).
+     * Same static-HTTPS rule as SCENE_IMAGES; provenance from RusPortraits / Commons where noted.
      * @type {Record<string, { src: string, alt: string, caption: string, creditHref?: string }>}
      */
     const SCENE_DIALOGUE_PORTRAITS = {
@@ -167,7 +167,8 @@
     /**
      * Per-scene art: prefer Commons /thumb/…/1280px-… (or 1920px) URLs for very large masters so mobile
      * browsers decode reliably; keep href on the canonical file page. Optional bgPos for cover crops.
-     * Portraits use a lower horizontal % so the subject sits in the clearer band to the right of the veil.
+     * Do not use portrait plates as full-width backgrounds (banner dialogue portraits stay separate).
+     * Fallback with no src: set bgGradient (CSS linear-gradient string) + credit; rails stay off.
      *
      * BACKLOG (item 2; scene imagery):
      * - Period appropriateness (critical): assets should fit ~1830s imperial Russia and the game’s
@@ -195,11 +196,11 @@
         bgPos: "48% 42%"
       },
       salon_pushkin: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
-        alt: "Portrait of Alexander Pushkin.",
-        credit: "Portrait of Alexander Pushkin.",
-        href: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg",
-        bgPos: "38% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fontanka_beggrov.jpg/1280px-Fontanka_beggrov.jpg",
+        alt: "Nineteenth-century lithograph of the Fontanka River embankment in Saint Petersburg.",
+        credit: "Karl Beggrov, Fontanka embankment (salon turns to Pushkin; city plate, portrait stays in the banner).",
+        href: "https://commons.wikimedia.org/wiki/File:Fontanka_beggrov.jpg",
+        bgPos: "50% 45%"
       },
       petersburg_pressure: {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg/1280px-Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
@@ -208,18 +209,18 @@
         href: "https://commons.wikimedia.org/wiki/File:Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg"
       },
       reformist: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
-        alt: "Engraved portrait of Pyotr Chaadayev.",
-        credit: "Engraved portrait of Petr Chaadaev (Grand Duke Nicholas Mikhailovich catalogue).",
-        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg",
-        bgPos: "42% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Alexeev_Senatskaya_plocshad.jpg/1280px-Alexeev_Senatskaya_plocshad.jpg",
+        alt: "Painting of Senate Square with Saint Isaac’s Cathedral and the Senate in Saint Petersburg.",
+        credit: "Fyodor Alexeyev, Senate Square (Westernizing reform: institutions and façades, not a sitter).",
+        href: "https://commons.wikimedia.org/wiki/File:Alexeev_Senatskaya_plocshad.jpg",
+        bgPos: "50% 40%"
       },
       reform_education: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
-        alt: "Portrait of Pyotr Chaadayev.",
-        credit: "Portrait of Pyotr Chaadayev (19th c., after Kozina).",
-        href: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg",
-        bgPos: "44% 16%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg/1280px-Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        alt: "Ivanovskaya Square, Moscow (early nineteenth-century city view).",
+        credit: "Fyodor Alekseyev, Ivanovskaya Square, Moscow (schools and charters; Moscow fabric).",
+        href: "https://commons.wikimedia.org/wiki/File:Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        bgPos: "50% 40%"
       },
       stub_petition_winter: {
         src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
@@ -269,11 +270,11 @@
         bgPos: "50% 42%"
       },
       beat_statist_machine: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
-        alt: "Portrait of Emperor Nicholas I of Russia.",
-        credit: "Portrait of Nicholas I of Russia.",
-        href: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Alekseev_Kremlin_palace-1800.jpg/1280px-Alekseev_Kremlin_palace-1800.jpg",
+        alt: "Painting of the Kremlin palace complex and cathedrals above the Moskva River.",
+        credit: "Fyodor Alexeyev, Kremlin palace view (statist machine: vertical center and legible throne geography).",
+        href: "https://commons.wikimedia.org/wiki/File:Alekseev_Kremlin_palace-1800.jpg",
+        bgPos: "50% 38%"
       },
       mediator: {
         src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
@@ -318,11 +319,11 @@
         bgPos: "50% 42%"
       },
       crisis_statist: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Alekseev_Kremlin_palace-1800.jpg",
-        alt: "Painting of the Kremlin palace complex and cathedrals above the Moskva River.",
-        credit: "Fyodor Alexeyev, Kremlin palace view (statist crisis: throne, vertical, legible center).",
-        href: "https://commons.wikimedia.org/wiki/File:Alekseev_Kremlin_palace-1800.jpg",
-        bgPos: "50% 38%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/PalaceSquare-Sadovnikov.jpg/1280px-PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace in Saint Petersburg (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square (statist crisis: capital façade and crowd geometry).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
       },
       crisis_med: {
         src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
@@ -339,18 +340,18 @@
         bgPos: "50% 45%"
       },
       event_censor: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
-        alt: "Engraved portrait of Count Alexander von Benckendorff.",
-        credit: "Engraved portrait of Alexander von Benckendorff (Third Section / gendarmes; censorship climate).",
-        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Anichkov_bridge.jpg/1280px-Anichkov_bridge.jpg",
+        alt: "The Anichkov Bridge in Saint Petersburg.",
+        credit: "Anichkov Bridge over the Fontanka (censorship beat: official city fabric; Benckendorff stays in dialogue banner where used).",
+        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg",
+        bgPos: "50% 45%"
       },
       event_salon: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Hector_Viger_-_L%27imp%C3%A9ratrice_Jos%C3%A9phine_re%C3%A7oit_%C3%A0_la_Malmaison_la_visite_du_Tsar_Alexandre_Ier.jpg",
-        alt: "Painting of Tsar Alexander I received in a salon at Malmaison (imperial visit, mirrors and court dress).",
-        credit: "Hector Viger, Tsar Alexander I received at Malmaison (event: salon reopened after pressure; not Russian interior, but period court visit).",
-        href: "https://commons.wikimedia.org/wiki/File:Hector_Viger_-_L%27imp%C3%A9ratrice_Jos%C3%A9phine_re%C3%A7oit_%C3%A0_la_Malmaison_la_visite_du_Tsar_Alexandre_Ier.jpg",
-        bgPos: "52% 38%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg/1280px-Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
+        alt: "Oil painting of a lamp-lit interior with figures seated in a nineteenth-century salon.",
+        credit: "Olga Kotchetova, <em>Intérieur de salon</em> (salon reopens after pressure; interior plate, no single portrait as backdrop).",
+        href: "https://commons.wikimedia.org/wiki/File:Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
+        bgPos: "48% 42%"
       },
       event_rural_gentry: {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg/1280px-Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg",
@@ -388,11 +389,11 @@
         bgPos: "50% 40%"
       },
       final_route_people: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/b/be/Venetsianov_Peasant_Girl_with_Cornflowers.jpg",
-        alt: "Painting of a young peasant girl in a headscarf holding cornflowers.",
-        credit: "Alexey Venetsianov, <em>Peasant Girl with Cornflowers</em> (closing frame: People, narod-facing life).",
-        href: "https://commons.wikimedia.org/wiki/File:Venetsianov_Peasant_Girl_with_Cornflowers.jpg",
-        bgPos: "48% 32%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg/1280px-The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        alt: "Historical depiction of the 1824 Saint Petersburg flood.",
+        credit: "The flood in Saint Petersburg, 1824 (People lens: water, clerks, and lives beside the bronze story).",
+        href: "https://commons.wikimedia.org/wiki/File:The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        bgPos: "50% 45%"
       },
       ending_computed: {
         src: "https://upload.wikimedia.org/wikipedia/commons/2/23/Beggrov_Vid_na_Isaakij.jpg",
@@ -413,24 +414,24 @@
         bgPos: "50% 38%"
       },
       intro: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
-        bgPos: "38% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Alekseev_Nikolskie_vorota_Kitai_Goroda.jpg/1280px-Alekseev_Nikolskie_vorota_Kitai_Goroda.jpg",
+        bgPos: "46% 36%"
       },
       salon_pushkin: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
-        bgPos: "42% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg/1280px-Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        bgPos: "50% 40%"
       },
       petersburg_pressure: {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Anichkov_bridge.jpg/1280px-Anichkov_bridge.jpg",
         bgPos: "50% 45%"
       },
       reformist: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
-        bgPos: "38% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Dvortsovaya_pier_at_1840.jpg/1280px-Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
       },
       reform_education: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
-        bgPos: "44% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fontanka_beggrov.jpg/1280px-Fontanka_beggrov.jpg",
+        bgPos: "50% 45%"
       },
       stub_petition_winter: {
         src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
@@ -441,8 +442,8 @@
         bgPos: "48% 35%"
       },
       beat_west_print: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg/1280px-RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Dvortsovaya_pier_at_1840.jpg/1280px-Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
       },
       distinct_path: {
         src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
@@ -457,12 +458,12 @@
         bgPos: "52% 35%"
       },
       state_path: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Alekseev_Kremlin_palace-1800.jpg/1280px-Alekseev_Kremlin_palace-1800.jpg",
+        bgPos: "50% 38%"
       },
       beat_statist_machine: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/PalaceSquare-Sadovnikov.jpg/1280px-PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
       },
       mediator: {
         src: "https://upload.wikimedia.org/wikipedia/commons/0/02/Red_Square_in_Moscow_%281801%29_by_Fedor_Alekseev.jpg",
@@ -481,16 +482,16 @@
         bgPos: "50% 48%"
       },
       crisis_west: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
-        bgPos: "44% 16%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fontanka_beggrov.jpg/1280px-Fontanka_beggrov.jpg",
+        bgPos: "50% 45%"
       },
       crisis_slav: {
         src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
         bgPos: "52% 35%"
       },
       crisis_statist: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg/1280px-The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        bgPos: "50% 45%"
       },
       crisis_med: {
         src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
@@ -501,16 +502,16 @@
         bgPos: "50% 45%"
       },
       event_censor: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fontanka_beggrov.jpg/1280px-Fontanka_beggrov.jpg",
+        bgPos: "50% 45%"
       },
       event_salon: {
         src: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Savrasov_1871.jpeg",
         bgPos: "48% 38%"
       },
       event_rural_gentry: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
-        bgPos: "38% 22%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
+        bgPos: "52% 35%"
       },
       event_zemstvo_clash: {
         src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
@@ -525,16 +526,16 @@
         bgPos: "50% 42%"
       },
       final_route_reform: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
-        bgPos: "42% 20%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Palace_Embankment_near_Hermitage_Theatre_%28Beggrov%29.jpg/1280px-Palace_Embankment_near_Hermitage_Theatre_%28Beggrov%29.jpg",
+        bgPos: "52% 46%"
       },
       final_route_people: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
-        bgPos: "50% 45%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Savrasov_1871.jpeg/1280px-Savrasov_1871.jpeg",
+        bgPos: "48% 38%"
       },
       ending_computed: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/6/65/Fyodor_Alexeyev_-_View_of_the_Peter_and_Paul_Fortress_and_Palace_Embankment_-_Google_Art_Project.jpg",
-        bgPos: "52% 44%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Dvortsovaya_pier_at_1840.jpg/1280px-Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
       }
     };
 

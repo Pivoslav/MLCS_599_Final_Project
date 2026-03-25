@@ -609,6 +609,14 @@
       transition: opacity 0.55s ease, filter 0.35s ease;
     }
 
+    /* Optional full-panel CSS gradient from SCENE_IMAGES.bgGradient (no portrait plate). */
+    .content-scene-bg.content-scene-bg--gradient-only {
+      background-repeat: no-repeat;
+      transform: none;
+      filter: saturate(1.05);
+      opacity: 0.88;
+    }
+
     /* Per-scene colour wash (still readable; pairs with data-ambient on .content) */
     .content-scene-ambient {
       position: absolute;
