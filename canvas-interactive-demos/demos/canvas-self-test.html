@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Canvas self-test (demo)</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .status-ok { color: #1b5e20; font-weight: 600; }
+    .status-bad { color: var(--danger); font-weight: 600; }
+    .status-neutral { color: #5d4e37; font-weight: 600; }
+    pre.report {
+      background: #eee9e2;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      overflow: auto;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+    ul.checks { padding-left: 1.2rem; }
+    ul.checks li { margin: 0.35rem 0; }
+    .inline-demo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .inline-demo svg {
+      width: 40px;
+      height: 40px;
+      stroke: var(--bar-order);
+      fill: none;
+      stroke-width: 2;
+    }
+    #click-result { font-weight: 600; min-height: 1.4em; }
+    /* input[type=button] survives some LMS sanitizers that strip <button> */
+    .demo-selftest-kbd {
+      display: inline-block;
+      min-height: 2.75rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+      border: 2px solid #1a1a1a;
+      background: #fff;
+      color: #1a1a1a;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .demo-selftest-kbd:hover {
+      background: #eee9e2;
+    }
+    .demo-selftest-fallback {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--link);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--link);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .demo-selftest-fallback:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Canvas self-test</h1>
+  <p>
+    Automated and manual checks from <a href="../AGENT_INSTRUCTIONS.md">AGENT_INSTRUCTIONS.md</a> §5.6: path
+    relationship, errors from <strong>this page’s scripts</strong>, inline SVG, keyboard-activatable button,
+    and <code>localStorage</code> behavior. In Canvas embeds or strict iframes, storage is often blocked — that still
+    <strong>passes</strong> here as long as the page handles it (no crash). Extension-injected script noise is ignored.
+  </p>
+
+  <h2>Checklist</h2>
+  <ul class="checks" id="checklist"></ul>
+
+  <h2>Inline SVG sample + activatable control</h2>
+  <div class="demo-panel">
+    <p style="margin-top:0;font-size:0.92rem;color:var(--text-muted);">
+      Canvas and some embedders remove <code>&lt;button&gt;</code> or block scripts. This block uses
+      <code>&lt;input type="button"&gt;</code> plus a plain link fallback you can activate with keyboard (Enter).
+    </p>
+    <div class="inline-demo">
+      <svg viewBox="0 0 24 24" role="img" aria-labelledby="st-svg-title">
+        <title id="st-svg-title">Self-test checkmark stroke</title>
+        <path d="M4 12l6 6L20 6" />
+      </svg>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;">
+        <input
+          type="button"
+          id="kbd-btn"
+          class="demo-selftest-kbd"
+          value="Activate (click or Enter / Space)"
+        />
+        <a href="#" class="demo-selftest-fallback" id="kbd-fallback" role="button" tabindex="0">Fallback: activate via link</a>
+        <span id="click-result" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </div>
+
+  <h2>localStorage</h2>
+  <p id="ls-result" role="status"></p>
+
+  <h2>Environment (optional)</h2>
+  <pre class="report" id="env-report" aria-label="User agent and viewport"></pre>
+
+  <p class="demo-note" style="margin-top:1.5rem;">
+    Open this file from the same relative folder layout you will zip for Canvas Files. Parent hub:
+    <a href="../index.html">index.html</a>.
+  </p>
+
+  <script>
+    (function () {
+      const checklist = document.getElementById("checklist");
+      const items = [];
+
+      function addItem(ok, label, note) {
+        items.push({ ok: ok, label: label, note: note || "" });
+      }
+
+      const errors = [];
+      window.onerror = function (msg, url, line, col, err) {
+        errors.push({
+          msg: String(msg),
+          url: url || "",
+          line: line,
+        });
+        return false;
+      };
+
+      /** Count only errors likely from this document — not browser extensions or foreign origins. */
+      function isRelevantScriptError(url, msg) {
+        var u = String(url || "");
+        if (/^(chrome|moz|safari|webkit)-extension:/i.test(u)) return false;
+        if (u.indexOf("extension://") !== -1) return false;
+        if (!u) return true;
+        try {
+          var abs = new URL(u, location.href);
+          var here = new URL(location.href);
+          if (/^(chrome|moz|safari|webkit)-extension:/i.test(abs.protocol)) return false;
+          if (abs.origin !== here.origin && abs.origin !== "null" && here.origin !== "null") return false;
+          if (abs.pathname === here.pathname) return true;
+          var tail = here.pathname.replace(/^.*\//, "") || "";
+          return Boolean(tail && abs.pathname.slice(-tail.length) === tail);
+        } catch (e) {
+          return false;
+        }
+      }
+
+      addItem(true, "Page loaded script block");
+
+      function markActivated(source) {
+        var el = document.getElementById("click-result");
+        if (el) el.textContent = "Control activated" + (source ? " (" + source + ")." : ".");
+      }
+
+      var kbdBtn = document.getElementById("kbd-btn");
+      if (kbdBtn) {
+        kbdBtn.addEventListener("click", function () {
+          markActivated("input");
+        });
+      }
+      var kbdLink = document.getElementById("kbd-fallback");
+      if (kbdLink) {
+        kbdLink.addEventListener("click", function (e) {
+          e.preventDefault();
+          markActivated("link");
+        });
+        kbdLink.addEventListener("keydown", function (e) {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            markActivated("link");
+          }
+        });
+      }
+
+      var lsEl = document.getElementById("ls-result");
+      var k = "mlcs599_demo_selftest";
+      try {
+        localStorage.setItem(k, "1");
+        var v = localStorage.getItem(k);
+        try {
+          localStorage.removeItem(k);
+        } catch (ignore) {}
+        if (v === "1") {
+          addItem(true, "localStorage read/write/remove (probe key removed after test)");
+          lsEl.textContent = "localStorage is available.";
+          lsEl.className = "status-ok";
+        } else {
+          addItem(
+            true,
+            "localStorage not usable (silent block or quota) — session-only UI is acceptable for Canvas / embeds"
+          );
+          lsEl.textContent =
+            "localStorage did not persist the probe value (common when storage is partitioned or disabled). Demos should not rely on it.";
+          lsEl.className = "status-neutral";
+        }
+      } catch (e) {
+        addItem(
+          true,
+          "localStorage threw — graceful degradation (typical in embedded LMS or strict iframe policy)"
+        );
+        lsEl.textContent =
+          "localStorage threw: " +
+          (e && e.message ? e.message : "unavailable") +
+          ". This is expected in some Canvas views; demos use try/catch and in-memory state only.";
+        lsEl.className = "status-neutral";
+      }
+
+      function renderChecks() {
+        checklist.innerHTML = items
+          .map(function (it) {
+            var c = it.ok ? "status-ok" : "status-bad";
+            var t = it.ok ? "PASS" : "FAIL";
+            var note = it.note ? " <span class=\"status-neutral\">(" + it.note + ")</span>" : "";
+            return "<li><span class=\"" + c + "\">" + t + "</span> — " + it.label + note + "</li>";
+          })
+          .join("");
+      }
+
+      renderChecks();
+
+      window.addEventListener("load", function () {
+        var relevant = errors.filter(function (e) {
+          return isRelevantScriptError(e.url, e.msg);
+        });
+        var ignored = errors.length - relevant.length;
+        if (relevant.length) {
+          var detail = relevant
+            .map(function (e) {
+              return e.msg + (e.line != null ? " @ line " + e.line : "");
+            })
+            .join("; ");
+          addItem(false, "Script error from this page: " + detail);
+        } else if (errors.length) {
+          addItem(true, "No errors attributed to this page’s scripts", "ignored " + ignored + " external message(s)");
+        } else {
+          addItem(true, "No window.onerror events during load");
+        }
+        var svgTitles = document.querySelectorAll("svg title");
+        addItem(svgTitles.length >= 1, "At least one inline SVG present");
+        var btn = document.getElementById("kbd-btn");
+        var okControl =
+          (btn && (btn.tagName === "BUTTON" || (btn.tagName === "INPUT" && btn.type === "button"))) ||
+          document.getElementById("kbd-fallback");
+        addItem(
+          Boolean(okControl),
+          "Activatable control in DOM (input/button or fallback link for strict hosts)"
+        );
+
+        document.getElementById("env-report").textContent =
+          "userAgent: " +
+          navigator.userAgent +
+          "\nviewport: " +
+          window.innerWidth +
+          " × " +
+          window.innerHeight +
+          "\ndevicePixelRatio: " +
+          (window.devicePixelRatio || 1);
+
+        renderChecks();
+      });
+    })();
+  </script>
+</body>
+</html>

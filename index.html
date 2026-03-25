@@ -1,0 +1,2989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Russia at the Crossroads: A Chaadaev Adventure</title>
+  <style>
+    :root {
+      /* Default: cool Neva-twilight frame, warm manuscript card (not flat beige) */
+      --bg: #dce3ec;
+      --bg-deep: #cfd8e6;
+      --ink: #16181d;
+      --card: #faf7f2;
+      --card-muted: #f3eee6;
+      --accent: #6b1a22;
+      --accent-2: #8b3a2d;
+      --line: #b8c0ce;
+      --bar-order: #4a5d6b;
+      --bar-reform: #6b4a5d;
+      --bar-people: #4a6b4f;
+      /* Overridden by :root[data-path] for path-tinted chrome */
+      --dynamic-accent: #5c1e28;
+      --dynamic-accent-2: #7a3d32;
+      --header-shade: rgba(45, 58, 82, 0.08);
+      --card-shade: rgba(252, 250, 246, 0.97);
+      /* Readable body band: ~16–18px equivalent on small / projector screens */
+      --fs-body: clamp(1rem, 0.92rem + 0.35vw, 1.125rem);
+      --pad-outer: clamp(10px, 2vw, 28px);
+      --pad-inset: clamp(14px, 2.5vw, 26px);
+      /* Scene colour scheme (html[data-scheme] + html[data-scene-id], set in syncAppChrome). Narrative pass: add keys to SCENE_COLOR_SCHEME or target [data-scene-id="…"] for one-offs. */
+      --page-grad-mid: #e4e9f1;
+      --page-grad-end: #d8dee8;
+      --app-grad-top: #fdfcfa;
+      --veil-rgb: 255, 250, 242;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(165deg, var(--bg) 0%, var(--page-grad-mid) 38%, var(--bg-deep) 72%, var(--page-grad-end) 100%);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: var(--fs-body);
+      min-height: 100vh;
+      line-height: 1.58;
+      display: flex;
+      justify-content: center;
+      padding: var(--pad-outer);
+    }
+
+    .app {
+      width: min(1680px, 100%);
+      max-width: 100%;
+      background: linear-gradient(180deg, var(--app-grad-top) 0%, var(--card) 22%, var(--card-muted) 100%);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(28, 40, 62, 0.12);
+      overflow: visible;
+    }
+
+    .app-main {
+      display: grid;
+      grid-template-columns: minmax(160px, 200px) minmax(0, 1fr);
+      gap: 0;
+      align-items: start;
+    }
+
+    @media (min-width: 1200px) {
+      .app-main {
+        grid-template-columns: minmax(176px, 220px) minmax(0, 1fr);
+      }
+    }
+
+    .header {
+      padding: clamp(14px, 2vw, 20px) var(--pad-inset);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(118deg, var(--card-shade) 0%, #f6f2eb 48%, var(--header-shade) 100%);
+      transition: background 0.45s ease;
+    }
+
+    h1 {
+      font-size: clamp(1.35rem, 1.1rem + 1.4vw, 1.95rem);
+      margin-bottom: 4px;
+      color: var(--dynamic-accent);
+      transition: color 0.35s ease;
+    }
+
+    .subtitle {
+      font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+      color: #4a5060;
+      line-height: 1.45;
+    }
+
+    .header-bar {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .header-bar .meta {
+      margin-top: 0;
+      flex: 1 1 auto;
+      min-width: min(100%, 220px);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: clamp(0.88rem, 0.84rem + 0.15vw, 0.95rem);
+      color: #6d5f53;
+    }
+
+    .meta span {
+      background: #e8edf5;
+      border: 1px solid #c8d0de;
+      border-radius: 999px;
+      padding: 4px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-ico {
+      flex-shrink: 0;
+      opacity: 0.88;
+    }
+
+    .meta-ico svg {
+      display: block;
+      width: 15px;
+      height: 15px;
+    }
+
+    /* Path-tinted accents: on :root so modal and global chrome still match */
+    :root[data-path="west"] {
+      --dynamic-accent: #4a3d5c;
+      --dynamic-accent-2: #6b5482;
+      --header-shade: rgba(75, 61, 92, 0.1);
+    }
+    :root[data-path="slav"] {
+      --dynamic-accent: #3d5a45;
+      --dynamic-accent-2: #5a7d63;
+      --header-shade: rgba(61, 90, 69, 0.11);
+    }
+    :root[data-path="statist"] {
+      --dynamic-accent: #6b3028;
+      --dynamic-accent-2: #8b4a3a;
+      --header-shade: rgba(107, 48, 40, 0.12);
+    }
+    :root[data-path="med"] {
+      --dynamic-accent: #2f5f6b;
+      --dynamic-accent-2: #3d7d8f;
+      --header-shade: rgba(47, 95, 107, 0.1);
+    }
+
+    /*
+     * Named colour schemes (optional). JS sets html[data-scheme] only when not "default" so :root base
+     * tokens apply for the main look. Assign scenes in SCENE_COLOR_SCHEME, or add rules such as
+     * :root[data-scene-id="intro"] { --veil-rgb: … } for one-off narrative beats.
+     */
+    :root[data-scheme="frost"] {
+      --bg: #cdd8e4;
+      --bg-deep: #bcc8d6;
+      --page-grad-mid: #d8e2ec;
+      --page-grad-end: #ccd6e2;
+      --card: #f4f8fb;
+      --card-muted: #eef3f8;
+      --app-grad-top: #f9fbfd;
+      --veil-rgb: 242, 248, 252;
+      --line: #a8b4c4;
+    }
+
+    :root[data-scheme="ember"] {
+      --bg: #e8e0d8;
+      --bg-deep: #dcd2c8;
+      --page-grad-mid: #efe8e0;
+      --page-grad-end: #e2d9d0;
+      --card: #fdfaf6;
+      --card-muted: #f5eee6;
+      --app-grad-top: #fffaf6;
+      --veil-rgb: 255, 248, 240;
+      --line: #c4b8a8;
+    }
+
+    :root[data-scene-tone="crisis"] .app .header {
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.06);
+    }
+    :root[data-scene-tone="event"] .app .header {
+      box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--dynamic-accent-2) 35%, transparent);
+    }
+    :root[data-scene-tone="ending"] .app .header {
+      box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--dynamic-accent) 45%, transparent);
+    }
+
+    .realm-legend {
+      padding: 14px 12px 18px 14px;
+      background: linear-gradient(180deg, #f7f4ef 0%, #f0ebe4 100%);
+      border-right: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+
+    .realm-legend h3 {
+      font-size: clamp(0.72rem, 0.68rem + 0.15vw, 0.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #7a6b5c;
+      margin-bottom: 12px;
+    }
+
+    .legend-meters {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding: 0 2px;
+    }
+
+    .legend-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .legend-track {
+      width: 100%;
+      max-width: 22px;
+      height: 112px;
+      background: #e8dfd2;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid #d4c9bb;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .legend-fill {
+      width: 100%;
+      min-height: 0;
+      border-radius: 0 0 4px 4px;
+      transition: height 0.35s ease;
+    }
+
+    .legend-fill.order { background: var(--bar-order); }
+    .legend-fill.reform { background: var(--bar-reform); }
+    .legend-fill.people { background: var(--bar-people); }
+
+    .legend-ico {
+      display: flex;
+      justify-content: center;
+      color: #5c4d40;
+    }
+    .legend-ico svg {
+      width: 22px;
+      height: 22px;
+      opacity: 0.92;
+    }
+    .legend-item:nth-child(1) .legend-ico { color: var(--bar-order); }
+    .legend-item:nth-child(2) .legend-ico { color: var(--bar-reform); }
+    .legend-item:nth-child(3) .legend-ico { color: var(--bar-people); }
+
+    .legend-label {
+      font-size: clamp(0.68rem, 0.62rem + 0.2vw, 0.78rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #5c4d40;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .legend-val {
+      font-size: clamp(0.82rem, 0.78rem + 0.15vw, 0.9rem);
+      font-variant-numeric: tabular-nums;
+      color: #3d342c;
+      font-weight: 600;
+    }
+
+    .inventory {
+      font-size: clamp(0.88rem, 0.84rem + 0.12vw, 0.95rem);
+      color: #5c4f42;
+    }
+
+    .inventory ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .inventory li {
+      background: #fff;
+      border: 1px solid #d4c4af;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .inv-ico svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      opacity: 0.9;
+      color: var(--dynamic-accent-2);
+    }
+
+    .inventory.empty { font-style: italic; color: #8a7b6a; }
+
+    .event-banner {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: linear-gradient(90deg, #f2f6fb 0%, #faf3e8 100%);
+      border: 1px solid #c9d2e4;
+      border-radius: 8px;
+      font-size: clamp(0.9rem, 0.86rem + 0.12vw, 0.98rem);
+      color: #3d4250;
+      display: none;
+    }
+
+    .event-banner.visible { display: block; }
+
+    .main-column {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    /* Wide screens: same scene image in narrow left/right strips (extra art real estate outside the veiled text block). */
+    .content-stage {
+      display: grid;
+      grid-template-columns: 1fr;
+      flex: 1;
+      min-height: 0;
+      align-items: stretch;
+    }
+
+    .scene-rail {
+      display: none;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.74;
+      filter: saturate(1.02);
+      pointer-events: none;
+      transition: opacity 0.45s ease, filter 0.35s ease;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--line) 35%, transparent);
+    }
+
+    .scene-rail--left {
+      border-right: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+    }
+
+    .scene-rail--right {
+      border-left: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+    }
+
+    .scene-rail.is-active {
+      opacity: 0.82;
+    }
+
+    @media (min-width: 980px) {
+      .content-stage {
+        grid-template-columns: minmax(72px, 11vw) minmax(0, 1fr) minmax(72px, 11vw);
+      }
+
+      .scene-rail {
+        display: block;
+      }
+    }
+
+    @media (min-width: 1400px) {
+      .content-stage {
+        grid-template-columns: minmax(96px, 13vw) minmax(0, 1fr) minmax(96px, 13vw);
+      }
+    }
+
+    .content {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      padding: clamp(16px, 2.2vw, 24px) var(--pad-inset) 10px;
+      flex: 1;
+      min-height: min(40vh, 420px);
+    }
+
+    /* Scene art: default suits landscapes; portraits set bgPos in JS so faces sit in the clearer mid-right band */
+    .content-scene-bg {
+      position: absolute;
+      inset: -8%;
+      z-index: 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 64% 32%;
+      opacity: 0.78;
+      filter: saturate(1);
+      transform: scale(1.02);
+      pointer-events: none;
+      transition: opacity 0.55s ease, filter 0.35s ease;
+    }
+
+    /* Per-scene colour wash (still readable; pairs with data-ambient on .content) */
+    .content-scene-ambient {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+    }
+
+    .content[data-ambient="salon"] .content-scene-ambient {
+      background: linear-gradient(108deg, rgba(120, 82, 48, 0.07) 0%, rgba(200, 170, 120, 0.04) 38%, transparent 68%);
+    }
+    .content[data-ambient="print"] .content-scene-ambient {
+      background: linear-gradient(110deg, rgba(62, 48, 88, 0.1) 0%, rgba(130, 110, 160, 0.05) 42%, transparent 70%);
+    }
+    .content[data-ambient="neva"] .content-scene-ambient {
+      background: linear-gradient(102deg, rgba(32, 58, 92, 0.11) 0%, rgba(100, 130, 168, 0.06) 44%, transparent 72%);
+    }
+    .content[data-ambient="soil"] .content-scene-ambient {
+      background: linear-gradient(105deg, rgba(36, 52, 32, 0.12) 0%, rgba(95, 88, 42, 0.07) 40%, transparent 66%);
+    }
+    .content[data-ambient="crown"] .content-scene-ambient {
+      background: linear-gradient(104deg, rgba(28, 26, 42, 0.12) 0%, rgba(72, 68, 98, 0.07) 38%, transparent 70%);
+    }
+    .content[data-ambient="bridge"] .content-scene-ambient {
+      background: linear-gradient(106deg, rgba(22, 72, 78, 0.11) 0%, rgba(70, 120, 128, 0.06) 45%, transparent 69%);
+    }
+    .content[data-ambient="winter"] .content-scene-ambient {
+      background: linear-gradient(108deg, rgba(48, 62, 82, 0.14) 0%, rgba(165, 180, 200, 0.09) 35%, transparent 64%);
+    }
+    .content[data-ambient="flood"] .content-scene-ambient {
+      background: linear-gradient(112deg, rgba(28, 48, 72, 0.15) 0%, rgba(85, 108, 138, 0.09) 48%, transparent 76%);
+    }
+    .content[data-ambient="censor"] .content-scene-ambient {
+      background: linear-gradient(105deg, rgba(72, 32, 36, 0.1) 0%, rgba(48, 40, 44, 0.07) 42%, transparent 68%);
+    }
+    .content[data-ambient="zemstvo"] .content-scene-ambient {
+      background: linear-gradient(107deg, rgba(88, 62, 28, 0.1) 0%, rgba(150, 118, 62, 0.06) 46%, transparent 71%);
+    }
+    .content[data-ambient="finis"] .content-scene-ambient {
+      background: linear-gradient(118deg, rgba(38, 32, 72, 0.14) 0%, rgba(100, 82, 140, 0.08) 46%, transparent 80%);
+    }
+
+    /* Sorting the Outcome: keep art readable beside long choice list (veil + bgPos tuned in JS). */
+    .content[data-ambient="sorting"] .content-scene-ambient {
+      background: linear-gradient(106deg, rgba(22, 72, 78, 0.08) 0%, rgba(70, 120, 128, 0.04) 42%, transparent 74%);
+    }
+
+    .content[data-ambient="sorting"] .content-scene-bg {
+      opacity: 0.88;
+    }
+
+    .content-scene-veil {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      /* Tight solid band only over the text column; mid viewport opens so portrait faces read */
+      background: linear-gradient(
+        105deg,
+        rgba(var(--veil-rgb), 1) 0%,
+        rgba(var(--veil-rgb), 0.99) 12%,
+        rgba(var(--veil-rgb), 0.93) 24%,
+        rgba(var(--veil-rgb), 0.72) 36%,
+        rgba(var(--veil-rgb), 0.38) 48%,
+        rgba(var(--veil-rgb), 0.14) 62%,
+        rgba(var(--veil-rgb), 0.03) 78%,
+        rgba(var(--veil-rgb), 0) 100%
+      );
+    }
+
+    @media (max-width: 960px) {
+      .content {
+        min-height: 0;
+      }
+
+      .scene-rail {
+        display: none !important;
+      }
+
+      .content-scene-bg {
+        opacity: 0.58;
+        filter: saturate(0.98);
+      }
+      .content-scene-veil {
+        background: linear-gradient(
+          175deg,
+          rgba(var(--veil-rgb), 1) 0%,
+          rgba(var(--veil-rgb), 0.96) 22%,
+          rgba(var(--veil-rgb), 0.82) 42%,
+          rgba(var(--veil-rgb), 0.45) 65%,
+          rgba(var(--veil-rgb), 0.12) 100%
+        );
+      }
+
+      .content[data-ambient="sorting"] .content-scene-veil {
+        background: linear-gradient(
+          175deg,
+          rgba(var(--veil-rgb), 0.82) 0%,
+          rgba(var(--veil-rgb), 0.48) 32%,
+          rgba(var(--veil-rgb), 0.18) 58%,
+          rgba(var(--veil-rgb), 0.04) 82%,
+          rgba(var(--veil-rgb), 0) 100%
+        );
+      }
+
+      .content[data-ambient="sorting"] .content-scene-bg {
+        opacity: 0.74;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .content-scene-bg,
+      .scene-rail {
+        transform: none;
+        transition: none;
+      }
+    }
+
+    .content-row {
+      position: relative;
+      z-index: 3;
+      display: block;
+    }
+
+    .content-primary {
+      position: relative;
+      z-index: 3;
+      min-width: 0;
+    }
+
+    .scene-bg-source {
+      margin-top: 14px;
+      max-width: min(80ch, 100%);
+      font-size: clamp(0.68rem, 0.64rem + 0.1vw, 0.76rem);
+      color: #8a7b6c;
+    }
+
+    .scene-bg-source[hidden] {
+      display: none !important;
+    }
+
+    .scene-bg-source > summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 600;
+      color: #7a6b5c;
+      letter-spacing: 0.02em;
+    }
+
+    .scene-bg-source > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .scene-bg-credit-inner {
+      margin-top: 6px;
+      padding-left: 10px;
+      line-height: 1.45;
+      font-style: italic;
+      border-left: 2px solid rgba(216, 203, 184, 0.9);
+    }
+
+    .scene-bg-credit-inner a {
+      color: var(--dynamic-accent);
+      font-style: normal;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Stack meters above story so narrow / classroom monitors use full width for text */
+    @media (max-width: 960px) {
+      .app-main {
+        grid-template-columns: 1fr;
+      }
+      .realm-legend {
+        position: static;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding: 14px var(--pad-inset) 16px;
+      }
+      .legend-meters {
+        justify-content: center;
+        gap: clamp(14px, 4vw, 24px);
+        max-width: 42rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (min-width: 961px) and (max-width: 1180px) {
+      .app-main {
+        grid-template-columns: minmax(148px, 180px) minmax(0, 1fr);
+      }
+    }
+
+    .scene-title {
+      font-size: clamp(1.2rem, 1.05rem + 0.55vw, 1.38rem);
+      margin-bottom: 10px;
+      color: var(--dynamic-accent-2);
+      transition: color 0.35s ease;
+      /* Keeps heading readable if the veil gradient is soft at this x-position */
+      text-shadow: 0 0 20px rgba(var(--veil-rgb), 0.9), 0 1px 0 rgba(var(--veil-rgb), 0.85);
+    }
+
+    .scene-text {
+      margin-bottom: 16px;
+      line-height: 1.66;
+      font-size: 1em;
+      color: #141210;
+      text-shadow: 0 0 18px rgba(var(--veil-rgb), 0.75), 0 1px 0 rgba(var(--veil-rgb), 0.65);
+    }
+    .scene-text em { font-style: italic; }
+
+    .choices { display: grid; gap: 10px; }
+
+    .choice-btn {
+      text-align: left;
+      border: 1px solid #c9b8a2;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: clamp(1rem, 0.96rem + 0.15vw, 1.07rem);
+      line-height: 1.45;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font-family: inherit;
+    }
+
+    .choice-btn:hover {
+      border-color: var(--dynamic-accent-2);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 14px color-mix(in srgb, var(--dynamic-accent) 14%, transparent);
+    }
+
+    .choice-btn .fx {
+      display: block;
+      font-size: clamp(0.82rem, 0.78rem + 0.12vw, 0.88rem);
+      color: #6b5d4f;
+      margin-top: 4px;
+    }
+
+    .header-actions.actions {
+      flex-shrink: 0;
+      justify-content: flex-end;
+    }
+
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .ghost, .primary {
+      border-radius: 7px;
+      padding: 9px 14px;
+      border: 1px solid #cdb79e;
+      cursor: pointer;
+      font-size: clamp(0.92rem, 0.88rem + 0.12vw, 1rem);
+      font-family: inherit;
+    }
+
+    .ghost { background: #fff; color: #3a4150; }
+    .primary { background: var(--dynamic-accent); color: #fff; border-color: var(--dynamic-accent); }
+
+    .ending-extra {
+      margin-top: 14px;
+      padding: 12px;
+      background: #e8edf4;
+      border-radius: 8px;
+      border-left: 3px solid var(--dynamic-accent-2);
+      font-size: clamp(0.95rem, 0.92rem + 0.1vw, 1.02rem);
+      line-height: 1.55;
+      max-width: min(80ch, 100%);
+    }
+
+    .achievements {
+      margin-top: 12px;
+      font-size: clamp(0.9rem, 0.86rem + 0.12vw, 0.95rem);
+      color: #5a4d40;
+    }
+
+    .achievements strong { color: var(--dynamic-accent); }
+
+    .discussion-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: #eef4f0;
+      border: 1px solid #a8c9b8;
+      border-radius: 8px;
+      font-size: clamp(0.95rem, 0.9rem + 0.15vw, 1.04rem);
+      line-height: 1.58;
+      color: #2a3d32;
+      max-width: min(80ch, 100%);
+    }
+
+    .discussion-box h4 {
+      font-size: clamp(0.82rem, 0.78rem + 0.12vw, 0.88rem);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #1e5c40;
+      margin-bottom: 10px;
+    }
+
+    .discussion-box ul {
+      margin: 0 0 0 1.15rem;
+      padding: 0;
+    }
+
+    .discussion-box li { margin-bottom: 8px; }
+
+    .path-recap {
+      margin-bottom: 14px;
+      padding: 12px 14px;
+      background: #e8f0f7;
+      border: 1px solid #9db8cc;
+      border-radius: 8px;
+      font-size: clamp(0.92rem, 0.88rem + 0.12vw, 1rem);
+      line-height: 1.52;
+      color: #2a3540;
+    }
+
+    .counterfactual-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #f2f0ea;
+      border-left: 3px solid #9a7a4a;
+      font-size: clamp(0.88rem, 0.84rem + 0.12vw, 0.95rem);
+      color: #4a4035;
+      line-height: 1.48;
+    }
+
+    .callback-note,
+    .crisis-misfit {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      padding: 10px 12px;
+      font-size: clamp(0.9rem, 0.86rem + 0.12vw, 0.96rem);
+      line-height: 1.45;
+      color: #3d3830;
+      border-left: 3px solid #8b7355;
+      background: #f7f2ea;
+    }
+
+    .crisis-misfit {
+      border-left-color: #6b5b95;
+      background: #f3f0f8;
+    }
+
+    .unresolved-block {
+      margin-top: 18px;
+      padding: 12px 14px;
+      background: #f8f9fb;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: clamp(0.95rem, 0.9rem + 0.12vw, 1.02rem);
+      max-width: min(80ch, 100%);
+    }
+
+    .unresolved-block h4 {
+      margin: 0 0 8px 0;
+      font-size: clamp(1rem, 0.96rem + 0.1vw, 1.06rem);
+    }
+
+    .unresolved-block ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .primary-read {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #f5f0eb;
+      border: 1px solid #d4c9bb;
+      border-radius: 8px;
+      font-size: clamp(0.92rem, 0.88rem + 0.12vw, 1rem);
+      line-height: 1.55;
+      max-width: min(80ch, 100%);
+    }
+
+    .primary-read summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--dynamic-accent-2);
+    }
+
+    .primary-read-body {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #e0d5c8;
+      color: #3d342c;
+    }
+
+    .primary-read-body .read-gloss {
+      display: block;
+      margin: 6px 0 14px;
+      padding-left: 10px;
+      border-left: 2px solid #d4c9bb;
+      color: #5a5046;
+      font-style: italic;
+    }
+
+    .run-title-banner {
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: linear-gradient(90deg, #e6eaf2, #faf6f0);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: clamp(1rem, 0.96rem + 0.12vw, 1.08rem);
+      color: var(--dynamic-accent);
+      line-height: 1.45;
+      max-width: min(80ch, 100%);
+    }
+
+    .historio-nudge {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #f4f0fa;
+      border: 1px solid #c4b8d8;
+      border-radius: 8px;
+      font-size: clamp(0.9rem, 0.86rem + 0.12vw, 0.98rem);
+      color: #3a3248;
+      line-height: 1.52;
+      max-width: min(80ch, 100%);
+    }
+
+    .secret-insight {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #fff9e6;
+      border: 2px solid #d4a017;
+      border-radius: 8px;
+      font-size: clamp(0.95rem, 0.9rem + 0.15vw, 1.04rem);
+      color: #4a3d1a;
+      line-height: 1.55;
+      max-width: min(80ch, 100%);
+    }
+
+    .coop-panel {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #eef2f7;
+      border: 1px solid #b8c4d8;
+      border-radius: 8px;
+      font-size: clamp(0.88rem, 0.84rem + 0.12vw, 0.95rem);
+      color: #333d4a;
+      line-height: 1.5;
+    }
+
+    .coop-panel summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #3d4a5c;
+    }
+
+    .coop-grid {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .coop-role {
+      padding: 8px 10px;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid #d0d8e4;
+    }
+
+    .coop-role strong { color: var(--bar-order); }
+    .coop-role:nth-child(2) strong { color: var(--bar-reform); }
+    .coop-role:nth-child(3) strong { color: var(--bar-people); }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal-sheet {
+      background: var(--card);
+      width: min(720px, calc(100vw - 24px));
+      max-width: calc(100vw - 24px);
+      max-height: min(85vh, 680px);
+      overflow: auto;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      padding: clamp(16px, 3vw, 22px);
+      font-size: clamp(0.95rem, 0.92rem + 0.1vw, 1.02rem);
+    }
+
+    .modal-sheet h3 {
+      font-size: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
+      color: var(--dynamic-accent);
+      margin-bottom: 12px;
+    }
+
+    .glossary-dl dt {
+      font-weight: 600;
+      margin-top: 10px;
+      color: #3d342c;
+    }
+
+    .glossary-dl dt [lang="ru"] {
+      font-weight: 500;
+      color: #5a5046;
+    }
+
+    .glossary-dl dd {
+      margin: 4px 0 0 0;
+      font-size: clamp(0.92rem, 0.88rem + 0.1vw, 0.98rem);
+      line-height: 1.5;
+      color: #5a5046;
+    }
+
+    .modal-close {
+      margin-top: 16px;
+      width: 100%;
+    }
+
+    .ending-actions {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .copy-toast {
+      font-size: clamp(0.88rem, 0.84rem + 0.1vw, 0.94rem);
+      color: #1e5c40;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Russia at the Crossroads</h1>
+      <p class="subtitle">Chaadaev, <em>The Bronze Horseman</em>, and choices that shift Order, Reform, and People, with discussion prompts at each ending</p>
+      <div class="header-bar">
+        <div class="meta">
+          <span id="sceneId"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span><span id="sceneIdText">Scene: Moscow, Autumn 1836</span></span>
+          <span id="steps"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01M9 15c1.5 1 4 1 6 0"/></svg></span><span id="stepsText">Turn: 0</span></span>
+          <span id="era"><span class="meta-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l3 2"/></svg></span><span id="eraText">Era: 1836</span></span>
+        </div>
+        <div class="header-actions actions">
+          <button type="button" class="ghost" id="glossaryBtn" title="Key terms">Terms</button>
+          <button type="button" class="ghost" id="backBtn">Back</button>
+          <button type="button" class="primary" id="restartBtn">Restart</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-main">
+      <aside class="realm-legend" aria-label="Game state">
+        <h3>Realm</h3>
+        <div class="legend-meters" role="img" aria-label="Order, Reform, and People from 0 to 100">
+          <div class="legend-item">
+            <span class="legend-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 21h18"/><path d="M6 21V8l6-4 6 4v13"/><path d="M9 21v-6h6v6"/><path d="M10 12h4"/></svg></span>
+            <div class="legend-track"><div class="legend-fill order" id="barOrder" style="height:50%"></div></div>
+            <span class="legend-label">Order</span>
+            <span class="legend-val" id="valOrder">50</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h8l4 4v12a2 2 0 01-2 2H6a2 2 0 01-2-2V5z"/><path d="M14 3v5h5"/><path d="M8 13h4"/><path d="M8 17h6"/></svg></span>
+            <div class="legend-track"><div class="legend-fill reform" id="barReform" style="height:50%"></div></div>
+            <span class="legend-label">Reform</span>
+            <span class="legend-val" id="valReform">50</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="2.5"/><path d="M3 21v-1.5A3.5 3.5 0 016.5 16h5a3.5 3.5 0 013.5 3.5V21"/><path d="M14 21v-1.2a2.8 2.8 0 012.5-2.8h1"/></svg></span>
+            <div class="legend-track"><div class="legend-fill people" id="barPeople" style="height:50%"></div></div>
+            <span class="legend-label">People</span>
+            <span class="legend-val" id="valPeople">50</span>
+          </div>
+        </div>
+        <div class="inventory" id="inventoryBlock">
+          <strong style="display:block;margin-bottom:6px;font-size:0.78rem;">Library &amp; tokens</strong>
+          <ul id="inventoryList"><li class="empty">Nothing yet.</li></ul>
+        </div>
+        <div class="event-banner" id="eventBanner"></div>
+        <details class="coop-panel">
+          <summary>3-player co-op roles</summary>
+          <div class="coop-grid">
+            <div class="coop-role"><strong>Player 1 · Order:</strong> Legitimacy of stability, patronage, and ministry logic (you argue <em>for</em> the vertical, not as the sovereign). Censorship as a tradeoff salons navigate.</div>
+            <div class="coop-role"><strong>Player 2 · Reform:</strong> Law, schools, print, Chaadaev’s “universal history”; institutions that could become real.</div>
+            <div class="coop-role"><strong>Player 3 · People:</strong> Clerks, flood victims, provincial cost, <em>narod</em>’s material life; Evgeny’s side of the poem.</div>
+          </div>
+        </details>
+      </aside>
+
+      <div class="main-column">
+        <div class="content-stage">
+          <div class="scene-rail scene-rail--left" id="sceneRailLeft" aria-hidden="true"></div>
+          <section class="content" data-ambient="salon">
+            <div class="content-scene-bg" id="sceneBg" aria-hidden="true"></div>
+            <div class="content-scene-ambient" id="sceneAmbient" aria-hidden="true"></div>
+            <div class="content-scene-veil" aria-hidden="true"></div>
+            <div class="content-row">
+              <div class="content-primary">
+                <h2 class="scene-title" id="title"></h2>
+                <p class="scene-text" id="text"></p>
+                <div class="choices" id="choices"></div>
+                <div id="endingBlock"></div>
+                <details class="scene-bg-source" id="sceneBgSource" hidden>
+                  <summary>Illustration source</summary>
+                  <div class="scene-bg-credit-inner" id="sceneBgCredit"></div>
+                </details>
+              </div>
+            </div>
+          </section>
+          <div class="scene-rail scene-rail--right" id="sceneRailRight" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-backdrop" id="glossaryModal" role="dialog" aria-modal="true" aria-labelledby="glossaryTitle">
+    <div class="modal-sheet">
+      <h3 id="glossaryTitle">Key terms</h3>
+      <dl class="glossary-dl">
+        <dt><em>Teleskop</em> <span lang="ru">(Телескоп)</span></dt>
+        <dd>Moscow journal that published Chaadaev’s first “Philosophical Letter” in 1836, provoking official reaction and debate.</dd>
+        <dt>Third Section <span lang="ru">(Третье отделение)</span></dt>
+        <dd>Tsarist political police (from 1826); shorthand here for surveillance, files, and fear of salons and print.</dd>
+        <dt><em>Sobornost</em> <span lang="ru">(соборность)</span></dt>
+        <dd>Spiritual togetherness, often invoked by Slavophiles for Orthodox communal unity, not a government office, but a moral ideal.</dd>
+        <dt><em>Narod</em> <span lang="ru">(народ)</span></dt>
+        <dd>“The people,” especially the Russian peasant people as a cultural and moral category in nineteenth-century discourse.</dd>
+        <dt>Neva flood (1824) <span lang="ru">(наводнение на Неве, 1824)</span></dt>
+        <dd>Historical catastrophe Pushkin treats as <strong>based on truth</strong> (his prologue); in Part One it destroys Yevgeny’s world. In-game: ordinary lives vs. embankments and plans.</dd>
+        <dt><em>The Bronze Horseman</em> (1833) <span lang="ru">(«Медный всадник», 1833)</span></dt>
+        <dd>Pushkin’s narrative in <strong>prologue + two parts</strong>: Peter’s founding vow and a lyric “I love thee, Peter’s own creation,” then the flood and Yevgeny’s fixation on the equestrian statue. The <strong>mood turns</strong> from civic pride to horror and pursuit, not one flat “message.”</dd>
+        <dt>Zemstvo-style councils <span lang="ru">(земство)</span></dt>
+        <dd>Historically, <strong>zemstvos</strong> were elected provincial and district assemblies created under the 1864 reform; they handled local budgets, schools, roads, medicine, and welfare within limits set from St. Petersburg. <strong>Counterfactual staging:</strong> this game uses “zemstvo-style councils” as shorthand for that <em>idea</em> of provincial self-rule while your salon debates in the 1830s, not as a claim that zemstvos already existed or had those powers then.</dd>
+        <dt>Who “you” are <span lang="ru">(кто такие «вы»)</span></dt>
+        <dd>You guide a <strong>salon and its network</strong> (gentry, minor officials, clergy), not Nicholas I. Even on the statist path you <strong>lobby, advise, withdraw, or denounce</strong>; you do not tighten censorship by decree. The Tsar and the ministries remain offstage actors your choices try to influence or appease.</dd>
+        <dt>Order / Reform / People <span lang="ru">(Порядок / Реформа / Народ)</span></dt>
+        <dd>Game meters: administrative continuity; law, schools, and “universal” history; material protection for clerks, peasants, and flood-side lives.</dd>
+        <dt>Genre (Letter I) <span lang="ru">(жанр; первое философское письмо)</span></dt>
+        <dd>Chaadaev’s first letter opens as <strong>spiritual counsel</strong> to a woman in distress, then widens into philosophy of history. The game condenses that into a <strong>debate</strong> for play.</dd>
+        <dt>Chaadaev’s “Europe” <span lang="ru">(«Европа» у Чаадаева)</span></dt>
+        <dd>In Letter I, “Europe” often means <strong>Christendom’s moral-historical unity</strong> (duty, justice, law, order absorbed from the cradle), not the same as modern secular liberalism. The <strong>Reform</strong> meter uses institutions as a shorthand; the letter asks deeper questions about moral continuity.</dd>
+      </dl>
+      <button type="button" class="ghost modal-close" id="glossaryClose">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const ITEMS = {
+      chaadaev_letter: "Chaadaev’s First Letter (1836)",
+      pushkin_bronze: "Pushkin, <em>Bronze Horseman</em> (Arndt trans.)",
+      reform_charter: "Draft charter (local schools)",
+      slavophile_note: "Notes on sobornost &amp; tradition",
+      aksakov_note: "Konstantin Aksakov: land, <em>narod</em>, spirit vs. borrowed law"
+    };
+
+    const INV_SVG = {
+      scroll: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h6"/><path d="M8 17h4"/></svg>',
+      book: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5a2 2 0 012-2h7v20H4a2 2 0 01-2-2V5zm20 0a2 2 0 00-2-2h-7v20h7a2 2 0 002-2V5z"/></svg>',
+      doc: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h6"/></svg>',
+      quill: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 2 2-7 7-4 1 1-4z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.5 7.5"/><path d="M16 16l2 2"/></svg>',
+      church: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 6v14H4V8l8-6z"/><path d="M9 22v-8h6v8"/></svg>'
+    };
+
+    const ITEM_ICONS = {
+      chaadaev_letter: INV_SVG.scroll,
+      pushkin_bronze: INV_SVG.book,
+      reform_charter: INV_SVG.doc,
+      slavophile_note: INV_SVG.church,
+      aksakov_note: INV_SVG.quill
+    };
+
+    /**
+     * Per-scene art: direct upload.wikimedia.org URLs (Commons /thumb/ paths often 404 in browsers).
+     * Optional bgPos: background-position for cover crops. Portraits use a lower horizontal % so the
+     * subject sits in the clearer band to the right of the text-column veil (see .content-scene-veil).
+     *
+     * BACKLOG (item 2 — scene imagery):
+     * - Period appropriateness (critical): assets should fit ~1830s imperial Russia and the game’s
+     *   salon / Neva / province frame. Avoid anachronisms (e.g. cars, modern street furniture, obvious
+     *   contemporary photos of historic sites). Prefer period paintings, engravings, documented
+     *   architecture views, and early photography only when the scene is clearly pre-modern.
+     * - Reduce recycling: prefer distinct center (main column) images per scene where feasible.
+     * - Side rails (.scene-rail): MUST use different image files than the center panel — not the same
+     *   URL with a different crop. When implementing, add e.g. railSrc / SCENE_RAIL_IMAGES keyed by
+     *   sceneId (left/right may share one rail image or differ; still ≠ center src).
+     */
+    const SCENE_IMAGES = {
+      intro: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/0/02/Red_Square_in_Moscow_%281801%29_by_Fedor_Alekseev.jpg",
+        alt: "Red Square and the Kremlin in Moscow (painting, ca. 1801).",
+        credit: "Fyodor Alekseyev, <em>Red Square in Moscow</em> (ca. 1801).",
+        href: "https://commons.wikimedia.org/wiki/File:Red_Square_in_Moscow_(1801)_by_Fedor_Alekseev.jpg",
+        bgPos: "48% 38%"
+      },
+      salon_pushkin: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        alt: "Portrait of Alexander Pushkin.",
+        credit: "Portrait of Alexander Pushkin.",
+        href: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg",
+        bgPos: "38% 20%"
+      },
+      petersburg_pressure: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
+        alt: "Nineteenth-century view of a bridge over the Fontanka in Saint Petersburg.",
+        credit: "Karl Beggrov, view of Panteleymonovsky Bridge, Fontanka.",
+        href: "https://commons.wikimedia.org/wiki/File:Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg"
+      },
+      reformist: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Pyotr Chaadayev.",
+        credit: "Engraved portrait of Petr Chaadaev (Grand Duke Nicholas Mikhailovich catalogue).",
+        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg",
+        bgPos: "42% 20%"
+      },
+      reform_education: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
+        alt: "Portrait of Pyotr Chaadayev.",
+        credit: "Portrait of Pyotr Chaadayev (19th c., after Kozina).",
+        href: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg",
+        bgPos: "44% 16%"
+      },
+      stub_petition_winter: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square and the Winter Palace (19th c.).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      reform_serfdom: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Savrasov_1871.jpeg",
+        alt: "Savrasov’s study of melting snow, rooks, and a village church (The Rooks Have Returned).",
+        credit: "Alexei Savrasov, study related to <em>The Rooks Have Returned</em> (1871).",
+        href: "https://commons.wikimedia.org/wiki/File:Savrasov_1871.jpeg",
+        bgPos: "48% 38%"
+      },
+      beat_west_print: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
+        alt: "Portrait of Pyotr Chaadayev.",
+        credit: "Portrait of Pyotr Chaadayev.",
+        href: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg",
+        bgPos: "44% 16%"
+      },
+      distinct_path: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        alt: "The Anichkov Bridge in Saint Petersburg.",
+        credit: "Anichkov Bridge over the Fontanka.",
+        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg"
+      },
+      slavophile: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
+        alt: "Church of the Intercession on the Nerl.",
+        credit: "Church of the Intercession on the Nerl.",
+        href: "https://commons.wikimedia.org/wiki/File:Church_of_the_Intercession_on_the_Nerl.jpg"
+      },
+      beat_aksakov: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Gorskii_04449u.jpg",
+        alt: "Church of St. Boris and Gleb near Suzdal (early color photograph, ca. 1910).",
+        credit: "Sergey Prokudin-Gorsky, Church of St. Boris and Gleb near Suzdal (ca. 1910).",
+        href: "https://commons.wikimedia.org/wiki/File:Gorskii_04449u.jpg",
+        bgPos: "50% 40%"
+      },
+      state_path: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square (19th c.).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      beat_statist_machine: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        alt: "Portrait of Emperor Nicholas I of Russia.",
+        credit: "Portrait of Nicholas I of Russia.",
+        href: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg",
+        bgPos: "38% 22%"
+      },
+      mediator: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        alt: "The Anichkov Bridge in Saint Petersburg.",
+        credit: "Anichkov Bridge (metaphor for bridging center and province).",
+        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg"
+      },
+      mediator_city: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
+        alt: "View of a bridge over the Fontanka in Saint Petersburg.",
+        credit: "Beggrov, Fontanka bridge view.",
+        href: "https://commons.wikimedia.org/wiki/File:Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg"
+      },
+      mediator_province: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        alt: "Ivanovskaya Square, Moscow (early 19th-century city view).",
+        credit: "Fyodor Alekseyev, Ivanovskaya Square, Moscow.",
+        href: "https://commons.wikimedia.org/wiki/File:Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        bgPos: "50% 40%"
+      },
+      beat_med_bridge: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
+        alt: "The Palace Embankment and Neva piers (watercolor, 1840).",
+        credit: "Vasily Sadovnikov, Palace Embankment pier (1840).",
+        href: "https://commons.wikimedia.org/wiki/File:Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
+      },
+      crisis_west: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Pyotr Chaadayev.",
+        credit: "Chaadaev engraving (Westernizing crisis beat).",
+        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg",
+        bgPos: "42% 20%"
+      },
+      crisis_slav: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
+        alt: "Church of the Intercession on the Nerl.",
+        credit: "Church of the Intercession on the Nerl (Slavophile crisis beat).",
+        href: "https://commons.wikimedia.org/wiki/File:Church_of_the_Intercession_on_the_Nerl.jpg"
+      },
+      crisis_statist: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        alt: "Portrait of Emperor Nicholas I.",
+        credit: "Nicholas I (statist crisis beat).",
+        href: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg",
+        bgPos: "38% 22%"
+      },
+      crisis_med: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        alt: "Anichkov Bridge.",
+        credit: "Anichkov Bridge (mediator crisis beat).",
+        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg"
+      },
+      event_flood_echo: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        alt: "Historical depiction of the 1824 Saint Petersburg flood.",
+        credit: "The flood in Saint Petersburg, 1824 (contemporary image).",
+        href: "https://commons.wikimedia.org/wiki/File:The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg"
+      },
+      event_censor: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        alt: "Engraved portrait of Count Alexander von Benckendorff.",
+        credit: "Engraved portrait of Alexander von Benckendorff (Third Section / gendarmes; censorship climate).",
+        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        bgPos: "38% 22%"
+      },
+      event_salon: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        alt: "Portrait of Alexander Pushkin.",
+        credit: "Pushkin (salon and print culture).",
+        href: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg",
+        bgPos: "38% 20%"
+      },
+      event_rural_gentry: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
+        alt: "Church of the Intercession on the Nerl.",
+        credit: "Rural landmark (provincial gentry resistance).",
+        href: "https://commons.wikimedia.org/wiki/File:Church_of_the_Intercession_on_the_Nerl.jpg"
+      },
+      event_zemstvo_clash: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square (ministry vs. local pilot).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      resolve_endings: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        alt: "The Anichkov Bridge over the Fontanka (historical view).",
+        credit: "Anichkov Bridge (sorting hat: which frame closes the run?).",
+        href: "https://commons.wikimedia.org/wiki/File:Anichkov_bridge.jpg",
+        bgPos: "58% 45%"
+      },
+      final_route_order: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        alt: "Palace Square and the Winter Palace (19th-century watercolor).",
+        credit: "Vasily Sadovnikov, Palace Square (closing frame: Order).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      final_route_reform: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Chaadayev.",
+        credit: "Chaadaev engraving (closing frame: Reform).",
+        href: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg",
+        bgPos: "42% 20%"
+      },
+      final_route_people: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        alt: "The 1824 Saint Petersburg flood.",
+        credit: "1824 flood (closing frame: People / Evgeny’s side).",
+        href: "https://commons.wikimedia.org/wiki/File:The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg"
+      },
+      ending_computed: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/14/SVINYIN%281814%29_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
+        alt: "The Bronze Horseman monument (early 19th-century print).",
+        credit: "M. S. Viniychuk after F. P. Alexeyev, view of the monument to Peter the Great (plate from Stepan Pimenov, <em>Collection of the most remarkable places of St. Petersburg</em>, 1814).",
+        href: "https://commons.wikimedia.org/wiki/File:SVINYIN(1814)_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
+        bgPos: "50% 42%"
+      }
+    };
+
+    /**
+     * Side rails: separate Commons files from the center panel (BACKLOG 2c). All picks are pre-modern
+     * paintings, prints, or early photography; rail.src must never equal SCENE_IMAGES[sceneId].src.
+     */
+    const SCENE_RAIL_IMAGES = {
+      intro: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
+        bgPos: "50% 38%"
+      },
+      salon_pushkin: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        bgPos: "42% 20%"
+      },
+      petersburg_pressure: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        bgPos: "50% 45%"
+      },
+      reformist: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        bgPos: "38% 20%"
+      },
+      reform_education: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        bgPos: "44% 20%"
+      },
+      stub_petition_winter: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        bgPos: "50% 45%"
+      },
+      reform_serfdom: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
+        bgPos: "48% 35%"
+      },
+      beat_west_print: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        bgPos: "38% 22%"
+      },
+      distinct_path: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        bgPos: "50% 40%"
+      },
+      slavophile: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Savrasov_1871.jpeg",
+        bgPos: "48% 38%"
+      },
+      beat_aksakov: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Church_of_the_Intercession_on_the_Nerl.jpg",
+        bgPos: "52% 35%"
+      },
+      state_path: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        bgPos: "38% 22%"
+      },
+      beat_statist_machine: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        bgPos: "38% 22%"
+      },
+      mediator: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/0/02/Red_Square_in_Moscow_%281801%29_by_Fedor_Alekseev.jpg",
+        bgPos: "48% 38%"
+      },
+      mediator_city: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      mediator_province: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/0/02/Red_Square_in_Moscow_%281801%29_by_Fedor_Alekseev.jpg",
+        bgPos: "48% 38%"
+      },
+      beat_med_bridge: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        bgPos: "55% 45%"
+      },
+      crisis_west: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        bgPos: "50% 45%"
+      },
+      crisis_slav: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Gorskii_04449u.jpg",
+        bgPos: "50% 40%"
+      },
+      crisis_statist: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        bgPos: "42% 20%"
+      },
+      crisis_med: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/6/60/Dvortsovaya_pier_at_1840.jpg",
+        bgPos: "50% 48%"
+      },
+      event_flood_echo: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
+        bgPos: "50% 38%"
+      },
+      event_censor: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        bgPos: "38% 22%"
+      },
+      event_salon: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Fyodor_Alekseyev._View_of_Ivanovskaya_Square.jpg",
+        bgPos: "50% 40%"
+      },
+      event_rural_gentry: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      event_zemstvo_clash: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/3/38/Anichkov_bridge.jpg",
+        bgPos: "55% 45%"
+      },
+      resolve_endings: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/19/PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
+      },
+      final_route_order: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/14/SVINYIN%281814%29_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
+        bgPos: "50% 42%"
+      },
+      final_route_reform: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
+        bgPos: "44% 16%"
+      },
+      final_route_people: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/b/b4/Savrasov_1871.jpeg",
+        bgPos: "48% 38%"
+      },
+      ending_computed: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/9/93/The_Flood_in_St.Petersburg_in_1824._1820-ies.jpg",
+        bgPos: "50% 45%"
+      }
+    };
+
+    /** Colour wash bucket per scene (see .content[data-ambient] in CSS). */
+    const SCENE_AMBIENT = {
+      intro: "salon",
+      salon_pushkin: "print",
+      petersburg_pressure: "neva",
+      reformist: "print",
+      reform_education: "print",
+      stub_petition_winter: "winter",
+      reform_serfdom: "soil",
+      beat_west_print: "print",
+      distinct_path: "bridge",
+      slavophile: "soil",
+      beat_aksakov: "soil",
+      state_path: "crown",
+      beat_statist_machine: "crown",
+      mediator: "bridge",
+      mediator_city: "neva",
+      mediator_province: "soil",
+      beat_med_bridge: "bridge",
+      crisis_west: "winter",
+      crisis_slav: "winter",
+      crisis_statist: "winter",
+      crisis_med: "winter",
+      event_flood_echo: "flood",
+      event_censor: "censor",
+      event_salon: "print",
+      event_rural_gentry: "soil",
+      event_zemstvo_clash: "zemstvo",
+      resolve_endings: "sorting",
+      final_route_order: "crown",
+      final_route_reform: "print",
+      final_route_people: "flood",
+      ending_computed: "finis"
+    };
+
+    /**
+     * Optional global palette preset per scene: sets html[data-scheme] when not "default".
+     * CSS defines :root[data-scheme="frost"] and ["ember"] as examples; add more named schemes there first.
+     * Per-scene one-offs: prefer selectors :root[data-scene-id="…"] { --veil-rgb: … } in the main <style>.
+     * @type {Record<string, "default"|"frost"|"ember">}
+     */
+    const SCENE_COLOR_SCHEME = {
+      /* Example: event_flood_echo: "frost", event_censor: "ember" */
+    };
+
+    function colorSchemeForScene(sceneId) {
+      return SCENE_COLOR_SCHEME[sceneId] || "default";
+    }
+
+    function sceneToneFromId(sceneId, scene) {
+      if (scene && scene.computed) return "ending";
+      if (String(sceneId).indexOf("crisis_") === 0) return "crisis";
+      if (String(sceneId).indexOf("event_") === 0) return "event";
+      if (String(sceneId).indexOf("final_route_") === 0) return "closing";
+      if (sceneId === "resolve_endings") return "sorting";
+      return "salon";
+    }
+
+    function syncAppChrome(sceneId, scene) {
+      const root = document.documentElement;
+      if (state.pathId) root.setAttribute("data-path", state.pathId);
+      else root.removeAttribute("data-path");
+      root.setAttribute("data-scene-tone", sceneToneFromId(sceneId, scene));
+      root.setAttribute("data-scene-id", sceneId);
+      const scheme = colorSchemeForScene(sceneId);
+      if (scheme === "default") root.removeAttribute("data-scheme");
+      else root.setAttribute("data-scheme", scheme);
+    }
+
+    function railVerticalFromBgPos(bgPos) {
+      const fallback = "42%";
+      if (!bgPos || !String(bgPos).trim()) return fallback;
+      const parts = String(bgPos).trim().split(/\s+/).filter(Boolean);
+      if (parts.length >= 2) return parts[1];
+      return fallback;
+    }
+
+    /** Side rails: background image URL (JSON-stringified for CSS) and vertical slice alignment. */
+    function setSceneSideRails(urlJson, bgPos) {
+      const railL = document.getElementById("sceneRailLeft");
+      const railR = document.getElementById("sceneRailRight");
+      if (!railL || !railR) return;
+      const y = railVerticalFromBgPos(bgPos);
+      if (!urlJson) {
+        railL.style.backgroundImage = "none";
+        railL.style.backgroundPosition = "";
+        railR.style.backgroundImage = "none";
+        railR.style.backgroundPosition = "";
+        railL.classList.remove("is-active");
+        railR.classList.remove("is-active");
+        return;
+      }
+      railL.style.backgroundImage = "url(" + urlJson + ")";
+      railR.style.backgroundImage = "url(" + urlJson + ")";
+      railL.style.backgroundPosition = "0% " + y;
+      railR.style.backgroundPosition = "100% " + y;
+      railL.classList.add("is-active");
+      railR.classList.add("is-active");
+    }
+
+    function updateSceneVisuals(sceneId) {
+      const contentEl = document.querySelector(".content");
+      const bg = document.getElementById("sceneBg");
+      const credit = document.getElementById("sceneBgCredit");
+      const source = document.getElementById("sceneBgSource");
+      const entry = SCENE_IMAGES[sceneId] || SCENE_IMAGES.intro;
+      if (contentEl) {
+        contentEl.setAttribute("data-ambient", SCENE_AMBIENT[sceneId] || "salon");
+      }
+      if (!bg || !credit || !source) {
+        setSceneSideRails(null);
+        return;
+      }
+      if (!entry || !entry.src) {
+        bg.style.backgroundImage = "none";
+        bg.style.backgroundPosition = "";
+        setSceneSideRails(null);
+        source.hidden = true;
+        credit.innerHTML = "";
+        return;
+      }
+      /* JSON.stringify so parentheses etc. in URLs cannot break CSS url() parsing */
+      const urlJson = JSON.stringify(entry.src);
+      bg.style.backgroundImage = "url(" + urlJson + ")";
+      bg.style.backgroundPosition = entry.bgPos || "";
+      let railPick = SCENE_RAIL_IMAGES[sceneId] || SCENE_RAIL_IMAGES.intro;
+      if (!railPick || !railPick.src || railPick.src === entry.src) {
+        railPick = SCENE_RAIL_IMAGES.intro;
+        if (!railPick || railPick.src === entry.src) {
+          railPick = null;
+          for (const k of Object.keys(SCENE_RAIL_IMAGES)) {
+            const r = SCENE_RAIL_IMAGES[k];
+            if (r && r.src && r.src !== entry.src) {
+              railPick = r;
+              break;
+            }
+          }
+        }
+      }
+      if (railPick && railPick.src) {
+        setSceneSideRails(JSON.stringify(railPick.src), railPick.bgPos || "");
+      } else {
+        setSceneSideRails(null);
+      }
+      const link = entry.href
+        ? ` <a href="${entry.href}" target="_blank" rel="noopener noreferrer">Wikimedia Commons (license)</a>`
+        : "";
+      credit.innerHTML = `${entry.credit || ""}${link}.`;
+      source.hidden = false;
+    }
+
+    /** After crisis, the “sorting” scene gets a path-specific lead-in. */
+    const RESOLVE_PATH_LEAD = {
+      west: `You have been arguing from the Westernizing side of the room: law, print, universities, and the hope that Russia can, in Chaadaev’s phrase, <strong>repeat the whole education of mankind</strong> using the history of humanity before it, not “in one stroke” mimic progress it never helped build.`,
+      slav: `You have been arguing from the Slavophile side, sharpened by voices such as <strong>Konstantin Aksakov</strong> (1817–1860): the Russian people (<em>narod</em>), the land, and Orthodox moral community as the true seat of renewal, not a code imported from abroad. Chaadaev’s shame is sometimes accepted; his remedy is rejected, yet his Letter I also indicted <strong>schism</strong> and a moral code drawn from “miserable Byzantium,” so every position the salon took still wrestles with Chaadaev’s premises, not only his conclusions.`,
+      statist: `You have been arguing <strong>for</strong> the throne’s logic, not <em>as</em> the autocrat. Your circle is gentry, clerks, officers who defend unity, legible ranks, and the containment of dangerous print. You draft memoranda, cultivate patrons in ministries, self-censor, or urge superiors to act. The <strong>sovereign and the ministers</strong> still hold the pen that signs decrees; you only supply the climate in which they move. Someone remembers Chaadaev’s <strong>cloak of civilization</strong>. Your camp prefers order in half-modern garb to another hollow leap.`,
+      med: `You have been arguing the mediator’s wager: borrow European law and technique, but root them in local councils, schools, and provincial trust: neither pure imitation nor proud isolation. (When the text says “zemstvo-style,” that names a <em>later</em> institution used here as shorthand; see Historical staging on any mediator beat.) Chaadaev imagined Russia between East and West, meant to fuse imagination and reason; he concluded Providence had “left us completely on our own.” The mediator track is the game’s name for trying to finish that unfinished synthesis.`
+    };
+
+    function pickCrisisEvent(total, rawRoll) {
+      const p = state.pathId || "west";
+      let key;
+      if (p === "slav") {
+        if (total >= 8) key = "event_salon";
+        else if (total >= 5) key = "event_rural_gentry";
+        else key = "event_censor";
+      } else if (p === "statist") {
+        if (total >= 8) key = "event_flood_echo";
+        else key = "event_censor";
+      } else if (p === "med") {
+        if (total >= 8) key = "event_salon";
+        else if (total >= 5) key = "event_zemstvo_clash";
+        else key = "event_censor";
+      } else {
+        if (total >= 8) key = "event_salon";
+        else if (total >= 5) key = "event_flood_echo";
+        else key = "event_censor";
+      }
+
+      state.crisisMisfit = false;
+      state.crisisMisfitKind = null;
+
+      /* Option 5: “wrong” rumor; high total but snake eyes, or weak total but a 6. Contingency, not a neat parable. */
+      if (rawRoll === 1 && total >= 7) {
+        state.crisisMisfit = true;
+        state.crisisMisfitKind = "snake";
+        const snake = { west: "event_zemstvo_clash", slav: "event_flood_echo", statist: "event_salon", med: "event_censor" };
+        return snake[p] || key;
+      }
+      if (rawRoll === 6 && total <= 5) {
+        state.crisisMisfit = true;
+        state.crisisMisfitKind = "lucky";
+        const lucky = { west: "event_salon", slav: "event_salon", statist: "event_flood_echo", med: "event_salon" };
+        return lucky[p] || key;
+      }
+      return key;
+    }
+
+    const scenes = {
+      intro: {
+        title: "Moscow, Autumn 1836",
+        text: `The latest issue of Teleskop has just circulated. Inside is a letter by Pyotr Chaadaev.
+
+The manuscript ranges from one woman’s spiritual unrest to the nation’s, naming forces from the court down to “the <strong>slave who exists only for the pleasure of his master</strong>.” By the time it reaches world history, the charge is severe: Russia stands outside the main movement of that history, has contributed little to universal civilization, and lives by borrowed forms rather than a clear moral mission.
+
+<strong>In the room tonight</strong> (they will argue with you again):
+
+<strong>Vera Kornilova</strong>, who reads French and mistrusts hurry.
+
+<strong>Stepan Ilyich</strong>, a junior official who wants a program he can file.
+
+<strong>Father Dimitri</strong>, who keeps asking whether abstractions reach anyone outside this study.
+
+<strong>Andrei Mikhailovich</strong>, who treats the letter as imported scandal before it is philosophy.
+
+Three questions will keep surfacing: Does Russia belong to “universal” history or is it an exception? Can reform mean borrowing without hollowness? Who pays when the state builds its future: Pushkin’s bronze rider or Evgeny’s flooded room?
+
+<strong>Andrei Mikhailovich</strong> cuts in first: “Half of Europe writes manifestos. Why should their nausea be our compass?”
+
+<strong>Vera</strong>: “If we ‘repeat mankind’s education,’ whose syllabus: Berlin’s? Paris’s? And who pays the tutor?”
+
+<strong>Father Dimitri</strong>: “The letter began as counsel to a soul in pain. Have we turned her into kindling?”
+
+You answer them in the moment, not in policy headlines. (The real Letter I is a <strong>pastoral epistle</strong> to “Madame”; here the salon <strong>dramatizes</strong> its ideas. See Terms.)`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (outside universal history):</strong> “Placed, as it were, outside of the times, we have not been affected by the universal education of mankind.”<br><span class="read-gloss">Chaadaev’s core charge: Russia never shared the slow moral formation other nations had. The Westernizing choice below treats that as a job for reform; the “separate destiny” choice refuses to let Europe be the judge of Russia’s soul.</span><br><br><strong>Letter I (neither West nor East):</strong> “We belong neither to the West nor to the East, and we possess the traditions of neither.”<br><span class="read-gloss">Chaadaev says Russia belongs fully to neither West nor East. The choices below ask you to pick a footing for Russia, or the mediator option as a deliberate middle path between copying Europe and cutting it off.</span><br><br><strong>Letter I (imitation):</strong> “This is a natural consequence of a culture based wholly upon importation and imitation.”<br><span class="read-gloss">Chaadaev calls import-only culture hollow. If you go Westernizing, you are promising that schools, law, and press are real civilization, not just the “cloak of civilization” he mocks.</span><br><br><strong>Letter I (no heritage):</strong> “We Russians… have come into the world like illegitimate children without a heritage, without a link with the men who preceded us on earth.”<br><span class="read-gloss">Chaadaev’s “no heritage” line is shame without a usable past. The Pushkin-first choice skips ahead to <em>The Bronze Horseman</em> to ask whether Yevgeny’s flood answers that shame as forcefully as debating the letter alone.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Chaadaev names our wound. We owe Europe serious reform, not costume imitation: schools, law, a public press, learned over time.”", next: "reformist", path: "west", effects: { order: -5, reform: 15, people: 5 }, item: "chaadaev_letter", stateTag: "intro_western" },
+          { text: "<strong>You:</strong> “He mistakes difference for disgrace. Russia is not a tardy pupil in someone else’s classroom.”", next: "distinct_path", effects: { order: 8, reform: -8, people: 0 }, item: "chaadaev_letter", stateTag: "intro_distinct" },
+          { text: "<strong>You:</strong> “He is right that stagnation should shame us; wrong that we must become Europe on Europe’s schedule. Adopt foreign forms only where they actually take root here.”", next: "mediator", path: "med", effects: { order: 3, reform: 6, people: 4 }, item: "chaadaev_letter", stateTag: "intro_med" },
+          { text: "<strong>You</strong> (reaching for Pushkin): “Before we vote on Europe, read how the capital treats a clerk when the Neva rises.”", next: "salon_pushkin", effects: { order: 2, reform: 5, people: 3 }, stateTag: "intro_pushkin_first" }
+        ]
+      },
+
+      salon_pushkin: {
+        title: "The Salon Turns to Pushkin",
+        text: `Stepan opens a worn volume. The conversation locks onto one long poem.
+
+<em>The Bronze Horseman</em> (1833): Pushkin calls the flood narrative <strong>based on truth</strong>; the prologue gives Peter a founding vow and a love song to the new capital; then Parts One and Two turn to the Neva’s assault, a clerk’s loss, and the bronze statue in pursuit. Grand history and the little man do not share the same safety.
+
+Chaadaev’s letter asks whether Russia has a real place in universal history. The poem asks who pays when the state builds its future in granite.
+
+Someone quotes Chaadaev’s barb about a “great man” who civilized Russia: he “threw us the <strong>cloak of civilization</strong>”; we took the cloak, Chaadaev says, but “did not so much as touch civilization.” The room hears Pushkin’s granite and Yevgeny’s roof in it.
+
+<strong>Vera</strong> objects: “A poem is not a ministry. Are we hiding behind beauty because law is harder?”
+
+<strong>Andrei Mikhailovich</strong>: “Peter built; the clerk broke. That is not a constitution.”
+
+<strong>Father Dimitri</strong>: “If Yevgeny matters, say what you owe him, not only what you owe Peter.”
+
+What do you say next?`,
+        primaryRead: {
+          title: "Read alongside: The Bronze Horseman",
+          body: `<strong>Prologue (Peter’s vow and hymn):</strong> “Here we at Nature’s own behest / Shall break a window to the West… / Here a new city shall be wrought.” The same voice loves “Nevá’s majestic perfluctation, / Her bankments’ granite carapace” and “Peter’s own creation.” (<em>The Bronze Horseman</em>, prologue.)<br><span class="read-gloss">Pushkin’s Peter praises a west-facing capital in granite. The three answers below ask whether that vision counts as civilization or as spectacle unless law and schools catch up.</span><br><br><strong>Part One (flood):</strong> “Nevá, engorged, with swell and roaring… / Leaped on the city… / There streamed Petropolis, foam-laced.” (<em>The Bronze Horseman</em>, Part One.)<br><span class="read-gloss">The state’s plan meets the Neva in flood; if you stress Pushkin’s clerk (middle choice), you are letting Yevgeny’s ruin test whether the state is still legitimate.</span><br><br><strong>Part Two (statue and pursuit):</strong> “There rode in bronze, one arm extended, / The Idol on its granite cliff”; Yevgeny to the “great wonder-worker”; “The Bronze Horseman in pursuit.” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">The bronze statue turns from majesty to menace; the third choice below is for players who want both institutions <em>and</em> the ordinary people official chronicles usually skip.</span><br><br><strong>Letter I (cloak of civilization, same evening’s debate):</strong> “…he threw us the cloak of civilization: we took up the cloak but did not so much as touch civilization.”<br><span class="read-gloss">Chaadaev’s “cloak” barb: borrowed polish without inner civilization. Keep it in mind when you judge Peter’s capital and any reform talk on this screen.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Moral education and schools before spectacle: parades and bronze heroes are not civilization.”", next: "reformist", path: "west", effects: { order: -3, reform: 12, people: 6 }, item: "pushkin_bronze", item2: "chaadaev_letter", stateTag: "intro_pushkin_first" },
+          { text: "<strong>You:</strong> “Pushkin’s clerk is the proof: a state that drowns ordinary people in spectacle is hollowing its own legitimacy.”", next: "petersburg_pressure", effects: { order: -10, reform: 4, people: 12 }, item: "pushkin_bronze", item2: "chaadaev_letter", stateTag: "intro_pushkin_first" },
+          { text: "<strong>You:</strong> “Both: durable institutions <em>and</em> care for people the chronicles skip; I will not sacrifice clerks and peasants to save the argument.”", next: "mediator", path: "med", effects: { order: -2, reform: 10, people: 8 }, item: "pushkin_bronze", item2: "chaadaev_letter", stateTag: "intro_pushkin_first" }
+        ]
+      },
+
+      petersburg_pressure: {
+        title: "News from the Capital",
+        text: `The Neva’s winter ice is already a rumor of power and peril. Officials speak of Peter’s statue, the embankments, the fleet. Others whisper Yevgeny’s name: a clerk broken by water and bronze; Pushkin’s poor Kolomna clerk who dreamed of marriage and a snug position until the river “<strong>Leaped on the city</strong>.”
+
+Letter I had already painted a society with “no definite sphere,” families like strangers, citizens like <strong>nomads in the cities</strong>; even the steppe nomads, Chaadaev wrote, more attached to their deserts than you to your capital. The Neva makes that rootlessness visible.
+
+<strong>Stepan</strong> wants statutes and relief lines on paper.
+
+<strong>Andrei Mikhailovich</strong> warns that “relief” spoken aloud sounds like riot.
+
+<strong>Vera</strong> asks who will sit in the clerk’s flat when the water recedes.
+
+Whose objection do you answer first, and with what move?`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (“nomads in the cities”):</strong> “There is no definite sphere of existence for anyone… In our cities we look like nomads, even more than the nomads who let their herds graze on our steppes, for they are more attached to their deserts than we to our cities.”<br><span class="read-gloss">Chaadaev’s “nomads in the cities” line is rootless life before any flood. The two choices name who you back first: Stepan wants relief written into law; Andrei wants calm, throne-led charity.</span><br><br><strong><em>The Bronze Horseman</em>, Part One (flood):</strong> “Nevá, engorged, with swell and roaring… / Leaped on the city.” (<em>The Bronze Horseman</em>, Part One.)<br><span class="read-gloss">Pushkin’s flood is concrete disaster: Petersburg’s order does not stop the Neva. Ordinary people drown while officials argue about tone. That is the moral picture Stepan and Andrei are fighting over.</span>`
+        },
+        choices: [
+          { text: "<strong>You</strong> (to Stepan): “Then write the law; relief funds, public health, protection after disaster. I’ll take the heat.”", next: "reform_education", path: "west", effects: { order: -5, reform: 14, people: 10 } },
+          { text: "<strong>You</strong> (to Andrei): “We petition for <em>imperial</em> relief; managed charity, no street theater. Let the throne show mercy while we keep the language calm.”", next: "state_path", path: "statist", effects: { order: 10, reform: 2, people: 4 } }
+        ]
+      },
+
+      reformist: {
+        title: "The Reformist Circle",
+        text: `The room divides quickly. Backward institutions and censorship, you argue, keep Russia trapped. If Chaadaev is right, modernization must be moral and political, not only technical; the letter’s threefold worry (history, borrowing, mission) now sounds like a program.
+
+You cite his demand that Russia must, “in a certain sense, <strong>repeat the whole education of mankind</strong>,” and his scorn for those who would assimilate European progress “<strong>in one stroke</strong>” without grasping the slow, morally grounded growth that produced it. You add his portrait of the West: not only books but <strong>duty, justice, law, and order</strong> breathed in “from the crib.”
+
+<strong>Stepan</strong> leans in: “Where do we begin; courts or land?”
+
+<strong>Father Dimitri</strong>: “Begin with who is still owned.”
+
+<strong>Vera</strong>: “If we move too fast, we only dress the nobility in foreign verbs.”
+
+Which pressure shapes your first step?`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (repeat mankind’s education):</strong> “If we wish to take up a position similar to that of other civilized people, we must, in a certain sense, repeat the whole education of mankind.”<br><span class="read-gloss">Chaadaev says catching up to Europe takes generations, not a shortcut. That backs Stepan’s “courts and schools first” option on the next row.</span><br><br><strong>Letter I (against “one stroke” mimicry):</strong> “…without even bothering to find out how it was produced, we can in one stroke assimilate all this European progress, which occurred so slowly and under the direct, evident action of a unique moral power?”<br><span class="read-gloss">Chaadaev warns against copying Europe “in one stroke.” That is the same worry Vera voices: nobles mouthing foreign words with no moral depth underneath.</span><br><br><strong>Letter I (West as moral atmosphere, not only books):</strong> “…in the crib the child is imbued with these ideas… They are the ideas of duty, justice, law, and order.”<br><span class="read-gloss">For Chaadaev, Western “civilization” is duty and law breathed in from childhood, not only books. Father Dimitri’s line (“begin with who is still owned”) is the serfdom-first choice below: none of the rest is honest while people are property.</span>`
+        },
+        choices: [
+          { text: "<strong>You</strong> (to Stepan): “Courts, universities, civic literacy; make thought legal before we pretend it is free.”", next: "reform_education", path: "west", effects: { order: -4, reform: 12, people: 6 } },
+          { text: "<strong>You</strong> (to Father Dimitri): “Abolish serfdom before we promise zemstvo or elections. Self-rule is empty while people are still legally property.”", next: "reform_serfdom", path: "west", effects: { order: -12, reform: 10, people: 14 } }
+        ]
+      },
+
+      reform_education: {
+        title: "Paper, Schools, and Law",
+        text: `New schools open. Censorship loosens in places. Translation circles spread European philosophy and science.
+
+You hope to build what Chaadaev described as the West’s invisible scaffolding: <strong>duty, justice, law, order</strong>, not only imported tomes. Critics say you are still draping the <strong>cloak</strong> without the moral fabric underneath.
+
+Conservative elites accuse reformers of importing alien values. Someone quotes the flood: when waters retreat, Pushkin’s burghers rush to <strong>“surcharge their neighbor”</strong> for what Nevá stole; the market moves on while corpses still float in memory. The river, they say, does not consult the Senate.
+
+<strong>Andrei Mikhailovich</strong> folds his arms: “Gradualism is how nothing happens.”
+
+<strong>Vera</strong>: “A constitution on this table is a warrant for the Third Section.”
+
+<strong>Stepan</strong>: “Or we do what the law allows; petition in order, wait our season.”`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (duty, justice, law, order):</strong> “They are the ideas of duty, justice, law, and order… This is the atmosphere of the West…”<br><span class="read-gloss">Chaadaev’s West is moral atmosphere (duty, justice, law), not gadgets. That justifies gradual charters and schools: the tone Vera and Stepan are arguing about on this screen.</span><br><br><strong><em>The Bronze Horseman</em>, Part One (after the flood):</strong> tradesmen rush “To surcharge their neighbor / For their grave loss” while the city moves on. (<em>The Bronze Horseman</em>, Part One, after the flood.)<br><span class="read-gloss">After the flood, Pushkin’s burghers gouge neighbors; reform on paper does not stop greed. That image cuts against both “only petitions” and naive gradualism. The fight Andrei, Vera, and Stepan voice above.</span>`
+        },
+        counterfactualNote: `Schools and “public” debate accelerated unevenly; this scene compresses years of argument into one autumn. Use it to name tensions, not to date specific ministries.`,
+        choices: [
+          { text: "<strong>You</strong> (to Vera): “Gradual law; charters, schools; so stability survives the first winter.”", next: "beat_west_print", effects: { order: 8, reform: 4, people: 2 }, item: "reform_charter" },
+          { text: "<strong>You</strong> (to Andrei): “We circulate a constitutional draft in trusted circles; force the question into salons before ministers pretend they never heard it.”", next: "beat_west_print", effects: { order: -15, reform: 18, people: 4 } },
+          { text: "<strong>Stepan</strong> (you second him): “Petitions first; proper channels, no scandal.” <em>(Costs the autumn; you reconvene behind schedule.)</em>", next: "stub_petition_winter", effects: { order: 3, reform: -2, people: -2 }, scar: "petition_winter" }
+        ]
+      },
+
+      stub_petition_winter: {
+        title: "Autumn Eaten by Forms",
+        text: `The petition breeds copies, seals, and waiting rooms.
+
+Vera stops attending after the second week; her note cites an indisposed aunt.
+
+Father Dimitri says dryly that Russia already had enough paper before Chaadaev.
+
+You proved a different hollowness than the one you meant: procedure without pressure stalls; the Third Section’s file on your circle grows thicker for the delay, not thinner. This branch is a <strong>dead end, not a game-over</strong>; you may still reach winter journals, one season poorer.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (restlessness, no fixed sphere):</strong> “We all resemble travellers. There is no definite sphere of existence for anyone… In our families we look like strangers…”<br><span class="read-gloss">Chaadaev describes restless motion with no fixed home, like your circle’s lost autumn in paperwork. The single choice below jumps you back toward journals and risk.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Enough. We return to print and risk; chastened, behind schedule.”", next: "beat_west_print", effects: { order: 0, reform: -2, people: -2 } }
+        ]
+      },
+
+      reform_serfdom: {
+        title: "Land and Freedom First",
+        text: `Serfdom is the central moral contradiction, you insist. Emancipation gains force but threatens landed interests and control from above.
+
+Chaadaev’s Letter I already named forces dominating “from the highest strata… to the <strong>slave who exists only for the pleasure of his master</strong>”; your path tries to make that hierarchy morally intolerable in policy, not only in a paragraph.
+
+Pushkin’s Yevgeny, who “found the great unnerving,” dwelled in poor Kolomna and stands for every small life the plan forgets. The statue and the flood are one fable about power. Can the empire refuse absolute dominion over persons without chaos?
+
+<strong>Vera</strong> asks who pays compensation.
+
+<strong>Andrei Mikhailovich</strong> mutters about Poland and precedent.`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (master and slave):</strong> “…forces which dominate everything here from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Chaadaev names power from court down to the enslaved person. That is the moral ladder Father Dimitri pointed at: promising elections while people are still serfs is empty.</span><br><br><strong><em>The Bronze Horseman</em>, Part One (Yevgeny before the flood):</strong> “Our hero dwelled / In poor Kolomna… / Some office, found the great unnerving…” (<em>The Bronze Horseman</em>, Part One.)<br><span class="read-gloss">Pushkin’s Yevgeny is a small clerk under the great plan. The two choices on this screen are whether you build careful noble alliances or force a public scandal. Both are also about whether <em>he</em> counts in politics.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Noble alliances, careful administrators; buy time without another Decembrist-style explosion.”", next: "beat_west_print", effects: { order: 4, reform: 8, people: 10 }, item: "reform_charter" },
+          { text: "<strong>You:</strong> “Public networks; force the scandal until the capital cannot look away.”", next: "beat_west_print", effects: { order: -18, reform: 12, people: 6 } }
+        ]
+      },
+
+      beat_west_print: {
+        title: "Journals and the Third Section",
+        text: `Your path is Westernizing in spirit: universities, law codes, translation societies. Chaadaev’s letter circulates alongside Hegel and the French debates. The Third Section takes notes; a governor asks whether “universal history” is worth a riot.
+
+Chaadaev asked: “Where are our wise men, where are our <strong>thinkers</strong>? Who is there who has ever <strong>thought for us</strong>?” Your journals wager that a reading minority can become that elite; for enlightenment or for sedition, depending on who writes the report.
+
+Pushkin’s Neva is a counter-image: the state’s plan and the clerk’s room are not the same story. Winter will test whether print or ranks decide what Russia becomes next. <strong>Sometimes the mail contradicts your rehearsed moral</strong>; the die can cross-wire rumor and path.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (who thinks for Russia?):</strong> “Now I ask you, where are our wise men, where are our thinkers? Who is there who has ever thought for us, who is there who thinks for us today?”<br><span class="read-gloss">Chaadaev asks who thinks for Russia. Your circle’s journals claim to be those thinkers; the “quiet journals” choice concedes the mind to ministry chiefs and police files.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Keep printing; circles, students, editors. Let spies earn their salary.”", next: "crisis_west", effects: { order: -6, reform: 10, people: 4 } },
+          { text: "<strong>You</strong> (over Stepan’s wince): “Quiet the journals; secure funding and ministerial cover first, trained staff second.”", next: "crisis_west", effects: { order: 10, reform: 2, people: -4 } }
+        ]
+      },
+
+      distinct_path: {
+        title: "A Separate Destiny",
+        text: `Chaadaev mistakes difference for failure, you answer. Russia is not late Europe. Orthodox tradition, communal memory, and social fabric may offer another historical contribution; an answer to “universal history” that does not concede the letter’s every premise, yet must still face the question of borrowed forms and of who is left out.
+
+You know Letter I also attacked a moral code drawn from “<strong>miserable Byzantium</strong>” and mourned Russia’s isolation from Latin Christendom’s “<strong>vivifying principle of unity</strong>”; so Slavophile pride does not simply <em>refute</em> Chaadaev; it must answer him on his own historical terms.
+
+<strong>Stepan</strong> worries you are swapping one borrowed slogan for another.
+
+<strong>Father Dimitri</strong> listens for whether “destiny” still reaches the poor.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (Byzantium and schism):</strong> “…we proceeded to seek the moral code which was to constitute our education in miserable Byzantium…” / “…the vivifying principle of unity animated everything.”<br><span class="read-gloss">Chaadaev attacks Orthodox separation from Latin Christendom and lost “unity.” Any Slavophile answer on the next screen still has to answer <em>that</em> charge, not only praise the village.</span><br><br><strong>Letter I (Russia between East and West):</strong> “…situated between the two great divisions of the world, between the East and the West, leaning with one elbow on China and another on Germany, we should have united within us the two great principles of intelligent nature…”<br><span class="read-gloss">Chaadaev says Russia could have fused East and West in one people but missed its vocation. If you pick the statist branch next, you are trading that romantic myth for loyalty to throne and ministries.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Moral community, not Western individualism dressed as reform.”", next: "slavophile", path: "slav", effects: { order: 2, reform: -6, people: 4 }, item: "slavophile_note" },
+          { text: "<strong>You</strong> (to Stepan): “We align with the throne and ministries (the chain of command), not salon manifestos. Unity first; we keep religious or national arguments private unless rank invites them.”", next: "state_path", path: "statist", effects: { order: 14, reform: -8, people: -4 } }
+        ]
+      },
+
+      slavophile: {
+        title: "Community and Faith",
+        text: `Your circle emphasizes sobornost and local tradition. Younger voices; Konstantin Aksakov will become one of the clearest; will argue that Russia’s truth lives in land, <em>narod</em>, and spirit, not in a borrowed legal script. Critics ask whether policy can follow without freezing the past.
+
+Letter I’s shadow: Chaadaev blamed <strong>schism</strong> and separation from the Western Church for missing Europe’s intellectual unity. Your defense of Orthodoxy must confront that indictment, not only celebrate the village.
+
+<strong>Vera</strong> asks whether the village is a moral refuge or an alibi.
+
+<strong>Pushkin’s Petersburg</strong> intrudes: when the state is absolute, can the communal soul starve as surely as Evgeny under the bronze gaze?
+
+Which answer do you hazard aloud?`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (charges the Slavophile path must answer):</strong> schism, “miserable Byzantium,” and missing Europe’s “vivifying principle of unity” (see same passages as <em>A Separate Destiny</em> scene).<br><span class="read-gloss">Soil-first pride still owes Chaadaev an answer on these charges. You cannot ignore the letter’s intellectual scorecard.</span><br><br><strong>Discuss:</strong> Land, <em>narod</em>, Orthodox conscience, suspicion of abstract “rights” talk (themes later associated with Aksakov). Does this language help the clerk in the flood, or chiefly the idea of the village?<br><span class="read-gloss">The Discuss line names land, <em>narod</em>, Orthodoxy, suspicion of “rights” talk. The two buttons below are that debate in policy form: fund parish schools with rules, or freeze foreign-looking law.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Turn <em>sobornost</em> (communal spiritual unity) into parish schools and accountable oversight: faith backed by real institutions and budgets, not a substitute for them.”", next: "beat_aksakov", effects: { order: 4, reform: 6, people: 8 } },
+          { text: "<strong>You:</strong> “Freeze borrowed law; defend the whole way of life; reform would dissolve what we love.”", next: "beat_aksakov", effects: { order: 12, reform: -14, people: -6 } }
+        ]
+      },
+
+      beat_aksakov: {
+        title: "Aksakov at the Edge of the Letter",
+        text: `<strong>Konstantin Aksakov</strong> (1817–1860) does not answer Chaadaev with European timelines. He treats the Russian people as a moral-historical subject in its own right: communal bonds, Orthodox conscience, and native speech against the abstract “rights” chatter of the West. Petersburg’s granite plan; Pushkin’s bronze rider; is for him a symbol of uprooted, state-driven power alien to the soil.
+
+This <em>inverts</em> much of Chaadaev’s prescription while sometimes echoing his shame: Russia may have failed Europe’s exam without thereby owing Europe its soul. The tension is live: can Slavophile language protect Evgeny, or only the idea of the village?`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (cloak and false progress):</strong> “…he threw us the cloak of civilization: we took up the cloak but did not so much as touch civilization.”<br><span class="read-gloss">Chaadaev’s cloak image asks whether “truth in Russian soil” is real growth for Aksakov, or another borrowed costume.</span><br><br><strong>Letter I (sterile soil):</strong> “…not one useful idea has germinated in the sterile soil of our fatherland…”<br><span class="read-gloss">Chaadaev calls Russia’s soil barren of useful ideas. The two winter choices are a hard public Slavophile line versus a softer line that still borrows in practice.</span>`
+        },
+        choices: [
+          { text: "Take Aksakov’s line in public: truth in our own soil, not a borrowed code.", next: "crisis_slav", effects: { order: 4, reform: -8, people: 6 }, item: "aksakov_note" },
+          { text: "Soften the edge: speak of spirit, yet allow selective borrowing in practice.", next: "crisis_slav", effects: { order: 2, reform: 2, people: 2 } }
+        ]
+      },
+
+      state_path: {
+        title: "Order Before Liberty",
+        text: `You are <strong>not</strong> the Tsar; you are a circle that wants the capital to believe that stability is worth more than salon scandal. Officials praise loyalty; rails and bureaucracy expand. Through cousins in the service and governors’ antechambers, you might ease <em>limited</em> debate, or you might feed the Third Section’s vocabulary.
+
+Writers in your own room whisper: order without conscience grows sterile, like a rider of bronze who outlives every Evgeny.
+
+Chaadaev’s “<strong>cloak of civilization</strong>” hangs in the air: the state took the garment of reform but, he charged, barely touched civilization itself. Your camp prefers a slow, supervised march; but <strong>only the sovereign and the ministers</strong> sign decrees; you supply briefs, introductions, and rumor.
+
+<strong>Andrei</strong> has a brother in the Ministry of Education.
+
+<strong>Stepan</strong> asks whether you are advising power or flattering it.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (cloak of civilization):</strong> “…he threw us the cloak of civilization: we took up the cloak but did not so much as touch civilization.”<br><span class="read-gloss">Chaadaev warns the state can wear the cloak of civilization without touching the real thing. The two choices below are opposite ways your circle tries to “fix” that image: loyal sponsored readings versus urging crackdown.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Draft a brief for Andrei’s patron: <em>sponsored</em> readings, tight program; show we can govern thought without burning every journal.”", next: "beat_statist_machine", effects: { order: -4, reform: 10, people: 6 }, item: "pushkin_bronze" },
+          { text: "<strong>You:</strong> “Urge our contacts to treat Chaadaev’s circle as seditious; pull our manuscripts, praise firm censorship in letters <em>they</em> can show upstairs.”", next: "beat_statist_machine", effects: { order: 14, reform: -12, people: -10 } }
+        ]
+      },
+
+      beat_statist_machine: {
+        title: "Files, Uniforms, and the Letter as Case File",
+        text: `Chaadaev’s text is copied into triplicate. The salon is not an idea but a security category; for the police. <strong>You</strong> cannot order a search; you can volunteer a <em>summary</em> for a section chief, host a “loyal” reading to shape the file, or distance yourself from friends who copied the letter.
+
+Reform, upstairs, exists only where it thickens the chain of command. Letter I asked who would <strong>think for Russia</strong>. The answer in the corridors is the minister and the clerk with the stamp, not you, unless you marry into the chain or draft its language.
+
+Here the Bronze Horseman is read as state majesty, not as Evgeny’s tragedy; unless someone in <em>your</em> circle dares say so, which costs him the next favor from a patron.`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (who thinks for the nation?):</strong> “…where are our wise men, where are our thinkers? Who is there who has ever thought for us…”<br><span class="read-gloss">Chaadaev asked who thinks for Russia; on the statist track the police file answers, not the salon. The two buttons are whether you steer dissent into commission memos or hand names to the Third Section.</span><br><br><strong><em>The Bronze Horseman</em>, Part Two (statue as power):</strong> “Oh, Destiny’s great potentate! / Was it not thus, a towering idol…” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">Pushkin’s statue is state majesty as idol. The harsher informer choice below gives that same state machinery a sharper sword against your friends.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “I’ll help frame the case for commissions; memos that route dissent into ranked reports, not street trials.”", next: "crisis_statist", effects: { order: 8, reform: 4, people: -6 } },
+          { text: "<strong>You:</strong> “I give the police names: who circulated the letter, who mocked court ceremony; let the Third Section arrest them while we keep our hands clean.”", next: "crisis_statist", effects: { order: 12, reform: -10, people: -10 }, walkout: "vera" }
+        ]
+      },
+
+      mediator: {
+        title: "Between Imitation and Isolation",
+        text: `You accept Chaadaev’s moral urgency but reject pure copying. Learn Europe’s law and science; rework them through local history.
+
+Chaadaev once imagined Russia between East and West; “leaning with one elbow on <strong>China</strong> and another on <strong>Germany</strong>”; called to unite imagination and reason; he concluded Providence had “left us completely on our own.” Your path is a stubborn attempt to build the synthesis that history denied.
+
+The same autumn questions persist, but the answer is neither abject imitation nor proud isolation. Pushkin’s flood already taught that borrowed granite and fleets need foundations that ordinary lives can survive.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (between East and West):</strong> “…leaning with one elbow on China and another on Germany, we should have united within us the two great principles of intelligent nature - imagination and reason…”<br><span class="read-gloss">Chaadaev wanted imagination and reason fused in one Russia; history never delivered it. The mediator’s first fork is whether you try that fusion in cities first or in the provinces first.</span><br><br><strong>Letter I (Providence and solitude):</strong> “…Providence has left us completely on our own, has refused all involvement in any of our affairs…”<br><span class="read-gloss">Providence left Russia alone in Chaadaev’s text. The mediator path is the game’s name for answering that loneliness with hybrid reform: neither pure copy nor pure isolation.</span><br><br><strong>Discuss:</strong> Can law and technique be rooted so that clerks and provinces recognize themselves in them, not as decorations dropped from the capital?<br><span class="read-gloss">The Discuss line asks whether law can feel native to clerks and provinces. Use it as a test: is your mediator program real participation, or another decoration dropped from St. Petersburg?</span>`
+        },
+        counterfactualNote: `The phrase “zemstvo-style” names a later model (zemstvos from 1864). You are staging the <em>argument</em> for local voice in the 1830s, not claiming the institutions already exist.`,
+        choices: [
+          { text: "Pilot reforms in cities first.", next: "mediator_city", effects: { order: 2, reform: 10, people: -2 } },
+          { text: "Start in provinces: zemstvo-style councils and schools.", next: "mediator_province", effects: { order: -2, reform: 8, people: 10 } }
+        ]
+      },
+
+      mediator_city: {
+        title: "Pilot Modernization",
+        text: `St. Petersburg and Moscow glitter; the periphery lags. Inequality feeds resentment. The Bronze Horseman’s shadow: magnificence for some, drowning rooms for others.`,
+        primaryRead: {
+          title: "Read alongside: The Bronze Horseman",
+          body: `<strong>Prologue (capital’s glory):</strong> “Peter’s own creation,” granite, Nevá’s “carapace.”<br><span class="read-gloss">Pushkin’s prologue is showpiece capital. The “negotiate with conservatives” button accepts that capital splendor still sets the political tempo for your pilot.</span><br><br><strong>Part One (ordinary life vs. plan):</strong> Yevgeny in “poor Kolomna,” the flood “Leaped on the city.” (<em>The Bronze Horseman</em>, prologue and Part One.)<br><span class="read-gloss">Yevgeny in poor Kolomna is periphery <em>inside</em> the capital. The “public pressure” choice argues that his kind of life, not only salons, must shape any national rollout.</span>`
+        },
+        choices: [
+          { text: "Negotiate broader rollout with conservatives.", next: "beat_med_bridge", effects: { order: 6, reform: 6, people: 2 } },
+          { text: "Public pressure for national adoption.", next: "beat_med_bridge", effects: { order: -10, reform: 12, people: 4 } }
+        ]
+      },
+
+      mediator_province: {
+        title: "From the Ground Up",
+        text: `Teachers and local councils reshape life outside the capitals. Trust grows where institutions feel familiar, not dropped from above like a decree in a storm.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (peoples mature slowly):</strong> “Peoples are moral beings just as individuals are. It takes centuries to educate them, just as it takes years to educate a person.”<br><span class="read-gloss">Chaadaev says nations mature slowly: moral cover for slow provincial schools and councils. The “central directives” choice trades that patience for speed ordered from St. Petersburg.</span>`
+        },
+        counterfactualNote: `Provincial self-rule as imagined here borrows from reforms that mature decades later; the game uses it to test values (trust vs. speed), not to simulate an 1836 statute.`,
+        choices: [
+          { text: "Slow institution-building over decades.", next: "beat_med_bridge", effects: { order: 4, reform: 10, people: 10 } },
+          { text: "Shift to central directives to speed outcomes.", next: "beat_med_bridge", effects: { order: 8, reform: 4, people: -8 } }
+        ]
+      },
+
+      beat_med_bridge: {
+        title: "Neither Salon Nor Soil Alone",
+        text: `You steer between Chaadaev’s demand for real participation in “civilization” and the Slavophile warning that borrowed forms may hollow the country. Zemstvo dreams meet ministry suspicion; Pushkin’s poem is cited by both sides; flood for the people, embankments for the state.
+
+His image of Russia between <strong>East and West</strong>, a country called to merge two principles yet left to find its own way, haunts your compromise: neither pure Brussels nor pure Moscow, but a ledger both can sign.
+
+The bridge strains: local trust is your asset; central jealousy is the weather.`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (East/West mission):</strong> “…leaning with one elbow on China and another on Germany…” (full passage in <em>Between Imitation and Isolation</em> read-along).<br><span class="read-gloss">You promised locals a hybrid East–West synthesis. The ministry-veto winter event tests whether that promise was ever real power or only talk.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> flood vs. embankments; clerk vs. statue (<em>The Bronze Horseman</em>, Part One and Part Two).<br><span class="read-gloss">Pushkin gives the image set for center (statue, embankments) vs. periphery (clerk, flood). Ask who pays when budgets and blame move upstairs to ministers.</span>`
+        },
+        counterfactualNote: `“Zemstvo dreams” is shorthand for local budgets and schools; real zemstvo law postdates this era. Treat clashes as thought-experiment, not documentary.`,
+        choices: [
+          { text: "Insist local budgets lead; fight ministerial veto in the open.", next: "crisis_med", effects: { order: -4, reform: 8, people: 8 } },
+          { text: "Trade public spotlight for guarantees: a smaller trial program, but written protections.", next: "crisis_med", effects: { order: 6, reform: 6, people: 2 } }
+        ]
+      },
+
+      crisis_west: {
+        title: "Winter 1837: The Westernizing Wager",
+        text: `Ice, journals, spies: the reformers’ winter. Will a reading society survive, will the Neva echo in the capital’s nerves, will a ministry strike a provincial budget you never championed, or will the censor end the season?
+
+You spent the season in print, law, and the Europe-facing case, but couriers do not ask which lamp you read by. Which whisper hardens into “what everyone knows” owes something to whether your friends still move in step with the ministries (the <strong>Order</strong> on your meter), and something to plain ill luck at the threshold. <strong>Two ones when you felt sure of yourself, or a six from nowhere when you felt invisible, can force the wrong crisis through the door</strong>. The sort of mess later lectures call “contingency,” but tonight is only dread and bad timing.
+
+Roll once: d6 + Order bonus. Strong totals lean toward a salon breakthrough or a Neva echo from the north; a Slavophile or statist circle, in this same frost, would be untangling different gossip entirely.`,
+        crisisRoll: true,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (thinkers and the crowd):</strong> “…where are our wise men, where are our thinkers? Who is there who has ever thought for us…”<br><span class="read-gloss">Chaadaev contrasts a few thinkers with a mute crowd. The die roll on this Westernizing winter screen decides which side (salon or street) gets the rumor that shapes your story.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> Part One (the Neva flood); Part Two (Yevgeny and the statue).<br><span class="read-gloss">Pushkin keeps the clerk and the flood in the same world as salon debate. Ideas don’t float free of water, roofs, or terror.</span>`
+        },
+        choices: [
+          { text: "Roll fate (1d6 + Order bonus)", next: null, roll: true }
+        ]
+      },
+
+      crisis_slav: {
+        title: "Winter 1837: Soil, Censor, and the Provinces",
+        text: `Land committees, clergy, and provincial gentry watch the capital. Aksakov’s language circulates in copies; the Third Section reads “narod” as a code for unrest. Will an Orthodox-sympathetic governor host a reading, will rural notables block a ministry school plan, will flood gossip from the capital derail your soil-first story, or will the packet burn?
+
+The provinces do not file their fears in your order. <strong>Snake eyes on a night you thought won, or a six when you had no pull, can paste someone else’s scandal onto your soil-first story</strong>. Raw contingency that syllabi will later call “background noise,” but your table will remember as the wrong name on the seal.
+
+Roll once: d6 + Order bonus. Middling totals favor gentry and clergy digging in against Petersburg’s school maps; a high throw may still buy a guarded salon hour, if the gendarmes are watching another staircase.`,
+        crisisRoll: true,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (Byzantium / unity):</strong> “…miserable Byzantium…” / “…the vivifying principle of unity…”<br><span class="read-gloss">Chaadaev names schism and missed Latin unity. The Slavophile winter roll will stress either soil rhetoric or rootless Petersburg. Both are answers you still owe him.</span><br><br><strong>Letter I (village vs. capital air):</strong> nomads in the cities passage (see <em>News from the Capital</em>).<br><span class="read-gloss">Same letter: village soul vs. nomads in the capital. The winter rumor table will lean on one side or the other after you roll.</span>`
+        },
+        choices: [
+          { text: "Roll fate (1d6 + Order bonus)", next: null, roll: true }
+        ]
+      },
+
+      crisis_statist: {
+        title: "Winter 1837: The Apparatus Closes Ranks",
+        text: `From your salon’s window, the letter is already a file number. Troops stand by embankments; floods become logistics, not moral drama. Reformers are “managed” by people you do not command. When someone asks who “thinks for Russia” now, the garrison and the <strong>Chief Directorate of Censorship</strong> have ready answers; your circle only hears the echo.
+
+Will winter hand you another Neva alarm: proclamations, barges, the <em>center</em> forced to move in daylight, or only the dull rhythm of seized proofs and closed rooms? Or will a sideways whisper slip the latch: <strong>a permissive rumor when you prayed for discipline, or a clamp when you needed breathing room</strong>. The kind of misfire files never quite explain?
+
+Roll once: d6 + Order bonus. High totals sound like flood and emergency; low ones, like censors and ordinary fear. <strong>When fortune crosses the wires, even those patterns lie.</strong>`,
+        crisisRoll: true,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (who thinks for Russia?):</strong> wise men / “thought for us” passage.<br><span class="read-gloss">Under censorship, Chaadaev’s question (“who thinks for Russia?”) is answered in advance by the police. The die tests whether any other rumor breaks through anyway.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> flood as state emergency vs. moral catastrophe; “Destiny’s great potentate” (<em>The Bronze Horseman</em>, Part Two).<br><span class="read-gloss">One Neva flood, two readings: statists see logistics and files; Pushkin and the People meter stress the clerk’s horror.</span>`
+        },
+        choices: [
+          { text: "Roll fate (1d6 + Order bonus)", next: null, roll: true }
+        ]
+      },
+
+      crisis_med: {
+        title: "Winter 1837: The Bridge Under Strain",
+        text: `Provincial pilots meet winter shortages and ministry ledgers. Chaadaev’s question and Pushkin’s clerk refuse to stay in separate rooms. Will a mixed salon win a night, will zemstvo ambition trigger a central slapdown, will pure censorship erase a pilot you thought safe, or will couriers mistake your patchwork for someone else’s feud, and leave you answering a petition you never signed?
+
+Roll once: d6 + Order bonus. The middling throws are where Petersburg’s ink and the district ledger collide. <strong>If fate misfires, you may inherit another salon’s winter entirely. Compromise, it turns out, does not buy immunity from the wrong rumor.</strong>`,
+        crisisRoll: true,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I:</strong> China/Germany / “left us completely on our own” (mediator path).<br><span class="read-gloss">Mediator path: hybrid mission, lonely execution in Chaadaev’s terms. A “misfit” die result is the game’s name for that loneliness biting back: wrong rumor for the story you prepared.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> clerk, flood, statue; center vs. periphery read through Part One–Two.<br><span class="read-gloss">Clerk, flood, and statue are one Pushkin story; the mediator winter scene will not let you treat them as separate files.</span>`
+        },
+        counterfactualNote: `Zemstvo “ambition” in dialogue belongs chiefly to later decades; here it stands in for any pilot local fund the ministry might crush.`,
+        choices: [
+          { text: "Roll fate (1d6 + Order bonus)", next: null, roll: true }
+        ]
+      },
+
+      event_flood_echo: {
+        title: "Echo of the Neva",
+        text: `Word arrives of ice jams and broken embankments in the north. Merchants panic; clerks lose roofs. The capital’s plan is grand; the water does not read decrees.
+
+Chaadaev had written of a people with no lasting home, of <strong>nomads in the cities</strong>, and of masters and slaves in one breath. The flood turns metaphor into wet plaster and broken timber.
+
+Pushkin’s Nevá “<strong>Leaped on the city</strong>”; coffins float down streets; the sovereign owns that <strong>“For czars there is no pitting / Their power against the Lord’s</strong>”; small comfort if your isle is gone.
+
+<strong>Asymmetric sting:</strong> reform-minded voices may seize the scandal to demand change, yet the <strong>People</strong> meter still dives; panic and loss outrun rhetoric. One axis improving does not spare the others.
+
+(Automatic: Order −5, Reform +5, People −8.)`,
+        primaryRead: {
+          title: "Read alongside: The Bronze Horseman",
+          body: `<strong>Part One (flood):</strong> “Nevá, engorged, with swell and roaring… / Leaped on the city.” “Into the deeply hollowed basements, / Canals rose gushing to the casements.” “There streamed Petropolis, foam-laced…” (<em>The Bronze Horseman</em>, Part One.)<br><span class="read-gloss">Pushkin’s lines are raw destruction. The “useful scandal” choice below tries to turn that pain into reform rhetoric; the other choice calms chiefs and controls the story.</span><br><br><strong>Part One (aftermath and sovereign):</strong> The Emperor’s generals went speeding “To save the people, who, unheeding / With fear, were drowning where they dwelled.” Compare the sovereign’s speech on czars and the Lord in the same passage (<em>The Bronze Horseman</em>, Part One).<br><span class="read-gloss">The Emperor’s speech is throne theology plus rescue theater. Calming chiefs (second button) matches controlling how that narrative spreads.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Petition governors for relief, open subscriptions; make the scandal <em>useful</em> to reform rhetoric.”", next: "resolve_endings", effects: { order: -8, reform: 8, people: 12 } },
+          { text: "<strong>You:</strong> “Counsel contacts to stress legality and calm; urge <em>their</em> chiefs to shape the story before the crowd does.”", next: "resolve_endings", effects: { order: 6, reform: -4, people: -10 } }
+        ],
+        forcedEffects: { order: -5, reform: 5, people: -8 }
+      },
+
+      event_censor: {
+        title: "The Censor’s Visit",
+        text: `A packet of Chaadaev’s letters is seized. Someone’s Pushkin is “lost.” Order tightens; Reform bleeds.
+
+(Automatic: Order +6, Reform −10, People −4.)`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (imitation and hollowness):</strong> “This is a natural consequence of a culture based wholly upon importation and imitation.”<br><span class="read-gloss">After the censor seizes letters, “protest legally” claims Chaadaev’s ideas were serious; “retreat private” admits the salon was only dressing up.</span>`
+        },
+        choices: [
+          { text: "Protest through legal channels.", next: "resolve_endings", effects: { order: -6, reform: 8, people: 2 } },
+          { text: "Retreat to private circles.", next: "resolve_endings", effects: { order: 4, reform: -4, people: 0 } }
+        ],
+        forcedEffects: { order: 6, reform: -10, people: -4 }
+      },
+
+      event_salon: {
+        title: "Salon Victory",
+        text: `A sympathetic governor allows a reading; <strong>his</strong> indulgence, not yours. Excerpts from <em>The Bronze Horseman</em> (Arndt; flood, statue, pursuit) and Chaadaev share one evening: granite hymn, drowned streets, and history’s verdict.
+
+(Automatic: Order −3, Reform +8, People +6.)`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong><em>The Bronze Horseman</em> (salon-sized excerpts):</strong> Prologue “window to the West”; Part One “Leaped on the city”; Part Two “The Bronze Horseman in pursuit.” (<em>The Bronze Horseman</em>, prologue, Part One, and Part Two.)<br><span class="read-gloss">The poem runs pride → disaster → pursuit in one arc. “Provincial circuit” bets that whole arc can travel beyond one governor’s salon.</span><br><br><strong>Letter I (program in one room):</strong> “…repeat the whole education of mankind…”<br><span class="read-gloss">Chaadaev’s “repeat mankind’s education” is a long haul, not one reading night. Thanking the host and vanishing protects his patronage; a circuit risks it.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Pool subscriptions, beg letters of introduction; stretch this night into a provincial circuit.”", next: "resolve_endings", effects: { order: -4, reform: 10, people: 8 } },
+          { text: "<strong>You:</strong> “Thank the host and vanish; let no one say we presumed on imperial patience.”", next: "resolve_endings", effects: { order: 6, reform: 4, people: 2 } }
+        ],
+        forcedEffects: { order: -3, reform: 8, people: 6 }
+      },
+
+      event_rural_gentry: {
+        title: "Provincial Notables Dig In",
+        text: `Gentry assemblies balk at a ministry school plan: too foreign, too fast. Orthodoxy and local patronage are invoked against “borrowed” classrooms. Order in the provinces looks like inertia; reformers call it sabotage.
+
+(Automatic: Order +2, Reform −5, People +4.)`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (borrowed codes):</strong> “…seek the moral code which was to constitute our education in miserable Byzantium…” / “…the vivifying principle of unity…”<br><span class="read-gloss">Chaadaev’s “Byzantium” and “unity” lines are cousins of the gentry cry “too foreign.” The buttons are the policy fork: negotiate parish schools with locals, or lobby the ministry to crush the assembly.</span>`
+        },
+        choices: [
+          { text: "Negotiate parish schools and elected local boards: Slavophile communities, but with budgets and rules on paper.", next: "resolve_endings", effects: { order: 4, reform: 6, people: 6 } },
+          { text: "<strong>You:</strong> “Lobby the ministry to override the assembly; use patrons, not troops we don’t have.”", next: "resolve_endings", effects: { order: 8, reform: 2, people: -8 } }
+        ],
+        forcedEffects: { order: 2, reform: -5, people: 4 }
+      },
+
+      event_zemstvo_clash: {
+        title: "Ministry vs. Local Budget",
+        text: `A pilot zemstvo’s school fund is struck from above. Central ledgers win the day; provincial trust cracks. Chaadaev’s “borrowing” accusation returns in a new key: mimicry of Western institutions without local teeth.
+
+(Automatic: Order +4, Reform −4, People −6.)`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (importation and imitation):</strong> “This is a natural consequence of a culture based wholly upon importation and imitation.”<br><span class="read-gloss">Chaadaev says import-and-imitate cultures hollow out meaning. A ministry canceling a local school fund is exactly that charge in bureaucratic form.</span><br><br><strong>Letter I (no inner progression):</strong> “With us there is no inner development, no natural progression; new ideas sweep away the old…”<br><span class="read-gloss">Chaadaev says new ideas sweep away the old with no inner progression. Cutting the pilot fund feels like betrayal because another reform idea just got erased from below.</span>`
+        },
+        counterfactualNote: `Zemstvos in law arrive after this period; this event is a parable about center vs. periphery, not a claim about an 1837 zemstvo budget.`,
+        choices: [
+          { text: "Appeal publicly; ally with reformers in the capital.", next: "resolve_endings", effects: { order: -8, reform: 10, people: 6 } },
+          { text: "Retreat to smaller charity; keep the trial program nominally alive so it can be revived later.", next: "resolve_endings", effects: { order: 4, reform: 2, people: 2 } }
+        ],
+        forcedEffects: { order: 4, reform: -4, people: -6 }
+      },
+
+      resolve_endings: {
+        title: "Sorting the Outcome",
+        text: `The winter crisis scene is over. The three colored bars (Order, Reform, People) are the running score for how your choices leaned, not a grade, just a portrait.
+
+Chaadaev’s Letter I asked whether Russia gets an honest place in “universal” history; Pushkin’s <em>Bronze Horseman</em> asked who survives when the state builds in granite and the river rises.
+
+Below, three friends name <em>which of those two questions should close the story you tell about this winter</em>. That pick only changes how you frame the tale afterward; it does not rewrite which ministry memo “really won.” It does shift the epilogue text and the discussion prompts.`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I:</strong> opening on Madame, “universal education,” West/East, imitation (see <em>Moscow, Autumn 1836</em> read-along for short extracts).<br><span class="read-gloss">Letter I carries Chaadaev’s side of the pairing: history, borrowing, Russian soul. Pick Stepan’s Reform button below if you want that voice to win the closing argument.</span><br><br><strong><em>The Bronze Horseman</em>:</strong> Prologue through Part Two (see <em>The Salon Turns to Pushkin</em> for excerpts keyed to those sections).<br><span class="read-gloss">Pushkin runs from Peter’s vow to Yevgeny’s grave. Andrei’s Order button stresses majesty and file; Father Dimitri’s People button stresses the clerk and the flood.</span>`
+        },
+        choices: [
+          { text: "<strong>Andrei Mikhailovich</strong> insists: “Stability first; without the state, your ethics are smoke.” <em>(Choose this to frame the epilogue around Order, the blue-gray bar: state survival and ranks.)</em>", next: "final_route_order" },
+          { text: "<strong>Stepan</strong> insists: “Law and schools, or we admit Chaadaev was only entertainment.” <em>(Choose this to frame the epilogue around Reform, the rose bar: institutions and Letter I as program.)</em>", next: "final_route_reform" },
+          { text: "<strong>Father Dimitri</strong> insists: “If the clerk and the peasant are footnotes, we lied to ourselves.” <em>(Choose this to frame the epilogue around People, the green bar: clerks, peasants, flood victims.)</em>", next: "final_route_people" }
+        ]
+      },
+
+      final_route_order: {
+        title: "Closing: The Weight of Order",
+        text: `The closing argument insists on legibility, ranks, and the survival of the state as such. The Bronze Horseman stands: Pushkin addresses him as “<strong>Destiny’s great potentate</strong>.” Yevgeny has no vote in the official story.`,
+        primaryRead: {
+          title: "Read alongside: The Bronze Horseman",
+          body: `<strong>Part Two (direct address to the statue):</strong> “Oh, Destiny’s great potentate! / Was it not thus, a towering idol…” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">Pushkin calls the statue fate-like power. If you confirm Andrei’s Order frame, you are treating that voice as the honest moral of your winter story.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Yes. Tell the story with stability and state authority as the moral center.”", next: "ending_computed" }
+        ],
+        tag: "order"
+      },
+
+      final_route_reform: {
+        title: "Closing: The Weight of Reform",
+        text: `The closing argument insists on law, schools, and Russia’s stake in a wider history. Chaadaev’s sting is treated as a program, not only a wound.`,
+        primaryRead: {
+          title: "Read alongside: First Philosophical Letter (Letter I)",
+          body: `<strong>Letter I (program):</strong> “…we must, in a certain sense, repeat the whole education of mankind.”<br><span class="read-gloss">“Repeat mankind’s education” is the banner for Stepan’s Reform frame: Russia’s long homework inside world history.</span><br><br><strong>Letter I (duty, justice, law, order):</strong> same theme in <em>The Reformist Circle</em> read-along.<br><span class="read-gloss">For Chaadaev, “education” includes duty and law breathed like air, not scandal headlines alone. That is what Stepan’s closing is claiming.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Yes. Close with law, schools, and Russia’s place in world history, whatever this winter cost.”", next: "ending_computed" }
+        ],
+        tag: "reform"
+      },
+
+      final_route_people: {
+        title: "Closing: The Weight of the People",
+        text: `The final argument rests on clerks, peasants, and everyone caught in the flood’s path. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the city outran; the Neva and the Admiralty’s needle share one lesson: the ledger must count bodies, not only ideas.`,
+        primaryRead: {
+          title: "Read alongside: Letter I and The Bronze Horseman",
+          body: `<strong>Letter I (slave and master):</strong> “…from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Chaadaev names the whole ladder from court to bonded laborer. Father Dimitri’s People frame keeps the bottom rung in view on purpose.</span><br><br><strong><em>The Bronze Horseman</em>, Part Two (close):</strong> “…Here lay asprawl my luckless knave, / And here in charity they buried / The chill corpse in a pauper’s grave.” (<em>The Bronze Horseman</em>, Part Two, closing.)<br><span class="read-gloss">Yevgeny’s pauper grave is what official history throws away. Confirming Father Dimitri’s People frame makes that grave harder to skip in the story you tell.</span>`
+        },
+        choices: [
+          { text: "<strong>You:</strong> “Yes. End with ordinary lives (clerks, peasants), not monuments to emperors.”", next: "ending_computed" }
+        ],
+        tag: "people"
+      },
+
+      ending_computed: {
+        title: "Epilogue",
+        text: ``,
+        choices: [],
+        computed: true
+      }
+    };
+
+    const state = {
+      current: "intro",
+      steps: 0,
+      history: [],
+      pathId: null,
+      lastEvent: null,
+      stats: { order: 50, reform: 50, people: 50 },
+      inventory: new Set(),
+      achievements: new Set(),
+      lastRoll: null,
+      sceneApplied: new Set(),
+      keepBanner: false,
+      finalLean: null,
+      finalLeanApplied: null,
+      evgenyChorus: false,
+      lastRunSummary: "",
+      crisisMisfit: false,
+      crisisMisfitKind: null,
+      runTags: new Set(),
+      scars: new Set(),
+      walkouts: new Set()
+    };
+
+    function isCrisisScene(id) {
+      return id === "crisis_west" || id === "crisis_slav" || id === "crisis_statist" || id === "crisis_med";
+    }
+
+    function buildCrisisRecap() {
+      const path = state.pathId || "west";
+      const pathNames = { west: "Westernizing", slav: "Slavophile", statist: "statist", med: "mediator" };
+      const O = state.stats.order;
+      const R = state.stats.reform;
+      const P = state.stats.people;
+      const bonus = Math.floor(O / 25);
+      let leanHint = "Lowest meter: <strong>People</strong> (green bar). Clerks and flood victims may matter less in gossip than they do in Pushkin’s poem.";
+      if (O <= R && O <= P) leanHint = "Lowest meter: <strong>Order</strong> (blue-gray bar). Winter rolls skew toward censor pressure unless the die is kind.";
+      else if (R <= O && R <= P) leanHint = "Lowest meter: <strong>Reform</strong> (rose bar). Print and schools are fragile in the winter rumor mill.";
+      return `<div class="path-recap" role="note"><strong>Before you roll the winter die</strong> (3-player co-op: the <strong>Order</strong> player summarizes this box aloud first.)<br>Argument track you joined: <strong>${pathNames[path] || path}</strong> · Order ${O} · Reform ${R} · People ${P}<br>Add to the six-sided die: <strong>+${bonus}</strong> (take Order, divide by 25, round down).<br><em>${leanHint}</em></div>`;
+    }
+
+    function prependSceneCallbacks(sceneId) {
+      let pre = "";
+      if (sceneId === "reform_education" && state.runTags.has("intro_pushkin_first")) {
+        pre += `<p class="callback-note"><strong>Vera (callback):</strong> We opened with Pushkin’s clerk Yevgeny; do these school-and-law papers ever reach <em>his</em> roof, or only ours?</p>`;
+      }
+      if (sceneId === "beat_west_print" && state.scars.has("petition_winter")) {
+        pre += `<p class="callback-note"><strong>Scar:</strong> The petition detour wasted weeks; Stepan speaks more softly, and the Third Section’s file on the salon is thicker.</p>`;
+      }
+      if (sceneId.startsWith("event_") && state.crisisMisfit) {
+        pre += `<p class="crisis-misfit"><strong>Winter misfit:</strong> The whisper that found you belonged, strictly speaking, to another salon’s weather: double ones when your hand looked strong, or a six slipping in when you had almost no pull. Read it as couriers and grudges crossing wires, not the tale you rehearsed by the lamp.</p>`;
+      }
+      return pre;
+    }
+
+    function appendSceneEnrichment(scene) {
+      let html = "";
+      if (scene.primaryRead) {
+        html += `<details class="primary-read"><summary>${scene.primaryRead.title}</summary><div class="primary-read-body">${sceneBodyHtml(scene.primaryRead.body)}</div></details>`;
+      }
+      if (scene.counterfactualNote) {
+        html += `<p class="counterfactual-note"><strong>Historical staging:</strong> ${scene.counterfactualNote}</p>`;
+      }
+      return html;
+    }
+
+    function buildUnresolvedEpilogue(O, R, P) {
+      const path = state.pathId || "west";
+      const event = state.lastEvent || "event_censor";
+      const lines = [];
+      const minV = Math.min(O, R, P);
+      if (minV === P && P < 50) {
+        lines.push("People stayed weak on the meter; Pushkin’s receipt for drowned rooms went mostly uncollected in this outcome.");
+      }
+      if (minV === R && R < 50) {
+        lines.push("Reform never quite anchored as ‘program’; Chaadaev’s call to relearn mankind’s education still sounds like salon noise.");
+      }
+      if (path === "west" && event === "event_censor" && !state.crisisMisfit) {
+        lines.push("Print never won the hearing Westernizers drafted; censorship closed the season on paper.");
+      }
+      if (state.crisisMisfit) {
+        lines.push("Winter threw a ‘wrong’ rumor across the path you were on; the table improvised without its scripted moral.");
+      }
+      if (state.walkouts.has("vera")) {
+        lines.push("Vera stopped coming after the seizure talk; trust in the room did not fully restitch.");
+      }
+      if (state.runTags.has("intro_pushkin_first")) {
+        lines.push("You opened with literature before locking a program; wisdom or evasion remains disputed.");
+      }
+      if (!lines.length) {
+        lines.push("Chaadaev’s mission question and Pushkin’s ‘who pays’ question still pull in different directions.");
+      }
+      return `<div class="unresolved-block"><h4>Still open after this session</h4><ul>${lines.map((l) => `<li>${l}</li>`).join("")}</ul></div>`;
+    }
+
+    /** Session banner title; keyed by path × framing (twelve endings). */
+    function computeRunTitle(endingKey, pathId, O, R, P) {
+      const p = pathId || "west";
+      const T = {
+        west_order: "Ranks of Civilization",
+        west_reform: "Syllabus and Censor",
+        west_people: "Evgeny’s Europeans",
+        slav_order: "Vertical Iconostasis",
+        slav_reform: "Parish Ink, Capital Light",
+        slav_people: "Soil and Roof",
+        statist_order: "File Outlives the Salon",
+        statist_reform: "Commissioned Progress",
+        statist_people: "Relief Without Receipt",
+        med_order: "The Minister’s Bridge",
+        med_reform: "Borrowed Law, Local Accent",
+        med_people: "The Ledger They Share"
+      };
+      if (T[endingKey]) return T[endingKey];
+      if (O >= 75 && p === "west") return "Salon Firebrand";
+      if (P >= 75) return "Neva’s Witnesses";
+      return "No Single Verdict";
+    }
+
+    function historiographyNudge(endingKey) {
+      const H = {
+        west_order: "Historiography hook: Nicholas-era administration often framed “progress” as discipline first. Compare that to Westernizer hopes for open debate. Whose archive survives?",
+        west_reform: "Historiography hook: censorship and educational expansion under autocracy are paired themes; ask whether institutions “Europeanize” society or only its elite paperwork.",
+        west_people: "Historiography hook: social historians stress who benefits from reform rhetoric. Does this People-framed ending put the clerk in the same story as the statute?",
+        slav_order: "Historiography hook: Orthodox and statist imaginaries sometimes merged. When does <em>narod</em> language serve the village, and when the ministry?",
+        slav_reform: "Historiography hook: selective borrowing without liberal “rights” talk is a real 19th-c. pattern. Trace parallels to parish schools and local elites.",
+        slav_people: "Historiography hook: material life vs. idealized village; compare to populist and later narodnik genealogies (without equating eras).",
+        statist_order: "Historiography hook: police and file culture as modern statecraft. Does continuity equal legitimacy in the secondary readings you assign for this unit?",
+        statist_reform: "Historiography hook: reform “from above” via commissions. Walicki and others ask whether mimicry can thicken into substance.",
+        statist_people: "Historiography hook: imperial charity vs. rights. How do historians narrate famine, flood, and mercy rhetoric?",
+        med_order: "Historiography hook: center–periphery tension in imperial Russia. The mediator path stages local budgets and schools as “zemstvo-style” pilots in the 1830s (real zemstvo law came later; see Historical staging). Ask whether post-1864 zemstvo historiography still helps students interpret that teaching device.",
+        med_reform: "Historiography hook: hybrid institutions. When does a borrowed law become “native” in historical narrative?",
+        med_people: "Historiography hook: fiscal accountability to communities. Link this to debates on who counted in the reform coalition."
+      };
+      return H[endingKey] || H.west_people;
+    }
+
+    function formatEpilogueDiscussion(specQ, bullets, path) {
+      const aks =
+        path === "slav"
+          ? `<li><strong>Aksakov vs. Chaadaev:</strong> Does grounding legitimacy in <em>narod</em> and soil answer Chaadaev’s shame about “universal history,” or merely change the subject? Can Slavophile thought protect Evgeny, or only idealize the village?</li>`
+          : "";
+      const lis = bullets.map((b) => `<li>${b}</li>`).join("");
+      return `<h4>Speculative question</h4><p><em>${specQ}</em></p><h4>For class discussion</h4><ul>${lis}${aks}</ul>`;
+    }
+
+    /**
+     * BACKLOG — priority order (user):
+     *
+     * (1) Narrative + teaching voice — synthesized pass (do together, in this order):
+     *   (a) Foundational notes from vetted plot/theme companions (SparkNotes-caliber or equivalent) plus
+     *       repo primaries (CHAADAEV-PRIMARY-TEXT-NOTES.md, BRONZE-HORSEMAN-TEXT-NOTES.md, SOURCES.md).
+     *   (b) Read alongside + scene glue: replace ornamental glosses with text-grounded lines (what the
+     *       passage does, who speaks, concrete link to the branch)—not filler connectives.
+     *   (c) EPILOGUE_TWELVE: bodies rewritten to in-scene salon voice (no “This text appears because…”);
+     *       winter flavor appended via winterEcho[event]. Continue tuning with Read alongside pass (b).
+     *
+     * (2) Scene imagery item 2b: diversify center-panel art where scenes still reuse the same file; keep
+     *     period-appropriate picks and rails ≠ center (see SCENE_IMAGES / SCENE_RAIL_IMAGES comments).
+     *
+     * (3) Icons / chrome polish if still desired.
+     *
+     * (4) Optional: assign SCENE_COLOR_SCHEME or per-scene :root[data-scene-id] palette tweaks once moods are set.
+     */
+    /** path × framing (order | reform | people): title, body, speculative Q, discussion bullets. */
+    const EPILOGUE_TWELVE = {
+      west: {
+        order: {
+          title: "Ending: The Ranks of Civilization",
+          body: `The coals were ash before anyone called the winter finished. <strong>Andrei</strong> had the last steady voice: whatever had crossed the threshold—censor, water, rumor from the north—the version he would carry to well-born cousins was one. Calm files and legible ranks had to eat first; salons could not digest Europe on an empty stomach. <strong>Stepan</strong> turned a Chaadaev copy face-down and said that was the very “cloak” the letter mocked—stationery dignity without breath. <strong>Vera</strong> asked whether Pushkin’s Neva had ever waited on a minister’s signature. <strong>Father Dimitri</strong> scrubbed ink from his cuff and muttered for drowned rooms nobody on the Order side had named aloud.
+
+Still, the story they would tell on the ride home was <strong>Andrei’s</strong>: Russia must survive its teachers before it becomes worthy of them—and if that puts Chaadaev’s shame in the police ledger instead of the schoolhouse, each of them would have to live with which ledger they trusted.`,
+          specQ:
+            "If stability is the prerequisite Chaadaev doubted, are you proving him wrong, or are you showing that his “cloak” fits the police better than the school?",
+          bullets: [
+            "Does administrative continuity count as participation in “universal history” if debate never leaves the anteroom?",
+            "In <em>The Bronze Horseman</em>, who is the hero of “progress” when the group frames a Westernizing winter through Andrei’s Order lens?",
+            "Letter I faults hollow borrowing. Does Order-first reform repeat what Chaadaev feared, or supply the soil that reform needs?"
+          ]
+        },
+        reform: {
+          title: "Ending: The Syllabus and the Censor",
+          body: `<strong>Stepan</strong> refused to let the night die on talk of fate alone. He laid his palm on the dog-eared proofs they had risked to print and said the winter proved only what Chaadaev already knew: a nation’s “education” lives in law and mother tongue—and the Third Section still owned both doors. <strong>Andrei</strong> warned him not to mistake scraps of permission for a constitution. <strong>Father Dimitri</strong> said that if couriers had brought flood-echo from the north, then reform drafted in Petersburg had once again arrived sodden on someone else’s doorstep. <strong>Vera</strong> kept her counsel, but she did not put out the lamp.
+
+They did not settle it. They agreed, sourly, to close the chapter on <strong>Stepan’s</strong> terms: the moral center of their year would be syllabi, petitions, and the war of ink—not bronze parades—while everyone in the room knew the censor’s light still burned in the next corridor.`,
+          specQ: "Can “universal history” be studied in rooms that the censor still owns?",
+          bullets: [
+            "Were Westernizers right that Russia had to risk instability to join “universal history,” or does Chaadaev exaggerate discontinuity?",
+            "When reform runs ahead of Order, is repression inevitable in an autocratic empire, or contingent?",
+            "How does Pushkin’s flood complicate faith in rational planning and legal reform?"
+          ]
+        },
+        people: {
+          title: "Ending: Evgeny’s Europeans",
+          body: `<strong>Father Dimitri</strong> would not bless the parting until the room said “clerk” without flinching. Pushkin’s Yevgeny had haunted their autumn; now the priest made him present: if “Europe” was only statutes and salons, he said, Kolomna could starve in syllogisms. <strong>Vera</strong>—who had opened with French novels—quoted Letter I’s ladder from court down to the owned soul and asked where any syllabus touched it. <strong>Andrei</strong> called the sentiment beautiful and ungovernable. <strong>Stepan</strong>, wiping soot from the shutter, conceded that borrowed institutions mean nothing if flood beds never reach the ledger.
+
+They left with an uneasy pact: the winter they would retell weighted bodies before abstractions—Chaadaev’s mirror held against Pushkin’s pauper grave until someone’s horse changed.`,
+          specQ: "Who is “Europe” for if the syllabus never reaches Kolomna?",
+          bullets: [
+            "Can borrowed institutions become authentic if they improve ordinary lives when you weighted People at the close, or does Chaadaev demand cultural continuity that reform alone cannot supply?",
+            "Does Pushkin’s poem obligate the state to care about clerks and flood victims, or only to mourn them in art?",
+            "Compare this outcome to the mediator path: is bottom-up legitimacy enough to answer Chaadaev, or must Russia also “matter” on a European stage?"
+          ]
+        }
+      },
+      slav: {
+        order: {
+          title: "Ending: The Vertical Iconostasis",
+          body: `Lamplight caught the icons while <strong>Andrei</strong>—an unexpected ally for soil-talk—drew one long stroke: altar, throne, <em>narod</em>, no crack for scandal-mongers. The Slavophile voices warmed until <strong>Vera</strong> asked who spoke for the hamlet when the ministry borrowed the same words. Pages on schism and “miserable Byzantium” still lay open; nobody pretended they answered each other. <strong>Father Dimitri</strong> wondered whether Pushkin’s clerk could live inside a story told as spiritual deference—or whether he would always snag the silk like a burr.
+
+They shelved the doubt for carriage-oaths. Winter, in <strong>Andrei’s</strong> retelling, had shown Holy Russia and good order sharing one tale—whether the tale still had room for correction from below, the road would test.`,
+          specQ: "When the state claims to speak for the soil, who is left to correct it from below?",
+          bullets: [
+            "When does <em>narod</em> language serve the village, and when does it ornament the ministry?",
+            "Where do Chaadaev’s charges about borrowed forms land if Order is sacralized as organic?",
+            "Does <em>The Bronze Horseman</em>’s clerk fit a Slavophile story told through Order, or does he break the iconostasis?"
+          ]
+        },
+        reform: {
+          title: "Ending: Parish Ink, Capital Light",
+          body: `<strong>Stepan</strong> surprised them: he took Aksakov’s vocabulary without surrendering ink. Parish schools, stewards the district could name, German verbs in Russian mouths—so long as no one waved a foreign constitution like a relic. <strong>Vera</strong> doubted “selective” stayed selective once Petersburg counted rubles. <strong>Andrei</strong> listened for treason, heard none, and allowed that perhaps “rights” could stay in Latin while silver stayed local. <strong>Father Dimitri</strong> asked when the hybrid hardened into orthodoxy Chaadaev would still peel off as costume.
+
+No answer satisfied. They agreed only that their winter would end on <strong>Stepan’s</strong> picture—parish ink, capital light, argument left honest and unfinished.`,
+          specQ: "At what moment does “selective” borrowing become a new orthodoxy Chaadaev would still call hollow?",
+          bullets: [
+            "Trace parallels to parish schools and local elites. When is hybrid reform substantive vs. symbolic?",
+            "Does Chaadaev’s shame about “universal history” apply to Slavophile curricula that borrow technique but refuse rights language?",
+            "Can Pushkin’s Petersburg clerk be “European” in a Slavophile reform frame, or must he be rewritten?"
+          ]
+        },
+        people: {
+          title: "Ending: The Soil and the Roof",
+          body: `<strong>Father Dimitri</strong> made <em>narod</em> a material argument, not embroidery. Clerks who shivered, peasants whose tithe fed someone else’s church silver—if Slavophile love stopped at the village linden, he called it gentry vanity with incense. <strong>Andrei</strong> flinched; throne-and-soil talk had not rehearsed Kolomna. <strong>Vera</strong> translated grief into lines a zemstvo dream might someday fund. <strong>Stepan</strong> quoted Chaadaev on strangers under one roof and asked whether their circle was less strange now.
+
+Pushkin and the letter refused to let the abstract float where someone drowned. They closed on <strong>Father Dimitri’s</strong> frame: soil that mattered had to mean roofs the chronicles skipped—or their Slav year was only a prettier exile from Chaadaev’s shame.`,
+          specQ: "Does Slavophile language obligate policy for the capital’s clerk, or only for the imagined village?",
+          bullets: [
+            "Material life vs. idealized village: where does historiography place the clerk in narodnik genealogies (without equating eras)?",
+            "Can soil-based legitimacy answer Evgeny’s fate, or only the gentry’s conscience?",
+            "Letter I’s upper-class vices: does a People-first Slavophile reading change how fair Chaadaev sounds?"
+          ]
+        }
+      },
+      statist: {
+        order: {
+          title: "Ending: The File Outlives the Salon",
+          body: `The dossier had grown thick enough to shame the brazier. <strong>Andrei’s</strong> circle—statists by habit, never by crown—agreed that what survived winter was stamped, numbered, triplicate. Names fed to the Third Section sat in someone’s throat like stones; others shrugged and said continuity was its own civilization. <strong>Stepan</strong> looked ill; Reform starved faster without air than he liked to admit. <strong>Vera</strong> asked whether “who thinks for Russia?” had been answered a little too neatly by police ink. <strong>Father Dimitri</strong> whispered Evgeny’s name once, then let it vanish into protocol.
+
+Their public story: ranks held; the salon had been a case category; thought, for the moment, lived in margins the chief allowed. Chaadaev’s question waited inside the cover sheet—unread, not gone.`,
+          specQ: "Is obedience to process a kind of civilization, or its costume while thought stays rented?",
+          bullets: [
+            "Police and file culture as modern statecraft. Does continuity equal legitimacy in the secondary readings you assign?",
+            "When Order is maximized, who is structurally unprotected? Use Evgeny as a test case.",
+            "Does high Order without strong People reproduce Letter I’s pattern of elite vice detached from civic depth?"
+          ]
+        },
+        reform: {
+          title: "Ending: Commissioned Progress",
+          body: `Europe arrived as memoranda—<strong>Stepan’s</strong> bitter joke landed flat. Commissions, patron letters, reform only where chiefs allowed ribbon and triplicate: that was the harvest they chose to narrate. <strong>Andrei</strong> praised triage; <strong>Vera</strong> named friends who would sign nothing bold again. <strong>Father Dimitri</strong> asked whether mankind’s long “education” could happen only upstairs; his voice thinned when no one answered.
+
+Paperwork could mimic borrowing without depth—Letter I’s curse in fair copy. Still <strong>Stepan’s</strong> closing carried: Russia would change where margins allowed, dignity measured in folders, never faster than a corridor could stomach.`,
+          specQ: "If reform lives in triplicate copies, does mankind’s “education” happen, or does paperwork replace it?",
+          bullets: [
+            "Walicki and others on mimicry from above: when does borrowed form thicken into substance?",
+            "Is “managed transformation” moral participation in civilization or bureaucratic borrowing without depth?",
+            "Who falls through the cracks when Order and Reform are both respectable on paper?"
+          ]
+        },
+        people: {
+          title: "Ending: Relief Without Receipt",
+          body: `<strong>Father Dimitri</strong> framed mercy because rights-talk would have split them from their hosts. Flood-year letters, petitions for imperial relief, the throne as father who might soften—he spun winter as grace, not structure. <strong>Andrei</strong> exhaled; mercy read well in patron letters. <strong>Stepan</strong> said quietly that supplication saves no one the law forgets. <strong>Vera</strong> asked who the story rescued—the drowned clerk or only the portrait of a merciful center.
+
+They left the question rustling like sealed paper. Their agreed tale: people had appeared as objects of grace this season; whether grace became justice, the file would not say.`,
+          specQ: "When you beg the center for flood victims, who is saved: them, or the story that the throne is merciful?",
+          bullets: [
+            "Imperial charity vs. rights: how do historians narrate mercy rhetoric after disaster?",
+            "Does Pushkin obligate the state to more than symbolic relief?",
+            "Can a strong People emphasis coexist with a narrative of grace rather than entitlement, and is that stable?"
+          ]
+        }
+      },
+      med: {
+        order: {
+          title: "Ending: The Minister’s Bridge",
+          body: `<strong>Andrei</strong> likened their compromise to a bridge with one stone pier and one of rope: the ministry owned the stone; locals got rope and gratitude. Mediator hopes thinned but did not snap. <strong>Stepan</strong> argued rope could hold if traffic stayed light; <strong>Vera</strong> said traffic never stayed light. <strong>Father Dimitri</strong> prayed for engineers honest enough to weigh both ends in one breath. They had tried to fuse Chaadaev’s borrowed forms with soil-trust; winter had taught them sequencing under veto.
+
+The story <strong>Andrei</strong> set for the road: order first, local voice a concession—honest about power, cruel about equality, perhaps the only span that stood in mud season.`,
+          specQ: "If one pier is stone and one is rope, is “compromise” just delayed collapse?",
+          bullets: [
+            "Imperial center vs. provinces: this scenario borrows zemstvo-era imagery for local pilots before those laws existed. Does scholarship on the real zemstvo period still sharpen discussion of the ministry–local clashes in play?",
+            "Is an uneasy equilibrium realistic, or does one value usually dominate?",
+            "Which of Chaadaev’s three charges does a mediator Order frame address least well?"
+          ]
+        },
+        reform: {
+          title: "Ending: Borrowed Law, Local Accent",
+          body: `<strong>Stepan</strong> closed with law translated through provincial mouths—foreign on parchment, Russian in the schoolyard; neither pure import nor sealed autarchy. <strong>Father Dimitri</strong> liked the music; <strong>Vera</strong> asked how many accents a code could bear before chiefs called it chaos. <strong>Andrei</strong> wanted schedules; compromise’s enemy was always impatience. They remembered Letter I on inner progression and laughed without mirth.
+
+Their winter ended on <strong>Stepan’s</strong> bet: hybrid from the first line; borrowed until proven native by lives, not slogans—knowing the moment of proof might belong to whoever held the ink.`,
+          specQ: "How long must a law be “borrowed” before it becomes native, and who declares the moment?",
+          bullets: [
+            "Hybrid institutions: when does narrative call a statute Russian rather than European?",
+            "Compare mediator reform to pure Westernizing or statist tracks. Same texts, different closure?",
+            "Chaadaev on authentic vs. mimetic institutions: does local accent cure hollow borrowing?"
+          ]
+        },
+        people: {
+          title: "Ending: The Ledger They Share",
+          body: `<strong>Father Dimitri</strong> made the ledgers kiss—one line for ministry wheat, one for parish rye, a total a hungry eye could read. <strong>Stepan</strong> called it bookkeeping mysticism; <strong>Andrei</strong> called it survival. <strong>Vera</strong> said Chaadaev had named absence, not overlap; Pushkin had named bodies. They agreed to tell winter as material synthesis: not only a rhetorical middle, but budgets clerks and clerics could audit together.
+
+Whether one ledger always became footnote to the other, none would swear; the closing chose hope over schema—the walk home carried two books, one satchel, one argument still breathing.`,
+          specQ:
+            "Two ledgers, one countryside: must one always become the footnote, or is overlap itself the synthesis Chaadaev could not name?",
+          bullets: [
+            "Fiscal accountability to communities: who counted in the reform coalition this ending implies?",
+            "Does material overlap answer Pushkin’s “who pays” without dissolving Order?",
+            "Letter I as salon text vs. spiritual counsel: does genre change how fair the synthesis in this closing sounds?"
+          ]
+        }
+      }
+    };
+
+    function buildRunSummary(ep) {
+      const path = state.pathId || "west";
+      const pathLabels = { west: "Westernizing", slav: "Slavophile", statist: "Statist", med: "Mediator" };
+      const visited = state.history.map((id) => (scenes[id] ? scenes[id].title : id)).join(" → ");
+      const inv = Array.from(state.inventory).map((id) => ITEMS[id] || id).join("; ") || "(none)";
+      const lines = [
+        "Russia at the Crossroads (run summary)",
+        "────────────────────────────",
+        `Session title: ${ep.runTitle}`,
+        `Epilogue: ${ep.title}`,
+        `Track: ${pathLabels[path] || path}`,
+        `Final: Order ${state.stats.order} · Reform ${state.stats.reform} · People ${state.stats.people}`,
+        `Winter event: ${rollOutcomeLabel(state.lastEvent || "event_censor")}`,
+        `Winter misfit (wrong rumor): ${state.crisisMisfit ? state.crisisMisfitKind || "yes" : "no"}`,
+        `Framing: ${state.finalLeanApplied || "(none)"}`,
+        `Evgeny chorus path: ${state.evgenyChorus ? "yes" : "no"}`,
+        `Run tags: ${state.runTags.size ? Array.from(state.runTags).join(", ") : "(none)"}`,
+        `Scars: ${state.scars.size ? Array.from(state.scars).join(", ") : "(none)"}`,
+        `Walkouts: ${state.walkouts.size ? Array.from(state.walkouts).join(", ") : "(none)"}`,
+        "",
+        "Library: " + inv,
+        "",
+        "Scenes visited:",
+        visited || "(start only)"
+      ];
+      if (ep.ach && ep.ach.length) lines.push("", "Unlocked: " + ep.ach.join("; "));
+      return lines.join("\n");
+    }
+
+    function rollOutcomeLabel(key) {
+      const labels = {
+        event_salon: "Salon breakthrough.",
+        event_flood_echo: "Flood echo in the north.",
+        event_censor: "Censor strikes.",
+        event_rural_gentry: "Provincial gentry resist the ministry plan.",
+        event_zemstvo_clash: "Ministry vetoes the local pilot."
+      };
+      return labels[key] || key;
+    }
+
+    const clamp = (n) => Math.max(0, Math.min(100, n));
+
+    function applyEffects(eff) {
+      if (!eff) return;
+      state.stats.order = clamp(state.stats.order + (eff.order || 0));
+      state.stats.reform = clamp(state.stats.reform + (eff.reform || 0));
+      state.stats.people = clamp(state.stats.people + (eff.people || 0));
+    }
+
+    function addItem(key) {
+      if (!key || !ITEMS[key]) return;
+      state.inventory.add(key);
+    }
+
+    function statBars() {
+      ["order", "reform", "people"].forEach((k) => {
+        const v = state.stats[k];
+        document.getElementById("bar" + k.charAt(0).toUpperCase() + k.slice(1)).style.height = v + "%";
+        document.getElementById("val" + k.charAt(0).toUpperCase() + k.slice(1)).textContent = String(v);
+      });
+    }
+
+    function renderInventory() {
+      const ul = document.getElementById("inventoryList");
+      ul.innerHTML = "";
+      if (state.inventory.size === 0) {
+        ul.innerHTML = "<li class=\"empty\">Nothing yet.</li>";
+        return;
+      }
+      state.inventory.forEach((id) => {
+        const li = document.createElement("li");
+        const iconSvg = ITEM_ICONS[id] || INV_SVG.doc;
+        li.innerHTML = `<span class="inv-ico" aria-hidden="true">${iconSvg}</span><span>${ITEMS[id]}</span>`;
+        ul.appendChild(li);
+      });
+    }
+
+    function formatEffects(eff) {
+      if (!eff) return "";
+      const parts = [];
+      if (eff.order) parts.push(`Order ${eff.order > 0 ? "+" : ""}${eff.order}`);
+      if (eff.reform) parts.push(`Reform ${eff.reform > 0 ? "+" : ""}${eff.reform}`);
+      if (eff.people) parts.push(`People ${eff.people > 0 ? "+" : ""}${eff.people}`);
+      return parts.join(" · ");
+    }
+
+    /** Scene copy may include <em> etc.; must use innerHTML, not textContent. Newlines → <br>. */
+    function sceneBodyHtml(raw) {
+      if (raw == null || raw === "") return "";
+      return String(raw)
+        .replace(/\r\n/g, "\n")
+        .replace(/\n/g, "<br>");
+    }
+
+    function showEventBanner(html) {
+      const b = document.getElementById("eventBanner");
+      b.innerHTML = html;
+      b.classList.add("visible");
+    }
+
+    function hideEventBanner() {
+      document.getElementById("eventBanner").classList.remove("visible");
+    }
+
+    function checkAchievements() {
+      if (state.inventory.has("pushkin_bronze")) {
+        state.achievements.add("bronze_reader");
+      }
+      if (state.stats.people >= 75) state.achievements.add("people_champion");
+      if (state.stats.order >= 80) state.achievements.add("iron_order");
+      if (state.stats.reform >= 80) state.achievements.add("reform_fire");
+      if (state.lastRoll === 6) state.achievements.add("lucky_six");
+      if (state.inventory.has("aksakov_note")) state.achievements.add("aksakov_reader");
+      if (state.evgenyChorus) state.achievements.add("evgeny_framing");
+      const P = state.stats.people;
+      if (state.inventory.has("chaadaev_letter") && state.inventory.has("pushkin_bronze") && P >= 60) {
+        state.achievements.add("evgeny_merged_insight");
+      }
+    }
+
+    function resolveEndingText() {
+      if (state.finalLean === "order") state.stats.order = clamp(state.stats.order + 5);
+      if (state.finalLean === "reform") state.stats.reform = clamp(state.stats.reform + 5);
+      if (state.finalLean === "people") state.stats.people = clamp(state.stats.people + 5);
+      state.finalLean = null;
+
+      const { order: O, reform: R, people: P } = state.stats;
+      const path = state.pathId || "west";
+      const lean = state.finalLeanApplied || "order";
+      const endingKey = `${path}_${lean}`;
+
+      const byPath = EPILOGUE_TWELVE[path] || EPILOGUE_TWELVE.west;
+      const pack = byPath[lean] || byPath.order;
+      const title = pack.title;
+      let body = pack.body;
+      const discussion = formatEpilogueDiscussion(pack.specQ, pack.bullets, path);
+
+      const event = state.lastEvent || "event_censor";
+      const winterEcho = {
+        event_salon:
+          "Outside, the wax-and-tea smell of the governor’s hall still clung to someone’s cuff—one sanctioned night when letter and poem had shared a candle, and no one could quite file it away.",
+        event_flood_echo:
+          "North-country letters had soaked every argument; cold water, they muttered, does not ask which program you defended before it breaks the sill.",
+        event_censor:
+          "Seals and missing pages sat in the middle of the table like a fifth guest nobody had invited.",
+        event_rural_gentry:
+          "Provincial obstinacy still rattled in Stepan’s throat—the ministry’s neat map had torn on a gentry nail.",
+        event_zemstvo_clash:
+          "The struck pilot fund left a bruise no manifesto could paint over; trust and paper had divorced in daylight."
+      };
+      body += "\n\n" + (winterEcho[event] || "Winter had left its own punctuation; no two of them quoted it the same way.");
+
+      if (state.evgenyChorus) {
+        body += `\n\n<strong>Vera</strong> had pressed them to stop treating letter, poem, and clerk as separate files; the circle let her have the last inch of ink—one moral ledger, one winter, no more polite partitions.`;
+      }
+
+      let secretHtml = "";
+      if (state.inventory.has("chaadaev_letter") && state.inventory.has("pushkin_bronze") && P >= 60) {
+        secretHtml = `<div class="secret-insight"><strong>Rare alignment:</strong> Chaadaev and Pushkin both travel in the satchel, and the room has refused to let People stay an afterthought. If “civilization” never touches the clerk’s roof, the bronze rider is threat, not partner—and someone said so aloud before the lamps went out.</div>`;
+      }
+
+      const runTitle = computeRunTitle(endingKey, path, O, R, P);
+      const historiography = historiographyNudge(endingKey);
+
+      checkAchievements();
+
+      const extras = [];
+      if (state.inventory.has("pushkin_bronze")) {
+        extras.push(`The <em>Bronze Horseman</em> lesson stays vivid: greatness and grief share one map.`);
+      }
+      if (state.inventory.has("chaadaev_letter")) {
+        extras.push(`Chaadaev's letter remains the cold mirror: borrowed forms, broken continuity, the demand for a moral future.`);
+      }
+      if (state.inventory.has("aksakov_note")) {
+        extras.push(`Aksakov's wager stays in the satchel: <em>narod</em> and soil against borrowed law. Whether that heals or evades Chaadaev remains contested.`);
+      }
+      if (state.walkouts.has("vera")) {
+        extras.push(`Vera’s absence after the seizure debate cost the circle an honest conservative interlocutor. The ending is colder in the corners.`);
+      }
+      if (state.crisisMisfit) {
+        extras.push(`Winter’s messenger arrived with the wrong coat on: history came as contingency, not as the parable the table had rehearsed.`);
+      }
+      if (state.runTags.has("intro_pushkin_first")) {
+        extras.push(`You privileged Pushkin’s clerk early. Prose and policy stayed tangled in one bundle, and sequence mattered.`);
+      }
+      if (state.scars.has("petition_winter")) {
+        extras.push(`The petition detour scarred the autumn: forms ate time the journals could have used.`);
+      }
+
+      const unresolvedHtml = buildUnresolvedEpilogue(O, R, P);
+
+      const ach = [];
+      if (state.achievements.has("bronze_reader")) ach.push("Engaged Pushkin's Petersburg poem");
+      if (state.achievements.has("people_champion")) ach.push("People's advocate (75+)");
+      if (state.achievements.has("iron_order")) ach.push("High Order (80+)");
+      if (state.achievements.has("reform_fire")) ach.push("High Reform (80+)");
+      if (state.achievements.has("lucky_six")) ach.push("Rolled a 6 on fate");
+      if (state.achievements.has("aksakov_reader")) ach.push("Engaged Aksakov (Slavophile voice)");
+      if (state.achievements.has("evgeny_framing")) ach.push("Evgeny’s chorus framing");
+      if (state.achievements.has("evgeny_merged_insight")) ach.push("Letter + poem + strong People (60+)");
+
+      return { title, body, extras, ach, discussion, runTitle, historiography, secretHtml, unresolvedHtml };
+    }
+
+    const titleEl = document.getElementById("title");
+    const textEl = document.getElementById("text");
+    const choicesEl = document.getElementById("choices");
+    const sceneIdTextEl = document.getElementById("sceneIdText");
+    const stepsTextEl = document.getElementById("stepsText");
+    const eraTextEl = document.getElementById("eraText");
+    const endingBlock = document.getElementById("endingBlock");
+
+    function renderScene() {
+      if (!state.keepBanner) hideEventBanner();
+      state.keepBanner = false;
+
+      const scene = scenes[state.current];
+      syncAppChrome(state.current, scene);
+      endingBlock.innerHTML = "";
+
+      if (scene.computed) {
+        const ep = resolveEndingText();
+        state.lastRunSummary = buildRunSummary(ep);
+        titleEl.textContent = ep.title;
+        textEl.innerHTML =
+          `<div class="run-title-banner"><strong>Session title:</strong> ${ep.runTitle}</div>` + sceneBodyHtml(ep.body);
+        let html = "";
+        if (ep.secretHtml) html += ep.secretHtml;
+        html += `<div class="ending-extra"><strong>Final scores</strong><br>Order ${state.stats.order} · Reform ${state.stats.reform} · People ${state.stats.people}<br><br>${ep.extras.join("<br>")}</div>`;
+        if (ep.ach.length) {
+          html += `<div class="achievements"><strong>Unlocked</strong>: ${ep.ach.join(" · ")}</div>`;
+        }
+        html += `<div class="historio-nudge">${ep.historiography}</div>`;
+        if (ep.discussion) {
+          html += `<div class="discussion-box">${ep.discussion}</div>`;
+        }
+        if (ep.unresolvedHtml) {
+          html += ep.unresolvedHtml;
+        }
+        html += `<div class="ending-actions"><button type="button" class="ghost" id="copySummaryBtn">Copy run summary</button> <span class="copy-toast" id="copyToast" hidden>Copied.</span></div>`;
+        endingBlock.innerHTML = html;
+        const copyBtn = document.getElementById("copySummaryBtn");
+        const toast = document.getElementById("copyToast");
+        if (copyBtn && toast) {
+          copyBtn.addEventListener("click", () => {
+            const t = state.lastRunSummary || "";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(t).then(() => {
+                toast.hidden = false;
+                setTimeout(() => { toast.hidden = true; }, 2000);
+              });
+            } else {
+              prompt("Copy this summary:", t);
+            }
+          });
+        }
+        sceneIdTextEl.textContent = `Scene: ${scene.title}`;
+        stepsTextEl.textContent = `Turn: ${state.steps}`;
+        eraTextEl.textContent = `Era: 1836–37`;
+        choicesEl.innerHTML = "";
+        const endBtn = document.createElement("button");
+        endBtn.className = "choice-btn";
+        endBtn.textContent = "Play again";
+        endBtn.addEventListener("click", restart);
+        choicesEl.appendChild(endBtn);
+        statBars();
+        renderInventory();
+        updateSceneVisuals(state.current);
+        return;
+      }
+
+      titleEl.textContent = scene.title;
+      let sceneText = scene.text;
+      if (state.current === "resolve_endings") {
+        state.evgenyChorus = false;
+        const lead = RESOLVE_PATH_LEAD[state.pathId || "west"];
+        if (lead) sceneText = lead + "\n\n" + sceneText;
+      }
+      let prefix = "";
+      if (scene.crisisRoll) prefix = buildCrisisRecap();
+      textEl.innerHTML = prefix + prependSceneCallbacks(state.current) + sceneBodyHtml(sceneText) + appendSceneEnrichment(scene);
+      sceneIdTextEl.textContent = `Scene: ${scene.title}`;
+      stepsTextEl.textContent = `Turn: ${state.steps}`;
+      eraTextEl.textContent = state.steps >= 4 ? "Era: 1836–37" : "Era: 1836";
+
+      choicesEl.innerHTML = "";
+
+      if (scene.forcedEffects && !state.sceneApplied.has(state.current)) {
+        applyEffects(scene.forcedEffects);
+        state.sceneApplied.add(state.current);
+        showEventBanner("<strong>Event applied:</strong> " + formatEffects(scene.forcedEffects));
+      }
+
+      if (!scene.choices || !scene.choices.length) {
+        const endBtn = document.createElement("button");
+        endBtn.className = "choice-btn";
+        endBtn.textContent = "Return to start";
+        endBtn.addEventListener("click", restart);
+        choicesEl.appendChild(endBtn);
+        statBars();
+        renderInventory();
+        updateSceneVisuals(state.current);
+        return;
+      }
+
+      let choicesToRender = scene.choices;
+      if (state.current === "resolve_endings") {
+        choicesToRender = scene.choices.slice();
+        if (state.inventory.has("chaadaev_letter") && state.inventory.has("pushkin_bronze") && state.stats.people >= 55) {
+          choicesToRender.push({
+            text: "<strong>Vera</strong> (quietly): “Stop treating them as separate files: Chaadaev, Pushkin, and the clerk belong in one moral reckoning.” <em>(Rare: Evgeny’s chorus framing.)</em>",
+            next: "final_route_people",
+            evgenyChorus: true,
+            effects: { people: 3 }
+          });
+        }
+      }
+
+      choicesToRender.forEach((choice) => {
+        const button = document.createElement("button");
+        button.className = "choice-btn";
+        const fx = choice.effects ? formatEffects(choice.effects) : "";
+        button.innerHTML = choice.roll
+          ? `<span class="main">${choice.text}</span>`
+          : `<span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}`;
+
+        button.addEventListener("click", () => {
+          if (choice.roll) {
+            const bonus = Math.floor(state.stats.order / 25);
+            const roll = 1 + Math.floor(Math.random() * 6);
+            state.lastRoll = roll;
+            const total = roll + bonus;
+            const nextKey = pickCrisisEvent(total, roll);
+            state.lastEvent = nextKey;
+            state.history.push(state.current);
+            state.current = nextKey;
+            state.steps += 1;
+            state.keepBanner = true;
+            let misfitNote = "";
+            if (state.crisisMisfit) {
+              misfitNote =
+                state.crisisMisfitKind === "snake"
+                  ? " <em>Winter misfit:</em> double ones on a strong hand: the wrong rumor forced the door anyway."
+                  : " <em>Winter misfit:</em> a six from nowhere on a thin total: luck rewrote which story stuck.";
+            }
+            showEventBanner(`<strong>Fate roll:</strong> d6 = ${roll} + Order bonus ${bonus} = <strong>${total}</strong> · ${state.pathId || "west"} track. ${rollOutcomeLabel(nextKey)}.${misfitNote}`);
+            statBars();
+            renderInventory();
+            renderScene();
+            return;
+          }
+
+          state.history.push(state.current);
+          if (choice.path) state.pathId = choice.path;
+          if (choice.stateTag) state.runTags.add(choice.stateTag);
+          if (choice.walkout) state.walkouts.add(choice.walkout);
+          if (choice.scar) state.scars.add(choice.scar);
+          if (choice.effects) applyEffects(choice.effects);
+          if (choice.item) addItem(choice.item);
+          if (choice.item2) addItem(choice.item2);
+          if (choice.next && String(choice.next).indexOf("final_route") === 0) {
+            state.evgenyChorus = choice.evgenyChorus === true;
+          }
+
+          let next = choice.next;
+          if (next && typeof next === "string" && next.indexOf("crisis_") === 0) {
+            state.steps += 1;
+            state.current = next;
+            statBars();
+            renderInventory();
+            renderScene();
+            return;
+          }
+
+          if (next === "ending_computed") {
+            const prev = scenes[state.history[state.history.length - 1]];
+            if (prev && prev.tag) {
+              state.finalLean = prev.tag;
+              state.finalLeanApplied = prev.tag;
+            }
+            state.steps += 1;
+            state.current = next;
+            statBars();
+            renderInventory();
+            renderScene();
+            return;
+          }
+
+          state.current = next;
+          state.steps += 1;
+          statBars();
+          renderInventory();
+          renderScene();
+        });
+        choicesEl.appendChild(button);
+      });
+
+      statBars();
+      renderInventory();
+      updateSceneVisuals(state.current);
+    }
+
+    function restart() {
+      state.current = "intro";
+      state.steps = 0;
+      state.history = [];
+      state.stats = { order: 50, reform: 50, people: 50 };
+      state.pathId = null;
+      state.lastEvent = null;
+      state.inventory = new Set();
+      state.achievements = new Set();
+      state.lastRoll = null;
+      state.sceneApplied = new Set();
+      state.keepBanner = false;
+      state.finalLean = null;
+      state.finalLeanApplied = null;
+      state.evgenyChorus = false;
+      state.lastRunSummary = "";
+      state.crisisMisfit = false;
+      state.crisisMisfitKind = null;
+      state.runTags = new Set();
+      state.scars = new Set();
+      state.walkouts = new Set();
+      hideEventBanner();
+      renderScene();
+    }
+
+    function goBack() {
+      if (!state.history.length) return;
+      hideEventBanner();
+      state.current = state.history.pop();
+      state.steps = Math.max(0, state.steps - 1);
+      renderScene();
+    }
+
+    document.getElementById("restartBtn").addEventListener("click", restart);
+    document.getElementById("backBtn").addEventListener("click", goBack);
+
+    const glossaryModal = document.getElementById("glossaryModal");
+    document.getElementById("glossaryBtn").addEventListener("click", () => {
+      glossaryModal.classList.add("open");
+    });
+    document.getElementById("glossaryClose").addEventListener("click", () => {
+      glossaryModal.classList.remove("open");
+    });
+    glossaryModal.addEventListener("click", (e) => {
+      if (e.target === glossaryModal) glossaryModal.classList.remove("open");
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") glossaryModal.classList.remove("open");
+    });
+
+    renderScene();
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Canvas-ready interactive demos — MLCS 599</title>
+  <link rel="stylesheet" href="./assets/demo-common.css" />
+  <style>
+    .demo-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+    .demo-list li {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.65rem;
+      background: var(--surface);
+    }
+    .demo-list a {
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .demo-list a:hover {
+      text-decoration: underline;
+    }
+    .demo-list p {
+      margin: 0.35rem 0 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive demos hub</h1>
+  <p>
+    Standalone prototypes for <cite>Russia at the Crossroads</cite> (parent <a href="../index.html">../index.html</a>).
+    Zip this folder for Canvas Files; all links are relative. Brief for builders:
+    <a href="./AGENT_INSTRUCTIONS.md">AGENT_INSTRUCTIONS.md</a>.
+  </p>
+
+  <h2>Demos</h2>
+  <ul class="demo-list">
+    <li>
+      <a href="./demos/realm-balance-slider.html">Realm balance — coupled sliders</a>
+      <p>Fixed combined total (toy model); moving one realm redistributes the others proportionally.</p>
+    </li>
+    <li>
+      <a href="./demos/realm-triangle-budget.html">Realm triangle — point budget</a>
+      <p>Spend a limited budget across Order, Reform, and People with +/− controls and live remaining count.</p>
+    </li>
+    <li>
+      <a href="./demos/icons-showcase.html">Icons showcase</a>
+      <p>Stroke SVG set (crown, quill, church, bridge, flood, book, gendarme, barn) with suggested game hooks.</p>
+    </li>
+    <li>
+      <a href="./demos/interactive-widgets.html">Interactive widgets</a>
+      <p>Buttons, <code>details</code> panel, <code>dialog</code> modal, toast, breadcrumb, stance checkbox gate.</p>
+    </li>
+    <li>
+      <a href="./demos/canvas-self-test.html">Canvas self-test</a>
+      <p>Checklist for LMS hosting: errors, SVG, keyboard button, <code>localStorage</code>, environment <code>pre</code>.</p>
+    </li>
+  </ul>
+
+  <h2>Assets</h2>
+  <p>Shared styles: <code>assets/demo-common.css</code> (realm colors, focus rings, reduced motion).</p>
+</body>
+</html>

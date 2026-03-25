@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" data-path="med">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Realm balance — coupled sliders (demo)</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .slider-row {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr 2.75rem;
+      gap: 0.5rem 0.75rem;
+      align-items: center;
+      margin-bottom: 0.85rem;
+    }
+    .slider-row label {
+      font-weight: 600;
+    }
+    .slider-row.order label { color: var(--bar-order); }
+    .slider-row.reform label { color: var(--bar-reform); }
+    .slider-row.people label { color: var(--bar-people); }
+    input[type="range"] {
+      width: 100%;
+      min-height: 2.75rem;
+    }
+    .value-out {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    .total-line {
+      margin-top: 0.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--line);
+      font-size: 0.95rem;
+    }
+    .bar-preview {
+      display: flex;
+      gap: 4px;
+      height: 12px;
+      margin-top: 0.35rem;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-preview span { height: 100%; min-width: 2px; }
+    .bar-preview .order { background: var(--bar-order); }
+    .bar-preview .reform { background: var(--bar-reform); }
+    .bar-preview .people { background: var(--bar-people); }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Realm balance — coupled sliders</h1>
+  <p>
+    This prototype answers: <strong>how does it feel when raising one realm necessarily pulls from the others?</strong>
+    The main game keeps Order, Reform, and People as separate 0–100 meters; here we use a
+    <strong>toy model</strong> so sliders stay interesting: a <strong>fixed combined total of 180</strong>
+    (each stat still capped at 0–100). Moving one slider redistributes the remainder between the other two
+    in proportion to their previous values. Rounding is applied per step; tiny drift is corrected on input.
+  </p>
+
+  <div class="demo-panel" aria-labelledby="sliders-heading">
+    <h2 id="sliders-heading">Adjust realms</h2>
+    <div class="slider-row order">
+      <label for="rng-order">Order</label>
+      <input type="range" id="rng-order" min="0" max="100" value="60" aria-valuemin="0" aria-valuemax="100" />
+      <output class="value-out" for="rng-order" id="out-order">60</output>
+    </div>
+    <div class="slider-row reform">
+      <label for="rng-reform">Reform</label>
+      <input type="range" id="rng-reform" min="0" max="100" value="60" aria-valuemin="0" aria-valuemax="100" />
+      <output class="value-out" for="rng-reform" id="out-reform">60</output>
+    </div>
+    <div class="slider-row people">
+      <label for="rng-people">People</label>
+      <input type="range" id="rng-people" min="0" max="100" value="60" aria-valuemin="0" aria-valuemax="100" />
+      <output class="value-out" for="rng-people" id="out-people">60</output>
+    </div>
+    <div class="total-line">
+      <strong>Combined total</strong> (fixed): <span id="total-fixed">180</span>
+      <div class="bar-preview" role="img" aria-label="Relative share of Order, Reform, and People">
+        <span class="order" id="bar-order" style="width:33.33%"></span>
+        <span class="reform" id="bar-reform" style="width:33.33%"></span>
+        <span class="people" id="bar-people" style="width:33.33%"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="demo-note">
+    <strong>Rounding rule:</strong> After proportional split, values are rounded to integers; any gap to match the
+    fixed total is applied to the larger of the two secondary stats so the sum stays exact.
+  </p>
+
+  <h2>Works cited</h2>
+  <p>Game terminology matches <cite>Russia at the Crossroads</cite> (<code>../index.html</code>). Edition notes: <a href="../SOURCES.md">SOURCES.md</a>.</p>
+
+  <script>
+    (function () {
+      const FIXED = 180;
+      const ids = ["order", "reform", "people"];
+      const els = Object.fromEntries(
+        ids.map((k) => [k, document.getElementById("rng-" + k)])
+      );
+      const outs = Object.fromEntries(
+        ids.map((k) => [k, document.getElementById("out-" + k)])
+      );
+
+      function read() {
+        return { order: +els.order.value, reform: +els.reform.value, people: +els.people.value };
+      }
+
+      function write(s) {
+        ids.forEach((k) => {
+          els[k].value = String(s[k]);
+          els[k].setAttribute("aria-valuenow", String(s[k]));
+          outs[k].textContent = String(s[k]);
+        });
+        const sum = s.order + s.reform + s.people;
+        document.getElementById("bar-order").style.width = (s.order / sum) * 100 + "%";
+        document.getElementById("bar-reform").style.width = (s.reform / sum) * 100 + "%";
+        document.getElementById("bar-people").style.width = (s.people / sum) * 100 + "%";
+      }
+
+      function clamp(n, lo, hi) {
+        return Math.min(hi, Math.max(lo, n));
+      }
+
+      /** Feasible range for `key` given the other two are at most 100 and sum is FIXED. */
+      function feasibleMinMax(key) {
+        const others = ids.filter((k) => k !== key);
+        const maxKey = clamp(FIXED, 0, 100);
+        const minKey = clamp(FIXED - 200, 0, 100);
+        return [minKey, maxKey];
+      }
+
+      function onInput(changedKey) {
+        const v = clamp(+els[changedKey].value, ...feasibleMinMax(changedKey));
+        const others = ids.filter((k) => k !== changedKey);
+        let a = others[0];
+        let b = others[1];
+        let rem = FIXED - v;
+        let oldA = +els[a].value;
+        let oldB = +els[b].value;
+        let sOld = oldA + oldB;
+        let newA;
+        let newB;
+        if (rem <= 0) {
+          newA = 0;
+          newB = 0;
+        } else if (sOld <= 0) {
+          newA = Math.round(rem / 2);
+          newB = rem - newA;
+        } else {
+          newA = Math.round((rem * oldA) / sOld);
+          newB = Math.round((rem * oldB) / sOld);
+        }
+        newA = clamp(newA, 0, 100);
+        newB = clamp(newB, 0, 100);
+        let diff = rem - (newA + newB);
+        if (diff !== 0) {
+          if (newA >= newB) newA = clamp(newA + diff, 0, 100);
+          else newB = clamp(newB + diff, 0, 100);
+          diff = rem - (newA + newB);
+          if (diff !== 0) newB = clamp(newB + diff, 0, 100);
+        }
+        const state = { order: 0, reform: 0, people: 0 };
+        state[changedKey] = v;
+        state[a] = newA;
+        state[b] = newB;
+        if (state.order + state.reform + state.people !== FIXED) {
+          const fix = FIXED - (state.order + state.reform + state.people);
+          const adj = state[a] >= state[b] ? a : b;
+          state[adj] = clamp(state[adj] + fix, 0, 100);
+        }
+        write(state);
+      }
+
+      ids.forEach((k) => {
+        els[k].addEventListener("input", () => onInput(k));
+      });
+      write(read());
+    })();
+  </script>
+</body>
+</html>

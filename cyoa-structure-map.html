@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Russia at the Crossroads: branch map</title>
+  <style>
+    :root {
+      --bg: #f0ebe3;
+      --ink: #1e1c1a;
+      --muted: #5c534a;
+      --accent: #6b2c2c;
+      --card: #fffdf8;
+      --line: #d4c9b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px 20px 56px;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.62;
+      max-width: min(76rem, 98vw);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      font-size: 1.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .lede {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+    a { color: var(--accent); }
+    h2 {
+      font-size: 1.28rem;
+      margin: 2.4rem 0 0.85rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--line);
+      color: #3d3530;
+    }
+    h3 { font-size: 1.08rem; margin: 1.35rem 0 0.55rem; color: #453d36; }
+    p { margin: 0.7rem 0; }
+    .graph-wrap {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: visible;
+      margin: 1.25rem 0 2rem;
+      padding: 8px 0 16px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #e8e2d8 0%, #f5f0e8 100%);
+      border: 1px solid var(--line);
+    }
+    .mermaid {
+      background: transparent;
+      padding: 24px 28px 36px;
+      min-width: 1180px;
+    }
+    .mermaid svg {
+      max-width: none !important;
+      height: auto !important;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 0.85rem 0;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #ebe4d8; font-weight: 600; }
+    .code-ref {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.78em;
+      color: #6a5f55;
+      display: block;
+      margin-top: 0.2rem;
+    }
+    code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.85em;
+      background: #ebe6de;
+      padding: 0.12rem 0.35rem;
+      border-radius: 4px;
+    }
+    ul.compact { margin: 0.45rem 0; padding-left: 1.25rem; }
+    ul.compact li { margin: 0.35rem 0; }
+    .note { font-size: 0.92rem; color: var(--muted); }
+    .anchor-note { font-size: 0.88rem; color: var(--muted); margin-top: 0.5rem; }
+    .crit { background: #faf6f0; border-left: 4px solid #b8860b; padding: 0.65rem 0.85rem; margin: 0.6rem 0; font-size: 0.92rem; }
+    .crit strong { color: #6b4a1a; }
+    .opp { background: #f0f4fa; border-left: 4px solid #4a6b8b; padding: 0.65rem 0.85rem; margin: 0.6rem 0; font-size: 0.92rem; }
+    .insight { background: #f4faf5; border-left: 4px solid #3d6b4f; padding: 0.65rem 0.85rem; margin: 0.6rem 0; font-size: 0.92rem; }
+    h4 { font-size: 1rem; margin: 1.1rem 0 0.4rem; color: #3a342c; }
+    .branch-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6a5f55; }
+  </style>
+</head>
+<body>
+  <h1>Russia at the Crossroads: branch map</h1>
+  <p class="lede">Companion to the game in <a href="index.html"><code>index.html</code></a>. This revision adds <strong>per-path narrative progression</strong>, a <strong>critical lens</strong> (gaps, risks, opportunities for mechanics and teaching tools), and <strong>rebuild insights</strong> aligned with <a href="NARRATIVE-FOUNDATION-NOTES.md"><code>NARRATIVE-FOUNDATION-NOTES.md</code></a>. New narrative sections: <strong>2A–2D</strong> (branch ladders, Pushkin-first, critical audit, rebuild insights), then the <strong>twelve-outcomes diagram</strong>, then <strong>§3+</strong> (die tables, epilogue grid, tokens) unchanged since prior versions.</p>
+
+  <h2>0. Sources and how to use this map</h2>
+  <ul class="compact">
+    <li><strong>Live graph:</strong> <code>Final/index.html</code> — <code>scenes</code> object, <code>pickCrisisEvent</code>, <code>resolveEndingText</code> / <code>EPILOGUE_TWELVE</code>.</li>
+    <li><strong>Primary alignment:</strong> <a href="CHAADAEV-PRIMARY-TEXT-NOTES.md"><code>CHAADAEV-PRIMARY-TEXT-NOTES.md</code></a>, <a href="BRONZE-HORSEMAN-TEXT-NOTES.md"><code>BRONZE-HORSEMAN-TEXT-NOTES.md</code></a>, <code>978-94-011-3166-7.txt</code>, <code>bronze_horseman.txt</code>.</li>
+    <li><strong>Narrative pass rubric:</strong> <a href="NARRATIVE-FOUNDATION-NOTES.md"><code>NARRATIVE-FOUNDATION-NOTES.md</code></a> (what a good Read alongside gloss must do; crosswalk meters ↔ texts).</li>
+    <li><strong>Path IDs in code:</strong> <code>west</code> (Westernizing), <code>slav</code>, <code>statist</code>, <code>med</code> (mediator). <code>pathId</code> is set on the <em>first</em> choice that assigns a path; Pushkin-first routes can delay or complicate meter shape before the path locks.</li>
+  </ul>
+
+  <h2>1. What each turn changes</h2>
+  <p>Every choice advances one beat of the fiction. Three meters (<strong>Order</strong>: stability and the vertical chain; <strong>Reform</strong>: law, schools, “universal history”; <strong>People</strong>: clerks, flood-side lives, material stakes) run from 0 to 100 and start at 50. They move when you pick options, when a winter <em>event</em> applies its automatic shock, and once more when you choose how to <strong>frame</strong> the outcome (stability vs. reform vs. the people’s ledger). That framing adds +5 to the meter you emphasize.</p>
+  <p class="note"><strong>Shipped game:</strong> after that +5, <code>index.html</code> selects one of <strong>twelve</strong> epilogues by <strong>path</strong> (<code>pathId</code>) × <strong>framing</strong> (<code>finalLeanApplied</code>), each with its own title, body, speculative question, and discussion bullets (§7 table). §7 also keeps a <strong>legacy</strong> five-bucket reference for comparison.</p>
+
+  <h2>2. Scene flow: what happens, in order</h2>
+  <p>The chart uses <strong>in-game scene titles</strong> (two lines where helpful). Read top to bottom: four different “schools” of argument lead to four different <strong>winter 1837</strong> chapters. Each of those rolls the die and lands on <strong>one</strong> concrete rumor (flood, censor, salon, provinces, or budget clash). Then the table sorts the winter, you choose how to tell the story, and the epilogue keys off <strong>which path you argued</strong> plus <strong>which framing</strong> you chose (twelve distinct closings).</p>
+  <p class="anchor-note">Scroll horizontally on narrow screens. Mermaid may take a second to draw.</p>
+
+  <div class="graph-wrap">
+  <div class="mermaid">
+flowchart TB
+  subgraph g0["Opening: Chaadaev in Teleskop, 1836"]
+    OPEN["Moscow, autumn 1836<br/>The letter circulates; the salon must answer"]
+  end
+
+  subgraph g1["First responses"]
+    OPEN --> REF["The reformist circle<br/>Westernize: law, print, moral apprenticeship"]
+    OPEN --> DIST["A separate destiny<br/>Russia is not a tardy pupil of Europe"]
+    OPEN --> MEDOPEN["Between imitation and isolation<br/>Borrow forms, root them locally"]
+    OPEN --> SALON["The salon turns to Pushkin<br/>Pushkin's Bronze Horseman as mirror"]
+  end
+
+  subgraph g2["After Pushkin"]
+    SALON --> REF
+    SALON --> PETER["News from the capital<br/>Neva, clerks, Petersburg vs. the provinces"]
+    SALON --> MEDOPEN
+  end
+
+  subgraph gWest["Westernizing track → one winter chapter"]
+    REF --> EDU["Paper, schools, and law<br/>Charters, petitions, or radical constitutional talk"]
+    REF --> SERF["Land and freedom first<br/>Serfdom at the center"]
+    EDU --> JOURNAL["Journals and the Third Section<br/>Print, spies at the edge of 1837"]
+    EDU --> STUB["Autumn eaten by forms<br/>(optional detour: lost season)"]
+    STUB --> JOURNAL
+    SERF --> JOURNAL
+    PETER --> EDU
+    JOURNAL --> CW["Winter 1837: The Westernizing wager<br/>Roll: d6 + bonus from Order"]
+  end
+
+  subgraph gStat["Order / statist track → different winter"]
+    PETER --> ORDER["Order before liberty<br/>Patrons, ministries, not the tsar’s pen"]
+    DIST --> ORDER
+    ORDER --> FILES["Files, uniforms, letter as case file<br/>Memos, names, or channeling the file"]
+    FILES --> CSTAT["Winter 1837: The apparatus closes ranks<br/>Roll: flood as logistics or censor's routine"]
+  end
+
+  subgraph gSlav["Slavophile track"]
+    DIST --> SLAV["Community and faith<br/>Narod, soil, Orthodoxy vs. borrowed law"]
+    SLAV --> AKS["Aksakov at the edge of the letter<br/>Hard or softened public stance"]
+    AKS --> CS["Winter 1837: Soil, censor, and the provinces<br/>Roll: salon, gentry, or seizure"]
+  end
+
+  subgraph gMed["Mediator track"]
+    MEDOPEN --> CITY["Pilot modernization<br/>Cities first"]
+    MEDOPEN --> GROUND["From the ground up<br/>Provincial pilots"]
+    CITY --> BRIDGE["Neither salon nor soil alone<br/>Local budgets vs. ministry jealousy"]
+    GROUND --> BRIDGE
+    BRIDGE --> CMED["Winter 1837: The bridge under strain<br/>Roll: salon, zemstvo clash, or censor"]
+  end
+
+  subgraph gWinter["One rumor lands, then you respond"]
+    CW --> RUMOR["Winter event: one of five rumors<br/>See sections 4–6 below"]
+    CS --> RUMOR
+    CSTAT --> RUMOR
+    CMED --> RUMOR
+  end
+
+  subgraph gEnd["Closing the arc: epilogues"]
+    RUMOR --> RES["Sorting the outcome<br/>Which question gets the last word?"]
+    RES --> F_O["Closing: The weight of Order<br/>+5 Order"]
+    RES --> F_R["Closing: The weight of Reform<br/>+5 Reform"]
+    RES --> F_P["Closing: The weight of the People<br/>+5 People"]
+    F_O --> END["Epilogue<br/><strong>12 variants</strong> path × framing<br/><em>See §7 (wired in index.html)</em>"]
+    F_R --> END
+    F_P --> END
+  end
+  </div>
+  </div>
+
+  <h2>2A. Progression by argument track (scene-by-scene)</h2>
+  <p>Each table lists the <strong>typical</strong> order of scenes for players who never backtrack. Some scenes are <strong>shared</strong> (intro, <code>salon_pushkin</code>, winter events, sorting). “Primary hooks” name Letter I / <em>Bronze Horseman</em> motifs the scene already invokes—use them when rewriting glosses so each line is <em>specific</em> to that beat (see foundation notes).</p>
+
+  <h3><span class="branch-tag">pathId · west</span> Westernizing (law, print, universal history)</h3>
+  <table>
+    <thead>
+      <tr><th>Scene key</th><th>In-game title</th><th>How you arrive</th><th>Fiction beat</th><th>Primary hooks (verify in source)</th><th>Critical / opportunity</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>intro</code></td>
+        <td>Moscow, Autumn 1836</td>
+        <td>Start</td>
+        <td>Letter circulates; four NPC voices; choose program.</td>
+        <td>Slave/master; outside universal history; imitation; heritage (Letter I).</td>
+        <td><span class="crit"><strong>Gloss risk:</strong> “no heritage” gloss is vague—name Yevgeny’s plot (loss of hut, madness, grave) if tied to Pushkin, not a rhetorical parallel only.</span></td>
+      </tr>
+      <tr>
+        <td><code>reformist</code></td>
+        <td>The Reformist Circle</td>
+        <td><code>intro</code> (west) or <code>salon_pushkin</code> (west)</td>
+        <td>Repeat mankind’s education; one stroke; duty/law from crib.</td>
+        <td>Letter I program lines; serfdom fork.</td>
+        <td><span class="opp"><strong>Mechanic:</strong> optional “quote picker” UI: three short McNally &amp; Tempest lines; choice previews which reform fork is emphasized.</span></td>
+      </tr>
+      <tr>
+        <td><code>reform_education</code></td>
+        <td>Paper, Schools, and Law</td>
+        <td><code>reformist</code> (Stepan) or <code>petersburg_pressure</code> (west)</td>
+        <td>Gradualism vs. constitutional scandal vs. petition detour.</td>
+        <td>Duty/justice/order; post-flood “surcharge their neighbor” (Pushkin).</td>
+        <td><span class="crit"><strong>Scar:</strong> <code>stub_petition_winter</code> is a teaching win but easy to miss narratively—surface Vera’s absence earlier on petition path.</span></td>
+      </tr>
+      <tr>
+        <td><code>stub_petition_winter</code></td>
+        <td>Autumn Eaten by Forms</td>
+        <td>Optional from <code>reform_education</code></td>
+        <td>Procedure without pressure; <code>scar: petition_winter</code>.</td>
+        <td>Restlessness / strangers in families (Letter I).</td>
+        <td><span class="opp"><strong>Tool:</strong> sidebar “scars &amp; tags” panel for debrief.</span></td>
+      </tr>
+      <tr>
+        <td><code>reform_serfdom</code></td>
+        <td>Land and Freedom First</td>
+        <td><code>reformist</code> (Father Dimitri line)</td>
+        <td>Emancipation politics; noble alliances vs. scandal.</td>
+        <td>Slave/master ladder; Yevgeny in Kolomna (Pushkin).</td>
+        <td><span class="insight"><strong>Rebuild:</strong> strongest People-meter lift in west branch—glosses should state how serfdom answers Chaadaev’s opening ladder.</span></td>
+      </tr>
+      <tr>
+        <td><code>beat_west_print</code></td>
+        <td>Journals and the Third Section</td>
+        <td>After schools or serfdom</td>
+        <td>Bold print vs. quiet journals; winter setup.</td>
+        <td>“Who thinks for us?” (Letter I); Neva vs. clerk (Pushkin).</td>
+        <td><span class="crit"><strong>Pacing:</strong> dense block before crisis—collapsible “what we’ve published” for replay readers.</span></td>
+      </tr>
+      <tr>
+        <td><code>crisis_west</code></td>
+        <td>Winter 1837: The Westernizing Wager</td>
+        <td>Roll</td>
+        <td>d6 + Order bonus; misfit swaps rumor type.</td>
+        <td>Thinkers vs. crowd; flood/statue as shared cultural weather.</td>
+        <td><span class="opp"><strong>Mechanic:</strong> show die odds (§4) before roll; see <code>canvas-interactive-demos</code> for outcome-band previews.</span></td>
+      </tr>
+      <tr>
+        <td><code>event_*</code></td>
+        <td>(one of five)</td>
+        <td>Roll resolution</td>
+        <td>Forced meter shock + two response choices.</td>
+        <td>Event-specific excerpts in Read alongside.</td>
+        <td><span class="crit"><strong>Narrative:</strong> event scenes often outvoice epilogues—rewrite endings to match.</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><span class="branch-tag">pathId · slav</span> Slavophile (soil, <em>narod</em>, Orthodoxy)</h3>
+  <table>
+    <thead>
+      <tr><th>Scene key</th><th>Title</th><th>Arrival</th><th>Beat</th><th>Primary hooks</th><th>Critical / opportunity</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>distinct_path</code></td>
+        <td>A Separate Destiny</td>
+        <td><code>intro</code></td>
+        <td>Reject Chaadaev’s verdict; Byzantium/schism charges linger.</td>
+        <td>Miserable Byzantium; unity; China/Germany elbows (Letter I).</td>
+        <td><span class="insight"><strong>Teaching:</strong> scene states Slavophile pride does not refute Chaadaev—glosses must keep that tension.</span></td>
+      </tr>
+      <tr>
+        <td><code>slavophile</code></td>
+        <td>Community and Faith</td>
+        <td><code>distinct_path</code></td>
+        <td>Parish institutions vs. freeze foreign law.</td>
+        <td>Schism indictment; Evgeny vs. village ideal.</td>
+        <td><span class="opp"><strong>Interactive:</strong> meter preview on hover—choices swing Order/Reform/People sharply.</span></td>
+      </tr>
+      <tr>
+        <td><code>beat_aksakov</code></td>
+        <td>Aksakov at the Edge of the Letter</td>
+        <td><code>slavophile</code></td>
+        <td>Hard public line vs. softened borrowing.</td>
+        <td>Cloak of civilization; sterile soil (Letter I).</td>
+        <td><span class="crit"><strong>Character:</strong> Aksakov is expository—optional Walicki-line in instructor notes.</span></td>
+      </tr>
+      <tr>
+        <td><code>crisis_slav</code></td>
+        <td>Winter 1837: Soil, Censor, and the Provinces</td>
+        <td>Roll</td>
+        <td>Same die engine; Slav rumor column.</td>
+        <td>Byzantium/unity; nomads in cities (recap).</td>
+        <td><span class="opp"><strong>Tool:</strong> handout comparing west vs. slav columns + misfit swaps.</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><span class="branch-tag">pathId · statist</span> Order, patronage, ministry alignment</h3>
+  <table>
+    <thead>
+      <tr><th>Scene key</th><th>Title</th><th>Arrival</th><th>Beat</th><th>Primary hooks</th><th>Critical / opportunity</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>petersburg_pressure</code> OR <code>distinct_path</code></td>
+        <td>News… / Separate Destiny</td>
+        <td><code>salon_pushkin</code> (Andrei) OR <code>intro</code></td>
+        <td>Throne-led relief vs. law-first (latter stays west).</td>
+        <td>Nomads; Neva “Leaped on the city.”</td>
+        <td><span class="crit"><strong>UX:</strong> flag early that Andrei’s line here is <em>statist</em> on-ramp.</span></td>
+      </tr>
+      <tr>
+        <td><code>state_path</code></td>
+        <td>Order Before Liberty</td>
+        <td>As above</td>
+        <td>Sponsored readings vs. informer rhetoric.</td>
+        <td>Cloak of civilization; who signs decrees.</td>
+        <td><span class="opp"><strong>Mechanic:</strong> invisible “file heat” tied to achievements.</span></td>
+      </tr>
+      <tr>
+        <td><code>beat_statist_machine</code></td>
+        <td>Files, Uniforms…</td>
+        <td><code>state_path</code></td>
+        <td>Commissions vs. names to Third Section; <code>walkout: vera</code>.</td>
+        <td>Who thinks for Russia; “Destiny’s great potentate” (Pushkin).</td>
+        <td><span class="insight"><strong>Emotion:</strong> Vera walkout—epilogue unresolved block; optional Vera icon state in sidebar.</span></td>
+      </tr>
+      <tr>
+        <td><code>crisis_statist</code></td>
+        <td>Winter: The Apparatus Closes Ranks</td>
+        <td>Roll</td>
+        <td>High totals → flood echo in <em>this</em> column.</td>
+        <td>Police answer Chaadaev’s “who thinks” before salon speaks.</td>
+        <td><span class="crit"><strong>Die literacy:</strong> label “your column” vs. “misfit import.”</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><span class="branch-tag">pathId · med</span> Mediator (hybrid institutions)</h3>
+  <table>
+    <thead>
+      <tr><th>Scene key</th><th>Title</th><th>Arrival</th><th>Beat</th><th>Primary hooks</th><th>Critical / opportunity</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>mediator</code></td>
+        <td>Between Imitation and Isolation</td>
+        <td><code>intro</code> or <code>salon_pushkin</code></td>
+        <td>City-first vs. province-first pilot.</td>
+        <td>China/Germany; Providence left us alone (Letter I).</td>
+        <td><span class="opp"><strong>UI:</strong> keep counterfactual / zemstvo staging notes visible on province beats.</span></td>
+      </tr>
+      <tr>
+        <td><code>mediator_city</code> / <code>mediator_province</code></td>
+        <td>Pilot… / From the Ground Up</td>
+        <td><code>mediator</code></td>
+        <td>Converging pair; two tones before bridge.</td>
+        <td>Peter’s creation vs. Yevgeny (city); peoples mature slowly (province).</td>
+        <td><span class="crit"><strong>Variety:</strong> differentiate Read alongside so replay does not feel duplicate.</span></td>
+      </tr>
+      <tr>
+        <td><code>beat_med_bridge</code></td>
+        <td>Neither Salon Nor Soil Alone</td>
+        <td>City or province</td>
+        <td>Open fight vs. trade spotlight for guarantees.</td>
+        <td>East/West synthesis; embankments vs. clerk (Pushkin).</td>
+        <td><span class="insight"><strong>Rebuild:</strong> ideal scene for “concrete branch link” gloss (ministry veto tests hybrid promise).</span></td>
+      </tr>
+      <tr>
+        <td><code>crisis_med</code></td>
+        <td>Winter: The Bridge Under Strain</td>
+        <td>Roll</td>
+        <td>Middling totals → zemstvo clash emphasis.</td>
+        <td>Wrong-rumor misfit = compromise buys no immunity.</td>
+        <td><span class="opp"><strong>Co-op:</strong> assign capital / province / clerk roles for this crisis.</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Shared convergence: after winter</h3>
+  <table>
+    <thead>
+      <tr><th>Scene key</th><th>Title</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>resolve_endings</code></td><td>Sorting the Outcome</td><td>Prepends <code>RESOLVE_PATH_LEAD[pathId]</code>. Three framing buttons → <code>final_route_*</code>. <strong>Rare fourth:</strong> inventory letter + Pushkin and People ≥ 55 → Vera’s “Evgeny’s chorus” → <code>final_route_people</code> + <code>evgenyChorus</code>.</td></tr>
+      <tr><td><code>final_route_*</code></td><td>Closing: Weight of…</td><td>One confirm each; +5 to framed meter.</td></tr>
+      <tr><td><code>ending_computed</code></td><td>Epilogue</td><td><code>EPILOGUE_TWELVE</code>; historiography nudge; discussion; unresolved; copy summary.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2B. Pushkin-first entry (cross-track)</h2>
+  <p><code>intro</code> → <code>salon_pushkin</code> delays <code>pathId</code> until the next pick (west / <code>petersburg_pressure</code> / med). Grants <code>pushkin_bronze</code> + usually <code>chaadaev_letter</code>; <code>intro_pushkin_first</code> triggers Vera’s callback on <code>reform_education</code>. <strong>Design opportunity:</strong> fourth “temperament” in legend—literature before ideology.</p>
+
+  <h2>2C. Critical audit: gaps, risks, mechanics &amp; tool opportunities</h2>
+  <p>Author-facing critique while rebuilding narrative and UI. Not all items require code—some are weekly discussion prompts.</p>
+  <h4>Narrative &amp; pedagogy</h4>
+  <ul class="compact">
+    <li><strong>Epilogue voice:</strong> <code>EPILOGUE_TWELVE</code> bodies are now in-scene (salon, winter echo per event). Keep §7 thesis column aligned if titles shift.</li>
+    <li><strong>Read alongside density:</strong> Repeated Letter I sentences encourage skimming; one verified quote + scene-specific gloss per block (foundation rubric).</li>
+    <li><strong>Genre contract:</strong> Letter I is pastoral epistle, game is salon dramatization—one-line “contract” for instructor PDFs.</li>
+    <li><strong>Statist clarity:</strong> <code>beat_statist_machine</code> is the strongest moral fork—ending should sound like same room.</li>
+  </ul>
+  <h4>Mechanics &amp; interactives</h4>
+  <ul class="compact">
+    <li><strong>Die transparency:</strong> Pre-roll: show §4 thresholds + Order bonus; teach misfit visually.</li>
+    <li><strong>Realm preview:</strong> Hover/focus all choices with Δ meters (extend existing <code>formatEffects</code> pattern).</li>
+    <li><strong>State strip:</strong> Chips for <code>pathId</code>, scars, walkouts, <code>crisisMisfit</code>, inventory—for debrief without devtools.</li>
+    <li><strong>NPC roster:</strong> Last stance per character per scene (co-op + narrative glue).</li>
+    <li><strong>Saved runs:</strong> JSON import/export for “compare branches” (build on copy summary).</li>
+  </ul>
+  <h4>Canvas / prototypes</h4>
+  <ul class="compact">
+    <li><code>Final/canvas-interactive-demos/</code> — merge widgets only after <code>AGENT_INSTRUCTIONS.md</code> constraints.</li>
+  </ul>
+
+  <h2>11. Rebuild insights (structure + foundation pass)</h2>
+  <ul class="compact">
+    <li><strong>Single voice:</strong> Sorting in-character → epilogues match; move routing to one italic session note if needed.</li>
+    <li><strong>Quote discipline:</strong> Letter I → <code>978-94-011-3166-7.txt</code>; Pushkin → <code>bronze_horseman.txt</code> (Arndt).</li>
+    <li><strong>Gloss template:</strong> [Primary speaker] + [passage move] + [this button] + [meter clause].</li>
+    <li><strong>Winter teaching:</strong> Four printouts of §4, each headed by path name.</li>
+    <li><strong>Historiography:</strong> Keep nudge out-of-band; body = salon aftermath.</li>
+    <li><strong>Maintenance:</strong> Update this file when <code>scenes</code> or <code>pickCrisisEvent</code> changes.</li>
+  </ul>
+
+  <h2>Twelve closing outcomes (diagram)</h2>
+  <p class="anchor-note">Same three framing buttons as in-game (plus rare fourth—see §2A). Each cell matches a live <strong>title + body + speculative question + bullets</strong>. Stats still drive extras, achievements, and the “still open” block.</p>
+  <div class="graph-wrap">
+  <div class="mermaid">
+flowchart LR
+  RES2["Sorting the outcome"]
+  RES2 --> OE["Order framing +5 Order"]
+  RES2 --> RE["Reform framing +5 Reform"]
+  RES2 --> PE["People framing +5 People"]
+  OE --> W1["West: Ranks of Civilization"]
+  OE --> S1["Slav: Vertical Iconostasis"]
+  OE --> T1["Statist: File Outlives Salon"]
+  OE --> M1["Med: Ministers Bridge"]
+  RE --> W2["West: Syllabus and Censor"]
+  RE --> S2["Slav: Parish Ink"]
+  RE --> T2["Statist: Commissioned Progress"]
+  RE --> M2["Med: Local Accent"]
+  PE --> W3["West: Evgeny's Europeans"]
+  PE --> S3["Slav: Soil and Roof"]
+  PE --> T3["Statist: Relief Without Receipt"]
+  PE --> M3["Med: Ledger They Share"]
+  </div>
+  </div>
+
+  <h2>3. Which winter chapter you play</h2>
+  <p>That depends on which <strong>argument you joined</strong> early on (Westernizing, Slavophile, statist, or mediator). The game remembers that as a track. The winter screen and die table are different for each.</p>
+  <table>
+    <thead>
+      <tr><th>Argument you joined</th><th>Winter chapter (roll here)</th><th>You usually reach it from…</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Westernizing (law, print, journals)</td>
+        <td><em>The Westernizing wager</em></td>
+        <td>Journals &amp; Third Section<span class="code-ref">code: crisis_west</span></td>
+      </tr>
+      <tr>
+        <td>Slavophile / soil line</td>
+        <td><em>Soil, censor, and the provinces</em></td>
+        <td>Aksakov beat<span class="code-ref">crisis_slav</span></td>
+      </tr>
+      <tr>
+        <td>Order, patronage, ministry alignment</td>
+        <td><em>The apparatus closes ranks</em></td>
+        <td>Files &amp; case file<span class="code-ref">crisis_statist</span></td>
+      </tr>
+      <tr>
+        <td>Mediator (local pilots + compromise)</td>
+        <td><em>The bridge under strain</em></td>
+        <td>Neither salon nor soil alone<span class="code-ref">crisis_med</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">If no track were set (unlikely in normal play), the die table uses the <strong>Westernizing</strong> column below.</p>
+
+  <h2>4. The winter die: what rumor arrives</h2>
+  <p>Total = <strong>six-sided die + bonus</strong>, where the bonus is the Order meter divided by 25 and rounded down (0–4). Higher Order slightly tilts toward “better” rumors for your track, unless a <strong>misfit</strong> intervenes (§5).</p>
+  <table>
+    <thead>
+      <tr><th>Total</th><th>Westernizing rumor</th><th>Slavophile rumor</th><th>Statist rumor</th><th>Mediator rumor</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>8 or more</td>
+        <td>Salon breakthrough (readings allowed)</td>
+        <td>Same (guarded salon opening)</td>
+        <td>Flood echo (embankments, logistics)</td>
+        <td>Salon breakthrough</td>
+      </tr>
+      <tr>
+        <td>5–7</td>
+        <td>Flood echo in the north</td>
+        <td>Provincial notables resist ministry schools</td>
+        <td>Censor’s routine (pressure, files)</td>
+        <td>Ministry strikes a local school budget</td>
+      </tr>
+      <tr>
+        <td>4 or less</td>
+        <td>Censor’s visit (letters seized)</td>
+        <td>Censor’s visit</td>
+        <td>Censor’s visit</td>
+        <td>Censor’s visit</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>5. When fate “misfits” (wrong rumor)</h2>
+  <p>Sometimes the story refuses to match your rehearsal: <strong>snake eyes on a strong total</strong> (die shows 1 but total ≥ 7) or a <strong>six on a weak total</strong> (die shows 6 but total ≤ 5) swaps in another track’s kind of winter. Use this for teaching contingency vs. moral parable.</p>
+  <table>
+    <thead>
+      <tr><th>Condition</th><th>Westernizing gets…</th><th>Slavophile gets…</th><th>Statist gets…</th><th>Mediator gets…</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Die <strong>1</strong> and total ≥ 7</td>
+        <td>Ministry vs. local budget clash</td>
+        <td>Flood echo</td>
+        <td>Salon breakthrough</td>
+        <td>Censor’s visit</td>
+      </tr>
+      <tr>
+        <td>Die <strong>6</strong> and total ≤ 5</td>
+        <td>Salon breakthrough</td>
+        <td>Salon breakthrough</td>
+        <td>Flood echo</td>
+        <td>Salon breakthrough</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>6. Automatic shock when the rumor hits</h2>
+  <p>Entering the winter scene applies this once (before your two in-scene choices).</p>
+  <table>
+    <thead>
+      <tr><th>Winter story</th><th>Order Δ</th><th>Reform Δ</th><th>People Δ</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Flood echo</td><td>−5</td><td>+5</td><td>−8</td></tr>
+      <tr><td>Censor’s visit</td><td>+6</td><td>−10</td><td>−4</td></tr>
+      <tr><td>Salon breakthrough</td><td>−3</td><td>+8</td><td>+6</td></tr>
+      <tr><td>Provincial notables dig in</td><td>+2</td><td>−5</td><td>+4</td></tr>
+      <tr><td>Ministry vs. local budget</td><td>+4</td><td>−4</td><td>−6</td></tr>
+    </tbody>
+  </table>
+
+  <h2>7. Epilogues: twelve endings</h2>
+  <p class="note" style="background:#e8f5e9;border:1px solid #a5d6a7;padding:10px 14px;border-radius:8px;margin-bottom:1rem;"><strong>Status:</strong> <code>index.html</code> implements this table via <code>EPILOGUE_TWELVE</code> and <code>formatEpilogueDiscussion</code>. The <strong>legacy five-bucket</strong> table below is kept for author reference only.</p>
+
+  <h3>Why twelve (path × framing)</h3>
+  <p>In an older <strong>stat-only</strong> design, a run could end in one of <strong>five</strong> epilogues chosen from <strong>final stat shapes</strong> alone, so a Slavophile run and a Westernizing run might receive the <strong>same</strong> title and body if their meters looked alike. That would hide the different <strong>intellectual risks</strong> each path was meant to carry.</p>
+  <p>The game keeps the <strong>same UI</strong>: the three closing choices on <em>Sorting the outcome</em>. It makes the epilogue <strong>path-aware</strong>: <code>pathId</code> (Westernizing / Slavophile / statist / mediator) × framing (Order / Reform / People) = <strong>12</strong> distinct outcomes. Each outcome has its own <strong>title</strong>, one-line <strong>thesis</strong> (how you retell winter), and a <strong>speculative question</strong> for section or writing that cannot be answered the same way on another path.</p>
+  <p><strong>Stats</strong> stay important: they can still drive <em>discussion bullets</em>, session banner titles, achievements, and one or two sentences inside the epilogue body (e.g. flood vs. censor winter). They no longer need to be the <em>sole</em> selector of which “family” you get.</p>
+
+  <h3>The twelve endings (draft copy)</h3>
+  <table>
+    <thead>
+      <tr><th>Path</th><th>Framing</th><th>Title</th><th>Thesis (how you tell the story)</th><th>Speculative question</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Westernizing</td>
+        <td>Order</td>
+        <td><em>The Ranks of Civilization</em></td>
+        <td>Winter proves administration and calm must precede Europe-facing reform. Salons wait on the file.</td>
+        <td>If stability is the prerequisite Chaadaev doubted, are you proving him wrong, or are you showing that his “cloak” fits the police better than the school?</td>
+      </tr>
+      <tr>
+        <td>Westernizing</td>
+        <td>Reform</td>
+        <td><em>The Syllabus and the Censor</em></td>
+        <td>The moral center is law, print, and schools locked in struggle with the Third Section.</td>
+        <td>Can “universal history” be studied in rooms that the censor still owns?</td>
+      </tr>
+      <tr>
+        <td>Westernizing</td>
+        <td>People</td>
+        <td><em>Evgeny’s Europeans</em></td>
+        <td>Europe is not a statute but a life: clerks and flood beds must appear on the same ledger as statutes.</td>
+        <td>Who is “Europe” for if the syllabus never reaches Kolomna?</td>
+      </tr>
+      <tr>
+        <td>Slavophile</td>
+        <td>Order</td>
+        <td><em>The Vertical Iconostasis</em></td>
+        <td><em>Narod</em> and altar align with the chain of command. Unity is read as spiritual deference.</td>
+        <td>When the state claims to speak for the soil, who is left to correct it from below?</td>
+      </tr>
+      <tr>
+        <td>Slavophile</td>
+        <td>Reform</td>
+        <td><em>Parish Ink, Capital Light</em></td>
+        <td>Selective borrowing (schools, oversight) without surrendering soul to abstract “rights.”</td>
+        <td>At what moment does “selective” borrowing become a new orthodoxy Chaadaev would still call hollow?</td>
+      </tr>
+      <tr>
+        <td>Slavophile</td>
+        <td>People</td>
+        <td><em>The Soil and the Roof</em></td>
+        <td>Love of <em>narod</em> is tested by material life: clerks and peasants, not only the village idea.</td>
+        <td>Does Slavophile language obligate policy for the capital’s clerk, or only for the imagined village?</td>
+      </tr>
+      <tr>
+        <td>Statist</td>
+        <td>Order</td>
+        <td><em>The File Outlives the Salon</em></td>
+        <td>Continuity is the achievement: ranks, seizures, the case file as the real historian.</td>
+        <td>Is obedience to process a kind of civilization, or its costume while thought stays rented?</td>
+      </tr>
+      <tr>
+        <td>Statist</td>
+        <td>Reform</td>
+        <td><em>Commissioned Progress</em></td>
+        <td>Europe arrives as memoranda: reform only where commissions and patrons allow.</td>
+        <td>If reform lives in triplicate copies, does mankind’s “education” happen, or does paperwork replace it?</td>
+      </tr>
+      <tr>
+        <td>Statist</td>
+        <td>People</td>
+        <td><em>Relief Without Receipt</em></td>
+        <td>Mercy flows from the throne and petitions. People appear as objects of grace, not of rights.</td>
+        <td>When you beg the center for flood victims, who is saved: them, or the story that the throne is merciful?</td>
+      </tr>
+      <tr>
+        <td>Mediator</td>
+        <td>Order</td>
+        <td><em>The Minister’s Bridge</em></td>
+        <td>The span stands only if the ministry owns the pier. Local trust is a concession, not a co-sovereign.</td>
+        <td>If one pier is stone and one is rope, is “compromise” just delayed collapse?</td>
+      </tr>
+      <tr>
+        <td>Mediator</td>
+        <td>Reform</td>
+        <td><em>Borrowed Law, Local Accent</em></td>
+        <td>Institutions sound foreign on paper but are spoken in provincial idiom.</td>
+        <td>How long must a law be “borrowed” before it becomes native, and who declares the moment?</td>
+      </tr>
+      <tr>
+        <td>Mediator</td>
+        <td>People</td>
+        <td><em>The Ledger They Share</em></td>
+        <td>Budgets and clerks can read the same line. Synthesis is material, not only rhetorical.</td>
+        <td>Two ledgers, one countryside: must one always become the footnote, or is overlap itself the synthesis that Chaadaev could not name?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Implementation notes (when you integrate)</h3>
+  <ul class="compact">
+    <li>In <code>resolveEndingText()</code>, branch first on <code>state.pathId</code> (default <code>west</code>), then on <code>state.finalLeanApplied</code> (<code>order</code> / <code>reform</code> / <code>people</code>) set from the chosen <code>final_route_*</code>.</li>
+    <li>Keep stat-based <strong>discussion</strong> paragraphs or merge old “family” prompts into each of the twelve as a second column of bullets.</li>
+    <li>Rare “Evgeny’s chorus” choice can still force <code>people</code> framing + extras without changing the count of primary endings.</li>
+    <li>Retire or repurpose <code>familyKey</code> for historiography hooks. Map each of the twelve to a hook string if needed.</li>
+  </ul>
+
+  <h3>Legacy: former five-bucket selector (reference)</h3>
+  <p>Earlier builds chose epilogue from <em>O, R, P</em> alone after the final +5. “High” = ≥ 60, “low” = ≤ 35. First match won. The live game now keys epilogues on path × framing instead. This table remains for comparison.</p>
+  <table>
+    <thead>
+      <tr><th>Pattern in final stats</th><th>Epilogue title</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>People low, Order high</td><td><em>Unity Without the Many</em></td></tr>
+      <tr><td>Reform high, Order low</td><td><em>Reform in the Teeth of the State</em></td></tr>
+      <tr><td>People and Reform both high</td><td><em>Bread, Schools, and Skepticism</em></td></tr>
+      <tr><td>Order and Reform both high</td><td><em>Managed Transformation</em></td></tr>
+      <tr><td>Nothing above fits</td><td><em>Uneasy Equilibrium</em></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Session title on screen can still vary with path + stats under either system.</p>
+
+  <h2>8. Side branches (same shape, extra flavor)</h2>
+  <ul class="compact">
+    <li><strong>Petition detour:</strong> From <em>Paper, schools, and law</em> you can waste the autumn on forms, then return to journals. The game remembers a “scar” for callbacks.</li>
+    <li><strong>Vera walks out:</strong> If you choose the harshest informer path on <em>Files, uniforms…</em>, Vera stops attending. Epilogue extras mention the colder room.</li>
+    <li><strong>Opened with Pushkin:</strong> Tags like “literature first” tweak later lines (e.g. Vera’s callback at schools).</li>
+    <li><strong>Rare fourth closing:</strong> If the group carries both Chaadaev and Pushkin tokens and People is strong enough, <em>Sorting the outcome</em> can offer a special line that frames letter + poem + clerk as one ledger.</li>
+  </ul>
+
+  <h2>9. Satchel tokens (what they represent)</h2>
+  <ul class="compact">
+    <li><strong>Chaadaev’s first letter:</strong> You took the letter seriously as a program or foil.</li>
+    <li><strong>Pushkin’s <em>Bronze Horseman</em>:</strong> You put the poem in play as a moral measure.</li>
+    <li><strong>Draft charter:</strong> You favored gradual schools / moderate land reform over shock.</li>
+    <li><strong>Slavophile notes / Aksakov:</strong> You committed the soil–<em>narod</em> answer to paper or public voice.</li>
+  </ul>
+
+  <h3>Author cross-reference (optional)</h3>
+  <p class="note">Scene keys in source: <code>intro</code>, <code>salon_pushkin</code>, <code>reformist</code>, <code>reform_education</code>, <code>stub_petition_winter</code>, <code>reform_serfdom</code>, <code>petersburg_pressure</code>, <code>beat_west_print</code>, <code>distinct_path</code>, <code>slavophile</code>, <code>beat_aksakov</code>, <code>state_path</code>, <code>beat_statist_machine</code>, <code>mediator</code>, <code>mediator_city</code>, <code>mediator_province</code>, <code>beat_med_bridge</code>, crisis_* , <code>event_*</code>, <code>resolve_endings</code>, <code>final_route_*</code>, <code>ending_computed</code>.</p>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "neutral",
+      flowchart: { curve: "basis", padding: 28, nodeSpacing: 50, rankSpacing: 60 },
+      securityLevel: "loose",
+      themeVariables: {
+        fontSize: "17px",
+        fontFamily: "Georgia, Palatino Linotype, Palatino, serif"
+      }
+    });
+    await mermaid.run({ querySelector: ".mermaid" });
+  </script>
+</body>
+</html>

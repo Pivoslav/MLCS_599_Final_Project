@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-path="west">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Realm triangle — point budget (demo)</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .budget-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .budget-pill {
+      font-variant-numeric: tabular-nums;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: #eee9e2;
+      border: 1px solid var(--line);
+    }
+    .budget-pill.warn {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    .stat-block {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 0.5rem 0.75rem;
+      align-items: center;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .stat-block:last-of-type { border-bottom: none; }
+    .stat-name { font-weight: 600; }
+    .stat-block.order .stat-name { color: var(--bar-order); }
+    .stat-block.reform .stat-name { color: var(--bar-reform); }
+    .stat-block.people .stat-name { color: var(--bar-people); }
+    .stat-val {
+      font-variant-numeric: tabular-nums;
+      min-width: 2rem;
+      text-align: center;
+    }
+    .btn-row {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .btn-row button {
+      min-width: 2.5rem;
+      min-height: 2.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .btn-row button:hover:not(:disabled) {
+      background: #eee9e2;
+    }
+    .reset-row { margin-top: 1rem; }
+    .reset-row button {
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Realm triangle — point budget</h1>
+  <p>
+    Pedagogy: <strong>scarcity</strong>. Players receive a small budget (30 points) to add on top of a
+    neutral baseline (20 each), still respecting the 0–100 cap per meter. This mirrors co-op negotiation:
+    you cannot max everything; the readout shows points left and uses more than color (counts + <code>aria-live</code>).
+  </p>
+
+  <div class="demo-panel">
+    <div class="budget-header">
+      <span id="budget-live" class="budget-pill" role="status" aria-live="polite" aria-atomic="true">
+        Points remaining: <strong id="points-left">30</strong> / 30
+      </span>
+      <span class="demo-note" style="margin:0;border:none;padding:0;">Baseline 20 + your budget → each stat max 50 here.</span>
+    </div>
+
+    <div class="stat-block order">
+      <span class="stat-name" id="lbl-order">Order</span>
+      <span class="stat-val" id="val-order" aria-labelledby="lbl-order">20</span>
+      <div class="btn-row" role="group" aria-label="Order points">
+        <button type="button" id="btn-order-minus" aria-label="Remove one point from Order">−</button>
+        <button type="button" id="btn-order-plus" aria-label="Add one point to Order">+</button>
+      </div>
+    </div>
+    <div class="stat-block reform">
+      <span class="stat-name" id="lbl-reform">Reform</span>
+      <span class="stat-val" id="val-reform" aria-labelledby="lbl-reform">20</span>
+      <div class="btn-row" role="group" aria-label="Reform points">
+        <button type="button" id="btn-reform-minus" aria-label="Remove one point from Reform">−</button>
+        <button type="button" id="btn-reform-plus" aria-label="Add one point to Reform">+</button>
+      </div>
+    </div>
+    <div class="stat-block people">
+      <span class="stat-name" id="lbl-people">People</span>
+      <span class="stat-val" id="val-people" aria-labelledby="lbl-people">20</span>
+      <div class="btn-row" role="group" aria-label="People points">
+        <button type="button" id="btn-people-minus" aria-label="Remove one point from People">−</button>
+        <button type="button" id="btn-people-plus" aria-label="Add one point to People">+</button>
+      </div>
+    </div>
+
+    <div class="reset-row">
+      <button type="button" id="btn-reset">Reset budget</button>
+    </div>
+  </div>
+
+  <p class="demo-note">
+    Main game stats live in <code>state.stats</code> in <code>../index.html</code>; this page is standalone for Canvas upload.
+  </p>
+
+  <h2>Works cited</h2>
+  <p>Terminology from the course CYOA. Citations for primary texts: <a href="../SOURCES.md">SOURCES.md</a>.</p>
+
+  <script>
+    (function () {
+      const BUDGET = 30;
+      const BASE = 20;
+      const MAX = 100;
+      const spent = { order: 0, reform: 0, people: 0 };
+
+      const elLeft = document.getElementById("points-left");
+      const elPill = document.getElementById("budget-live");
+      const vals = {
+        order: document.getElementById("val-order"),
+        reform: document.getElementById("val-reform"),
+        people: document.getElementById("val-people"),
+      };
+
+      function remaining() {
+        return BUDGET - spent.order - spent.reform - spent.people;
+      }
+
+      function render() {
+        const r = remaining();
+        elLeft.textContent = String(r);
+        elPill.classList.toggle("warn", r === 0);
+        ["order", "reform", "people"].forEach((k) => {
+          vals[k].textContent = String(BASE + spent[k]);
+        });
+        ["order", "reform", "people"].forEach((k) => {
+          const atCap = BASE + spent[k] >= MAX;
+          document.getElementById("btn-" + k + "-plus").disabled = r <= 0 || atCap;
+          document.getElementById("btn-" + k + "-minus").disabled = spent[k] <= 0;
+        });
+      }
+
+      function add(k, delta) {
+        if (delta > 0) {
+          if (remaining() < 1) return;
+          if (BASE + spent[k] >= MAX) return;
+          spent[k]++;
+        } else {
+          if (spent[k] < 1) return;
+          spent[k]--;
+        }
+        render();
+      }
+
+      [["order", "plus"], ["order", "minus"], ["reform", "plus"], ["reform", "minus"], ["people", "plus"], ["people", "minus"]].forEach(
+        ([k, op]) => {
+          document.getElementById("btn-" + k + "-" + op).addEventListener("click", () => add(k, op === "plus" ? 1 : -1));
+        }
+      );
+
+      document.getElementById("btn-reset").addEventListener("click", () => {
+        spent.order = spent.reform = spent.people = 0;
+        render();
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

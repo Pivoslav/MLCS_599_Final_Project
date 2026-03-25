@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive widgets — patterns (demo)</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .btn-primary {
+      background: var(--link);
+      color: #fff;
+      border: 1px solid #42151c;
+      padding: 0.5rem 1.1rem;
+      border-radius: 8px;
+    }
+    .btn-primary:hover:not(:disabled) {
+      filter: brightness(1.08);
+    }
+    .btn-ghost {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 1rem;
+    }
+    details.panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      background: var(--surface);
+      margin-bottom: 0.75rem;
+    }
+    details.panel summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #toast-region {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      max-width: min(20rem, calc(100vw - 2rem));
+      z-index: 10;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #toast-region { position: static; margin-top: 1rem; max-width: none; }
+    }
+    .toast {
+      background: var(--text);
+      color: #f7f5f2;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      margin-top: 0.5rem;
+      animation: toast-in 0.35s ease-out;
+    }
+    @keyframes toast-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    dialog.demo-dialog {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.25rem;
+      max-width: 26rem;
+      background: var(--surface);
+    }
+    dialog.demo-dialog::backdrop {
+      background: rgba(26, 26, 26, 0.45);
+    }
+    .stance-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+    .stance-row input { width: 1.15rem; height: 1.15rem; }
+    .crumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+      font-size: 0.88rem;
+      margin: 0.5rem 0;
+    }
+    .crumb span {
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      background: #eee9e2;
+      border: 1px solid var(--line);
+    }
+    .crumb .sep { border: none; background: none; padding: 0 0.1rem; }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Interactive widgets</h1>
+  <p>
+    Vanilla patterns that could ship inside <code>../index.html</code> without frameworks: buttons, native
+    disclosure (<code>details</code>), an accessible modal (<code>dialog</code>), a non-blocking toast with
+    <code>aria-live</code>, and a “commit before you choose” gate for role-play.
+  </p>
+
+  <h2>Buttons</h2>
+  <div class="toolbar">
+    <button type="button" class="btn-primary" id="btn-save">Primary action</button>
+    <button type="button" class="btn-ghost" id="btn-secondary">Secondary</button>
+    <button type="button" class="btn-ghost" disabled>Disabled</button>
+  </div>
+
+  <h2>Collapsible panel</h2>
+  <details class="panel">
+    <summary>Co-op sidebar notes (example)</summary>
+    <p style="margin:0.5rem 0 0;">
+      Use <code>details</code>/<code>summary</code> for optional glossary chunks or turn reminders. Keyboard:
+      Space/Enter toggles open state; focus stays on <code>summary</code>.
+    </p>
+  </details>
+
+  <h2>Modal (native dialog)</h2>
+  <button type="button" class="btn-primary" id="open-modal">Open confirmation dialog</button>
+  <dialog class="demo-dialog" id="demo-dialog" aria-labelledby="dlg-title">
+    <h2 id="dlg-title" style="margin:0 0 0.75rem;font-size:1.15rem;">Confirm choice</h2>
+    <p style="margin:0 0 1rem;">This uses the native <code>&lt;dialog&gt;</code> element: focus management and Escape handling come from the browser.</p>
+    <div class="toolbar" style="margin:0;justify-content:flex-end;">
+      <button type="button" class="btn-ghost" id="dlg-cancel">Cancel</button>
+      <button type="button" class="btn-primary" id="dlg-ok">Continue</button>
+    </div>
+  </dialog>
+
+  <h2>Achievement toast</h2>
+  <button type="button" class="btn-ghost" id="btn-toast">Trigger toast</button>
+  <div id="toast-region" role="region" aria-label="Notifications"></div>
+
+  <h2>Scene breadcrumb</h2>
+  <div class="crumb" aria-label="Scene path">
+    <span>Intro</span><span class="sep" aria-hidden="true">→</span><span>Salon</span><span class="sep" aria-hidden="true">→</span><span id="crumb-scene">Crisis card</span>
+  </div>
+  <button type="button" class="btn-ghost" id="btn-advance">Advance stub scene</button>
+
+  <h2>Commit to a stance</h2>
+  <div class="demo-panel">
+    <p style="margin-top:0;">Check the box to unlock the choice (pedagogical friction).</p>
+    <div class="stance-row">
+      <input type="checkbox" id="stance-ok" />
+      <label for="stance-ok">Our pair has discussed and commits to this direction for the next beat.</label>
+    </div>
+    <button type="button" class="btn-primary" id="btn-choose" disabled aria-describedby="stance-hint">
+      Proceed to choice
+    </button>
+    <p id="stance-hint" class="demo-note" style="margin-bottom:0;">Disabled state is not conveyed by color alone — the control is literally inactive until checked.</p>
+  </div>
+
+  <h2>Works cited</h2>
+  <p>Patterns only; game copy lives in <a href="../index.html">../index.html</a>. Sources: <a href="../SOURCES.md">SOURCES.md</a>.</p>
+
+  <script>
+    (function () {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const dlg = document.getElementById("demo-dialog");
+      document.getElementById("open-modal").addEventListener("click", () => {
+        if (typeof dlg.showModal === "function") dlg.showModal();
+        else alert("dialog element not supported in this browser");
+      });
+      function closeDlg() {
+        if (typeof dlg.close === "function") dlg.close();
+      }
+      document.getElementById("dlg-cancel").addEventListener("click", closeDlg);
+      document.getElementById("dlg-ok").addEventListener("click", closeDlg);
+
+      const toastRegion = document.getElementById("toast-region");
+      document.getElementById("btn-toast").addEventListener("click", () => {
+        const el = document.createElement("div");
+        el.className = "toast";
+        el.setAttribute("role", "status");
+        el.textContent = "Achievement: First salon debate recorded.";
+        if (reduceMotion) el.style.animation = "none";
+        toastRegion.appendChild(el);
+        window.setTimeout(() => {
+          el.remove();
+        }, reduceMotion ? 4000 : 3200);
+      });
+
+      const scenes = ["Crisis card", "Sorting hat", "Closing reflection"];
+      let si = 0;
+      document.getElementById("btn-advance").addEventListener("click", () => {
+        si = (si + 1) % scenes.length;
+        document.getElementById("crumb-scene").textContent = scenes[si];
+      });
+
+      const chk = document.getElementById("stance-ok");
+      const btnChoose = document.getElementById("btn-choose");
+      chk.addEventListener("change", () => {
+        btnChoose.disabled = !chk.checked;
+      });
+    })();
+  </script>
+</body>
+</html>
