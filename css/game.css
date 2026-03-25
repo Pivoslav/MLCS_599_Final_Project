@@ -64,6 +64,17 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .app-main {
+        grid-template-columns: 1fr;
+      }
+
+      .realm-legend {
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+    }
+
     .header {
       padding: clamp(14px, 2vw, 20px) var(--pad-inset);
       border-bottom: 1px solid var(--line);
@@ -780,6 +791,9 @@
     .choices { display: grid; gap: 10px; }
 
     .choice-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
       text-align: left;
       border: 1px solid #c9b8a2;
       background: rgba(255, 255, 255, 0.98);
@@ -791,6 +805,24 @@
       cursor: pointer;
       transition: 0.18s ease;
       font-family: inherit;
+    }
+
+    .choice-ico {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--dynamic-accent-2);
+      opacity: 0.92;
+    }
+
+    .choice-ico svg {
+      display: block;
+      width: 22px;
+      height: 22px;
+    }
+
+    .choice-btn-main {
+      flex: 1;
+      min-width: 0;
     }
 
     .choice-btn:hover {
@@ -823,6 +855,7 @@
     }
 
     .ghost { background: #fff; color: #3a4150; }
+    .header-actions a.ghost { text-decoration: none; display: inline-block; box-sizing: border-box; }
     .primary { background: var(--dynamic-accent); color: #fff; border-color: var(--dynamic-accent); }
 
     .ending-extra {
@@ -1098,4 +1131,403 @@
     .copy-toast {
       font-size: clamp(0.88rem, 0.84rem + 0.1vw, 0.94rem);
       color: #1e5c40;
+    }
+
+    .crisis-die-table {
+      margin-top: 12px;
+      font-size: clamp(0.86rem, 0.82rem + 0.1vw, 0.93rem);
+    }
+
+    .crisis-die-lead,
+    .crisis-path-rule {
+      margin: 0.5rem 0;
+      color: #4a5060;
+    }
+
+    .crisis-grid {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 0.82rem;
+    }
+
+    .crisis-grid th,
+    .crisis-grid td {
+      border: 1px solid var(--line);
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .crisis-grid th {
+      background: color-mix(in srgb, var(--card-muted) 90%, var(--line));
+    }
+
+    .toast-region {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 60;
+      max-width: min(22rem, calc(100vw - 2rem));
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .game-toast {
+      pointer-events: none;
+      background: var(--ink);
+      color: var(--card);
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+      font-size: clamp(0.86rem, 0.82rem + 0.1vw, 0.94rem);
+      line-height: 1.4;
+      animation: game-toast-in 0.32s ease-out;
+    }
+
+    @keyframes game-toast-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .game-toast {
+        animation: none;
+      }
+
+      .toast-region {
+        position: static;
+        max-width: none;
+        margin: 12px var(--pad-inset) 0;
+      }
+    }
+
+    .coop-tools-panel {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+      font-size: clamp(0.78rem, 0.74rem + 0.12vw, 0.86rem);
+    }
+
+    .coop-tools-lead {
+      margin: 0.4rem 0 0.6rem;
+      color: #5a5046;
+      line-height: 1.45;
+    }
+
+    .coop-enable-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .coop-timer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .coop-timer-display {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 1.25rem;
+      min-width: 3rem;
+      color: var(--dynamic-accent);
+    }
+
+    .coop-main-ballot-wrap {
+      margin: 1rem 0 1.25rem;
+      max-width: min(88ch, 100%);
+    }
+
+    .coop-main-ballot-wrap[hidden] {
+      display: none !important;
+    }
+
+    .coop-main-ballot-inner {
+      padding: 1rem 1.1rem 1.15rem;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--line) 88%, var(--dynamic-accent) 12%);
+      background: linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--card-muted) 92%, #fff) 0%,
+        var(--card) 55%
+      );
+      box-shadow: 0 4px 22px rgba(28, 40, 62, 0.07);
+    }
+
+    .coop-seats-heading {
+      margin: 0 0 0.35rem;
+      font-size: clamp(1.02rem, 0.96rem + 0.2vw, 1.12rem);
+      color: var(--dynamic-accent);
+      letter-spacing: 0.02em;
+    }
+
+    .coop-seats-flow {
+      margin: 0 0 1rem;
+      font-size: clamp(0.88rem, 0.84rem + 0.1vw, 0.95rem);
+      line-height: 1.5;
+      color: #5a5046;
+    }
+
+    .coop-ballot-mount {
+      min-width: 0;
+    }
+
+    .coop-seats-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 720px) {
+      .coop-seats-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .coop-seat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding: 12px 12px 14px;
+      border-radius: 10px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--line);
+      min-width: 0;
+    }
+
+    .coop-seat--order {
+      border-top-color: var(--bar-order);
+    }
+
+    .coop-seat--reform {
+      border-top-color: var(--bar-reform);
+    }
+
+    .coop-seat--people {
+      border-top-color: var(--bar-people);
+    }
+
+    .coop-seat-badge {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 6px 10px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+      color: #6a6258;
+    }
+
+    .coop-seat-step {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--card-muted) 85%, var(--line));
+      color: var(--ink);
+    }
+
+    .coop-seat-realm {
+      color: var(--dynamic-accent-2);
+    }
+
+    .coop-seat--order .coop-seat-realm {
+      color: var(--bar-order);
+    }
+
+    .coop-seat--reform .coop-seat-realm {
+      color: var(--bar-reform);
+    }
+
+    .coop-seat--people .coop-seat-realm {
+      color: var(--bar-people);
+    }
+
+    .coop-seat-title {
+      margin: 0;
+      font-size: clamp(0.95rem, 0.9rem + 0.12vw, 1.02rem);
+      color: var(--ink);
+    }
+
+    .coop-seat-hint {
+      margin: 0;
+      flex: 1;
+      font-size: clamp(0.8rem, 0.76rem + 0.1vw, 0.88rem);
+      line-height: 1.45;
+      color: #5a5046;
+    }
+
+    .coop-seat-vote-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #6a6258;
+      margin-top: 0.25rem;
+    }
+
+    .coop-note {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #5a5046;
+    }
+
+    .coop-select {
+      width: 100%;
+      font: inherit;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
+
+    .coop-ballot-summary {
+      min-height: 1.2em;
+      font-size: 0.82rem;
+      color: #4a5060;
+      margin: 6px 0;
+    }
+
+    .coop-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 6px 0;
+    }
+
+    .coop-stance-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    #coopApplyMajority {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .choice-pedagogy {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed color-mix(in srgb, var(--line) 85%, transparent);
+      font-size: clamp(0.84rem, 0.8rem + 0.1vw, 0.92rem);
+    }
+
+    .choice-pedagogy-body {
+      margin: 0.5rem 0 0;
+      color: #5a5046;
+      line-height: 1.5;
+    }
+
+    .debrief-lab,
+    .realm-debrief-lab {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--card-muted) 88%, transparent);
+      font-size: clamp(0.88rem, 0.84rem + 0.1vw, 0.95rem);
+    }
+
+    .debrief-lab-lead {
+      margin: 0.5rem 0;
+      color: #4a5060;
+    }
+
+    .debrief-compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .debrief-compare-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: var(--card);
+    }
+
+    .debrief-compare-card h4 {
+      margin: 0 0 6px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--dynamic-accent);
+    }
+
+    .debrief-snippet {
+      margin: 0;
+      font-size: 0.84rem;
+      color: #5a5046;
+      line-height: 1.45;
+    }
+
+    .realm-debrief-lead {
+      margin: 0.5rem 0;
+      color: #5a5046;
+    }
+
+    .realm-coupled-row {
+      margin: 8px 0;
+    }
+
+    .realm-coupled-row label {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .realm-coupled-row input[type="range"] {
+      width: 100%;
+    }
+
+    .debrief-peek-dlg {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.15rem;
+      max-width: min(32rem, calc(100vw - 2rem));
+      background: var(--card);
+      color: var(--ink);
+      font-family: inherit;
+    }
+
+    .debrief-peek-dlg::backdrop {
+      background: rgba(22, 24, 29, 0.42);
+    }
+
+    .debrief-peek-title {
+      margin: 0 0 0.75rem;
+      font-size: 1.15rem;
+      color: var(--dynamic-accent);
+    }
+
+    .debrief-peek-body {
+      margin: 0 0 1rem;
+      line-height: 1.55;
+      font-size: clamp(0.92rem, 0.88rem + 0.1vw, 1rem);
+    }
+
+    .debrief-peek-body p {
+      margin: 0 0 0.65rem;
     }

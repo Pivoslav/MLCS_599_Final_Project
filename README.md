@@ -45,6 +45,8 @@ The **sorting** scene before the final framing choice prepends a short recap of 
 
 One shared screen. **Three fixed roles** align with the game’s meters. Before **every** choice, each player speaks once from their lens. The group decides which option to take (consensus or majority: your call).
 
+**In the UI:** enable **Co-op tools** in the sidebar for **gating**, a **timer**, **reveal / clear summary**, **stance**, and **Apply winning choice**. While gating is on, **three seat cards** (Order → Reform → People) appear **above the choice buttons** in the story column—each player speaks in turn, then locks a vote there so every voice is visible next to the options the group is debating.
+
 | Player | Role | Argue from… |
 |--------|------|----------------|
 | **1** | **Order** | State survival, ranks, censorship tradeoffs, continuity. The Bronze Horseman as necessary majesty (even when costly). |
@@ -82,7 +84,7 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 ## In-game teaching tools (game bundle)
 
 - **Terms** (footer): glossary modal for *Teleskop*, Third Section, *sobornost*, *narod*, Neva flood, zemstvo staging, meters.
-- **3-player co-op:** collapsible role card in the side panel (Order → Reform → People).
+- **3-player co-op:** role card in the sidebar plus, when gating is on, **three seat cards above the choices** (speak order + vote per player).
 - **Read alongside:** collapsible anchors on (almost) every story scene; after each short quotation, a one-line **gloss** (`.read-gloss` in the panel) names **who and what** (Chaadaev, Pushkin, Stepan, the meters, the next buttons) so players are not left guessing. Glosses use explicit connectives (*that*, *whether*, *while*, and the like). Section cues (prologue, Part One, Part Two), not line numbers. **Epilogues** are in-scene (the four friends close the winter in voice); **session title** above the body still signals which track and framing the run used.
 - **Historical staging:** notes on counterfactual compression (e.g. zemstvo language).
 - **Before you roll:** path recap and stat context on winter 1837 crisis screens.
@@ -92,6 +94,10 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 ## Extending beyond Letter I (optional unit)
 
 The Springer volume includes **Letters II–VIII**, ***Apologia of a Madman***, and **fragments** with editors’ commentaries. The CYOA stays **Letter-I-first** for coherence; a second week can assign e.g. *Apologia* (response to the “madness” decree) or Letter VIII alongside a second playthrough. See **`SOURCES.md`** for the edition.
+
+## Directed start (`?scene=`)
+
+For demos, make-up play, or assigned entry points, append **`?scene=<sceneId>`** to the page URL. **`<sceneId>`** must be a key on the `scenes` object in **`js/game-scenes.js`**. The game resets path history and opens that node, with a short toast that the start was directed. This **skips** earlier story beats—use with care for first-time players.
 
 ## Embedding in Canvas
 
@@ -104,5 +110,6 @@ Summary: wrapper + **`iframe`** (GitHub Pages or Canvas Files **`/preview`**) + 
 - `index.html` + `css/game.css` + `js/game-config.js`, `js/game-scenes.js`, `js/game-app.js`: shipped game (open `index.html` locally or host the whole `Final/` folder on GitHub Pages).
 - `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload). Increase `height` on `<iframe>` if the embedded player feels small.
 - `SOURCES.md`: citations and editions.
+- `LICENSE`: MIT (redistribution; adjust copyright if your program requires a different notice).
 - `cyoa-structure-map.html`: branch map and teaching companion.
 - `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`. Backlog: `canvas-interactive-demos/PENDING-TASKS.md`.

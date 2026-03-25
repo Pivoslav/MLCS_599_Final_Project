@@ -150,6 +150,31 @@
       }
       return key;
     }
+
+    function crisisRollExplanationHtml() {
+      const path = state.pathId || "west";
+      const bonus = Math.floor(state.stats.order / 25);
+      const rules = {
+        west: "Total <strong>≥8</strong> → salon breakthrough · <strong>5–7</strong> → Neva flood echo · <strong>≤4</strong> → censor strike.",
+        slav: "Total <strong>≥8</strong> → sympathetic salon · <strong>5–7</strong> → provincial gentry resist ministry schools · <strong>≤4</strong> → censor.",
+        statist: "Total <strong>≥8</strong> → flood framed as logistics / emergency · <strong>≤7</strong> → censor (no separate mid band in code).",
+        med: "Total <strong>≥8</strong> → salon · <strong>5–7</strong> → zemstvo-style pilot vs. ministry · <strong>≤4</strong> → censor."
+      };
+      return `<details class="crisis-die-table"><summary>Winter roll: how <strong>d6 + Order bonus</strong> maps to rumors</summary>
+        <p class="crisis-die-lead">Roll <strong>1d6</strong>, add <strong>${bonus}</strong> (Order ÷ 25, rounded down). The game uses <strong>total</strong> with your path column below. <em>Misfits</em> can override: raw die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, swap in another path’s scandal.</p>
+        <p class="crisis-path-rule"><strong>Your track (${path}):</strong> ${rules[path] || rules.west}</p>
+        <table class="crisis-grid" aria-label="Baseline totals by path">
+          <thead><tr><th scope="col">Path</th><th scope="col">High (≥8)</th><th scope="col">Mid (5–7)</th><th scope="col">Low (≤4)</th></tr></thead>
+          <tbody>
+            <tr><td>Westernizing</td><td>Salon</td><td>Neva echo</td><td>Censor</td></tr>
+            <tr><td>Slavophile</td><td>Salon</td><td>Rural gentry</td><td>Censor</td></tr>
+            <tr><td>Statist</td><td>Flood echo</td><td colspan="2">Censor</td></tr>
+            <tr><td>Mediator</td><td>Salon</td><td>Zemstvo clash</td><td>Censor</td></tr>
+          </tbody>
+        </table>
+      </details>`;
+    }
+
     const state = {
       current: "intro",
       steps: 0,
@@ -170,7 +195,10 @@
       crisisMisfitKind: null,
       runTags: new Set(),
       scars: new Set(),
-      walkouts: new Set()
+      walkouts: new Set(),
+      coopToolsEnabled: false,
+      _coopReveal: false,
+      _coopChoicesSnapshot: null
     };
 
     function isCrisisScene(id) {
@@ -187,7 +215,7 @@
       let leanHint = "Lowest meter: <strong>People</strong> (green bar). Clerks and flood victims may matter less in gossip than they do in Pushkin’s poem.";
       if (O <= R && O <= P) leanHint = "Lowest meter: <strong>Order</strong> (blue-gray bar). Winter rolls skew toward censor pressure unless the die is kind.";
       else if (R <= O && R <= P) leanHint = "Lowest meter: <strong>Reform</strong> (rose bar). Print and schools are fragile in the winter rumor mill.";
-      return `<div class="path-recap" role="note"><strong>Before you roll the winter die</strong> (3-player co-op: the <strong>Order</strong> player summarizes this box aloud first.)<br>Argument track you joined: <strong>${pathNames[path] || path}</strong> · Order ${O} · Reform ${R} · People ${P}<br>Add to the six-sided die: <strong>+${bonus}</strong> (take Order, divide by 25, round down).<br><em>${leanHint}</em></div>`;
+      return `<div class="path-recap" role="note"><strong>Before you roll the winter die</strong> (3-player co-op: the <strong>Order</strong> player summarizes this box aloud first.)<br>Argument track you joined: <strong>${pathNames[path] || path}</strong> · Order ${O} · Reform ${R} · People ${P}<br>Add to the six-sided die: <strong>+${bonus}</strong> (take Order, divide by 25, round down).<br><em>${leanHint}</em></div>${crisisRollExplanationHtml()}`;
     }
 
     function prependSceneCallbacks(sceneId) {
@@ -478,6 +506,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const lines = [
         "Russia at the Crossroads (run summary)",
         "────────────────────────────",
+        "Course: MLCS-599",
+        `Run ID: ${getRunId()}`,
         `Session title: ${ep.runTitle}`,
         `Epilogue: ${ep.title}`,
         `Track: ${pathLabels[path] || path}`,
@@ -520,8 +550,128 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     }
 
     function addItem(key) {
-      if (!key || !ITEMS[key]) return;
+      if (!key || !ITEMS[key]) return false;
+      if (state.inventory.has(key)) return false;
       state.inventory.add(key);
+      return true;
+    }
+
+    const ACH_TOAST = {
+      bronze_reader: "Token: engaged Pushkin’s Petersburg poem.",
+      people_champion: "Achievement: People’s advocate (75+).",
+      iron_order: "Achievement: High Order (80+).",
+      reform_fire: "Achievement: High Reform (80+).",
+      lucky_six: "Achievement: Rolled a 6 on fate.",
+      aksakov_reader: "Token: Aksakov notes in the satchel.",
+      evgeny_framing: "Rare: Evgeny’s chorus framing.",
+      evgeny_merged_insight: "Rare: Letter + poem + strong People."
+    };
+
+    function pushToast(message) {
+      if (!message) return;
+      const region = document.getElementById("toastRegion");
+      if (!region) return;
+      const t = document.createElement("div");
+      t.className = "game-toast";
+      t.setAttribute("role", "status");
+      t.textContent = message;
+      region.appendChild(t);
+      const ms = prefersReducedMotion() ? 5000 : 3400;
+      window.setTimeout(() => {
+        t.remove();
+      }, ms);
+    }
+
+    function flushNewAchievementsToasts() {
+      const before = new Set(state.achievements);
+      checkAchievements();
+      state.achievements.forEach((k) => {
+        if (!before.has(k) && ACH_TOAST[k]) pushToast(ACH_TOAST[k]);
+      });
+    }
+
+    function getRunId() {
+      try {
+        const k = "chaadaev_run_id";
+        let id = sessionStorage.getItem(k);
+        if (!id) {
+          id = `R-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
+          sessionStorage.setItem(k, id);
+        }
+        return id;
+      } catch (e) {
+        return "R-local";
+      }
+    }
+
+    function commitChoice(choice) {
+      if (choice.roll) {
+        const bonus = Math.floor(state.stats.order / 25);
+        const roll = 1 + Math.floor(Math.random() * 6);
+        state.lastRoll = roll;
+        const total = roll + bonus;
+        const nextKey = pickCrisisEvent(total, roll);
+        state.lastEvent = nextKey;
+        state.history.push(state.current);
+        state.current = nextKey;
+        state.steps += 1;
+        state.keepBanner = true;
+        let misfitNote = "";
+        if (state.crisisMisfit) {
+          misfitNote =
+            state.crisisMisfitKind === "snake"
+              ? " <em>Winter misfit:</em> double ones on a strong hand: the wrong rumor forced the door anyway."
+              : " <em>Winter misfit:</em> a six from nowhere on a thin total: luck rewrote which story stuck.";
+        }
+        showEventBanner(`<strong>Fate roll:</strong> d6 = ${roll} + Order bonus ${bonus} = <strong>${total}</strong> · ${state.pathId || "west"} track. ${rollOutcomeLabel(nextKey)}.${misfitNote}`);
+        flushNewAchievementsToasts();
+        statBars();
+        renderInventory();
+        renderScene();
+        return;
+      }
+
+      state.history.push(state.current);
+      if (choice.path) state.pathId = choice.path;
+      if (choice.stateTag) state.runTags.add(choice.stateTag);
+      if (choice.walkout) state.walkouts.add(choice.walkout);
+      if (choice.scar) state.scars.add(choice.scar);
+      if (choice.effects) applyEffects(choice.effects);
+      if (choice.item && addItem(choice.item)) pushToast(`Library: ${ITEMS[choice.item].replace(/<[^>]+>/g, "")}`);
+      if (choice.item2 && addItem(choice.item2)) pushToast(`Library: ${ITEMS[choice.item2].replace(/<[^>]+>/g, "")}`);
+      if (choice.next && String(choice.next).indexOf("final_route") === 0) {
+        state.evgenyChorus = choice.evgenyChorus === true;
+      }
+
+      let next = choice.next;
+      if (next && typeof next === "string" && next.indexOf("crisis_") === 0) {
+        state.steps += 1;
+        state.current = next;
+        statBars();
+        renderInventory();
+        renderScene();
+        return;
+      }
+
+      if (next === "ending_computed") {
+        const prev = scenes[state.history[state.history.length - 1]];
+        if (prev && prev.tag) {
+          state.finalLean = prev.tag;
+          state.finalLeanApplied = prev.tag;
+        }
+        state.steps += 1;
+        state.current = next;
+        statBars();
+        renderInventory();
+        renderScene();
+        return;
+      }
+
+      state.current = next;
+      state.steps += 1;
+      statBars();
+      renderInventory();
+      renderScene();
     }
 
     function prefersReducedMotion() {
@@ -659,7 +809,11 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const runTitle = computeRunTitle(endingKey, path, O, R, P);
       const historiography = historiographyNudge(endingKey);
 
+      const achBefore = new Set(state.achievements);
       checkAchievements();
+      state.achievements.forEach((k) => {
+        if (!achBefore.has(k) && ACH_TOAST[k]) pushToast(ACH_TOAST[k]);
+      });
 
       const extras = [];
       if (state.inventory.has("pushkin_bronze")) {
@@ -748,6 +902,128 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       });
     }
 
+    function stripChoiceLabel(html) {
+      return String(html || "")
+        .replace(/<[^>]+>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function setCoopBallotWrapVisible(show) {
+      const wrap = document.getElementById("coopMainBallotWrap");
+      if (wrap) wrap.hidden = !show;
+    }
+
+    function refreshCoopBallotUI() {
+      const mount = document.getElementById("coopBallotMount");
+      const body = document.getElementById("coopToolsBody");
+      const cb = document.getElementById("coopToolsEnable");
+      const sumEl = document.getElementById("coopBallotSummary");
+      const stance = document.getElementById("coopStanceOk");
+      const applyBtn = document.getElementById("coopApplyMajority");
+      if (!mount || !body) return;
+      const enabled = !!(cb && cb.checked);
+      state.coopToolsEnabled = enabled;
+      body.hidden = !enabled;
+      if (!enabled) {
+        mount.innerHTML = "";
+        setCoopBallotWrapVisible(false);
+        if (sumEl) sumEl.textContent = "";
+        return;
+      }
+      const list = state._coopChoicesSnapshot || [];
+      if (!list.length) {
+        mount.innerHTML = "";
+        setCoopBallotWrapVisible(false);
+        if (sumEl) sumEl.textContent = "";
+        return;
+      }
+      setCoopBallotWrapVisible(true);
+      const roles = [
+        {
+          id: "coopV1",
+          step: "1",
+          realm: "Order",
+          title: "Player 1 · Order",
+          hint: "Speak for ranks, continuity, and ministry logic—not as the sovereign, but for the vertical everyone leans on.",
+          mod: "coop-seat--order"
+        },
+        {
+          id: "coopV2",
+          step: "2",
+          realm: "Reform",
+          title: "Player 2 · Reform",
+          hint: "Speak for law, schools, print, and Chaadaev’s wager on institutions that could become real.",
+          mod: "coop-seat--reform"
+        },
+        {
+          id: "coopV3",
+          step: "3",
+          realm: "People",
+          title: "Player 3 · People",
+          hint: "Speak for clerks, flood-side lives, provincial cost, and Evgeny’s side of the poem.",
+          mod: "coop-seat--people"
+        }
+      ];
+      let h = '<div class="coop-seats-row" role="group" aria-label="Three-player votes for this beat">';
+      roles.forEach((r) => {
+        h += `<article class="coop-seat ${r.mod}" aria-labelledby="${r.id}-hd">`;
+        h += `<div class="coop-seat-badge"><span class="coop-seat-step">${r.step}</span><span class="coop-seat-realm">${r.realm}</span></div>`;
+        h += `<h4 class="coop-seat-title" id="${r.id}-hd">${r.title}</h4>`;
+        h += `<p class="coop-seat-hint">${r.hint}</p>`;
+        h += `<label class="coop-seat-vote-label" for="${r.id}">Lock your vote</label>`;
+        h += `<select id="${r.id}" class="coop-select" autocomplete="off">`;
+        h += "<option value=\"\">— choose —</option>";
+        list.forEach((ch, i) => {
+          const t = stripChoiceLabel(ch.text).slice(0, 56);
+          h += `<option value="${i}">${i + 1}. ${t}${t.length >= 56 ? "…" : ""}</option>`;
+        });
+        h += "</select></article>";
+      });
+      h += "</div>";
+      mount.innerHTML = h;
+      mount.onchange = updateCoopApplyGate;
+      state._coopReveal = false;
+      if (sumEl) sumEl.textContent = "";
+      if (stance) stance.checked = false;
+      if (applyBtn) applyBtn.disabled = true;
+    }
+
+    function coopMajorityChoiceIndex() {
+      const v1 = document.getElementById("coopV1");
+      const v2 = document.getElementById("coopV2");
+      const v3 = document.getElementById("coopV3");
+      if (!v1 || !v2 || !v3) return -1;
+      if (v1.value === "" || v2.value === "" || v3.value === "") return -1;
+      const a = +v1.value;
+      const b = +v2.value;
+      const c = +v3.value;
+      const counts = {};
+      [a, b, c].forEach((i) => {
+        counts[i] = (counts[i] || 0) + 1;
+      });
+      let bestI = a;
+      let bestN = 0;
+      Object.keys(counts).forEach((k) => {
+        const kk = +k;
+        const n = counts[kk];
+        if (n > bestN || (n === bestN && kk < bestI)) {
+          bestN = n;
+          bestI = kk;
+        }
+      });
+      return bestI;
+    }
+
+    function updateCoopApplyGate() {
+      const applyBtn = document.getElementById("coopApplyMajority");
+      const stance = document.getElementById("coopStanceOk");
+      if (!applyBtn || !stance) return;
+      const list = state._coopChoicesSnapshot || [];
+      const idx = coopMajorityChoiceIndex();
+      applyBtn.disabled = !(stance.checked && idx >= 0 && list[idx]);
+    }
+
     function renderScene() {
       if (!state.keepBanner) hideEventBanner();
       state.keepBanner = false;
@@ -777,6 +1053,16 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           html += ep.unresolvedHtml;
         }
         html += `<div class="ending-actions"><button type="button" class="ghost" id="copySummaryBtn">Copy run summary</button> <span class="copy-toast" id="copyToast" hidden>Copied.</span></div>`;
+        const path = state.pathId || "west";
+        const pack = EPILOGUE_TWELVE[path] || EPILOGUE_TWELVE.west;
+        const cmp = (k, lab) => {
+          const p = pack[k];
+          if (!p) return "";
+          const snip = String(p.body).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 140);
+          return `<div class="debrief-compare-card"><h4>${lab}</h4><p><strong>${p.title}</strong></p><p class="debrief-snippet">${snip}…</p></div>`;
+        };
+        html += `<details class="debrief-lab"><summary>Debrief lab: compare framings (read-only)</summary><p class="debrief-lab-lead">Same path (<strong>${path}</strong>), three closing lenses. Your run used one; the others are snippets only—no stat change.</p><div class="debrief-compare-grid">${cmp("order", "Order lens")}${cmp("reform", "Reform lens")}${cmp("people", "People lens")}</div><button type="button" class="ghost" id="debriefPeekBtn">Branch peek: another path’s winter flavor (read-only)</button></details>`;
+        html += `<details class="realm-debrief-lab"><summary>Debrief toy: coupled realm sliders (does not change saved scores)</summary><p class="realm-debrief-lead">Total fixed at 150. Drag one bar; the others rebalance—useful for arguing scarcity after the run.</p><div class="realm-coupled-row"><label>Order <span id="debValO">50</span><input type="range" id="debRngO" min="0" max="150" value="50" /></label></div><div class="realm-coupled-row"><label>Reform <span id="debValR">50</span><input type="range" id="debRngR" min="0" max="150" value="50" /></label></div><div class="realm-coupled-row"><label>People <span id="debValP">50</span><input type="range" id="debRngP" min="0" max="150" value="50" /></label></div></details>`;
         endingBlock.innerHTML = html;
         const copyBtn = document.getElementById("copySummaryBtn");
         const toast = document.getElementById("copyToast");
@@ -793,6 +1079,102 @@ Whether one ledger always became footnote to the other, none would swear; the cl
             }
           });
         }
+        const peekBtn = document.getElementById("debriefPeekBtn");
+        const peekDlg = document.getElementById("debriefPeekDlg");
+        const peekBody = document.getElementById("debriefPeekBody");
+        const peekClose = document.getElementById("debriefPeekClose");
+        const PEEK_TEXT = {
+          west:
+            "<strong>Westernizing track:</strong> mid totals often bring <strong>Neva flood echoes</strong> into salon talk; high totals favor a sanctioned reading night; low totals draw the censor.",
+          slav:
+            "<strong>Slavophile track:</strong> mid totals stress <strong>provincial gentry</strong> resisting ministry school maps; high totals can still open a salon; soil and parish rhetoric color the rumor.",
+          statist:
+            "<strong>Statist track:</strong> there is no separate mid-band in code—high totals frame <strong>flood logistics</strong>; lower totals fold into <strong>censor</strong> pressure.",
+          med:
+            "<strong>Mediator track:</strong> mid totals trigger <strong>zemstvo-style</strong> pilot funds vs. ministry veto; high totals still allow a salon night; low totals mean censor."
+        };
+        if (peekBtn && peekDlg && peekBody) {
+          peekBtn.addEventListener("click", () => {
+            const cur = state.pathId || "west";
+            const alt = ["west", "slav", "statist", "med"].find((p) => p !== cur) || "west";
+            peekBody.innerHTML = `<p><strong>Branch peek</strong> — your run: <strong>${cur}</strong>. Showing <strong>${alt}</strong> winter logic (read-only):</p><p>${PEEK_TEXT[alt]}</p>`;
+            if (typeof peekDlg.showModal === "function") peekDlg.showModal();
+          });
+        }
+        if (peekClose && peekDlg) {
+          peekClose.addEventListener("click", () => peekDlg.close());
+        }
+        if (peekDlg) {
+          peekDlg.addEventListener("click", (e) => {
+            if (e.target === peekDlg) peekDlg.close();
+          });
+        }
+        (function wireRealmDebriefSliders() {
+          const rO = document.getElementById("debRngO");
+          const rR = document.getElementById("debRngR");
+          const rP = document.getElementById("debRngP");
+          const vO = document.getElementById("debValO");
+          const vR = document.getElementById("debValR");
+          const vP = document.getElementById("debValP");
+          if (!rO || !rR || !rP || !vO || !vR || !vP) return;
+          const T = 150;
+          function write(o, r, p) {
+            o = Math.max(0, Math.min(T, Math.round(o)));
+            r = Math.max(0, Math.min(T, Math.round(r)));
+            p = T - o - r;
+            if (p < 0) {
+              p = 0;
+              r = T - o;
+            }
+            rO.value = String(o);
+            rR.value = String(r);
+            rP.value = String(p);
+            vO.textContent = String(o);
+            vR.textContent = String(r);
+            vP.textContent = String(p);
+          }
+          function onInput(changed) {
+            let o = +rO.value;
+            let r = +rR.value;
+            let p = +rP.value;
+            if (changed === "o") {
+              const rem = T - o;
+              const sumRP = r + p;
+              if (sumRP <= 0) {
+                r = Math.floor(rem / 2);
+                p = rem - r;
+              } else {
+                r = Math.round(rem * (r / sumRP));
+                p = rem - r;
+              }
+            } else if (changed === "r") {
+              const rem = T - r;
+              const sumOP = o + p;
+              if (sumOP <= 0) {
+                o = Math.floor(rem / 2);
+                p = rem - o;
+              } else {
+                o = Math.round(rem * (o / sumOP));
+                p = rem - o;
+              }
+            } else {
+              const rem = T - p;
+              const sumOR = o + r;
+              if (sumOR <= 0) {
+                o = Math.floor(rem / 2);
+                r = rem - o;
+              } else {
+                o = Math.round(rem * (o / sumOR));
+                r = rem - o;
+              }
+            }
+            write(o, r, p);
+          }
+          rO.addEventListener("input", () => onInput("o"));
+          rR.addEventListener("input", () => onInput("r"));
+          rP.addEventListener("input", () => onInput("p"));
+          write(50, 50, 50);
+        })();
         sceneIdTextEl.textContent = `Scene: ${scene.title}`;
         stepsTextEl.textContent = `Turn: ${state.steps}`;
         eraTextEl.textContent = `Era: 1836–37`;
@@ -802,6 +1184,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         endBtn.textContent = "Play again";
         endBtn.addEventListener("click", restart);
         choicesEl.appendChild(endBtn);
+        state._coopChoicesSnapshot = [];
+        refreshCoopBallotUI();
         statBars();
         renderInventory();
         updateSceneVisuals(state.current);
@@ -838,6 +1222,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         endBtn.textContent = "Return to start";
         endBtn.addEventListener("click", restart);
         choicesEl.appendChild(endBtn);
+        state._coopChoicesSnapshot = [];
+        refreshCoopBallotUI();
         statBars();
         renderInventory();
         updateSceneVisuals(state.current);
@@ -859,84 +1245,42 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         }
       }
 
+      const icoDice =
+        '<span class="choice-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="8.5" cy="8.5" r="0.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="0.5" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="0.5" fill="currentColor" stroke="none"/></svg></span>';
+      const icoBranch =
+        '<span class="choice-ico choice-ico--branch" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3v12"/><circle cx="6" cy="3" r="2"/><circle cx="6" cy="15" r="2"/><path d="M6 9h8l4 4"/><circle cx="18" cy="15" r="2"/></svg></span>';
+
       choicesToRender.forEach((choice) => {
         const button = document.createElement("button");
+        button.type = "button";
         button.className = "choice-btn";
         const fx = choice.effects ? formatEffects(choice.effects) : "";
+        if (fx) button.title = `Meter shift if you choose this: ${fx}`;
+        const ico = choice.roll ? icoDice : icoBranch;
         button.innerHTML = choice.roll
-          ? `<span class="main">${choice.text}</span>`
-          : `<span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}`;
+          ? `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span></span>`
+          : `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}</span>`;
 
         button.addEventListener("click", () => {
-          if (choice.roll) {
-            const bonus = Math.floor(state.stats.order / 25);
-            const roll = 1 + Math.floor(Math.random() * 6);
-            state.lastRoll = roll;
-            const total = roll + bonus;
-            const nextKey = pickCrisisEvent(total, roll);
-            state.lastEvent = nextKey;
-            state.history.push(state.current);
-            state.current = nextKey;
-            state.steps += 1;
-            state.keepBanner = true;
-            let misfitNote = "";
-            if (state.crisisMisfit) {
-              misfitNote =
-                state.crisisMisfitKind === "snake"
-                  ? " <em>Winter misfit:</em> double ones on a strong hand: the wrong rumor forced the door anyway."
-                  : " <em>Winter misfit:</em> a six from nowhere on a thin total: luck rewrote which story stuck.";
-            }
-            showEventBanner(`<strong>Fate roll:</strong> d6 = ${roll} + Order bonus ${bonus} = <strong>${total}</strong> · ${state.pathId || "west"} track. ${rollOutcomeLabel(nextKey)}.${misfitNote}`);
-            statBars();
-            renderInventory();
-            renderScene();
+          if (state.coopToolsEnabled) {
+            pushToast("Co-op gating on: each seat votes above, then sidebar → stance → Apply winning choice.");
             return;
           }
-
-          state.history.push(state.current);
-          if (choice.path) state.pathId = choice.path;
-          if (choice.stateTag) state.runTags.add(choice.stateTag);
-          if (choice.walkout) state.walkouts.add(choice.walkout);
-          if (choice.scar) state.scars.add(choice.scar);
-          if (choice.effects) applyEffects(choice.effects);
-          if (choice.item) addItem(choice.item);
-          if (choice.item2) addItem(choice.item2);
-          if (choice.next && String(choice.next).indexOf("final_route") === 0) {
-            state.evgenyChorus = choice.evgenyChorus === true;
-          }
-
-          let next = choice.next;
-          if (next && typeof next === "string" && next.indexOf("crisis_") === 0) {
-            state.steps += 1;
-            state.current = next;
-            statBars();
-            renderInventory();
-            renderScene();
-            return;
-          }
-
-          if (next === "ending_computed") {
-            const prev = scenes[state.history[state.history.length - 1]];
-            if (prev && prev.tag) {
-              state.finalLean = prev.tag;
-              state.finalLeanApplied = prev.tag;
-            }
-            state.steps += 1;
-            state.current = next;
-            statBars();
-            renderInventory();
-            renderScene();
-            return;
-          }
-
-          state.current = next;
-          state.steps += 1;
-          statBars();
-          renderInventory();
-          renderScene();
+          commitChoice(choice);
         });
         choicesEl.appendChild(button);
       });
+
+      if (choicesToRender.length > 0 && !(choicesToRender.length === 1 && choicesToRender[0].roll)) {
+        const ped = document.createElement("details");
+        ped.className = "choice-pedagogy";
+        const track = state.pathId ? `<strong>${state.pathId}</strong> (argument track locked)` : "<strong>not locked</strong> until you take a forking choice";
+        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move—institutional costs, not a hidden “correct” score. Track: ${track}. Hover or focus a button for a plain-language <strong>title</strong> preview.</p>`;
+        choicesEl.appendChild(ped);
+      }
+
+      state._coopChoicesSnapshot = choicesToRender;
+      refreshCoopBallotUI();
 
       statBars();
       renderInventory();
@@ -952,7 +1296,16 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       }
     }
 
+    let coopTimerInterval = null;
+
     function restart() {
+      if (coopTimerInterval) clearInterval(coopTimerInterval);
+      coopTimerInterval = null;
+      const disp = document.getElementById("coopTimerDisplay");
+      if (disp) disp.textContent = "—";
+      const cb = document.getElementById("coopToolsEnable");
+      if (cb) cb.checked = false;
+      state.coopToolsEnabled = false;
       state.current = "intro";
       state.steps = 0;
       state.history = [];
@@ -974,6 +1327,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.scars = new Set();
       state.walkouts = new Set();
       hideEventBanner();
+      refreshCoopBallotUI();
       renderScene();
     }
 
@@ -1002,4 +1356,86 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (e.key === "Escape") glossaryModal.classList.remove("open");
     });
 
+    (function wireCoopTools() {
+      const en = document.getElementById("coopToolsEnable");
+      const start = document.getElementById("coopTimerStart");
+      const stop = document.getElementById("coopTimerStop");
+      const reveal = document.getElementById("coopRevealVotes");
+      const hide = document.getElementById("coopHideVotes");
+      const apply = document.getElementById("coopApplyMajority");
+      const stance = document.getElementById("coopStanceOk");
+      const disp = document.getElementById("coopTimerDisplay");
+      if (en) en.addEventListener("change", refreshCoopBallotUI);
+      if (stance) stance.addEventListener("change", updateCoopApplyGate);
+      if (start && disp) {
+        start.addEventListener("click", () => {
+          if (coopTimerInterval) clearInterval(coopTimerInterval);
+          let left = 30;
+          disp.textContent = `${left}s`;
+          coopTimerInterval = setInterval(() => {
+            left -= 1;
+            disp.textContent = left > 0 ? `${left}s` : "—";
+            if (left <= 0) {
+              clearInterval(coopTimerInterval);
+              coopTimerInterval = null;
+            }
+          }, 1000);
+        });
+      }
+      if (stop && disp) {
+        stop.addEventListener("click", () => {
+          if (coopTimerInterval) clearInterval(coopTimerInterval);
+          coopTimerInterval = null;
+          disp.textContent = "—";
+        });
+      }
+      if (reveal) {
+        reveal.addEventListener("click", () => {
+          const list = state._coopChoicesSnapshot || [];
+          const sumEl = document.getElementById("coopBallotSummary");
+          const labels = ["Order", "Reform", "People"];
+          const ids = ["coopV1", "coopV2", "coopV3"];
+          const parts = ids.map((id, j) => {
+            const el = document.getElementById(id);
+            const v = el && el.value;
+            if (v === "") return `${labels[j]}: (no vote)`;
+            const ch = list[+v];
+            return `${labels[j]} → ${stripChoiceLabel(ch && ch.text).slice(0, 42)}`;
+          });
+          if (sumEl) sumEl.textContent = parts.join(" · ");
+        });
+      }
+      if (hide) {
+        hide.addEventListener("click", () => {
+          const sumEl = document.getElementById("coopBallotSummary");
+          if (sumEl) sumEl.textContent = "";
+        });
+      }
+      if (apply) {
+        apply.addEventListener("click", () => {
+          const list = state._coopChoicesSnapshot || [];
+          const idx = coopMajorityChoiceIndex();
+          const st = document.getElementById("coopStanceOk");
+          if (!st || !st.checked || idx < 0 || !list[idx]) return;
+          const cbx = document.getElementById("coopToolsEnable");
+          if (cbx) cbx.checked = false;
+          state.coopToolsEnabled = false;
+          refreshCoopBallotUI();
+          commitChoice(list[idx]);
+        });
+      }
+    })();
+
+    (function applySceneFromQuery() {
+      try {
+        const q = new URLSearchParams(location.search).get("scene");
+        if (!q || !scenes[q]) return;
+        state.current = q;
+        state.history = [];
+        state.steps = 0;
+        pushToast(`Deep link: scene “${q}” — default meters; not a full playthrough path.`);
+      } catch (e) {}
+    })();
+
+    refreshCoopBallotUI();
     renderScene();

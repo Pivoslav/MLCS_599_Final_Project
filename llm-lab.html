@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art lab (local dev) — Russia at the Crossroads</title>
+  <link rel="stylesheet" href="css/game.css" />
+  <style>
+    .lab-wrap { max-width: 42rem; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
+    .lab-banner {
+      background: var(--panel, #1e1e24);
+      border: 1px solid var(--border, #333);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+    .lab-banner strong { color: var(--accent, #c9a227); }
+    .lab-form label { display: block; margin: 0.75rem 0 0.25rem; font-weight: 600; }
+    .lab-form textarea { width: 100%; min-height: 5rem; padding: 0.5rem; font: inherit; border-radius: 6px; }
+    .lab-form select { font: inherit; padding: 0.35rem 0.5rem; border-radius: 6px; }
+    .lab-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 0.75rem; }
+    .lab-row label { display: flex; align-items: center; gap: 0.35rem; font-weight: normal; margin: 0; }
+    .lab-actions { margin-top: 1rem; }
+    .lab-out { margin-top: 1.5rem; }
+    .lab-out pre {
+      white-space: pre-wrap;
+      background: var(--panel, #1e1e24);
+      border: 1px solid var(--border, #333);
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+    .lab-out iframe { width: 100%; min-height: 320px; border: 1px solid var(--border, #333); border-radius: 8px; background: #fff; }
+    .lab-err { color: #f66; margin-top: 0.75rem; }
+    .lab-back { margin-bottom: 1rem; }
+    .lab-back a { color: var(--accent, #c9a227); }
+  </style>
+</head>
+<body>
+  <div class="lab-wrap">
+    <p class="lab-back"><a href="index.html">&larr; Back to game</a></p>
+    <h1>Art lab</h1>
+    <div class="lab-banner" id="labBanner">
+      <strong>Local only.</strong> Run <code>python tools/dev_server.py</code> from the <code>MLCS_599</code> folder, then open
+      <code>http://127.0.0.1:8765/llm-lab.html</code> (not a <code>file://</code> URL). Your GitHub token stays in <code>.env</code> on the server; the browser never sees it.
+    </div>
+
+    <form class="lab-form" id="labForm">
+      <label for="brief">Scene or character brief</label>
+      <textarea id="brief" name="brief" required placeholder="e.g. Winter Neva embankment at dawn, clerks walking toward ministry buildings"></textarea>
+
+      <label for="kind">Kind</label>
+      <select id="kind" name="kind">
+        <option value="scene">Scene</option>
+        <option value="character">Character</option>
+      </select>
+
+      <div class="lab-row">
+        <label><input type="checkbox" id="textOnly" checked /> Skip GitHub image API (recommended; often 404)</label>
+        <label><input type="checkbox" id="pollinations" checked /> Pollinations preview in result</label>
+        <label><input type="checkbox" id="saveFiles" checked /> Save JSON/HTML under <code>tools/output/</code></label>
+      </div>
+
+      <div class="lab-actions">
+        <button type="submit" class="primary" id="submitBtn">Run Grok</button>
+      </div>
+    </form>
+
+    <div class="lab-out" id="labOut" hidden>
+      <h2>Result</h2>
+      <p id="metaTitle"></p>
+      <p id="metaAlt"></p>
+      <h3>Image prompt</h3>
+      <pre id="promptPre"></pre>
+      <p id="pathsNote"></p>
+      <div id="iframeWrap"></div>
+    </div>
+    <p class="lab-err" id="labErr" hidden></p>
+  </div>
+
+  <script>
+(function () {
+  var form = document.getElementById("labForm");
+  var out = document.getElementById("labOut");
+  var err = document.getElementById("labErr");
+  var btn = document.getElementById("submitBtn");
+
+  if (location.protocol === "file:") {
+    document.getElementById("labBanner").innerHTML =
+      "<strong>Wrong URL.</strong> Open this page via <code>http://127.0.0.1:8765/llm-lab.html</code> after starting <code>python tools/dev_server.py</code>. <code>file://</code> cannot call the local API.";
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    out.hidden = true;
+    btn.disabled = true;
+    btn.textContent = "Running…";
+
+    fetch("/api/art-direct", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        brief: document.getElementById("brief").value,
+        kind: document.getElementById("kind").value,
+        text_only: document.getElementById("textOnly").checked,
+        pollinations_preview: document.getElementById("pollinations").checked,
+        save_files: document.getElementById("saveFiles").checked,
+        prefix: "ui_lab",
+      }),
+    })
+      .then(function (r) {
+        return r.json().then(function (data) {
+          if (!r.ok) throw new Error(data.error || r.statusText);
+          return data;
+        });
+      })
+      .then(function (data) {
+        if (!data.ok) throw new Error(data.error || "Unknown error");
+        var meta = data.meta || {};
+        document.getElementById("metaTitle").textContent = meta.title || "";
+        document.getElementById("metaAlt").textContent = meta.alt_text ? "Alt: " + meta.alt_text : "";
+        document.getElementById("promptPre").textContent = data.image_prompt || "";
+        var paths = [];
+        if (data.json_path) paths.push("JSON: " + data.json_path);
+        if (data.preview_html_path) paths.push("Preview file: " + data.preview_html_path);
+        if (data.png_path) paths.push("PNG: " + data.png_path);
+        if (data.image_api_error) paths.push("Image API: " + data.image_api_error);
+        document.getElementById("pathsNote").textContent = paths.join(" · ") || "";
+
+        var wrap = document.getElementById("iframeWrap");
+        wrap.innerHTML = "";
+        if (data.preview_html) {
+          var iframe = document.createElement("iframe");
+          iframe.title = "Preview";
+          iframe.setAttribute("sandbox", "allow-same-origin allow-scripts");
+          iframe.srcdoc = data.preview_html;
+          wrap.appendChild(iframe);
+        }
+        out.hidden = false;
+      })
+      .catch(function (e) {
+        err.textContent = e.message || String(e);
+        err.hidden = false;
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.textContent = "Run Grok";
+      });
+  });
+})();
+  </script>
+</body>
+</html>

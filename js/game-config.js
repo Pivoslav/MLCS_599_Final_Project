@@ -420,7 +420,8 @@
      * @type {Record<string, "default"|"frost"|"ember">}
      */
     const SCENE_COLOR_SCHEME = {
-      /* Example: event_flood_echo: "frost", event_censor: "ember" */
+      event_flood_echo: "frost",
+      event_censor: "ember"
     };
     /** After crisis, the “sorting” scene gets a path-specific lead-in. */
     const RESOLVE_PATH_LEAD = {

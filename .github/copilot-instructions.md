@@ -33,6 +33,8 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 - **`js/game-config.js`** — Images, ambient keys, inventory labels, static tables.
 - **`canvas-interactive-demos/`** — **Vanilla** prototypes for UI/mechanics **before** merging into the game; no framework; no CDN. Hub: `canvas-interactive-demos/index.html`. Backlog: **`canvas-interactive-demos/PENDING-TASKS.md`**.
 - **`HOSTING-AND-INTEGRATION.md`** — Canvas, GitHub Pages, iframe sizing, merge roadmap.
+- **`DEMOS-AND-LLM-REPORT.md`** — Full demo/tool inventory, needs vs costs, design leverage, handoff block for agents.
+- **`GAMEPLAN.md`** — Phased delivery (Canvas + Pages + optional LLM-assisted character art pipeline).
 - **`co-op-cyoa-mechanics-report.html`** — Design report (effort vs payoff, co-op patterns).
 
 ## Implementation rules

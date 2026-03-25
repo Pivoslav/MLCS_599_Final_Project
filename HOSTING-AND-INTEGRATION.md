@@ -34,6 +34,12 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 - **`localStorage`** may fail in embedded contexts; treat **graceful degradation** as success (in-memory / session-only state).
 - **`window.onerror`:** filter extension noise when attributing failures to the page.
 
+### Shipped game: iframe vs new tab (storage, co-op, run summary)
+
+- **`sessionStorage`:** Some LMS embeds block or partition storage for third-party iframes. **`getRunId()`** in `js/game-app.js` falls back to **`R-local`** in the copied run summary when storage throws; gameplay is unchanged.
+- **Co-op:** The three-seat ballot is usable in an iframe but **much easier** in a **full tab**; recommend **Open in new tab** for three-player sessions (see `canvas-rce-embed-fragment.html`).
+- **Phased delivery:** **`GAMEPLAN.md`** (Canvas + Pages + optional LLM-assisted art pipeline).
+
 ### Public repository hygiene
 
 - Removed from **`main`:** full primary-text dumps (PDF/txt poem and letter extracts), internal alignment notes, PDF tooling scripts—**copyright and clutter** reasons. Citations remain in **`SOURCES.md`**.
@@ -57,20 +63,22 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 
 ### Prototype → game mapping (short)
 
+Most rows below are **merged** in the bundle; demos stay as vanilla labs for Canvas paste tests.
+
 | Prototype (`demos/`) | Idea in the live game | Touch points (mainly `js/game-app.js`, styles in `css/game.css`) |
 |----------------------|------------------------|------------------------------|
-| `realm-balance-slider.html` | Optional “tension” or debrief toy: **coupled** realm sliders (toy math, not replacing independent meters unless labeled). | Sidebar lab / instructor mode; or post-run debrief panel. |
-| `realm-triangle-budget.html` | **Co-op budget:** spend N points before a hard choice; forces negotiation. | Before major forks; gate choice until “committed.” |
-| `icons-showcase.html` | **Stroke icons** for paths, events, inventory, Read alongside. | Inline SVG near titles, choice rows, glossary. |
-| `interactive-widgets.html` | **Native `<dialog>`** for confirmations; **toast** for rare achievements; **details/summary** for optional glossary chunks; **stance checkbox** before a pivotal choice. | Choice confirmation, achievement after rare branches, collapsible panels. |
+| `realm-balance-slider.html` | **Shipped (epilogue):** coupled realm sliders labeled as debrief toy only. | `resolveEndingText` → `.realm-debrief-lab`; `wireRealmDebriefSliders`. |
+| `realm-triangle-budget.html` | **Co-op budget** (optional pilot; not in bundle yet). | Future: before major forks; gate choice until “committed.” |
+| `icons-showcase.html` | **Partial:** choice-row **dice / branch** SVGs + titles. | `renderChoices` / `.choice-ico`; inventory/glossary polish optional. |
+| `interactive-widgets.html` | **Toast**, `<dialog>` peek, **details/summary**, stance pattern. | `#toastRegion`, `#debriefPeekDlg`, co-op stance checkbox. |
 | `canvas-self-test.html` | Not for players—**support** checklist when embedding. | N/A (keep as separate file for authors). |
-| `mechanic-winter-crisis-lab.html` | Crisis threshold **preview** + **die table** in `details`. | Before winter roll; align copy with real crisis tables. |
-| `mechanic-path-deltas-and-hints.html` | **Path-weighted** deltas + optional **why it matters** gloss. | Choice UI: focus/hover + `details` under choices. |
-| `mechanic-breadcrumb-tension.html` | **Breadcrumb** + **tension** = max(stat) − min(stat). | **Shipped:** `#salometry` in `index.html`, styles in `css/game.css`, `updateSalometry()` in `js/game-app.js`; high spread → `data-tension="high"`. Demo remains a vanilla lab. |
-| `mechanic-co-op-timer-ballot.html` | **Timer**, **secret ballot** reveal, **stance** checkbox. | `state.coopMode` UI branch in `game-app.js`. |
-| `mechanic-debrief-epilogues.html` | **Thesis picker**, **compare** epilogues, **branch peek** `dialog`. | Post-`EPILOGUE_TWELVE`; read-only, no state mutation. |
-| `mechanic-achievement-flash.html` | **Toast** + **inventory icon** flash. | Rare scene/token hooks. |
-| `mechanic-url-and-summary.html` | **`?scene=`** banner + **copy summary** pattern. | Router + existing copy summary. |
+| `mechanic-winter-crisis-lab.html` | **Shipped:** crisis recap + collapsible die table. | `crisisRollExplanationHtml`, `buildCrisisRecap`. |
+| `mechanic-path-deltas-and-hints.html` | **Shipped:** meter hints on choices + pedagogy `details`. | `.choice-btn` `title`, `.choice-pedagogy`. |
+| `mechanic-breadcrumb-tension.html` | **Shipped:** breadcrumb + tension spread. | `#salometry`, `updateSalometry()`, `data-tension="high"`. |
+| `mechanic-co-op-timer-ballot.html` | **Shipped:** sidebar co-op panel + **three seat cards** above choices (timer, ballot, reveal, apply). | `wireCoopTools`, `#coopMainBallotWrap`, `#coopBallotMount`, `state.coopToolsEnabled`. |
+| `mechanic-debrief-epilogues.html` | **Shipped:** compare three framings + read-only branch peek. | Epilogue HTML in `resolveEndingText`; `PEEK_TEXT`. |
+| `mechanic-achievement-flash.html` | **Shipped:** achievement toasts after checks. | `pushToast`, `ACH_TOAST`, `flushNewAchievementsToasts`. |
+| `mechanic-url-and-summary.html` | **Shipped:** `?scene=` deep link + run summary (course + run id). | `applySceneFromQuery`, `buildRunSummary`, `getRunId`. |
 
 **Backlog checklist:** `canvas-interactive-demos/PENDING-TASKS.md` (itemized merge + narrative + LMS tasks).
 
@@ -108,8 +116,11 @@ Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_
 | `canvas-rce-embed-fragment.html` | Paste into Canvas Page HTML view |
 | `canvas-interactive-demos/` | Prototypes before merge; hub lists all demos + **PENDING-TASKS.md** |
 | `README.md` | Teaching notes + short embed pointer |
+| `LICENSE` | MIT (course redistribution; adjust copyright if required) |
 | `SOURCES.md` | Editions and citations |
 | `HOSTING-AND-INTEGRATION.md` | This document |
+| `GAMEPLAN.md` | Phased ship plan (Canvas fragment, ops, optional character-art pipeline) |
+| `DEMOS-AND-LLM-REPORT.md` | Demos + local LLM tooling inventory |
 
 **Deploy note:** GitHub Pages and any **iframe `src`** must keep **`index.html`, `css/`, and `js/`** together at the same base URL. Relative paths (`css/game.css`, `js/…`) assume that layout.
 

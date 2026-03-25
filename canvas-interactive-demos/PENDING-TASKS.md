@@ -2,7 +2,7 @@
 
 Checklist of work **not** done yet—merge into the **game bundle** (`index.html` + `css/`, `js/`), narrative, course ops. Update this file as items close.
 
-**Suggested next implementation (code):** §A **point budget** pilot in one scene (`realm-triangle-budget.html` pattern), or jump to §B **Read alongside** pass (content-heavy). **Suggested next ops:** §D Canvas fragment refresh + §F smoke tests.
+**Suggested next implementation (code):** §A **point budget** pilot in one scene (`realm-triangle-budget.html` pattern), or jump to §B **Read alongside** pass (content-heavy). **Optional:** **`GAMEPLAN.md` Phase 2b** — LLM-assisted character briefs locally, **static** portraits in-bundle for dialogue scenes (no runtime API). **Suggested next ops:** §D Canvas fragment refresh + §F smoke tests.
 
 ---
 
@@ -60,4 +60,4 @@ When a section completes, move bullets to a “Done” appendix or delete them�
 
 - **Breadcrumb + realm spread** — Live in `index.html` / `css/game.css` and `js/game-app.js`; View Transitions + GSAP stagger where supported.
 - **Demo merges (A, except point budget)** — Toasts, crisis table, co-op panel, epilogue debrief lab + peek dialog, `?scene=`, choice icons/hints, realm debrief sliders, run summary fields — see `js/game-app.js`, `css/game.css`, `index.html`.
-- **Next design pass (not started here)** — Richer **three-player layout / agency** (votes and voice beyond the sidebar ballot): product request for a future iteration.
+- **Three-player layout** — **Three seat cards** above the choice column when co-op gating is on (speak order + per-seat vote + sidebar timer / reveal / apply).
