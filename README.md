@@ -89,9 +89,30 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 
 The Springer volume includes **Letters II–VIII**, ***Apologia of a Madman***, and **fragments** with editors’ commentaries. The CYOA stays **Letter-I-first** for coherence; a second week can assign e.g. *Apologia* (response to the “madness” decree) or Letter VIII alongside a second playthrough. See **`SOURCES.md`** for the edition.
 
+## Embedding in a Canvas Page (UAlberta / Instructure RCE)
+
+Do **not** paste the entire game into the HTML editor: Canvas **sanitizes** content and will break scripts. Use a **short wrapper** plus either **GitHub Pages** or **Canvas Files preview** inside an `iframe`, and always offer **open in new tab**.
+
+### A. No Files upload in this course (common for designers / limited roles)
+
+If you **cannot** upload to **Course Files**, point students at the **public site** (e.g. GitHub Pages):
+
+1. Enable **Pages** on the repo (branch `main`, folder `/ (root)`). The game should load at  
+   `https://<user>.github.io/<repo>/`  
+   and the demos at  
+   `https://<user>.github.io/<repo>/canvas-interactive-demos/`.
+2. In a **Page** → **Edit** → **HTML View**, paste **`canvas-rce-embed-fragment.html`** and replace the URLs if your GitHub username or repo name differs from the sample.
+3. Keep the big **“Play the game (new tab)”** button: if the `iframe` is blank, your institution may **block third-party iframes** while still allowing **external links**—the link is enough.
+4. Optional: ask the **instructor** to add the same URL as a **Module** item (**External URL**) so students see it in the flow even without a custom Page.
+
+### B. You have Files upload (e.g. another course / instructor)
+
+Same pattern as DSC: upload **`index.html`**, copy the file’s **`…/preview`** URL, and use it as both the **link** and the **`iframe src`**. Upload **`canvas-interactive-demos/`** with paths preserved if you want the demos hub from Files too; otherwise keep demos on GitHub only.
+
 ## Files (public repo)
 
 - `index.html`: self-contained game (open in a browser or host on GitHub Pages).
+- `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload).
 - `SOURCES.md`: citations and editions.
 - `cyoa-structure-map.html`: branch map and teaching companion.
 - `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`.
