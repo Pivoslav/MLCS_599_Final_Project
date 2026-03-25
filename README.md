@@ -6,6 +6,8 @@
 
 **Canvas / iframe:** Third-party or RCE embeds may **block or partition `sessionStorage`**; the game degrades (e.g. run ID falls back in **Copy run summary**). **Co-op** and wide layout are intended for a **new tab**—see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (Phase 0 checklist + `canvas-self-test.html`).
 
+**Maintainer direction:** Ship as a **teaching instrument**—debrief via epilogue discussion boxes, **Copy run summary**, **Terms**, and **Read alongside**. The UI stays **lean** (compact **O / R / P** in the header, no in-game historiography card). Add chrome or URL presets only when they clearly earn their space.
+
 **Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles in the header, and compact **O / R / P** meter values (0–100) beside scene meta. All motion respects **`prefers-reduced-motion`**. On many **dialogue-heavy** beats (paths, crises, key events), a small **dialogue portrait** (Wikimedia Commons, with alt text and caption) appears under the scene title — see **`IMAGE_CREDITS.md`** and **`SCENE_DIALOGUE_PORTRAITS`** in `game-config.js`.
 
 ## Coherence of the narrative
@@ -72,7 +74,7 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 
 - **Micro-primary-text moments:** Project or hand out 2–4 lines from Chaadaev (borrowing / history) or Pushkin (Peter / flood / Evgeny) **before** a major branch; map diction to the next choice.
 - **Name the counterfactual:** When the text mentions zemstvo-style pilots or salons, say aloud: *This is plausible debate in the 1830s; some institutions belong to a later period; we’re staging the argument, not simulating a year-by-year replay.*
-- **Historiography nudge at endings:** Tie an epilogue to one secondary reading (e.g. Walicki on Westernizers vs. Slavophiles; see `SOURCES.md`). Ask: *Which interpretation of Russia’s path does this ending privilege?*
+- **Secondary reading after endings (instructor):** Tie the closing students reached to one assigned historian or chapter (e.g. Walicki); the game does **not** surface a separate historiography panel—keep this in discussion or a forum prompt.
 - **Concept glossary (prep):** Short definitions for *Teleskop*, Third Section, *sobornost*, Neva flood of 1824, *narod* (handout or slide) so terms don’t block play.
 - **Path recap before the roll:** Instructor or **Order** player summarizes: *We’ve favored Reform over People since…* so the d6 feels connected to prior choices, not arbitrary.
 - **Post-game reading:** After the run, assign 1–2 pages keyed to ending type (e.g. *Unity Without the Many*: hollow state / Evgeny readings; *Reform in the Teeth*: Westernizers and repression).

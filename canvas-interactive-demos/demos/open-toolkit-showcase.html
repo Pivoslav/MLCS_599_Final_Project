@@ -155,13 +155,16 @@ flowchart TB
   <section class="panel" aria-labelledby="mv-h">
     <h2 id="mv-h">3. model-viewer — GLB/GLTF (lighter than raw STL for the web)</h2>
     <p>
-      Google’s <code>&lt;model-viewer&gt;</code> handles AR on some devices. This demo loads the Khronos <strong>Lantern</strong> sample (CC-friendly glTF sample model)—a stand-in for <em>lamplight in the salon</em>, not a historical replica. Swap <code>src</code> for your own CC-licensed GLB (e.g. simplified church or monument mesh from Commons-derived photogrammetry, with rights checked).
+      Google’s <code>&lt;model-viewer&gt;</code> handles AR on some devices. For this course lab, the <strong>intended</strong> mesh is a <strong>table lantern</strong> (salon candlelight), not a street lamp:
+      <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld — medieval table lantern (LED candle)</a>.
+      MakerWorld/Bambu models ship as print files; export to <strong>GLB</strong> yourself (e.g. Blender: import STL/3MF → export glTF binary), then drop it next to this demo as <code>canvas-interactive-demos/assets/medieval-table-lantern.glb</code>. This page <strong>auto-loads</strong> that file when it exists; otherwise it falls back to a generic Khronos lantern sample.
       <a href="https://modelviewer.dev/">modelviewer.dev</a>
     </p>
     <div id="mvHost">
       <model-viewer
+        id="mvLantern"
         src="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@main/2.0/Lantern/glTF-Binary/Lantern.glb"
-        alt="Khronos sample lantern mesh — didactic prop for lamplight / salon atmosphere"
+        alt="3D lantern: local medieval table lantern GLB when present, otherwise Khronos sample lantern"
         camera-controls
         auto-rotate
         shadow-intensity="1"
@@ -171,8 +174,11 @@ flowchart TB
         style="width:100%;height:min(52vh,360px);"
       ></model-viewer>
     </div>
+    <p id="mvSourceNote" class="mv-caption" aria-live="polite"></p>
     <p class="mv-caption">
-      <strong>Source:</strong> <a href="https://github.com/KhronosGroup/glTF-Sample-Models/tree/main/2.0/Lantern">Khronos glTF Sample Models — Lantern</a> (typically <strong>CC BY 4.0</strong>; confirm in that folder’s README before redistributing). HDR environment from <a href="https://modelviewer.dev/">model-viewer shared assets</a>. <strong>Fallback:</strong> if a CDN blocks GLB, download <code>Lantern.glb</code> and set <code>src</code> to a relative path.
+      <strong>Preferred mesh:</strong> <a href="https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826">MakerWorld #1066715</a> — follow the <strong>license / terms on that page</strong> before redistributing; this repo does not bundle their geometry.
+      <strong>Local path:</strong> <code>../assets/medieval-table-lantern.glb</code> (from this HTML file).
+      <strong>Fallback mesh:</strong> <a href="https://github.com/KhronosGroup/glTF-Sample-Models/tree/main/2.0/Lantern">Khronos Lantern</a> (sample street-style lantern; <strong>CC BY 4.0</strong> — confirm in folder README). HDR environment from <a href="https://modelviewer.dev/">model-viewer shared assets</a>.
     </p>
   </section>
 
@@ -277,6 +283,25 @@ flowchart TB
 
   <!-- model-viewer -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var mv = document.getElementById("mvLantern");
+      var note = document.getElementById("mvSourceNote");
+      if (!mv) return;
+      var rel = "../assets/medieval-table-lantern.glb";
+      var localUrl = new URL(rel, window.location.href).href;
+      fetch(rel, { headers: { Range: "bytes=0-0" }, cache: "no-store" })
+        .then(function (res) {
+          if (res.status !== 206 && res.status !== 200) return;
+          mv.src = localUrl;
+          if (note) {
+            note.innerHTML =
+              "<strong>Loaded:</strong> local <code>assets/medieval-table-lantern.glb</code> — export from <a href=\"https://makerworld.com/en/models/1066715-medieval-table-lantern-led-candle#profileId-1055826\">MakerWorld #1066715</a> per that site’s license; not redistributed by this repo.";
+          }
+        })
+        .catch(function () {});
+    });
+  </script>
 
   <!-- Three.js + STL from inline ASCII -->
   <script type="module">

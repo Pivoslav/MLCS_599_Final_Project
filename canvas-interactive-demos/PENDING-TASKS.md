@@ -6,6 +6,8 @@
 
 This file holds **actionable** work on the **game bundle** (`index.html` + `css/`, `js/`) and **course ops**. Check boxes as you complete items.
 
+**Maintainer direction:** treat the build as a **teaching instrument** (debrief prompts, copy summary, Read alongside, co-op)—add UI or query parameters only when they **earn** their space; trim fat as you go. No separate “class mode” URL layer unless requirements change.
+
 **GAMEPLAN order (ship path first):** see **`../GAMEPLAN.md`** → **Progress tracker** for Phase 0 (deploy + Canvas self-test) through Phase 4. The execution queue below is mostly **bundle** work; Phase 0 **push** and **LMS self-test** live in **`../HOSTING-AND-INTEGRATION.md`** (Phase 0 checklist). **Phase 2b pilot:** dialogue portraits — **`../IMAGE_CREDITS.md`**, `SCENE_DIALOGUE_PORTRAITS` in `game-config.js`.
 
 ---
@@ -32,7 +34,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 - [x] **Path-weighted delta preview** — `.choice-btn` titles + pedagogy `details`
 - [x] **Pedagogy hint**
 - [x] **Crisis / winter transparency**
-- [x] **Breadcrumb + tension**
+- [x] **Breadcrumb (recent scenes)** — `#salometry` / `#sceneCrumb`, `updateSalometry()`. *Mar 2026:* header **realm spread bar** removed; **compact O / R / P** values live in header meta; `mechanic-breadcrumb-tension.html` remains a **lab** demo only.
 - [x] **Co-op timer + ballot + stance + three seats above choices**
 - [x] **Debrief compare + branch peek**
 - [x] **URL `?scene=`**
@@ -43,13 +45,14 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 ## B. Narrative & primary-text quality
 
 - [x] **Read alongside pass** — In-panel glosses only; no repeated McNally/Arndt boilerplate on each `primaryRead.body`. *(Deeper quote rewrites / EPILOGUE voice remain optional.)*
-- [x] **EPILOGUE_TWELVE** — Salon voice; winter block: misfit lead-in + `winterEcho` + path coda (`game-app.js`).
+- [x] **EPILOGUE_TWELVE (baseline)** — Salon voice; winter block: misfit lead-in + `winterEcho` + path coda (`game-app.js`).
+- [ ] **EPILOGUE_TWELVE (parity pass, all 12)** — Editorial pass on **every** closing: **west / slav / statist / med** × **order / reform / people**—even weight, voice, winter tail, and discussion payoff (not only the most-played paths).
 - [x] **Scene imagery** — `SCENE_IMAGES` / rails: diversified centers + `beat_med_bridge` rail swap (`game-config.js`).
 - [x] **Optional palette** — `SCENE_COLOR_SCHEME` (`event_flood_echo`, `event_censor`); more scenes optional.
 
 ## C. Authoring & structure docs
 
-- [x] **`cyoa-structure-map.html`** — Full re-sync when `scenes` / crisis / epilogues change (§7 vs `EPILOGUE_TWELVE`). *Done Mar 2026: titles, §2D heading, implementation refs, 31-key cross-ref, co-op seats context.*
+- [x] **`cyoa-structure-map.html`** — Full re-sync when `scenes` / crisis / epilogues change (§7 vs `EPILOGUE_TWELVE`). *Done Mar 2026: titles, §2D heading, implementation refs, scene-key cross-ref (incl. `session_format`), co-op seats context.*
 - [x] **`HOSTING-AND-INTEGRATION.md`** — Prototype table + iframe notes (living).
 
 ## D. Course / LMS operations
@@ -60,7 +63,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## E. Repository / legal (optional)
 
-- [ ] **Git history purge** — Only if required by policy → **BACKLOG**.
+- [ ] **Git history purge** — **Deferred / not planned** unless policy mandates → see **`../BACKLOG.md`**.
 
 ## F. Testing
 
@@ -72,6 +75,6 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## Done (shipped or superseded)
 
-- **Breadcrumb + realm spread** — `index.html` / `game.css` / `game-app.js`; View Transitions + GSAP where supported.
-- **§A bundle merges** — Including co-op seats, point budget on `resolve_endings`, epilogue debrief, `?scene=`, etc.
+- **Scene breadcrumb + compact meters** — Recent scene titles in header; **O / R / P** in header meta (sidebar tall meters and epilogue historiography card removed Mar 2026). View Transitions + GSAP where supported.
+- **§A bundle merges** — Including co-op seats, point budget on `resolve_endings`, epilogue debrief, `?scene=`, `session_format` co-op preset, etc.
 - **`teaching-notes.html`** — TA quick reference (queue #4).
