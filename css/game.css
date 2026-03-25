@@ -494,6 +494,15 @@
       font-weight: 600;
     }
 
+    .realm-legend-budget-hint {
+      font-size: clamp(0.68rem, 0.64rem + 0.12vw, 0.76rem);
+      line-height: 1.45;
+      color: #5c677a;
+      margin: 0 0 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    }
+
     .inventory {
       font-size: clamp(0.88rem, 0.84rem + 0.12vw, 0.95rem);
       color: #4b5568;

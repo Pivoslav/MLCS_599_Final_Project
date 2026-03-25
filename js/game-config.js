@@ -181,18 +181,18 @@
      */
     const SCENE_IMAGES = {
       session_format: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg/1280px-Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
-        alt: "Oil painting of a lamp-lit interior with figures seated in a nineteenth-century salon.",
-        credit: "Olga Kotchetova, <em>Intérieur de salon</em> (late 19th c.; salon-as-table metaphor for co-op setup).",
-        href: "https://commons.wikimedia.org/wiki/File:Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
-        bgPos: "48% 42%"
-      },
-      intro: {
         src: "https://upload.wikimedia.org/wikipedia/commons/0/02/Red_Square_in_Moscow_%281801%29_by_Fedor_Alekseev.jpg",
         alt: "Red Square and the Kremlin in Moscow (painting, ca. 1801).",
-        credit: "Fyodor Alekseyev, <em>Red Square in Moscow</em> (ca. 1801).",
+        credit: "Fyodor Alekseyev, <em>Red Square in Moscow</em> (ca. 1801; table setup against the imperial city).",
         href: "https://commons.wikimedia.org/wiki/File:Red_Square_in_Moscow_(1801)_by_Fedor_Alekseev.jpg",
         bgPos: "48% 38%"
+      },
+      intro: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg/1280px-Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
+        alt: "Oil painting of a lamp-lit interior with figures seated in a nineteenth-century salon.",
+        credit: "Olga Kotchetova, <em>Intérieur de salon</em> (late 19th c.; Moscow salon night, Chaadaev’s letter).",
+        href: "https://commons.wikimedia.org/wiki/File:Olga_Kotchetova_-_Int%C3%A9rieur_de_salon.jpg",
+        bgPos: "48% 42%"
       },
       salon_pushkin: {
         src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
@@ -409,12 +409,12 @@
      */
     const SCENE_RAIL_IMAGES = {
       session_format: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
-        bgPos: "38% 20%"
-      },
-      intro: {
         src: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Beggrov_K_View_of_Chain_Panteleimonovsky_Bridge_across_Fontanka.jpg",
         bgPos: "50% 38%"
+      },
+      intro: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        bgPos: "38% 20%"
       },
       salon_pushkin: {
         src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",

@@ -799,6 +799,9 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const valEl = document.getElementById("val" + cap);
         if (barEl) barEl.style.height = v + "%";
         if (valEl) valEl.textContent = String(v);
+        document.querySelectorAll(`[data-stat-val="${k}"]`).forEach((el) => {
+          el.textContent = String(v);
+        });
       });
     }
 
