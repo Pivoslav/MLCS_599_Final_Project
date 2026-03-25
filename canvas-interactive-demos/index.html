@@ -30,41 +30,94 @@
       font-size: 0.95rem;
       color: var(--text-muted);
     }
+    .demo-list .why {
+      margin: 0.5rem 0 0;
+      font-size: 0.88rem;
+      color: var(--text);
+      border-left: 3px solid var(--line);
+      padding-left: 0.65rem;
+    }
+    .demo-list .why strong { color: var(--link); }
   </style>
 </head>
 <body>
   <h1>Interactive demos hub</h1>
   <p>
     Standalone prototypes for <cite>Russia at the Crossroads</cite> (parent <a href="../index.html">../index.html</a>).
-    Zip this folder for Canvas Files; all links are relative. Course context:
-    <a href="../README.md">../README.md</a>.
+    Course context: <a href="../README.md">../README.md</a>. Merge order and hosting: <a href="../HOSTING-AND-INTEGRATION.md">../HOSTING-AND-INTEGRATION.md</a>.
+    Itemized backlog: <a href="./PENDING-TASKS.md">PENDING-TASKS.md</a>.
   </p>
 
-  <h2>Demos</h2>
+  <h2>Mechanic brainstorm demos</h2>
+  <p class="demo-note" style="margin-top:0;">Each page is playable vanilla HTML; paste into Canvas via the parent <a href="../canvas-rce-embed-fragment.html">canvas-rce-embed-fragment</a> pattern or link out to GitHub Pages.</p>
+  <ul class="demo-list">
+    <li>
+      <a href="./demos/mechanic-winter-crisis-lab.html">Winter / crisis lab</a>
+      <p>Rumor threshold preview + collapsible die table (path × d6).</p>
+      <p class="why"><strong>Fun:</strong> puzzle beat before the fiction moves. <strong>Educational:</strong> probability and institutions in one view—why “we needed Reform higher” is also a historical claim.</p>
+    </li>
+    <li>
+      <a href="./demos/mechanic-path-deltas-and-hints.html">Path deltas + pedagogy hint</a>
+      <p>Same choice label, different Order/Reform/People effects per path; optional gloss under <code>details</code>.</p>
+      <p class="why"><strong>Fun:</strong> the verb stays, the numbers dance. <strong>Educational:</strong> fights the single “right move” for 1836; surfaces Slavophile vs Westernizer costs.</p>
+    </li>
+    <li>
+      <a href="./demos/mechanic-breadcrumb-tension.html">Breadcrumb + tension meter</a>
+      <p>Scene strip + “spread” bar (max − min across the three realms).</p>
+      <p class="why"><strong>Fun:</strong> quick situational read. <strong>Educational:</strong> co-op debrief hook—“who’s winning the argument numerically?” without opening modals.</p>
+    </li>
+    <li>
+      <a href="./demos/mechanic-co-op-timer-ballot.html">Co-op timer, ballot, stance gate</a>
+      <p>30s cue, hidden votes then reveal, checkbox before “commit.”</p>
+      <p class="why"><strong>Fun:</strong> committee drama. <strong>Educational:</strong> models salon equity; reduces one player owning every click.</p>
+    </li>
+    <li>
+      <a href="./demos/mechanic-debrief-epilogues.html">Debrief: thesis + compare + branch peek</a>
+      <p>Side-by-side epilogue stubs, pick a historian one-liner, read-only other-path snippet in <code>dialog</code>.</p>
+      <p class="why"><strong>Fun:</strong> re-title your run. <strong>Educational:</strong> contingency and lens; FOMO relief without save-scumming.</p>
+    </li>
+    <li>
+      <a href="./demos/mechanic-achievement-flash.html">Achievement toast + token icon flash</a>
+      <p>Rare beat fires status toast and drops an SVG token with a short motion accent.</p>
+      <p class="why"><strong>Fun:</strong> collectible moments. <strong>Educational:</strong> mnemonics back to flood / file / bridge motifs in Pushkin–Chaadaev space.</p>
+    </li>
+    <li>
+      <a href="./demos/mechanic-url-and-summary.html">URL scene hint + copy summary</a>
+      <p><code>?scene=</code> banner + clipboard-friendly run blurb.</p>
+      <p class="why"><strong>Fun:</strong> shareable. <strong>Educational:</strong> instructor deep links; forum posts that force path + meters + ending in one line.</p>
+    </li>
+  </ul>
+
+  <h2>Original UI prototypes</h2>
   <ul class="demo-list">
     <li>
       <a href="./demos/realm-balance-slider.html">Realm balance — coupled sliders</a>
-      <p>Fixed combined total (toy model); moving one realm redistributes the others proportionally.</p>
+      <p>Toy model: fixed combined total; redistribute across Order / Reform / People.</p>
+      <p class="why"><strong>Fun:</strong> tangible scarcity. <strong>Educational:</strong> feel tradeoffs before touching the real independent 0–100 meters in the shipped game.</p>
     </li>
     <li>
       <a href="./demos/realm-triangle-budget.html">Realm triangle — point budget</a>
-      <p>Spend a limited budget across Order, Reform, and People with +/− controls and live remaining count.</p>
+      <p>Spend a budget with +/−; <code>aria-live</code> on points remaining.</p>
+      <p class="why"><strong>Fun:</strong> negotiation chip. <strong>Educational:</strong> co-op scarcity; numbers + screen reader, not color alone.</p>
     </li>
     <li>
       <a href="./demos/icons-showcase.html">Icons showcase</a>
-      <p>Stroke SVG set (crown, quill, church, bridge, flood, book, gendarme, barn) with suggested game hooks.</p>
+      <p>Stroke SVG set with suggested hooks (crown, quill, flood, etc.).</p>
+      <p class="why"><strong>Fun:</strong> visual collectibles. <strong>Educational:</strong> consistent vocabulary for paths, crises, inventory.</p>
     </li>
     <li>
       <a href="./demos/interactive-widgets.html">Interactive widgets</a>
-      <p>Buttons, <code>details</code> panel, <code>dialog</code> modal, toast, breadcrumb, stance checkbox gate.</p>
+      <p>Buttons, <code>details</code>, <code>dialog</code>, toast, breadcrumb stub, stance gate.</p>
+      <p class="why"><strong>Fun:</strong> polish. <strong>Educational:</strong> accessible patterns without frameworks—good LMS citizen.</p>
     </li>
     <li>
       <a href="./demos/canvas-self-test.html">Canvas self-test</a>
-      <p>Checklist for LMS hosting: errors, SVG, keyboard button, <code>localStorage</code>, environment <code>pre</code>.</p>
+      <p>Embed checklist: errors, SVG, controls, storage, environment.</p>
+      <p class="why"><strong>Fun:</strong> n/a (author tool). <strong>Educational:</strong> confirms your institution’s iframe / storage behavior before class.</p>
     </li>
   </ul>
 
   <h2>Assets</h2>
-  <p>Shared styles: <code>assets/demo-common.css</code> (realm colors, focus rings, reduced motion).</p>
+  <p>Shared styles: <code>assets/demo-common.css</code>.</p>
 </body>
 </html>

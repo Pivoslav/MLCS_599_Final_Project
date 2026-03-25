@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo: co-op timer, secret ballot, stance gate</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .role-grid { display: grid; gap: 0.75rem; margin: 1rem 0; }
+    .role-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      background: var(--surface);
+    }
+    .role-card label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+    .vote-face { font-weight: 600; letter-spacing: 0.05em; }
+    .vote-face.masked::before { content: "•••"; }
+    .timer { font-variant-numeric: tabular-nums; font-size: 1.5rem; font-weight: 600; margin: 0.5rem 0; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .btn-row button { padding: 0.45rem 0.9rem; border-radius: 8px; border: 1px solid var(--line); font: inherit; cursor: pointer; background: var(--surface); }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Co-op: timer, secret ballot, stance gate</h1>
+  <p>
+    <strong>Why it is fun:</strong> committee chaos with a fair rhythm—everyone gets a beat, then a dramatic reveal.
+    <strong>Why it is educational:</strong> models how salons and study groups actually disagree: time pressure, hidden preferences, and explicit commitment before a risky publish/petition move. Pedagogically it combats one student driving every click.
+  </p>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;"><strong>Timer</strong> (optional facilitator cue)</p>
+    <div class="timer" id="timer" aria-live="polite">—</div>
+    <div class="btn-row">
+      <button type="button" id="t-start">Start 30s discussion</button>
+      <button type="button" id="t-stop">Stop</button>
+    </div>
+  </div>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;"><strong>Secret ballot</strong> — each role picks A / B / C; reveal together.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <label for="v1">Player 1 · Order</label>
+        <select id="v1" aria-label="Order player vote">
+          <option value="">—</option>
+          <option value="A">A · Withdraw</option>
+          <option value="B">B · Circulate quietly</option>
+          <option value="C">C · Petition openly</option>
+        </select>
+        <p class="vote-face masked" id="face1" aria-hidden="true"></p>
+      </div>
+      <div class="role-card">
+        <label for="v2">Player 2 · Reform</label>
+        <select id="v2" aria-label="Reform player vote">
+          <option value="">—</option>
+          <option value="A">A · Withdraw</option>
+          <option value="B">B · Circulate quietly</option>
+          <option value="C">C · Petition openly</option>
+        </select>
+        <p class="vote-face masked" id="face2" aria-hidden="true"></p>
+      </div>
+      <div class="role-card">
+        <label for="v3">Player 3 · People</label>
+        <select id="v3" aria-label="People player vote">
+          <option value="">—</option>
+          <option value="A">A · Withdraw</option>
+          <option value="B">B · Circulate quietly</option>
+          <option value="C">C · Petition openly</option>
+        </select>
+        <p class="vote-face masked" id="face3" aria-hidden="true"></p>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button type="button" id="reveal">Reveal all votes</button>
+      <button type="button" id="hide-again">Hide again</button>
+    </div>
+    <p id="ballot-out" class="demo-note" style="margin-top:0.75rem;"></p>
+  </div>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;"><strong>Stance gate</strong> — commit before the facilitator clicks the real choice.</p>
+    <label style="display:flex;gap:0.5rem;align-items:flex-start;margin:0.5rem 0;">
+      <input type="checkbox" id="stance" />
+      <span>Our trio has spoken; we stand behind the ballot outcome for this beat.</span>
+    </label>
+    <button type="button" id="commit-btn" disabled style="padding:0.5rem 1rem;border-radius:8px;border:1px solid var(--line);font:inherit;opacity:0.5;">Apply group choice (demo)</button>
+  </div>
+
+  <h2>Works cited</h2>
+  <p><a href="../../README.md">README.md</a> (co-op flow). <a href="../../SOURCES.md">SOURCES.md</a></p>
+
+  <script>
+    (function () {
+      var tid = null;
+      var left = 0;
+      var elT = document.getElementById("timer");
+      function showTimer() {
+        elT.textContent = left > 0 ? left + "s" : "—";
+      }
+      document.getElementById("t-start").addEventListener("click", function () {
+        if (tid) clearInterval(tid);
+        left = 30;
+        showTimer();
+        tid = setInterval(function () {
+          left--;
+          showTimer();
+          if (left <= 0) clearInterval(tid);
+        }, 1000);
+      });
+      document.getElementById("t-stop").addEventListener("click", function () {
+        if (tid) clearInterval(tid);
+        left = 0;
+        elT.textContent = "—";
+      });
+
+      var out = document.getElementById("ballot-out");
+      function label(v) {
+        if (v === "A") return "A · Withdraw";
+        if (v === "B") return "B · Circulate quietly";
+        if (v === "C") return "C · Petition openly";
+        return "?";
+      }
+      function setMasked(on) {
+        [1, 2, 3].forEach(function (i) {
+          var f = document.getElementById("face" + i);
+          f.classList.toggle("masked", on);
+          if (on) f.textContent = "";
+          else f.textContent = label(document.getElementById("v" + i).value);
+        });
+      }
+      setMasked(true);
+      document.getElementById("reveal").addEventListener("click", function () {
+        setMasked(false);
+        var a = document.getElementById("v1").value;
+        var b = document.getElementById("v2").value;
+        var c = document.getElementById("v3").value;
+        out.textContent =
+          "Votes: Order → " + label(a) + ", Reform → " + label(b) + ", People → " + label(c) + ". Majority rules (your house rule).";
+      });
+      document.getElementById("hide-again").addEventListener("click", function () {
+        setMasked(true);
+        out.textContent = "";
+      });
+
+      var chk = document.getElementById("stance");
+      var btn = document.getElementById("commit-btn");
+      chk.addEventListener("change", function () {
+        btn.disabled = !chk.checked;
+        btn.style.opacity = chk.checked ? "1" : "0.5";
+      });
+      btn.addEventListener("click", function () {
+        alert("Toy demo — would map majority vote to the game's choice handler.");
+      });
+    })();
+  </script>
+</body>
+</html>

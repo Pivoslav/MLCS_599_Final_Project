@@ -29,7 +29,7 @@ The **final framing choice** (Order vs. Reform vs. People) does not pick a “wi
 
 The **sorting** scene before the final framing choice prepends a short recap of the player’s **path** (Westernizing / Slavophile–Aksakov / statist / mediator). Each epilogue includes a **speculative question** plus a **“For class discussion”** box with **3 prompts**. Slavophile paths append an extra **Aksakov vs. Chaadaev** bullet.
 
-**Twelve closings** (path × framing) include, for example: *The Ranks of Civilization*, *The Syllabus and the Censor*, *Evgeny’s Europeans* (Westernizing); *The Vertical Iconostasis*, *Parish Ink, Capital Light*, *The Soil and the Roof* (Slavophile); *The File Outlives the Salon*, *Commissioned Progress*, *Relief Without Receipt* (statist); *The Minister’s Bridge*, *Borrowed Law, Local Accent*, *The Ledger They Share* (mediator). Full copy lives in **`index.html`** (`EPILOGUE_TWELVE`).
+**Twelve closings** (path × framing) include, for example: *The Ranks of Civilization*, *The Syllabus and the Censor*, *Evgeny’s Europeans* (Westernizing); *The Vertical Iconostasis*, *Parish Ink, Capital Light*, *The Soil and the Roof* (Slavophile); *The File Outlives the Salon*, *Commissioned Progress*, *Relief Without Receipt* (statist); *The Minister’s Bridge*, *Borrowed Law, Local Accent*, *The Ledger They Share* (mediator). Full copy lives in **`js/game-app.js`** (`EPILOGUE_TWELVE`).
 
 **Suggested activities**
 
@@ -77,7 +77,7 @@ One shared screen. **Three fixed roles** align with the game’s meters. Before 
 - **No optional *Gypsies* branch** in the CYOA: the game stays anchored on Chaadaev + *The Bronze Horseman*.
 - **No “historian mode” toggle** (e.g. hiding stat previews): keep the current UI for clarity and pace.
 
-## In-game teaching tools (`index.html`)
+## In-game teaching tools (game bundle)
 
 - **Terms** (footer): glossary modal for *Teleskop*, Third Section, *sobornost*, *narod*, Neva flood, zemstvo staging, meters.
 - **3-player co-op:** collapsible role card in the side panel (Order → Reform → People).
@@ -98,8 +98,8 @@ Summary: wrapper + **`iframe`** (GitHub Pages or Canvas Files **`/preview`**) + 
 ## Files (public repo)
 
 - `HOSTING-AND-INTEGRATION.md`: **Canvas + GitHub Pages lessons**, iframe sizing tips, public-repo notes, **mechanics/integration roadmap** vs `canvas-interactive-demos/`.
-- `index.html`: self-contained game (open in a browser or host on GitHub Pages).
+- `index.html` + `css/game.css` + `js/game-config.js`, `js/game-scenes.js`, `js/game-app.js`: shipped game (open `index.html` locally or host the whole `Final/` folder on GitHub Pages).
 - `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload). Increase `height` on `<iframe>` if the embedded player feels small.
 - `SOURCES.md`: citations and editions.
 - `cyoa-structure-map.html`: branch map and teaching companion.
-- `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`.
+- `canvas-interactive-demos/`: optional UI/mechanic prototypes for Canvas; open `canvas-interactive-demos/index.html`. Backlog: `canvas-interactive-demos/PENDING-TASKS.md`.

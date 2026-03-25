@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo: URL scene hint + copy run summary</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .banner {
+      background: #eee9e2;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.92rem;
+      margin: 0.75rem 0;
+    }
+    textarea {
+      width: 100%;
+      min-height: 7rem;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 0.82rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    .copy-row { margin-top: 0.5rem; }
+    .copy-row button { padding: 0.45rem 1rem; border-radius: 8px; border: 1px solid var(--line); font: inherit; cursor: pointer; background: var(--surface); }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>URL scene hint + copy run summary</h1>
+  <p>
+    <strong>Why it is fun:</strong> sharable links and forum-ready blurbs make the game social.
+    <strong>Why it is educational:</strong> instructors can assign “start at crisis west” deep links for discussion sections; copied summaries force students to name path, meters, and ending in one glance—good for grading participation.
+  </p>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;"><strong>Query string demo</strong> — append <code>?scene=crisis_west</code> (or another key) to this file’s URL and reload.</p>
+    <div class="banner" id="scene-banner" role="status" aria-live="polite">No <code>scene</code> parameter — full run from start.</div>
+    <p class="demo-note" style="margin-bottom:0;">Full game would map keys to <code>renderScene</code>; here we only display the hint banner.</p>
+  </div>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;"><strong>Copy run summary</strong> (pattern from main game)</p>
+    <label for="summary-ta" class="visually-hidden">Run summary text</label>
+    <textarea id="summary-ta" readonly>path: west | scene: winter_1837 | Order 62 Reform 58 People 44 | tokens: Neva witness | epilogue: Evgeny's Europeans (stub)</textarea>
+    <div class="copy-row">
+      <button type="button" id="btn-copy">Copy to clipboard</button>
+      <span id="copy-status" role="status" aria-live="polite" style="margin-left:0.75rem;font-size:0.9rem;"></span>
+    </div>
+  </div>
+
+  <h2>Works cited</h2>
+  <p><a href="../../index.html">../index.html</a> (copy summary). <a href="../../SOURCES.md">SOURCES.md</a></p>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var scene = params.get("scene");
+      var banner = document.getElementById("scene-banner");
+      if (scene) {
+        banner.textContent = "Instructor / student hint: jump context → scene key \"" + scene + "\" (demo label only).";
+      }
+      document.getElementById("btn-copy").addEventListener("click", function () {
+        var ta = document.getElementById("summary-ta");
+        var st = document.getElementById("copy-status");
+        var text = ta.value;
+        function ok() {
+          st.textContent = "Copied.";
+        }
+        function bad() {
+          st.textContent = "Select the text and copy manually (context blocked clipboard).";
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(ok, bad);
+        } else {
+          ta.select();
+          try {
+            document.execCommand("copy");
+            ok();
+          } catch (e) {
+            bad();
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

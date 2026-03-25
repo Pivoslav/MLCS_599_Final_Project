@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo: thesis picker + epilogue compare + branch peek</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 640px) {
+      .grid2 { grid-template-columns: 1fr; }
+    }
+    .epi {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.85rem;
+      background: var(--surface);
+      font-size: 0.92rem;
+    }
+    .epi h3 { margin: 0 0 0.5rem; font-size: 1rem; color: var(--bar-reform); }
+    .thesis-btns { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.75rem 0; }
+    .thesis-btns button {
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font: inherit;
+      cursor: pointer;
+    }
+    .thesis-btns button[aria-pressed="true"] {
+      border-color: var(--link);
+      background: #eee9e2;
+    }
+    dialog.debrief {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem;
+      max-width: 28rem;
+      background: var(--surface);
+    }
+    dialog.debrief::backdrop { background: rgba(0, 0, 0, 0.35); }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Debrief: thesis picker, epilogue compare, branch peek</h1>
+  <p>
+    <strong>Why it is fun:</strong> after the story ends, players get to <em>re-title</em> what happened—like picking a historian’s lens.
+    <strong>Why it is educational:</strong> side-by-side epilogues make <em>contingency</em> visible (“if we had framed People…”). The read-only branch peek resists FOMO without rewriting saves—good for one-shot classroom runs.
+  </p>
+
+  <h2>Compare two closings (static excerpts)</h2>
+  <div class="grid2">
+    <div class="epi">
+      <h3>West · Order framing (stub)</h3>
+      <p style="margin:0;">The ranks close around the file; the salon learns to speak in memos. Progress wears a uniform, and the Neva keeps its schedule.</p>
+    </div>
+    <div class="epi">
+      <h3>West · People framing (stub)</h3>
+      <p style="margin:0;">Evgeny’s ghost gets a line item: relief without receipt. The Europeans cheer reform while clerks count the cost in ink and bread.</p>
+    </div>
+  </div>
+
+  <div class="demo-panel">
+    <h2 style="margin-top:0;font-size:1.1rem;">Thesis picker — one historian voice</h2>
+    <p>Which sentence best matches <em>your</em> group’s read of the same winter?</p>
+    <div class="thesis-btns" role="group" aria-label="Pick thesis">
+      <button type="button" data-thesis="order">Order: continuity paid for the flood before the people saw a kopek.</button>
+      <button type="button" data-thesis="reform">Reform: borrowed law finally had desks, even if souls lagged.</button>
+      <button type="button" data-thesis="people">People: the statue still rides; the clerk’s grave is still shallow.</button>
+    </div>
+    <p id="thesis-out" class="demo-note" style="margin:0;" aria-live="polite"></p>
+  </div>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;"><strong>Branch peek</strong> (read-only, no stat change)</p>
+    <button type="button" id="peek-open" style="padding:0.45rem 1rem;border-radius:8px;border:1px solid var(--line);font:inherit;cursor:pointer;background:var(--surface);">Peek: what Slavophile crisis would have said</button>
+  </div>
+
+  <dialog class="debrief" id="peek-dlg" aria-labelledby="peek-h">
+    <h2 id="peek-h" style="margin:0 0 0.5rem;font-size:1.1rem;">Slavophile crisis (snippet)</h2>
+    <p style="margin:0 0 1rem;">Soil petitions beat salon whispers; the provinces ask whether borrowed schools insult the parish. <em>Your run stayed Westernizing—this is flavor only.</em></p>
+    <button type="button" id="peek-close" style="padding:0.4rem 0.9rem;border-radius:8px;border:1px solid var(--line);font:inherit;cursor:pointer;">Close</button>
+  </dialog>
+
+  <h2>Works cited</h2>
+  <p>Epilogue structure: <code>EPILOGUE_TWELVE</code> in <a href="../../index.html">../index.html</a>. <a href="../../SOURCES.md">SOURCES.md</a></p>
+
+  <script>
+    (function () {
+      var out = document.getElementById("thesis-out");
+      document.querySelectorAll(".thesis-btns button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".thesis-btns button").forEach(function (b) {
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          out.textContent = "Selected lens logged for debrief (demo only): " + btn.textContent.trim();
+        });
+      });
+      var dlg = document.getElementById("peek-dlg");
+      document.getElementById("peek-open").addEventListener("click", function () {
+        if (dlg.showModal) dlg.showModal();
+        else alert("Dialog not supported.");
+      });
+      document.getElementById("peek-close").addEventListener("click", function () {
+        dlg.close();
+      });
+    })();
+  </script>
+</body>
+</html>

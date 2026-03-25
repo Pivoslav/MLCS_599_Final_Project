@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo: achievement toast + inventory icon flash</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    #toast-region {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      max-width: min(20rem, calc(100vw - 2rem));
+      z-index: 20;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #toast-region { position: static; margin-top: 1rem; max-width: none; }
+    }
+    .toast {
+      background: var(--text);
+      color: #f7f5f2;
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+      animation: toast-in 0.35s ease-out;
+    }
+    @keyframes toast-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .toast { animation: none; }
+    }
+    .inv { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+    .inv li {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .inv svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--bar-order);
+      fill: none;
+      stroke-width: 1.75;
+      flex-shrink: 0;
+    }
+    .inv li.flash svg {
+      animation: icon-pop 0.6s ease;
+    }
+    @keyframes icon-pop {
+      0%, 100% { transform: scale(1); }
+      40% { transform: scale(1.2); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .inv li.flash svg { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Achievement toast + inventory icon flash</h1>
+  <p>
+    <strong>Why it is fun:</strong> small celebrations for rare beats—players hunt for the “Neva witness” or “zemstvo chip” moment.
+    <strong>Why it is educational:</strong> ties abstract meters to <em>tokens of argument</em> (flood, bridge, file). Icons become mnemonic hooks back to Pushkin and Chaadaev without another paragraph of gloss.
+  </p>
+
+  <div class="demo-panel">
+    <p style="margin-top:0;">Simulate resolving a flood-tagged scene:</p>
+    <button type="button" id="btn-earn" style="padding:0.5rem 1rem;border-radius:8px;border:1px solid var(--line);font:inherit;cursor:pointer;background:var(--surface);">Resolve “Neva echo” (demo)</button>
+    <p style="margin:0.75rem 0 0.25rem;"><strong>Library &amp; tokens</strong></p>
+    <ul class="inv" id="inv" aria-live="polite"></ul>
+  </div>
+
+  <div id="toast-region" role="region" aria-label="Notifications"></div>
+
+  <p class="demo-note">Merge: fire on <code>sceneId</code> / inventory push in <code>index.html</code>; reuse SVGs from <a href="./icons-showcase.html">icons-showcase</a>.</p>
+
+  <h2>Works cited</h2>
+  <p><a href="../../SOURCES.md">SOURCES.md</a></p>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var inv = document.getElementById("inv");
+      var region = document.getElementById("toast-region");
+      var floodSvg =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 14c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2M2 18h20" stroke-linecap="round"/></svg>';
+
+      document.getElementById("btn-earn").addEventListener("click", function () {
+        var li = document.createElement("li");
+        li.className = "flash";
+        li.innerHTML = floodSvg + "<span>Neva witness (token)</span>";
+        inv.appendChild(li);
+        if (!reduce) {
+          window.setTimeout(function () {
+            li.classList.remove("flash");
+          }, 700);
+        }
+        var t = document.createElement("div");
+        t.className = "toast";
+        t.setAttribute("role", "status");
+        t.textContent = "Achievement: Neva witness — token added.";
+        region.appendChild(t);
+        window.setTimeout(function () {
+          t.remove();
+        }, reduce ? 5000 : 3200);
+      });
+    })();
+  </script>
+</body>
+</html>

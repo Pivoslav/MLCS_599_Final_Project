@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo: scene breadcrumb + tension meter</title>
+  <link rel="stylesheet" href="../assets/demo-common.css" />
+  <style>
+    .crumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: center;
+      font-size: 0.88rem;
+      margin: 0 0 1rem;
+      padding: 0.5rem 0.75rem;
+      background: #eee9e2;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    .crumb span { padding: 0.2rem 0.45rem; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+    .crumb .sep { border: none; background: none; padding: 0 0.1rem; }
+    .tension-wrap { margin: 1rem 0; }
+    .tension-label { font-size: 0.9rem; margin-bottom: 0.35rem; }
+    .tension-bar {
+      height: 14px;
+      border-radius: 7px;
+      background: #ddd;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .tension-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--bar-order), var(--bar-reform), var(--bar-people));
+      border-radius: 7px;
+      transition: width 0.25s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tension-fill { transition: none; }
+    }
+    .meters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; font-size: 0.85rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <nav class="demo-back" aria-label="Breadcrumb"><a href="../index.html">← Demo hub</a></nav>
+  <h1>Scene breadcrumb + tension (realm spread)</h1>
+  <p>
+    <strong>Why it is fun:</strong> a quick read on “where we are” and “how brittle the trio is” without opening a modal.
+    <strong>Why it is educational:</strong> the <em>spread</em> between highest and lowest meter (Order / Reform / People) is a simple proxy for ideological tension in the room. When one meter runs away, the bar widens—good prompt for co-op debrief: “Who is winning the argument numerically?”
+  </p>
+
+  <div class="demo-panel">
+    <div class="crumb" aria-label="Scene path">
+      <span>Intro</span><span class="sep" aria-hidden="true">→</span><span id="crumb-mid">Salon</span><span class="sep" aria-hidden="true">→</span><span id="crumb-end">Teleskop shock</span>
+    </div>
+    <div class="tension-wrap">
+      <div class="tension-label" id="tension-desc">Tension (max − min across realms): <strong id="tension-val">0</strong></div>
+      <div class="tension-bar" role="img" aria-labelledby="tension-desc">
+        <div class="tension-fill" id="tension-fill" style="width: 0%"></div>
+      </div>
+      <div class="meters">
+        <label>Order <input type="range" id="o" min="0" max="100" value="50" /></label>
+        <label>Reform <input type="range" id="r" min="0" max="100" value="50" /></label>
+        <label>People <input type="range" id="p" min="0" max="100" value="50" /></label>
+      </div>
+    </div>
+    <button type="button" id="adv" style="padding:0.45rem 1rem;border-radius:8px;border:1px solid var(--line);font:inherit;cursor:pointer;background:var(--surface);">Advance stub scene</button>
+  </div>
+
+  <p class="demo-note">Tension = spread, not “good/bad.” Optionally tint chrome when spread &gt; 40 in the real game.</p>
+
+  <h2>Works cited</h2>
+  <p><a href="../../SOURCES.md">SOURCES.md</a></p>
+
+  <script>
+    (function () {
+      var scenes = [
+        ["Salon", "Teleskop shock"],
+        ["Salon", "Journals & Third Section"],
+        ["Crisis", "Winter 1837"],
+        ["Sorting", "Framing"],
+      ];
+      var si = 0;
+      function tension(o, r, p) {
+        return Math.max(o, r, p) - Math.min(o, r, p);
+      }
+      function renderMeters() {
+        var o = +document.getElementById("o").value;
+        var r = +document.getElementById("r").value;
+        var p = +document.getElementById("p").value;
+        var t = tension(o, r, p);
+        document.getElementById("tension-val").textContent = String(t);
+        document.getElementById("tension-fill").style.width = t + "%";
+      }
+      ["o", "r", "p"].forEach(function (id) {
+        document.getElementById(id).addEventListener("input", renderMeters);
+      });
+      document.getElementById("adv").addEventListener("click", function () {
+        si = (si + 1) % scenes.length;
+        document.getElementById("crumb-mid").textContent = scenes[si][0];
+        document.getElementById("crumb-end").textContent = scenes[si][1];
+      });
+      renderMeters();
+    })();
+  </script>
+</body>
+</html>

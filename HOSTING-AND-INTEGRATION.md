@@ -40,7 +40,7 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 
 ---
 
-## 2. Long-term goal: integrate prototype tools into `index.html`
+## 2. Long-term goal: integrate prototype tools into the game bundle (`index.html` + `js/`, `css/`)
 
 The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to be **merged** into the main game later. Integration should:
 
@@ -51,13 +51,22 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 
 ### Prototype → game mapping (short)
 
-| Prototype (`demos/`) | Idea in the live game | Touch points in `index.html` |
+| Prototype (`demos/`) | Idea in the live game | Touch points (mainly `js/game-app.js`, styles in `css/game.css`) |
 |----------------------|------------------------|------------------------------|
 | `realm-balance-slider.html` | Optional “tension” or debrief toy: **coupled** realm sliders (toy math, not replacing independent meters unless labeled). | Sidebar lab / instructor mode; or post-run debrief panel. |
 | `realm-triangle-budget.html` | **Co-op budget:** spend N points before a hard choice; forces negotiation. | Before major forks; gate choice until “committed.” |
 | `icons-showcase.html` | **Stroke icons** for paths, events, inventory, Read alongside. | Inline SVG near titles, choice rows, glossary. |
 | `interactive-widgets.html` | **Native `<dialog>`** for confirmations; **toast** for rare achievements; **details/summary** for optional glossary chunks; **stance checkbox** before a pivotal choice. | Choice confirmation, achievement after rare branches, collapsible panels. |
 | `canvas-self-test.html` | Not for players—**support** checklist when embedding. | N/A (keep as separate file for authors). |
+| `mechanic-winter-crisis-lab.html` | Crisis threshold **preview** + **die table** in `details`. | Before winter roll; align copy with real crisis tables. |
+| `mechanic-path-deltas-and-hints.html` | **Path-weighted** deltas + optional **why it matters** gloss. | Choice UI: focus/hover + `details` under choices. |
+| `mechanic-breadcrumb-tension.html` | **Breadcrumb** + **tension** = max(stat) − min(stat). | Header strip; optional UI chrome when spread high. |
+| `mechanic-co-op-timer-ballot.html` | **Timer**, **secret ballot** reveal, **stance** checkbox. | `state.coopMode` UI branch in `game-app.js`. |
+| `mechanic-debrief-epilogues.html` | **Thesis picker**, **compare** epilogues, **branch peek** `dialog`. | Post-`EPILOGUE_TWELVE`; read-only, no state mutation. |
+| `mechanic-achievement-flash.html` | **Toast** + **inventory icon** flash. | Rare scene/token hooks. |
+| `mechanic-url-and-summary.html` | **`?scene=`** banner + **copy summary** pattern. | Router + existing copy summary. |
+
+**Backlog checklist:** `canvas-interactive-demos/PENDING-TASKS.md` (itemized merge + narrative + LMS tasks).
 
 ### Suggested implementation order (when you start coding)
 
@@ -77,7 +86,7 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 - **Copy-to-clipboard** enhancements: already present; add **short URL** or **run code** for forum posts if desired.
 - **Tension meter:** derived signal (e.g. distance between highest and lowest realm) driving one line of salon color or ambient line—optional, subtle.
 
-Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_TWELVE` in `index.html` when scheduling narrative + mechanic passes together.
+Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_TWELVE` in **`js/game-app.js`** when scheduling narrative + mechanic passes together.
 
 ---
 
@@ -85,9 +94,17 @@ Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_
 
 | File | Role |
 |------|------|
-| `index.html` | Shipped game |
+| `index.html` | Shipped game shell (markup + glossary); loads CSS/JS below |
+| `css/game.css` | All game styles |
+| `js/game-config.js` | Inventory labels, scene image maps, ambient keys, `RESOLVE_PATH_LEAD` |
+| `js/game-scenes.js` | `scenes` object (all narrative nodes and choices) |
+| `js/game-app.js` | State, rendering, crisis logic, epilogues (`EPILOGUE_TWELVE`), UI wiring |
 | `canvas-rce-embed-fragment.html` | Paste into Canvas Page HTML view |
-| `canvas-interactive-demos/` | Prototypes before merge |
+| `canvas-interactive-demos/` | Prototypes before merge; hub lists all demos + **PENDING-TASKS.md** |
 | `README.md` | Teaching notes + short embed pointer |
 | `SOURCES.md` | Editions and citations |
 | `HOSTING-AND-INTEGRATION.md` | This document |
+
+**Deploy note:** GitHub Pages and any **iframe `src`** must keep **`index.html`, `css/`, and `js/`** together at the same base URL. Relative paths (`css/game.css`, `js/…`) assume that layout.
+
+**Optional later:** a small build step could concatenate bundles again for a single-file mirror; the iframe workflow does not require it.
