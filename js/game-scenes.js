@@ -603,7 +603,7 @@ Then <strong>choose one friend’s emphasis</strong> below. That pick sets wheth
 
       final_route_reform: {
         title: "Closing: The Weight of Reform",
-        text: `<strong>Stepan</strong> speaks as if Chaadaev’s letter were a syllabus, not only a wound: law, schools, print, Russia doing mankind’s long homework in the open. The winter cost what it cost; he wants the close to name institutions, not only sighs.
+        text: `<strong>Stepan</strong> reads Chaadaev as a program, not only a provocation: statutes, schools, journals, Russia doing the slow work Chaadaev called repeating mankind’s education—<em>in the open</em>, where it can be tested. Win or lose this winter, he wants the tale you carry away to still hang on those things, not only on how the room felt when the lamps went low.
 
 <strong>If the table agrees</strong> that Reform should frame the retelling, confirm below.`,
         primaryRead: {
@@ -611,7 +611,7 @@ Then <strong>choose one friend’s emphasis</strong> below. That pick sets wheth
           body: `<strong>Letter I (program):</strong> “…we must, in a certain sense, repeat the whole education of mankind.”<br><span class="read-gloss">“Repeat mankind’s education” is the banner for Stepan’s Reform frame: Russia’s long homework inside world history.</span><br><br><strong>Letter I (duty, justice, law, order):</strong> same theme in <em>The Reformist Circle</em> read-along.<br><span class="read-gloss">For Chaadaev, “education” includes duty and law breathed like air, not scandal headlines alone. That is what Stepan’s closing is claiming.</span>`
         },
         choices: [
-          { text: "<strong>You:</strong> “Yes. Close with law, schools, and Russia’s place in world history, whatever this winter cost.”", next: "ending_computed" }
+          { text: "<strong>You:</strong> “Yes. Frame the epilogue around law, schools, and Letter I as a real program—not only the mood of the winter.”", next: "ending_computed" }
         ],
         tag: "reform"
       },
