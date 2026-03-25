@@ -33,6 +33,16 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 
 See also **`teaching-notes.html`** (short TA summary with links to this file and the fragment).
 
+### Phase 0 checklist (instructor — do before term stress)
+
+Do these **in order** once your GitHub Pages URL (or substitute host) is live:
+
+1. **Deploy parity** — Confirm the **same** `index.html`, `css/`, and `js/` you tested locally are what Pages serves (hard refresh; bump `?v=` on assets in `index.html` if students see stale script).
+2. **Canvas Page** — Paste **`canvas-rce-embed-fragment.html`**; **Student View:** open game in **new tab**; play one choice + back.
+3. **LMS self-test** — Host or paste **`canvas-interactive-demos/demos/canvas-self-test.html`** inside **your** Canvas (RCE HTML view, or upload to **Files** and link **`/preview`** if your school allows). Run the on-page checks; note whether **`localStorage`** throws, whether `<button>` vs `<input type="button">` matters, and any console errors that are **not** browser extensions. Append a one-line note at the bottom of this section or in your course wiki: *“Canvas self-test YYYY-MM-DD: …”* so future you knows the environment.
+
+The **shipped game** does not require storage for core play; **`getRunId()`** falls back when **`sessionStorage`** is blocked (run summary may show **`R-local`**). Co-op is still best in a **full tab**, not a narrow iframe.
+
 ### Optional iframe (if you add one yourself)
 
 - Canvas **content column width** is fixed; the shipped fragment no longer includes an iframe so students default to a **full browser tab**.
@@ -46,7 +56,7 @@ See also **`teaching-notes.html`** (short TA summary with links to this file and
 
 ### Shipped game: iframe vs new tab (storage, co-op, run summary)
 
-- **`sessionStorage`:** Some LMS embeds block or partition storage for third-party iframes. **`getRunId()`** in `js/game-app.js` falls back to **`R-local`** in the copied run summary when storage throws; gameplay is unchanged.
+- **`sessionStorage`:** Some LMS embeds block or partition storage for third-party iframes. **`getRunId()`** in `js/game-app.js` falls back to **`R-local`** in the copied run summary when storage throws; gameplay is unchanged. **Co-op gating** defaults **on**; the flag is **`mlcs599_coop_tools_enabled`** (`1` / `0`). If storage throws, the UI still defaults to co-op on for that session. Share **`?coop=0`** (or `off`) for links that should open with co-op off.
 - **Co-op:** The three-seat ballot is **intended for a full tab**; the Canvas fragment sends students there by default (`canvas-rce-embed-fragment.html`).
 - **Phased delivery:** **`GAMEPLAN.md`** (Canvas + Pages + optional LLM-assisted art pipeline).
 
@@ -69,7 +79,7 @@ The folder **`canvas-interactive-demos/`** holds **vanilla** patterns meant to b
 - Reuse existing **`state.stats`** (`order`, `reform`, `people`, 0–100) and **`pathId`** (`west` | `slav` | `statist` | `med`).
 - Keep **`prefers-reduced-motion`** behavior consistent with the main CSS.
 - Namespace new classes (e.g. `.demo-` → rename to match game conventions) to avoid collisions.
-- **`canvas-interactive-demos/`** pages: keep **self-contained** (no extra CDNs) when possible so authors can paste snippets into picky LMS HTML views. The **shipped game** may load **GSAP** from jsDelivr for motion (see §1 “Motion stack”); that is intentional and degrades gracefully if blocked.
+- **`canvas-interactive-demos/`** pages: keep **self-contained** (no extra CDNs) when possible so authors can paste snippets into picky LMS HTML views. **Exception:** `open-toolkit-showcase.html` intentionally loads Mermaid, Three.js, and `model-viewer` from CDNs for GitHub Pages / open-web experiments. The **shipped game** may load **GSAP** from jsDelivr for motion (see §1 “Motion stack”); that is intentional and degrades gracefully if blocked.
 
 ### Prototype → game mapping (short)
 
@@ -79,7 +89,7 @@ Most rows below are **merged** in the bundle; demos stay as vanilla labs for Can
 |----------------------|------------------------|------------------------------|
 | `realm-balance-slider.html` | **Shipped (epilogue):** coupled realm sliders labeled as debrief toy only. | `resolveEndingText` → `.realm-debrief-lab`; `wireRealmDebriefSliders`. |
 | `realm-triangle-budget.html` | **Shipped (pilot):** co-op-gated budget on **`resolve_endings`** before final framing choices (`REALM_BUDGET_POOL_POINTS`). | `mountResolveEndingsRealmBudget` in `js/game-app.js`; flag `coopRealmBudgetBeforeChoices` on scene. |
-| `icons-showcase.html` | **Partial:** choice-row **dice / branch** SVGs + titles. | `renderChoices` / `.choice-ico`; inventory/glossary polish optional. |
+| `icons-showcase.html` | **Shipped:** choice-row **dice / branch** SVGs; **inventory** chips + **Terms** glossary rows use the same stroke vocabulary (`INV_SVG`, `GLOSSARY_ICON_BY_KEY` in `game-config.js`; `wireGlossaryIcons` in `game-app.js`). | `renderInventory`, `.glossary-dl dt[data-gloss-icon]`, `#glossaryBtn` book mark. |
 | `interactive-widgets.html` | **Toast**, `<dialog>` peek, **details/summary**, stance pattern. | `#toastRegion`, `#debriefPeekDlg`, co-op stance checkbox. |
 | `canvas-self-test.html` | Not for players—**support** checklist when embedding. | N/A (keep as separate file for authors). |
 | `mechanic-winter-crisis-lab.html` | **Shipped:** crisis recap + collapsible die table. | `crisisRollExplanationHtml`, `buildCrisisRecap`. |
@@ -89,6 +99,7 @@ Most rows below are **merged** in the bundle; demos stay as vanilla labs for Can
 | `mechanic-debrief-epilogues.html` | **Shipped:** compare three framings + read-only branch peek. | Epilogue HTML in `resolveEndingText`; `PEEK_TEXT`. |
 | `mechanic-achievement-flash.html` | **Shipped:** achievement toasts after checks. | `pushToast`, `ACH_TOAST`, `flushNewAchievementsToasts`. |
 | `mechanic-url-and-summary.html` | **Shipped:** `?scene=` deep link + run summary (course + run id). | `applySceneFromQuery`, `buildRunSummary`, `getRunId`. |
+| `open-toolkit-showcase.html` | **Lab only:** Mermaid diagrams, embedded **ASCII STL** (Three.js), `model-viewer` GLB slot, Web Audio, link hub (Commons / Archive / IIIF / print sites), GitHub workflow ideas. | N/A — optional author-facing; pair with `SOURCES.md` for rights. |
 
 **Backlog checklist:** `canvas-interactive-demos/PENDING-TASKS.md` (itemized merge + narrative + LMS tasks).
 
@@ -128,6 +139,7 @@ Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_
 | `README.md` | Teaching notes + short embed pointer |
 | `LICENSE` | MIT (course redistribution; adjust copyright if required) |
 | `SOURCES.md` | Editions and citations |
+| `IMAGE_CREDITS.md` | Wikimedia dialogue portraits + scene art pointer |
 | `HOSTING-AND-INTEGRATION.md` | This document |
 | `GAMEPLAN.md` | Phased ship plan (Canvas fragment, ops, optional character-art pipeline) |
 | `BACKLOG.md` | Ideas / overhauls (not on `PENDING-TASKS` execution queue) |

@@ -30,7 +30,7 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 - **`index.html`** — Shell + glossary markup; links **`css/game.css`**, **`js/game-config.js`**, **`js/game-scenes.js`**, **`js/game-app.js`** (order matters).
 - **`js/game-scenes.js`** — `scenes` object: narrative nodes, choices, effects. Primary **content** surface for story edits.
 - **`js/game-app.js`** — State, rendering, crisis / epilogue logic (`EPILOGUE_TWELVE`, `pickCrisisEvent`, etc.). Primary **mechanics** surface.
-- **`js/game-config.js`** — Images, ambient keys, inventory labels, static tables.
+- **`js/game-config.js`** — Scene backgrounds (`SCENE_IMAGES`), optional title-under portraits (`SCENE_DIALOGUE_PORTRAITS`), ambient keys, inventory labels, static tables.
 - **`canvas-interactive-demos/`** — **Vanilla** prototypes for UI/mechanics **before** merging into the game; no framework; no CDN. Hub: `canvas-interactive-demos/index.html`. Backlog: **`canvas-interactive-demos/PENDING-TASKS.md`**.
 - **`HOSTING-AND-INTEGRATION.md`** — Canvas, GitHub Pages, optional iframe, merge roadmap.
 - **`DEMOS-AND-LLM-REPORT.md`** — Full demo/tool inventory, needs vs costs, design leverage, handoff block for agents.

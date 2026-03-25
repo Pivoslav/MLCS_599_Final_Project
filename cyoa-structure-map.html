@@ -106,7 +106,7 @@
 </head>
 <body>
   <h1>Russia at the Crossroads: branch map</h1>
-  <p class="lede">Companion to the game in <a href="index.html"><code>index.html</code></a> (loads <code>js/game-scenes.js</code>, <code>js/game-app.js</code>, etc.). This map documents <strong>per-path narrative progression</strong>, a <strong>critical lens</strong> (gaps, risks, opportunities for mechanics and teaching tools), and <strong>rebuild insights</strong>. Primary editions and citations: <a href="SOURCES.md"><code>SOURCES.md</code></a>. New narrative sections: <strong>2A–2D</strong> (branch ladders, Pushkin-first, critical audit, rebuild insights), then the <strong>twelve-outcomes diagram</strong>, then <strong>§3+</strong> (die tables, epilogue grid, tokens).</p>
+  <p class="lede">Companion to the game in <a href="index.html"><code>index.html</code></a> (loads <code>js/game-scenes.js</code>, <code>js/game-app.js</code>, etc.). This map documents <strong>per-path narrative progression</strong>, a <strong>critical lens</strong> (gaps, risks, opportunities for mechanics and teaching tools), and <strong>rebuild insights</strong>. Primary editions and citations: <a href="SOURCES.md"><code>SOURCES.md</code></a>. New narrative sections: <strong>2A–2D</strong> (branch ladders, Pushkin-first, critical audit, rebuild insights), then the <strong>twelve-outcomes diagram</strong>, then <strong>§3+</strong> (die tables, epilogue grid, tokens). <strong>Maintainer:</strong> re-synced <strong>Mar 2026</strong> against <code>game-scenes.js</code> (31 scene keys) and <code>EPILOGUE_TWELVE</code> in <code>game-app.js</code>; run <code>python tools/verify-scenes.py</code> after graph edits.</p>
 
   <h2>0. Sources and how to use this map</h2>
   <ul class="compact">
@@ -119,7 +119,7 @@
 
   <h2>1. What each turn changes</h2>
   <p>Every choice advances one beat of the fiction. Three meters (<strong>Order</strong>: stability and the vertical chain; <strong>Reform</strong>: law, schools, “universal history”; <strong>People</strong>: clerks, flood-side lives, material stakes) run from 0 to 100 and start at 50. They move when you pick options, when a winter <em>event</em> applies its automatic shock, and once more when you choose how to <strong>frame</strong> the outcome (stability vs. reform vs. the people’s ledger). That framing adds +5 to the meter you emphasize.</p>
-  <p class="note"><strong>Shipped game:</strong> after that +5, <code>index.html</code> selects one of <strong>twelve</strong> epilogues by <strong>path</strong> (<code>pathId</code>) × <strong>framing</strong> (<code>finalLeanApplied</code>), each with its own title, body, speculative question, and discussion bullets (§7 table). §7 also keeps a <strong>legacy</strong> five-bucket reference for comparison.</p>
+  <p class="note"><strong>Shipped game:</strong> after that +5, <code>resolveEndingText()</code> in <code>js/game-app.js</code> selects one of <strong>twelve</strong> epilogues by <strong>path</strong> (<code>pathId</code>) × <strong>framing</strong> (<code>finalLeanApplied</code>), each with its own title, body, speculative question, and discussion bullets (§7 table). §7 also keeps a <strong>legacy</strong> five-bucket reference for comparison.</p>
 
   <h2>2. Scene flow: what happens, in order</h2>
   <p>The chart uses <strong>in-game scene titles</strong> (two lines where helpful). Read top to bottom: four different “schools” of argument lead to four different <strong>winter 1837</strong> chapters. Each of those rolls the die and lands on <strong>one</strong> concrete rumor (flood, censor, salon, provinces, or budget clash). Then the table sorts the winter, you choose how to tell the story, and the epilogue keys off <strong>which path you argued</strong> plus <strong>which framing</strong> you chose (twelve distinct closings).</p>
@@ -189,7 +189,7 @@ flowchart TB
     RES --> F_O["Closing: The weight of Order<br/>+5 Order"]
     RES --> F_R["Closing: The weight of Reform<br/>+5 Reform"]
     RES --> F_P["Closing: The weight of the People<br/>+5 People"]
-    F_O --> END["Epilogue<br/><strong>12 variants</strong> path × framing<br/><em>See §7 (wired in index.html)</em>"]
+    F_O --> END["Epilogue<br/><strong>12 variants</strong> path × framing<br/><em>See §7 · game-app.js · EPILOGUE_TWELVE</em>"]
     F_R --> END
     F_P --> END
   end
@@ -337,7 +337,7 @@ flowchart TB
       </tr>
       <tr>
         <td><code>beat_statist_machine</code></td>
-        <td>Files, Uniforms…</td>
+        <td>Files, Uniforms, and the Letter as Case File</td>
         <td><code>state_path</code></td>
         <td>Commissions vs. names to Third Section; <code>walkout: vera</code>.</td>
         <td>Who thinks for Russia; “Destiny’s great potentate” (Pushkin).</td>
@@ -345,7 +345,7 @@ flowchart TB
       </tr>
       <tr>
         <td><code>crisis_statist</code></td>
-        <td>Winter: The Apparatus Closes Ranks</td>
+        <td>Winter 1837: The Apparatus Closes Ranks</td>
         <td>Roll</td>
         <td>High totals → flood echo in <em>this</em> column.</td>
         <td>Police answer Chaadaev’s “who thinks” before salon speaks.</td>
@@ -370,7 +370,7 @@ flowchart TB
       </tr>
       <tr>
         <td><code>mediator_city</code> / <code>mediator_province</code></td>
-        <td>Pilot… / From the Ground Up</td>
+        <td>Pilot Modernization / From the Ground Up</td>
         <td><code>mediator</code></td>
         <td>Converging pair; two tones before bridge.</td>
         <td>Peter’s creation vs. Yevgeny (city); peoples mature slowly (province).</td>
@@ -386,7 +386,7 @@ flowchart TB
       </tr>
       <tr>
         <td><code>crisis_med</code></td>
-        <td>Winter: The Bridge Under Strain</td>
+        <td>Winter 1837: The Bridge Under Strain</td>
         <td>Roll</td>
         <td>Middling totals → zemstvo clash emphasis.</td>
         <td>Wrong-rumor misfit = compromise buys no immunity.</td>
@@ -401,7 +401,7 @@ flowchart TB
       <tr><th>Scene key</th><th>Title</th><th>Notes</th></tr>
     </thead>
     <tbody>
-      <tr><td><code>resolve_endings</code></td><td>Sorting the Outcome</td><td>Prepends <code>RESOLVE_PATH_LEAD[pathId]</code>. <strong>Co-op tools on:</strong> shared <strong>realm budget</strong> (30 pts across meters, cap 100) then framing choices; <strong>three-seat ballot</strong> in the story column with timer above seats, choice buttons, then reveal/stance/apply under the buttons. Three framing buttons → <code>final_route_*</code>. <strong>Rare fourth:</strong> letter + Pushkin + People ≥ 55 → Vera → <code>final_route_people</code> + <code>evgenyChorus</code>.</td></tr>
+      <tr><td><code>resolve_endings</code></td><td>Sorting the Outcome</td><td>Prepends <code>RESOLVE_PATH_LEAD[pathId]</code>. <strong>Co-op tools on:</strong> shared <strong>realm budget</strong> (30 pts across meters, cap 100) then framing choices; <strong>three-seat ballot</strong> in the story column (timer in the co-op card above seats; <code>#coopSeatsContext</code> restates the live beat as <strong>What you’re weighing</strong>); choice buttons, then reveal / stance / apply under the buttons. Three framing buttons → <code>final_route_*</code>. <strong>Rare fourth:</strong> letter + Pushkin + People ≥ 55 → Vera → <code>final_route_people</code> + <code>evgenyChorus</code>.</td></tr>
       <tr><td><code>final_route_*</code></td><td>Closing: Weight of…</td><td>One confirm each; +5 to framed meter.</td></tr>
       <tr><td><code>ending_computed</code></td><td>Epilogue</td><td><code>EPILOGUE_TWELVE</code> (path × framing). <strong>Winter tail:</strong> optional misfit lead-in when <code>crisisMisfit</code>; event-keyed <code>winterEcho</code> (<code>lastEvent</code>); path coda (<code>west</code> | <code>slav</code> | <code>statist</code> | <code>med</code>). Then historiography nudge, discussion, unresolved, inventory/extras, copy summary.</td></tr>
     </tbody>
@@ -432,7 +432,7 @@ flowchart TB
     <li><code>canvas-interactive-demos/</code> — optional UI prototypes; see hub <code>canvas-interactive-demos/index.html</code>.</li>
   </ul>
 
-  <h2>11. Rebuild insights (structure + foundation pass)</h2>
+  <h2>2D. Rebuild insights (structure + foundation pass)</h2>
   <ul class="compact">
     <li><strong>Single voice:</strong> Sorting in-character → epilogues match; move routing to one italic session note if needed.</li>
     <li><strong>Quote discipline:</strong> verify in-game quotations against McNally &amp; Tempest (Letter I) and Arndt’s <em>Bronze Horseman</em> (<a href="SOURCES.md"><code>SOURCES.md</code></a>).</li>
@@ -568,112 +568,112 @@ flowchart LR
   </table>
 
   <h2>7. Epilogues: twelve endings</h2>
-  <p class="note" style="background:#e8f5e9;border:1px solid #a5d6a7;padding:10px 14px;border-radius:8px;margin-bottom:1rem;"><strong>Status:</strong> <code>index.html</code> implements this table via <code>EPILOGUE_TWELVE</code> and <code>formatEpilogueDiscussion</code>. The <strong>legacy five-bucket</strong> table below is kept for author reference only.</p>
+  <p class="note" style="background:#e8f5e9;border:1px solid #a5d6a7;padding:10px 14px;border-radius:8px;margin-bottom:1rem;"><strong>Status:</strong> Shipped in <code>js/game-app.js</code> as <code>EPILOGUE_TWELVE</code> plus <code>resolveEndingText()</code> / <code>formatEpilogueDiscussion()</code>. On-screen epilogue titles use the same strings as the <strong>Title</strong> column below (including the <code>Ending:</code> prefix). The <strong>legacy five-bucket</strong> table below is kept for author reference only.</p>
 
   <h3>Why twelve (path × framing)</h3>
   <p>In an older <strong>stat-only</strong> design, a run could end in one of <strong>five</strong> epilogues chosen from <strong>final stat shapes</strong> alone, so a Slavophile run and a Westernizing run might receive the <strong>same</strong> title and body if their meters looked alike. That would hide the different <strong>intellectual risks</strong> each path was meant to carry.</p>
   <p>The game keeps the <strong>same UI</strong>: the three closing choices on <em>Sorting the outcome</em>. It makes the epilogue <strong>path-aware</strong>: <code>pathId</code> (Westernizing / Slavophile / statist / mediator) × framing (Order / Reform / People) = <strong>12</strong> distinct outcomes. Each outcome has its own <strong>title</strong>, one-line <strong>thesis</strong> (how you retell winter), and a <strong>speculative question</strong> for section or writing that cannot be answered the same way on another path.</p>
   <p><strong>Stats</strong> stay important: they can still drive <em>discussion bullets</em>, session banner titles, achievements, and one or two sentences inside the epilogue body (e.g. flood vs. censor winter). They no longer need to be the <em>sole</em> selector of which “family” you get.</p>
 
-  <h3>The twelve endings (draft copy)</h3>
+  <h3>The twelve endings (shipped titles match UI)</h3>
   <table>
     <thead>
-      <tr><th>Path</th><th>Framing</th><th>Title</th><th>Thesis (how you tell the story)</th><th>Speculative question</th></tr>
+      <tr><th>Path</th><th>Framing</th><th>Title (<code>EPILOGUE_TWELVE</code>)</th><th>Thesis (how you tell the story)</th><th>Speculative question</th></tr>
     </thead>
     <tbody>
       <tr>
         <td>Westernizing</td>
         <td>Order</td>
-        <td><em>The Ranks of Civilization</em></td>
+        <td><em>Ending: The Ranks of Civilization</em></td>
         <td>Winter proves administration and calm must precede Europe-facing reform. Salons wait on the file.</td>
         <td>If stability is the prerequisite Chaadaev doubted, are you proving him wrong, or are you showing that his “cloak” fits the police better than the school?</td>
       </tr>
       <tr>
         <td>Westernizing</td>
         <td>Reform</td>
-        <td><em>The Syllabus and the Censor</em></td>
+        <td><em>Ending: The Syllabus and the Censor</em></td>
         <td>The moral center is law, print, and schools locked in struggle with the Third Section.</td>
         <td>Can “universal history” be studied in rooms that the censor still owns?</td>
       </tr>
       <tr>
         <td>Westernizing</td>
         <td>People</td>
-        <td><em>Evgeny’s Europeans</em></td>
+        <td><em>Ending: Evgeny’s Europeans</em></td>
         <td>Europe is not a statute but a life: clerks and flood beds must appear on the same ledger as statutes.</td>
         <td>Who is “Europe” for if the syllabus never reaches Kolomna?</td>
       </tr>
       <tr>
         <td>Slavophile</td>
         <td>Order</td>
-        <td><em>The Vertical Iconostasis</em></td>
+        <td><em>Ending: The Vertical Iconostasis</em></td>
         <td><em>Narod</em> and altar align with the chain of command. Unity is read as spiritual deference.</td>
         <td>When the state claims to speak for the soil, who is left to correct it from below?</td>
       </tr>
       <tr>
         <td>Slavophile</td>
         <td>Reform</td>
-        <td><em>Parish Ink, Capital Light</em></td>
+        <td><em>Ending: Parish Ink, Capital Light</em></td>
         <td>Selective borrowing (schools, oversight) without surrendering soul to abstract “rights.”</td>
         <td>At what moment does “selective” borrowing become a new orthodoxy Chaadaev would still call hollow?</td>
       </tr>
       <tr>
         <td>Slavophile</td>
         <td>People</td>
-        <td><em>The Soil and the Roof</em></td>
+        <td><em>Ending: The Soil and the Roof</em></td>
         <td>Love of <em>narod</em> is tested by material life: clerks and peasants, not only the village idea.</td>
         <td>Does Slavophile language obligate policy for the capital’s clerk, or only for the imagined village?</td>
       </tr>
       <tr>
         <td>Statist</td>
         <td>Order</td>
-        <td><em>The File Outlives the Salon</em></td>
+        <td><em>Ending: The File Outlives the Salon</em></td>
         <td>Continuity is the achievement: ranks, seizures, the case file as the real historian.</td>
         <td>Is obedience to process a kind of civilization, or its costume while thought stays rented?</td>
       </tr>
       <tr>
         <td>Statist</td>
         <td>Reform</td>
-        <td><em>Commissioned Progress</em></td>
+        <td><em>Ending: Commissioned Progress</em></td>
         <td>Europe arrives as memoranda: reform only where commissions and patrons allow.</td>
         <td>If reform lives in triplicate copies, does mankind’s “education” happen, or does paperwork replace it?</td>
       </tr>
       <tr>
         <td>Statist</td>
         <td>People</td>
-        <td><em>Relief Without Receipt</em></td>
+        <td><em>Ending: Relief Without Receipt</em></td>
         <td>Mercy flows from the throne and petitions. People appear as objects of grace, not of rights.</td>
         <td>When you beg the center for flood victims, who is saved: them, or the story that the throne is merciful?</td>
       </tr>
       <tr>
         <td>Mediator</td>
         <td>Order</td>
-        <td><em>The Minister’s Bridge</em></td>
+        <td><em>Ending: The Minister’s Bridge</em></td>
         <td>The span stands only if the ministry owns the pier. Local trust is a concession, not a co-sovereign.</td>
         <td>If one pier is stone and one is rope, is “compromise” just delayed collapse?</td>
       </tr>
       <tr>
         <td>Mediator</td>
         <td>Reform</td>
-        <td><em>Borrowed Law, Local Accent</em></td>
+        <td><em>Ending: Borrowed Law, Local Accent</em></td>
         <td>Institutions sound foreign on paper but are spoken in provincial idiom.</td>
         <td>How long must a law be “borrowed” before it becomes native, and who declares the moment?</td>
       </tr>
       <tr>
         <td>Mediator</td>
         <td>People</td>
-        <td><em>The Ledger They Share</em></td>
+        <td><em>Ending: The Ledger They Share</em></td>
         <td>Budgets and clerks can read the same line. Synthesis is material, not only rhetorical.</td>
         <td>Two ledgers, one countryside: must one always become the footnote, or is overlap itself the synthesis that Chaadaev could not name?</td>
       </tr>
     </tbody>
   </table>
 
-  <h3>Implementation notes (when you integrate)</h3>
+  <h3>Implementation notes (live in bundle)</h3>
   <ul class="compact">
-    <li>In <code>resolveEndingText()</code>, branch first on <code>state.pathId</code> (default <code>west</code>), then on <code>state.finalLeanApplied</code> (<code>order</code> / <code>reform</code> / <code>people</code>) set from the chosen <code>final_route_*</code>.</li>
-    <li>Keep stat-based <strong>discussion</strong> paragraphs or merge old “family” prompts into each of the twelve as a second column of bullets.</li>
-    <li>Rare “Evgeny’s chorus” choice can still force <code>people</code> framing + extras without changing the count of primary endings.</li>
-    <li>Retire or repurpose <code>familyKey</code> for historiography hooks. Map each of the twelve to a hook string if needed.</li>
+    <li><code>resolveEndingText()</code> branches on <code>state.pathId</code> (default <code>west</code>), then <code>state.finalLeanApplied</code> (<code>order</code> / <code>reform</code> / <code>people</code>) from the chosen <code>final_route_*</code>.</li>
+    <li>Each epilogue packs <code>title</code>, <code>body</code>, <code>specQ</code>, and <code>bullets</code>; <code>formatEpilogueDiscussion()</code> renders discussion for the debrief UI.</li>
+    <li>Rare “Evgeny’s chorus” still forces <code>people</code> framing + extras without changing the count of primary endings.</li>
+    <li>When retitling an ending, edit <code>EPILOGUE_TWELVE</code> and this §7 table together; run <code>verify-scenes</code> if scene flow changes.</li>
   </ul>
 
   <h3>Legacy: former five-bucket selector (reference)</h3>
@@ -709,7 +709,7 @@ flowchart LR
   </ul>
 
   <h3>Author cross-reference (optional)</h3>
-  <p class="note">Scene keys in source: <code>intro</code>, <code>salon_pushkin</code>, <code>reformist</code>, <code>reform_education</code>, <code>stub_petition_winter</code>, <code>reform_serfdom</code>, <code>petersburg_pressure</code>, <code>beat_west_print</code>, <code>distinct_path</code>, <code>slavophile</code>, <code>beat_aksakov</code>, <code>state_path</code>, <code>beat_statist_machine</code>, <code>mediator</code>, <code>mediator_city</code>, <code>mediator_province</code>, <code>beat_med_bridge</code>, crisis_* , <code>event_*</code>, <code>resolve_endings</code>, <code>final_route_*</code>, <code>ending_computed</code>.</p>
+    <p class="note"><strong>31 scene keys</strong> in <code>game-scenes.js</code> (see <code>tools/verify-scenes.py</code>): <code>intro</code>, <code>salon_pushkin</code>, <code>petersburg_pressure</code>, <code>reformist</code>, <code>reform_education</code>, <code>stub_petition_winter</code>, <code>reform_serfdom</code>, <code>beat_west_print</code>, <code>distinct_path</code>, <code>slavophile</code>, <code>beat_aksakov</code>, <code>state_path</code>, <code>beat_statist_machine</code>, <code>mediator</code>, <code>mediator_city</code>, <code>mediator_province</code>, <code>beat_med_bridge</code>, <code>crisis_west</code>, <code>crisis_slav</code>, <code>crisis_statist</code>, <code>crisis_med</code>, <code>event_flood_echo</code>, <code>event_censor</code>, <code>event_salon</code>, <code>event_rural_gentry</code>, <code>event_zemstvo_clash</code>, <code>resolve_endings</code>, <code>final_route_order</code>, <code>final_route_reform</code>, <code>final_route_people</code>, <code>ending_computed</code>.</p>
 
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";

@@ -4,7 +4,9 @@
 
 **Stale page after an update?** Browsers often keep an old `game-scenes.js` (same URL). The shipped **`index.html`** appends **`?v=…`** to `css/` and `js/` requests—**bump that date** whenever you need everyone to pull fresh script. Use a **hard refresh** (Ctrl+Shift+R / Cmd+Shift+R) or a **private window**. If you use the Canvas fragment, **re-paste** `canvas-rce-embed-fragment.html` when the published link’s query string changes.
 
-**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles, and a **realm spread** bar (max − min meter) in the header. All motion respects **`prefers-reduced-motion`**.
+**Canvas / iframe:** Third-party or RCE embeds may **block or partition `sessionStorage`**; the game degrades (e.g. run ID falls back in **Copy run summary**). **Co-op** and wide layout are intended for a **new tab**—see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (Phase 0 checklist + `canvas-self-test.html`).
+
+**Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles, and a **realm spread** bar (max − min meter) in the header. All motion respects **`prefers-reduced-motion`**. On many **dialogue-heavy** beats (paths, crises, key events), a small **dialogue portrait** (Wikimedia Commons, with alt text and caption) appears under the scene title — see **`IMAGE_CREDITS.md`** and **`SCENE_DIALOGUE_PORTRAITS`** in `game-config.js`.
 
 ## Coherence of the narrative
 
@@ -47,7 +49,7 @@ The **sorting** scene before the final framing choice prepends a short recap of 
 
 One shared screen. **Three fixed roles** align with the game’s meters. Before **every** choice, each player speaks once from their lens. The group decides which option to take (consensus or majority: your call).
 
-**In the UI:** enable **Co-op gating** in the **story column** (card above the seats) for the **timer**; **three seat cards** (Order → Reform → People) sit under that, then the **story choice buttons**; **Reveal votes**, **stance**, and **Apply winning choice** sit in a card **under those buttons** so the flow reads top-to-bottom without reaching into the sidebar. On **Sorting the Outcome** (`resolve_endings`), co-op groups also **spend a shared 30-point budget** across the three meters before the final framing choices unlock (solo play or co-op off skips this step).
+**In the UI:** enable **Co-op gating** in the **story column** (card above the seats) for the **timer**; **three seat cards** (Order → Reform → People) sit under that, then the **story choice buttons**; **Reveal votes**, **stance**, and **Apply winning choice** sit in a card **under those buttons** so the flow reads top-to-bottom without reaching into the sidebar. On **Sorting the Outcome** (`resolve_endings`), co-op groups also **spend a shared 30-point budget** across the three meters before the final framing choices unlock (solo play or co-op off skips this step). Co-op gating is **on by default** for every scene in the tab; uncheck for solo play, or open with **`?coop=0`** (or `off` / `false`) to start with it off. The checkbox state is stored in **`sessionStorage`** (`mlcs599_coop_tools_enabled`: `1` / `0`) so it survives refresh and **Restart** until the tab closes or storage is cleared.
 
 | Player | Role | Argue from… |
 |--------|------|----------------|

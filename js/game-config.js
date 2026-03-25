@@ -7,11 +7,16 @@
     };
 
     const INV_SVG = {
-      scroll: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h6"/><path d="M8 17h4"/></svg>',
-      book: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5a2 2 0 012-2h7v20H4a2 2 0 01-2-2V5zm20 0a2 2 0 00-2-2h-7v20h7a2 2 0 002-2V5z"/></svg>',
-      doc: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h6"/></svg>',
-      quill: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 2 2-7 7-4 1 1-4z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.5 7.5"/><path d="M16 16l2 2"/></svg>',
-      church: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 6v14H4V8l8-6z"/><path d="M9 22v-8h6v8"/></svg>'
+      scroll:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h6"/><path d="M8 17h4"/></svg>',
+      book:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5a2 2 0 012-2h7v20H4a2 2 0 01-2-2V5zm20 0a2 2 0 00-2-2h-7v20h7a2 2 0 002-2V5z"/></svg>',
+      doc:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h6"/></svg>',
+      quill:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 2 2-7 7-4 1 1-4z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.5 7.5"/><path d="M16 16l2 2"/></svg>',
+      church:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 6v14H4V8l8-6z"/><path d="M9 22v-8h6v8"/></svg>'
     };
 
     const ITEM_ICONS = {
@@ -20,6 +25,143 @@
       reform_charter: INV_SVG.doc,
       slavophile_note: INV_SVG.church,
       aksakov_note: INV_SVG.quill
+    };
+
+    /**
+     * Glossary modal: keys match data-gloss-icon on each <dt> in index.html.
+     * Stroke vocabulary aligns with choice-row icons and icons-showcase.html.
+     */
+    const GLOSSARY_ICON_BY_KEY = {
+      teleskop: INV_SVG.scroll,
+      third_section:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10c0-3 2-6 4-6s4 3 4 6v3H8v-3z"/><path d="M6 13h12v3H6z"/><path d="M10 21h4"/><path d="M12 16v5"/></svg>',
+      sobornost: INV_SVG.church,
+      narod:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="2.5"/><path d="M3 21v-1.5A3.5 3.5 0 016.5 16h5a3.5 3.5 0 013.5 3.5V21"/><path d="M14 21v-1.2a2.8 2.8 0 012.5-2.8h1"/></svg>',
+      neva_flood:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2 2 2 4 2"/><path d="M2 18h20"/><path d="M4 22c3-2 5-2 8 0s5 2 8 0"/></svg>',
+      bronze_horseman: INV_SVG.book,
+      zemstvo:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-6 9 6v9H3V12z"/><path d="M9 21V14h6v7"/><path d="M12 10v2"/></svg>',
+      salon_network:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>',
+      game_meters:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 20V10M12 20V4M18 20v-8"/></svg>',
+      genre_letter: INV_SVG.quill,
+      chaadaev_europe:
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>'
+    };
+
+    /**
+     * Optional dialogue portrait under the scene title (Phase 2b). Same static-HTTPS rule as SCENE_IMAGES.
+     * Provenance matches SCENE_IMAGES / RusPortraits where possible; Konstantin Aksakov from Commons.
+     * @type {Record<string, { src: string, alt: string, caption: string, creditHref?: string }>}
+     */
+    const SCENE_DIALOGUE_PORTRAITS = {
+      intro: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length, facing slightly right.",
+        caption:
+          "Pyotr Chaadayev — author of the First Philosophical Letter (engraving, 19th c., catalogue portrait).",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
+      },
+      salon_pushkin: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        alt: "Portrait of Alexander Pushkin with dark curly hair and a high collar.",
+        caption:
+          "Alexander Pushkin — the salon turns to The Bronze Horseman (commonly reproduced portrait).",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg"
+      },
+      reformist: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length.",
+        caption: "Westernizing opening: Chaadayev’s letter as program for law, schools, and print.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
+      },
+      reform_education: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
+        alt: "Portrait of Pyotr Chaadayev, oil or print after a nineteenth-century likeness.",
+        caption: "Chaadayev — schools, charters, and petitions on the Westernizing path.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg"
+      },
+      beat_west_print: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        alt: "Engraved portrait of Count Alexander von Benckendorff in uniform.",
+        caption: "Count Benckendorff — shorthand for files, salons, and Third Section pressure on print.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg"
+      },
+      petersburg_pressure: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        alt: "Portrait of Alexander Pushkin with dark curly hair and a high collar.",
+        caption: "Pushkin’s Neva and clerk — the capital’s flood logic beside Chaadaev’s nomads.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg"
+      },
+      distinct_path: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length.",
+        caption: "Chaadayev’s verdict still hangs in the air — the room seeks a separate destiny.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
+      },
+      slavophile: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/4/44/RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev%2C_1794-1856.jpg",
+        alt: "Engraved portrait of Pyotr Chaadayev in formal dress, bust length.",
+        caption: "Soil and faith answers still argue with Chaadaev’s letter — foil, not wallpaper.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v5-237_Petr_Iakovlevich_Chaadaev,_1794-1856.jpg"
+      },
+      beat_aksakov: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f8/KonstantinAksakov.jpg",
+        alt: "Photograph of Konstantin Sergeyevich Aksakov, seated, nineteenth-century print reproduction.",
+        caption: "Konstantin Aksakov (1817–1860) — narod, soil, and spirit vs. borrowed law (Commons scan).",
+        creditHref: "https://commons.wikimedia.org/wiki/File:KonstantinAksakov.jpg"
+      },
+      state_path: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        alt: "Portrait of Emperor Nicholas I of Russia in military dress.",
+        caption: "Nicholas I — the offstage sovereign your circle lobbies, never replaces (portrait).",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg"
+      },
+      beat_statist_machine: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        alt: "Engraved portrait of Count Alexander von Benckendorff in uniform.",
+        caption: "Benckendorff and the file — memoranda, names, and the climate of the Third Section.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg"
+      },
+      crisis_west: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/c/c0/Chaadaev_portrait.jpeg",
+        alt: "Portrait of Pyotr Chaadayev, nineteenth-century likeness.",
+        caption: "Westernizing winter — Chaadayev’s questions under salon, censor, and flood rumors.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Chaadaev_portrait.jpeg"
+      },
+      crisis_slav: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/f/f8/KonstantinAksakov.jpg",
+        alt: "Photograph of Konstantin Sergeyevich Aksakov, nineteenth-century reproduction.",
+        caption: "Slavophile winter — parish, provinces, and censor in Aksakov’s key.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:KonstantinAksakov.jpg"
+      },
+      crisis_statist: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        alt: "Portrait of Emperor Nicholas I of Russia in military dress.",
+        caption: "Statist winter — logistics, files, and flood echo under Nicholas’s reign.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg"
+      },
+      event_censor: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/d/d9/RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg",
+        alt: "Engraved portrait of Count Alexander von Benckendorff in uniform.",
+        caption: "Censor’s visit — political police and seizure climate (Benckendorff engraving).",
+        creditHref: "https://commons.wikimedia.org/wiki/File:RusPortraits_v2-046_Le_Comte_Alexandre_Khristoforowitch_Benkendorf.jpg"
+      },
+      event_salon: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Alexander_Puschkin.jpg",
+        alt: "Portrait of Alexander Pushkin with dark curly hair and a high collar.",
+        caption: "Salon breakthrough — print and poetry still face the same corridors.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Alexander_Puschkin.jpg"
+      },
+      event_rural_gentry: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Nicholas_I_of_Russia.jpg",
+        alt: "Portrait of Emperor Nicholas I of Russia in military dress.",
+        caption: "Provincial notables and ministry schools — patronage logic under the autocrat.",
+        creditHref: "https://commons.wikimedia.org/wiki/File:Nicholas_I_of_Russia.jpg"
+      }
     };
 
     /**

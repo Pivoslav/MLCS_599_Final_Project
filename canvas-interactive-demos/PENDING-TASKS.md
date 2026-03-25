@@ -6,12 +6,14 @@
 
 This file holds **actionable** work on the **game bundle** (`index.html` + `css/`, `js/`) and **course ops**. Check boxes as you complete items.
 
+**GAMEPLAN order (ship path first):** see **`../GAMEPLAN.md`** → **Progress tracker** for Phase 0 (deploy + Canvas self-test) through Phase 4. The execution queue below is mostly **bundle** work; Phase 0 **push** and **LMS self-test** live in **`../HOSTING-AND-INTEGRATION.md`** (Phase 0 checklist). **Phase 2b pilot:** dialogue portraits — **`../IMAGE_CREDITS.md`**, `SCENE_DIALOGUE_PORTRAITS` in `game-config.js`.
+
 ---
 
 ## Execution queue (do in order when chipping away)
 
 1. [x] **Handoff accuracy** — `DEMOS-AND-LLM-REPORT.md` §7 reflects shipped mechanics (point budget, co-op seats).
-2. [x] **`cyoa-structure-map.html`** — `resolve_endings` row notes co-op **realm budget** (when tools on) + **three-seat ballot** (see `game-app.js`).
+2. [x] **`cyoa-structure-map.html`** — Full maintainer re-sync Mar 2026 vs `game-scenes.js` + `EPILOGUE_TWELVE`; `resolve_endings` row documents realm budget, three-seat ballot, `#coopSeatsContext` beat excerpt.
 3. [x] **Co-op ballot → run summary** — Last **Reveal votes** line appended to **Copy run summary** when present (`state.lastCoopBallotReveal`).
 4. [x] **`teaching-notes.html`** — Static TA page: embed fragment, new tab, `?scene=`, links to docs.
 5. [x] **Read-along pilot (intro)** — Edition pointer in first **Read alongside** block (McNally & Tempest; Arndt) per `SOURCES.md`.
@@ -25,7 +27,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## A. Merge demos into the shipped game (bundle)
 
-- [x] **Icons** — Choice rows: dice/branch SVGs + `title`; optional polish: inventory / glossary (`icons-showcase.html`) → see **BACKLOG** if deferred.
+- [x] **Icons** — Choice rows: dice/branch SVGs + `title`; **inventory** list + **Terms** modal: per-item / per-term inline SVGs (`game-config.js`); header **Terms** button book mark.
 - [x] **Toast + achievements**
 - [x] **Path-weighted delta preview** — `.choice-btn` titles + pedagogy `details`
 - [x] **Pedagogy hint**
@@ -47,7 +49,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## C. Authoring & structure docs
 
-- [ ] **`cyoa-structure-map.html`** — Full re-sync when `scenes` / crisis / epilogues change (§7 vs `EPILOGUE_TWELVE`). *Partial (2025-03): `resolve_endings` row + co-op notes.*
+- [x] **`cyoa-structure-map.html`** — Full re-sync when `scenes` / crisis / epilogues change (§7 vs `EPILOGUE_TWELVE`). *Done Mar 2026: titles, §2D heading, implementation refs, 31-key cross-ref, co-op seats context.*
 - [x] **`HOSTING-AND-INTEGRATION.md`** — Prototype table + iframe notes (living).
 
 ## D. Course / LMS operations

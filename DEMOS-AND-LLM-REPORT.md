@@ -9,7 +9,7 @@ Single reference for **what exists**, **what it requires**, **what it consumes**
 | Layer | Role |
 |-------|------|
 | **Shipped game** | `index.html` + `css/game.css` + `js/game-*.js` — primary student experience. |
-| **Demos hub** | `canvas-interactive-demos/` — vanilla, CDN-free labs; most mechanic ideas are **already merged** into the bundle; hub remains for Canvas paste tests and teaching. |
+| **Demos hub** | `canvas-interactive-demos/` — mostly **CDN-free** vanilla labs; **exception:** `open-toolkit-showcase.html` loads Mermaid / Three / model-viewer for author experiments. Most mechanic ideas are **already merged** into the bundle. |
 | **Author / LMS** | `canvas-rce-embed-fragment.html`, `canvas-self-test.html`, `HOSTING-AND-INTEGRATION.md`. |
 | **Design narrative** | `co-op-cyoa-mechanics-report.html`, `cyoa-structure-map.html`. |
 | **LLM (local only)** | Repo-root `tools/` + `Final/llm-lab.html` — **not** on GitHub Pages; token in `.env`; `python tools/dev_server.py`. |
@@ -40,11 +40,13 @@ All live under `canvas-interactive-demos/demos/`. **Needs:** modern browser; ope
 |------|----------------|---------------|--------------------|-----------------------------------|
 | **realm-balance-slider.html** | Same | Toy: redistributes fixed total | **Partial** — epilogue **debrief toy** only (not canonical meters) | Keep **non-canon**; could add “export sliders → forum post” for reflection. |
 | **realm-triangle-budget.html** | Same | Co-op negotiation time | **Yes (pilot)** — **`resolve_endings`** when co-op tools on | **Extend** only if playtests want another beat; pairs with co-op timer + seats. |
-| **icons-showcase.html** | Same | Visual scan | **Partial** — choice-row dice/branch SVGs | Extend to **inventory rows**, glossary; **icon legend** page for TAs. |
+| **icons-showcase.html** | Same | Visual scan | **Yes** — choice-row SVGs + **inventory** + **Terms** glossary (`GLOSSARY_ICON_BY_KEY`); optional: TA-only icon legend page. |
 | **interactive-widgets.html** | Same | Pattern catalog | Patterns ported | Reference for **new** modals / toasts without framework drift. |
 | **canvas-self-test.html** | LMS iframe context | Author time | N/A — support | Run before term; documents **storage / button / SVG** quirks. |
 
 **Hub:** `canvas-interactive-demos/index.html` lists all of the above with short “fun / educational” blurbs.
+
+| **open-toolkit-showcase.html** | Browser + **CDNs** (Mermaid, Three.js, model-viewer); not for strictest LMS iframes | Author demo time | **No** — lab only | **Mermaid** in README/docs for graph structure; **ASCII STL** in Git for diffable 3D; **GLB** slot for props; **Web Audio** without MP3; link hub (Commons, Archive, IIIF, Europeana, print sites); GitHub Discussions/Actions/Gist ideas. |
 
 ---
 
@@ -71,7 +73,7 @@ All live under `canvas-interactive-demos/demos/`. **Needs:** modern browser; ope
 | Artifact | Needs | Takes | Opportunities |
 |----------|--------|-------|----------------|
 | **co-op-cyoa-mechanics-report.html** | Browser | Read time | Phased rollout; **effort vs payoff** when arguing for new co-op features. |
-| **cyoa-structure-map.html** | Browser | Maintainer sync | After scene edits, **re-sync** per `PENDING-TASKS.md` §C. |
+| **cyoa-structure-map.html** | Browser | Maintainer sync | **§C** full sync Mar 2026; after future scene / epilogue edits, diff vs `game-scenes.js` / `EPILOGUE_TWELVE` and update the map. |
 | **canvas-rce-embed-fragment.html** | Canvas RCE access | Paste (new-tab hero) | Primary LMS delivery path. |
 | **index.html** → **Art lab** link | Same origin as dev server | Student confusion if clicked on Pages | On static hosting, link may 404 API — acceptable if tooltip / README clarify **local only**. |
 
@@ -94,6 +96,11 @@ All live under `canvas-interactive-demos/demos/`. **Needs:** modern browser; ope
 - Grok outputs **structured art briefs** → human approves → `SCENE_IMAGES` / credits.  
 - Optional **variant scene blurbs** for instructor-only fork (never auto-ship to students without review).  
 - **Rethink:** separate **“canon CYOA”** (static, citable) from **“lab build”** (LLM-assisted assets behind dev server).
+
+**Open web + makerspace**  
+- **STL/GLB** tokens per path or crisis (print at library makerspace).  
+- **IIIF** side-by-side engravings for flood / cityscape units.  
+- **Observable** or **Mermaid** for student-visible structure without touching `game-app.js`.
 
 **Strategic**  
 - If co-op is core identity, **solo mode** stays simple; **optional** panels stay gated.  
@@ -119,7 +126,7 @@ You are working on **Russia at the Crossroads** (MLCS 599 CYOA). Canonical repo 
 
 **LLM:** Author-facing only. **`tools/dev_server.py`** + **`Final/llm-lab.html`** + **`.env`** (`GITHUB_TOKEN`) — **local machine**. Never embed tokens in **`js/`** or ship them on Pages. GitHub Models **chat** works for our Grok art-direct flow; **image generations** on `models.github.ai` have been **404** in practice — treat image output as **external** or preview-only. Full inventory: **`Final/DEMOS-AND-LLM-REPORT.md`**.
 
-**Suggested next code task:** **§B** read-along pass (see **`PENDING-TASKS.md`** execution queue) or **`GAMEPLAN.md` Phase 2b** (static character art pipeline).
+**Suggested next code task:** **`?classMode=`** (Phase 3) if you need one URL for teaching, or mediator / flood-event portraits if you add stable Commons **faces** for those beats. Phase **2b** (broad **`SCENE_DIALOGUE_PORTRAITS`**) is **shipped** — see **`IMAGE_CREDITS.md`**.
 
 **Suggested next ops task:** **`canvas-self-test.html`** in the target LMS (if you use iframes anywhere); **`cyoa-structure-map.html`** sync after any structural narrative edit.
 
@@ -137,6 +144,7 @@ You are working on **Russia at the Crossroads** (MLCS 599 CYOA). Canonical repo 
 | `Final/BACKLOG.md` | Ideas / overhauls (deferred work) |
 | `Final/teaching-notes.html` | Instructor quick reference (LMS + links) |
 | `Final/canvas-interactive-demos/index.html` | Demos hub |
+| `Final/canvas-interactive-demos/demos/open-toolkit-showcase.html` | Mermaid + STL + model-viewer + Web Audio (CDN) |
 | `Final/canvas-interactive-demos/PENDING-TASKS.md` | Checklist |
 | `Final/HOSTING-AND-INTEGRATION.md` | Deploy + merge table |
 | `Final/.github/copilot-instructions.md` | Copilot / agent briefing |

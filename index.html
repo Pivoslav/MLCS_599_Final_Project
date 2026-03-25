@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Russia at the Crossroads: A Chaadaev Adventure</title>
   <!-- Bump ?v= on css/js when students may see stale copies (browser cache). -->
-  <link rel="stylesheet" href="css/game.css?v=20260326f" />
+  <link rel="stylesheet" href="css/game.css?v=20260328h" />
 </head>
 <body>
   <a href="#title" class="skip-link">Skip to story</a>
@@ -21,7 +21,7 @@
         </div>
         <div class="header-actions actions">
           <a href="llm-lab.html" class="ghost" title="Local dev: run python tools/dev_server.py first">Art lab</a>
-          <button type="button" class="ghost" id="glossaryBtn" title="Key terms">Terms</button>
+          <button type="button" class="ghost glossary-header-btn" id="glossaryBtn" title="Key terms"><span class="glossary-header-btn-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5a2 2 0 012-2h7v20H4a2 2 0 01-2-2V5zm20 0a2 2 0 00-2-2h-7v20h7a2 2 0 002-2V5z"/></svg></span> Terms</button>
           <button type="button" class="ghost" id="backBtn">Back</button>
           <button type="button" class="primary" id="restartBtn">Restart</button>
         </div>
@@ -34,9 +34,14 @@
             <span class="tension-desc-hint">max − min across Order, Reform, People</span>
             <span class="tension-val" id="tensionVal" aria-live="polite">0</span>
           </p>
+          <p class="tension-flavor" id="tensionFlavor" aria-live="polite"></p>
           <div class="tension-bar" role="img" aria-labelledby="tensionDesc">
             <div class="tension-fill" id="tensionFill"></div>
           </div>
+          <details class="tension-explainer">
+            <summary>Salon temperature — what spread means</summary>
+            <p class="tension-explainer-body">Spread is how far apart your three meters are. <strong>High spread</strong> means one realm (Order, Reform, or People) is pulling much harder than the others—the salon’s “benches” disagree. <strong>Low spread</strong> means the circle is more aligned. Open <strong>Terms</strong> in the header for full definitions. Co-op: when spread is high, consider letting the player whose <em>seat realm</em> is lowest speak to the gap.</p>
+          </details>
         </div>
       </div>
     </header>
@@ -89,11 +94,12 @@
             <div class="content-row">
               <div class="content-primary">
                 <h2 class="scene-title" id="title" tabindex="-1"></h2>
+                <figure class="scene-dialogue-portrait" id="sceneDialoguePortrait" hidden></figure>
                 <p class="scene-text" id="text"></p>
                 <div class="coop-tools-panel coop-tools-panel--story" aria-label="Co-op gating and timer">
                   <h3 class="coop-story-tools-heading">Co-op (three players)</h3>
                   <p class="coop-tools-lead">Turn on gating to show the three seats. Optional <strong>discussion timer</strong> below. Each seat picks an option; then use <strong>Reveal votes</strong> (under the choice buttons), confirm <strong>We commit…</strong>, and <strong>Apply winning choice</strong>.</p>
-                  <label class="coop-enable-row coop-enable-row--prominent"><input type="checkbox" id="coopToolsEnable" /> Enable co-op gating on choice scenes</label>
+                  <label class="coop-enable-row coop-enable-row--prominent"><input type="checkbox" id="coopToolsEnable" checked /> Enable co-op gating on choice scenes</label>
                   <div id="coopToolsDiscuss" class="coop-tools-discuss" hidden>
                     <div class="coop-timer-row">
                       <div class="coop-timer-display" id="coopTimerDisplay" aria-live="polite">—</div>
@@ -104,8 +110,8 @@
                 </div>
                 <div id="coopMainBallotWrap" class="coop-main-ballot-wrap" hidden>
                   <div class="coop-main-ballot-inner">
-                    <h3 class="coop-seats-heading">Three seats — speak, then vote</h3>
-                    <p class="coop-seats-flow">Discussion order: <strong>Order</strong> speaks first, then <strong>Reform</strong>, then <strong>People</strong>. Each seat locks one vote matching an option below. After everyone has chosen, scroll past the buttons for <strong>Reveal votes</strong> if you want a blind first pass.</p>
+                    <h3 class="coop-seats-heading">Three seats — Order, then Reform, then People</h3>
+                    <p class="coop-seats-flow coop-seats-context" id="coopSeatsContext" hidden aria-live="polite"></p>
                     <div id="coopBallotMount" class="coop-ballot-mount"></div>
                   </div>
                 </div>
@@ -140,27 +146,27 @@
     <div class="modal-sheet">
       <h3 id="glossaryTitle">Key terms</h3>
       <dl class="glossary-dl">
-        <dt><em>Teleskop</em> <span lang="ru">(Телескоп)</span></dt>
+        <dt data-gloss-icon="teleskop"><em>Teleskop</em> <span lang="ru">(Телескоп)</span></dt>
         <dd>Moscow journal that published Chaadaev’s first “Philosophical Letter” in 1836, provoking official reaction and debate.</dd>
-        <dt>Third Section <span lang="ru">(Третье отделение)</span></dt>
+        <dt data-gloss-icon="third_section">Third Section <span lang="ru">(Третье отделение)</span></dt>
         <dd>Tsarist political police (from 1826); shorthand here for surveillance, files, and fear of salons and print.</dd>
-        <dt><em>Sobornost</em> <span lang="ru">(соборность)</span></dt>
+        <dt data-gloss-icon="sobornost"><em>Sobornost</em> <span lang="ru">(соборность)</span></dt>
         <dd>Spiritual togetherness, often invoked by Slavophiles for Orthodox communal unity, not a government office, but a moral ideal.</dd>
-        <dt><em>Narod</em> <span lang="ru">(народ)</span></dt>
+        <dt data-gloss-icon="narod"><em>Narod</em> <span lang="ru">(народ)</span></dt>
         <dd>“The people,” especially the Russian peasant people as a cultural and moral category in nineteenth-century discourse.</dd>
-        <dt>Neva flood (1824) <span lang="ru">(наводнение на Неве, 1824)</span></dt>
+        <dt data-gloss-icon="neva_flood">Neva flood (1824) <span lang="ru">(наводнение на Неве, 1824)</span></dt>
         <dd>Historical catastrophe Pushkin treats as <strong>based on truth</strong> (his prologue); in Part One it destroys Yevgeny’s world. In-game: ordinary lives vs. embankments and plans.</dd>
-        <dt><em>The Bronze Horseman</em> (1833) <span lang="ru">(«Медный всадник», 1833)</span></dt>
+        <dt data-gloss-icon="bronze_horseman"><em>The Bronze Horseman</em> (1833) <span lang="ru">(«Медный всадник», 1833)</span></dt>
         <dd>Pushkin’s narrative in <strong>prologue + two parts</strong>: Peter’s founding vow and a lyric “I love thee, Peter’s own creation,” then the flood and Yevgeny’s fixation on the equestrian statue. The <strong>mood turns</strong> from civic pride to horror and pursuit, not one flat “message.”</dd>
-        <dt>Zemstvo-style councils <span lang="ru">(земство)</span></dt>
+        <dt data-gloss-icon="zemstvo">Zemstvo-style councils <span lang="ru">(земство)</span></dt>
         <dd>Historically, <strong>zemstvos</strong> were elected provincial and district assemblies created under the 1864 reform; they handled local budgets, schools, roads, medicine, and welfare within limits set from St. Petersburg. <strong>Counterfactual staging:</strong> this game uses “zemstvo-style councils” as shorthand for that <em>idea</em> of provincial self-rule while your salon debates in the 1830s, not as a claim that zemstvos already existed or had those powers then.</dd>
-        <dt>Who “you” are <span lang="ru">(кто такие «вы»)</span></dt>
+        <dt data-gloss-icon="salon_network">Who “you” are <span lang="ru">(кто такие «вы»)</span></dt>
         <dd>You guide a <strong>salon and its network</strong> (gentry, minor officials, clergy), not Nicholas I. Even on the statist path you <strong>lobby, advise, withdraw, or denounce</strong>; you do not tighten censorship by decree. The Tsar and the ministries remain offstage actors your choices try to influence or appease.</dd>
-        <dt>Order / Reform / People <span lang="ru">(Порядок / Реформа / Народ)</span></dt>
+        <dt data-gloss-icon="game_meters">Order / Reform / People <span lang="ru">(Порядок / Реформа / Народ)</span></dt>
         <dd>Game meters: administrative continuity; law, schools, and “universal” history; material protection for clerks, peasants, and flood-side lives.</dd>
-        <dt>Genre (Letter I) <span lang="ru">(жанр; первое философское письмо)</span></dt>
+        <dt data-gloss-icon="genre_letter">Genre (Letter I) <span lang="ru">(жанр; первое философское письмо)</span></dt>
         <dd>Chaadaev’s first letter opens as <strong>spiritual counsel</strong> to a woman in distress, then widens into philosophy of history. The game condenses that into a <strong>debate</strong> for play.</dd>
-        <dt>Chaadaev’s “Europe” <span lang="ru">(«Европа» у Чаадаева)</span></dt>
+        <dt data-gloss-icon="chaadaev_europe">Chaadaev’s “Europe” <span lang="ru">(«Европа» у Чаадаева)</span></dt>
         <dd>In Letter I, “Europe” often means <strong>Christendom’s moral-historical unity</strong> (duty, justice, law, order absorbed from the cradle), not the same as modern secular liberalism. The <strong>Reform</strong> meter uses institutions as a shorthand; the letter asks deeper questions about moral continuity.</dd>
       </dl>
       <button type="button" class="ghost modal-close" id="glossaryClose">Close</button>
@@ -175,8 +181,8 @@
   <div id="toastRegion" class="toast-region" role="region" aria-label="Game notifications"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
-  <script src="js/game-config.js?v=20260326"></script>
+  <script src="js/game-config.js?v=20260328c"></script>
   <script src="js/game-scenes.js?v=20260326"></script>
-  <script src="js/game-app.js?v=20260326f"></script>
+  <script src="js/game-app.js?v=20260328h"></script>
 </body>
 </html>

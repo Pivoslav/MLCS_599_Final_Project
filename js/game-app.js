@@ -169,6 +169,35 @@
       </details>`;
     }
 
+    /** Plain-language bands before the winter roll (pairs with <code>#crisisPreviewCard</code> for screen readers). */
+    function crisisPreviewCardHtml() {
+      const path = state.pathId || "west";
+      const bonus = Math.floor(state.stats.order / 25);
+      const O = state.stats.order;
+      const R = state.stats.reform;
+      const P = state.stats.people;
+      const spread = Math.max(O, R, P) - Math.min(O, R, P);
+      const minT = 1 + bonus;
+      const maxT = 6 + bonus;
+      const bands = {
+        west:
+          "<strong>Westernizing:</strong> total <strong>≥8</strong> → salon breakthrough · <strong>5–7</strong> → Neva flood echo · <strong>≤4</strong> → censor strike.",
+        slav:
+          "<strong>Slavophile:</strong> <strong>≥8</strong> sympathetic salon · <strong>5–7</strong> provincial gentry resist ministry schools · <strong>≤4</strong> censor.",
+        statist:
+          "<strong>Statist:</strong> <strong>≥8</strong> flood framed as logistics / emergency · <strong>≤7</strong> censor (no separate mid band in code).",
+        med:
+          "<strong>Mediator:</strong> <strong>≥8</strong> salon · <strong>5–7</strong> zemstvo-style pilot vs. ministry · <strong>≤4</strong> censor."
+      };
+      return `<aside class="crisis-preview-card" id="crisisPreviewCard" role="region" aria-label="Likely winter outcomes before you roll">
+        <h3 class="crisis-preview-title">Crisis preview — before the die</h3>
+        <p class="crisis-preview-lead">You will roll <strong>1d6 + ${bonus}</strong> (Order is ${O} → bonus ${bonus}). Possible totals this throw: <strong>${minT}</strong> through <strong>${maxT}</strong>.</p>
+        <p class="crisis-preview-band">${bands[path] || bands.west}</p>
+        <p class="crisis-preview-misfit"><strong>Misfits:</strong> raw die <strong>1</strong> with total <strong>≥7</strong>, or die <strong>6</strong> with total <strong>≤5</strong>, can force <em>another path’s</em> scandal—contingency, not the parable you rehearsed.</p>
+        <p class="crisis-preview-meters">Current meters: Order ${O} · Reform ${R} · People ${P} · spread ${spread}.</p>
+      </aside>`;
+    }
+
     const state = {
       current: "intro",
       steps: 0,
@@ -196,10 +225,56 @@
       realmBudgetCommittedResolveEndings: false,
       realmBudgetDraft: { order: 0, reform: 0, people: 0 },
       _prevSceneForBudget: null,
-      lastCoopBallotReveal: ""
+      lastCoopBallotReveal: "",
+      ephemeralScenePrefix: "",
+      inventoryFlashKey: null
     };
 
+    const COURIER_WHISPER_SCENES = ["beat_west_print", "beat_aksakov", "beat_statist_machine", "beat_med_bridge"];
+
     const REALM_BUDGET_POOL_POINTS = 30;
+
+    /** Co-op gating preference for this tab (sessionStorage); mirrors checkbox #coopToolsEnable. "1" on, "0" off; missing = default on (class play). */
+    const COOP_TOOLS_PREF_KEY = "mlcs599_coop_tools_enabled";
+
+    function persistCoopToolsPref(enabled) {
+      try {
+        sessionStorage.setItem(COOP_TOOLS_PREF_KEY, enabled ? "1" : "0");
+      } catch (e) {}
+    }
+
+    function readCoopToolsPrefEnabled() {
+      try {
+        const v = sessionStorage.getItem(COOP_TOOLS_PREF_KEY);
+        if (v === "0") return false;
+        return true;
+      } catch (e) {
+        return true;
+      }
+    }
+
+    function applyStoredCoopToolsPrefToCheckbox() {
+      const cb = document.getElementById("coopToolsEnable");
+      if (cb) cb.checked = readCoopToolsPrefEnabled();
+    }
+
+    /** Re-apply session pref and mirror checkbox → state (call at each scene paint so gating never goes stale vs DOM). */
+    function applyCoopPrefToDomAndState() {
+      applyStoredCoopToolsPrefToCheckbox();
+      const cb = document.getElementById("coopToolsEnable");
+      state.coopToolsEnabled = !!(cb && cb.checked);
+    }
+
+    /** Optional URL override: ?coop=0 or ?coop=off (solo), ?coop=1 or ?coop=on (force on). Only runs when the param is present. */
+    function applyCoopPrefFromQueryIfPresent() {
+      try {
+        const raw = new URLSearchParams(location.search).get("coop");
+        if (raw == null || raw === "") return;
+        const q = String(raw).trim().toLowerCase();
+        if (q === "0" || q === "false" || q === "off" || q === "no") persistCoopToolsPref(false);
+        else if (q === "1" || q === "true" || q === "on" || q === "yes") persistCoopToolsPref(true);
+      } catch (e) {}
+    }
 
     function isCrisisScene(id) {
       return id === "crisis_west" || id === "crisis_slav" || id === "crisis_statist" || id === "crisis_med";
@@ -215,7 +290,7 @@
       let leanHint = "Lowest meter: <strong>People</strong> (green bar). Clerks and flood victims may matter less in gossip than they do in Pushkin’s poem.";
       if (O <= R && O <= P) leanHint = "Lowest meter: <strong>Order</strong> (blue-gray bar). Winter rolls skew toward censor pressure unless the die is kind.";
       else if (R <= O && R <= P) leanHint = "Lowest meter: <strong>Reform</strong> (rose bar). Print and schools are fragile in the winter rumor mill.";
-      return `<div class="path-recap" role="note"><strong>Before you roll the winter die</strong> (3-player co-op: the <strong>Order</strong> player summarizes this box aloud first.)<br>Argument track you joined: <strong>${pathNames[path] || path}</strong> · Order ${O} · Reform ${R} · People ${P}<br>Add to the six-sided die: <strong>+${bonus}</strong> (take Order, divide by 25, round down).<br><em>${leanHint}</em></div>${crisisRollExplanationHtml()}`;
+      return `${crisisPreviewCardHtml()}<div class="path-recap" role="note"><strong>Before you roll the winter die</strong> (3-player co-op: the <strong>Order</strong> player summarizes this box aloud first.)<br>Argument track you joined: <strong>${pathNames[path] || path}</strong> · Order ${O} · Reform ${R} · People ${P}<br>Add to the six-sided die: <strong>+${bonus}</strong> (take Order, divide by 25, round down).<br><em>${leanHint}</em></div>${crisisRollExplanationHtml()}`;
     }
 
     function prependSceneCallbacks(sceneId) {
@@ -565,7 +640,12 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       lucky_six: "Achievement: Rolled a 6 on fate.",
       aksakov_reader: "Token: Aksakov notes in the satchel.",
       evgeny_framing: "Rare: Evgeny’s chorus framing.",
-      evgeny_merged_insight: "Rare: Letter + poem + strong People."
+      evgeny_merged_insight: "Rare: Letter + poem + strong People.",
+      courier_intrusion: "Token: Misrouted ministry packet (random winter beat).",
+      winter_misfit_story: "Token: Winter forced someone else’s rumor.",
+      salon_wide_split: "Achievement: Realm spread reached 50+ (salon pulled apart).",
+      aligned_benches: "Achievement: Realm spread stayed tight (≤12).",
+      triple_satchel: "Token: Chaadaev, Pushkin, and Aksakov all in the library."
     };
 
     function pushToast(message) {
@@ -589,6 +669,18 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.achievements.forEach((k) => {
         if (!before.has(k) && ACH_TOAST[k]) pushToast(ACH_TOAST[k]);
       });
+    }
+
+    function maybeCourierRandomBeat(nextSceneId) {
+      if (state.runTags.has("courier_random_used")) return;
+      if (!nextSceneId || COURIER_WHISPER_SCENES.indexOf(nextSceneId) < 0) return;
+      if (Math.random() >= 0.26) return;
+      state.runTags.add("courier_random_used");
+      state.stats.order = clamp(state.stats.order + 2);
+      state.stats.reform = clamp(state.stats.reform - 2);
+      state.achievements.add("courier_intrusion");
+      state.ephemeralScenePrefix = `<aside class="random-beat-courier" role="note"><strong>Winter mail (random event):</strong> A misrouted Ministry fair copy lands on your pile—half a decree on provincial schools, coffee-stained, dated last week. Nothing binding, but it costs an evening proving you never saw it. <em>Applied:</em> Order +2, Reform −2.</aside>`;
+      pushToast(ACH_TOAST.courier_intrusion);
     }
 
     function getRunId() {
@@ -625,6 +717,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
               : " <em>Winter misfit:</em> a six from nowhere on a thin total: luck rewrote which story stuck.";
         }
         showEventBanner(`<strong>Fate roll:</strong> d6 = ${roll} + Order bonus ${bonus} = <strong>${total}</strong> · ${state.pathId || "west"} track. ${rollOutcomeLabel(nextKey)}.${misfitNote}`);
+        if (state.crisisMisfit) state.achievements.add("winter_misfit_story");
         flushNewAchievementsToasts();
         statBars();
         renderInventory();
@@ -638,8 +731,14 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (choice.walkout) state.walkouts.add(choice.walkout);
       if (choice.scar) state.scars.add(choice.scar);
       if (choice.effects) applyEffects(choice.effects);
-      if (choice.item && addItem(choice.item)) pushToast(`Library: ${ITEMS[choice.item].replace(/<[^>]+>/g, "")}`);
-      if (choice.item2 && addItem(choice.item2)) pushToast(`Library: ${ITEMS[choice.item2].replace(/<[^>]+>/g, "")}`);
+      if (choice.item && addItem(choice.item)) {
+        state.inventoryFlashKey = choice.item;
+        pushToast(`Library: ${ITEMS[choice.item].replace(/<[^>]+>/g, "")}`);
+      }
+      if (choice.item2 && addItem(choice.item2)) {
+        state.inventoryFlashKey = choice.item2;
+        pushToast(`Library: ${ITEMS[choice.item2].replace(/<[^>]+>/g, "")}`);
+      }
       if (choice.next && String(choice.next).indexOf("final_route") === 0) {
         state.evgenyChorus = choice.evgenyChorus === true;
       }
@@ -649,6 +748,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         state.steps += 1;
         state.current = next;
         statBars();
+        flushNewAchievementsToasts();
         renderInventory();
         renderScene();
         return;
@@ -663,14 +763,17 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         state.steps += 1;
         state.current = next;
         statBars();
+        flushNewAchievementsToasts();
         renderInventory();
         renderScene();
         return;
       }
 
+      maybeCourierRandomBeat(next);
       state.current = next;
       state.steps += 1;
       statBars();
+      flushNewAchievementsToasts();
       renderInventory();
       renderScene();
     }
@@ -713,14 +816,24 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       ul.innerHTML = "";
       if (state.inventory.size === 0) {
         ul.innerHTML = "<li class=\"empty\">Nothing yet.</li>";
+        state.inventoryFlashKey = null;
         return;
       }
+      const flashId = state.inventoryFlashKey;
       state.inventory.forEach((id) => {
         const li = document.createElement("li");
+        li.className = "inv-row";
+        if (flashId === id) li.classList.add("inv-row--flash");
         const iconSvg = ITEM_ICONS[id] || INV_SVG.doc;
         li.innerHTML = `<span class="inv-ico" aria-hidden="true">${iconSvg}</span><span>${ITEMS[id]}</span>`;
         ul.appendChild(li);
       });
+      if (flashId && !prefersReducedMotion()) {
+        window.setTimeout(() => {
+          ul.querySelectorAll(".inv-row--flash").forEach((n) => n.classList.remove("inv-row--flash"));
+        }, 1600);
+      }
+      state.inventoryFlashKey = null;
     }
 
     function formatEffects(eff) {
@@ -764,6 +877,17 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (state.inventory.has("chaadaev_letter") && state.inventory.has("pushkin_bronze") && P >= 60) {
         state.achievements.add("evgeny_merged_insight");
       }
+      const { order: O, reform: R, people: Pl } = state.stats;
+      const spread = Math.max(O, R, Pl) - Math.min(O, R, Pl);
+      if (spread >= 50) state.achievements.add("salon_wide_split");
+      if (spread <= 12) state.achievements.add("aligned_benches");
+      if (
+        state.inventory.has("chaadaev_letter") &&
+        state.inventory.has("pushkin_bronze") &&
+        state.inventory.has("aksakov_note")
+      ) {
+        state.achievements.add("triple_satchel");
+      }
     }
 
     function resolveEndingText() {
@@ -778,12 +902,14 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const endingKey = `${path}_${lean}`;
 
       const byPath = EPILOGUE_TWELVE[path] || EPILOGUE_TWELVE.west;
-      const pack = byPath[lean] || byPath.order;
-      const title = pack.title;
-      let body = pack.body;
-      const discussion = formatEpilogueDiscussion(pack.specQ, pack.bullets, path);
+        const pack = byPath[lean] || byPath.order;
+        const title = pack.title;
+        let body = pack.body;
+        const discussion = formatEpilogueDiscussion(pack.specQ, pack.bullets, path);
 
-      const event = state.lastEvent || "event_censor";
+        updateSceneDialoguePortrait(state.current);
+
+        const event = state.lastEvent || "event_censor";
       const winterEcho = {
         event_salon:
           "Outside, the wax-and-tea smell of the governor’s hall still clung to someone’s cuff—one sanctioned night when letter and poem had shared a candle, and no one could quite file it away. <strong>Vera</strong> said the breakthrough had felt like air; <strong>Andrei</strong> said air that sweet usually meant someone upstairs had opened a vent on purpose.",
@@ -868,6 +994,11 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (state.achievements.has("aksakov_reader")) ach.push("Engaged Aksakov (Slavophile voice)");
       if (state.achievements.has("evgeny_framing")) ach.push("Evgeny’s chorus framing");
       if (state.achievements.has("evgeny_merged_insight")) ach.push("Letter + poem + strong People (60+)");
+      if (state.achievements.has("courier_intrusion")) ach.push("Misrouted ministry packet (random beat)");
+      if (state.achievements.has("winter_misfit_story")) ach.push("Winter misfit — wrong rumor");
+      if (state.achievements.has("salon_wide_split")) ach.push("High realm spread (50+)");
+      if (state.achievements.has("aligned_benches")) ach.push("Tight realm spread (≤12)");
+      if (state.achievements.has("triple_satchel")) ach.push("All three library voices (Chaadaev, Pushkin, Aksakov)");
 
       return { title, body, extras, ach, discussion, runTitle, historiography, secretHtml, unresolvedHtml };
     }
@@ -895,6 +1026,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     const sceneCrumbEl = document.getElementById("sceneCrumb");
     const tensionValEl = document.getElementById("tensionVal");
     const tensionFillEl = document.getElementById("tensionFill");
+    const tensionFlavorEl = document.getElementById("tensionFlavor");
 
     function updateSalometry() {
       const trail = state.history.slice(-4);
@@ -917,7 +1049,18 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const spread = Math.max(O, R, P) - Math.min(O, R, P);
       if (tensionValEl) tensionValEl.textContent = String(spread);
       if (tensionFillEl) tensionFillEl.style.width = spread + "%";
-      document.documentElement.setAttribute("data-tension", spread >= 40 ? "high" : "low");
+      const high = spread >= 40;
+      document.documentElement.setAttribute("data-tension", high ? "high" : "low");
+      if (tensionFlavorEl) {
+        let line = high
+          ? "The salon is pulled wide—one realm is running much hotter than the others."
+          : "The circle is relatively aligned; no single bench owns the whole argument yet.";
+        if (high && state.coopToolsEnabled) {
+          line +=
+            " Co-op: ask the player on the lowest-meter seat to name what the gap costs the room.";
+        }
+        tensionFlavorEl.textContent = line;
+      }
     }
 
     function animateChoiceButtonsIfNeeded() {
@@ -946,6 +1089,44 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       if (wrap) wrap.hidden = !show;
     }
 
+    function clearCoopSeatsContextEl() {
+      const el = document.getElementById("coopSeatsContext");
+      if (!el) return;
+      el.innerHTML = "";
+      el.hidden = true;
+    }
+
+    /** Plain excerpt of the beat players see in the story column (tail-biased so the decision moment is likelier to appear). */
+    function updateCoopSeatsContextEl() {
+      const el = document.getElementById("coopSeatsContext");
+      if (!el) return;
+      let body = "";
+      if (textEl && textEl.textContent) {
+        body = textEl.textContent.replace(/\s+/g, " ").trim();
+      }
+      if (!body && scenes[state.current]) {
+        body = stripChoiceLabel(scenes[state.current].text || "");
+      }
+      if (!body) {
+        el.innerHTML = "";
+        el.hidden = true;
+        return;
+      }
+      const max = 450;
+      let snip = body;
+      if (snip.length > max) {
+        snip = "\u2026 " + snip.slice(-max).trim();
+      }
+      const esc = (s) =>
+        String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      el.innerHTML = `<strong class="coop-seats-context-lead">What you\u2019re weighing:</strong> ${esc(snip)}`;
+      el.hidden = false;
+    }
+
     function refreshCoopBallotUI() {
       const mount = document.getElementById("coopBallotMount");
       const discuss = document.getElementById("coopToolsDiscuss");
@@ -963,17 +1144,31 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         mount.innerHTML = "";
         setCoopBallotWrapVisible(false);
         if (sumEl) sumEl.textContent = "";
+        clearCoopSeatsContextEl();
         return;
       }
       const list = state._coopChoicesSnapshot || [];
       if (!list.length) {
         actionBar.hidden = true;
-        mount.innerHTML = "";
-        setCoopBallotWrapVisible(false);
+        const sc = scenes[state.current];
+        const realmBudgetActive =
+          sc &&
+          sc.coopRealmBudgetBeforeChoices &&
+          !state.realmBudgetCommittedResolveEndings;
+        if (realmBudgetActive || (sc && sc.computed)) {
+          mount.innerHTML = "";
+          setCoopBallotWrapVisible(false);
+        } else {
+          mount.innerHTML =
+            '<p class="coop-ballot-idle-hint" role="status">Co-op is on. Three-seat voting and the reveal card under the buttons appear when this beat has choices below.</p>';
+          setCoopBallotWrapVisible(true);
+        }
         if (sumEl) sumEl.textContent = "";
+        clearCoopSeatsContextEl();
         return;
       }
       actionBar.hidden = false;
+      updateCoopSeatsContextEl();
       setCoopBallotWrapVisible(true);
       const roles = [
         {
@@ -1063,12 +1258,15 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     function mountChoiceButtons(choicesToRender, icoDice, icoBranch) {
       stashCoopActionBarBeforeChoicesWipe();
       choicesEl.innerHTML = "";
-      choicesToRender.forEach((choice) => {
+      choicesToRender.forEach((choice, idx) => {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "choice-btn";
         const fx = choice.effects ? formatEffects(choice.effects) : "";
+        const hintId = `choice-meter-hint-${idx}`;
         if (fx) button.title = `Meter shift if you choose this: ${fx}`;
+        if (choice.roll) button.setAttribute("aria-describedby", "crisisPreviewCard");
+        else if (fx) button.setAttribute("aria-describedby", hintId);
         const ico = choice.roll ? icoDice : icoBranch;
         button.innerHTML = choice.roll
           ? `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span></span>`
@@ -1081,13 +1279,20 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           commitChoice(choice);
         });
         choicesEl.appendChild(button);
+        if (fx && !choice.roll) {
+          const hint = document.createElement("span");
+          hint.id = hintId;
+          hint.className = "sr-only";
+          hint.textContent = `Meter shift if you choose this: ${fx}`;
+          choicesEl.appendChild(hint);
+        }
       });
       appendCoopActionBarIntoChoices();
       if (choicesToRender.length > 0 && !(choicesToRender.length === 1 && choicesToRender[0].roll)) {
         const ped = document.createElement("details");
         ped.className = "choice-pedagogy";
         const track = state.pathId ? `<strong>${state.pathId}</strong> (argument track locked)` : "<strong>not locked</strong> until you take a forking choice";
-        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move—institutional costs, not a hidden “correct” score. Track: ${track}. Hover or focus a button for a plain-language <strong>title</strong> preview.</p>`;
+        ped.innerHTML = `<summary>How to read meter lines on choices</summary><p class="choice-pedagogy-body">Numbers show how <strong>Order</strong>, <strong>Reform</strong>, and <strong>People</strong> move—institutional costs, not a hidden “correct” score. Track: ${track}. Each choice with numbers has a <strong>tooltip</strong> and a screen-reader line with the same shift. Open <strong>Terms</strong> in the header for what each meter measures.</p>`;
         choicesEl.appendChild(ped);
       }
       state._coopChoicesSnapshot = choicesToRender;
@@ -1173,11 +1378,51 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       appendCoopActionBarIntoChoices();
     }
 
+    function updateSceneDialoguePortrait(sceneId) {
+      const fig = document.getElementById("sceneDialoguePortrait");
+      if (!fig) return;
+      const map = typeof SCENE_DIALOGUE_PORTRAITS !== "undefined" ? SCENE_DIALOGUE_PORTRAITS : {};
+      const spec = sceneId && map[sceneId];
+      if (!spec || !spec.src || !spec.alt) {
+        fig.hidden = true;
+        fig.innerHTML = "";
+        fig.classList.remove("scene-dialogue-portrait--has-image");
+        return;
+      }
+      fig.hidden = false;
+      fig.innerHTML = "";
+      fig.classList.add("scene-dialogue-portrait--has-image");
+      const img = document.createElement("img");
+      img.className = "scene-dialogue-portrait-img";
+      img.src = spec.src;
+      img.alt = spec.alt;
+      img.setAttribute("width", "112");
+      img.setAttribute("height", "140");
+      img.loading = "lazy";
+      img.decoding = "async";
+      const cap = document.createElement("figcaption");
+      cap.className = "scene-dialogue-portrait-caption";
+      cap.appendChild(document.createTextNode(spec.caption));
+      if (spec.creditHref) {
+        cap.appendChild(document.createElement("br"));
+        const a = document.createElement("a");
+        a.className = "scene-dialogue-portrait-credit";
+        a.href = spec.creditHref;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Source: Wikimedia Commons";
+        cap.appendChild(a);
+      }
+      fig.appendChild(img);
+      fig.appendChild(cap);
+    }
+
     function renderScene() {
       if (!state.keepBanner) hideEventBanner();
       state.keepBanner = false;
 
       const paint = () => {
+      applyCoopPrefToDomAndState();
       const scene = scenes[state.current];
       if (state.current !== "resolve_endings") state.realmBudgetCommittedResolveEndings = false;
       if (state.current === "resolve_endings" && state._prevSceneForBudget !== "resolve_endings") {
@@ -1190,6 +1435,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         const ep = resolveEndingText();
         state.lastRunSummary = buildRunSummary(ep);
         titleEl.textContent = ep.title;
+        updateSceneDialoguePortrait(state.current);
         textEl.innerHTML =
           `<div class="run-title-banner"><strong>Session title:</strong> ${ep.runTitle}</div>` + sceneBodyHtml(ep.body);
         let html = "";
@@ -1351,15 +1597,22 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       }
 
       titleEl.textContent = scene.title;
+      updateSceneDialoguePortrait(state.current);
       let sceneText = scene.text;
       if (state.current === "resolve_endings") {
         state.evgenyChorus = false;
         const lead = RESOLVE_PATH_LEAD[state.pathId || "west"];
         if (lead) sceneText = lead + "\n\n" + sceneText;
       }
-      let prefix = "";
-      if (scene.crisisRoll) prefix = buildCrisisRecap();
-      textEl.innerHTML = prefix + prependSceneCallbacks(state.current) + sceneBodyHtml(sceneText) + appendSceneEnrichment(scene);
+      let topPrefix = "";
+      if (state.ephemeralScenePrefix) {
+        topPrefix += state.ephemeralScenePrefix;
+        state.ephemeralScenePrefix = "";
+      }
+      let crisisBlock = "";
+      if (scene.crisisRoll) crisisBlock = buildCrisisRecap();
+      textEl.innerHTML =
+        topPrefix + crisisBlock + prependSceneCallbacks(state.current) + sceneBodyHtml(sceneText) + appendSceneEnrichment(scene);
       sceneIdTextEl.textContent = `Scene: ${scene.title}`;
       stepsTextEl.textContent = `Turn: ${state.steps}`;
       eraTextEl.textContent = state.steps >= 4 ? "Era: 1836–37" : "Era: 1836";
@@ -1441,8 +1694,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const disp = document.getElementById("coopTimerDisplay");
       if (disp) disp.textContent = "—";
       const cb = document.getElementById("coopToolsEnable");
-      if (cb) cb.checked = false;
-      state.coopToolsEnabled = false;
+      if (cb) cb.checked = readCoopToolsPrefEnabled();
+      state.coopToolsEnabled = !!(cb && cb.checked);
       state.current = "intro";
       state.steps = 0;
       state.history = [];
@@ -1469,6 +1722,8 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       state.realmBudgetDraft = { order: 0, reform: 0, people: 0 };
       state._prevSceneForBudget = null;
       state.lastCoopBallotReveal = "";
+      state.ephemeralScenePrefix = "";
+      state.inventoryFlashKey = null;
       hideEventBanner();
       refreshCoopBallotUI();
       renderScene();
@@ -1508,7 +1763,14 @@ Whether one ledger always became footnote to the other, none would swear; the cl
       const apply = document.getElementById("coopApplyMajority");
       const stance = document.getElementById("coopStanceOk");
       const disp = document.getElementById("coopTimerDisplay");
-      if (en) en.addEventListener("change", refreshCoopBallotUI);
+      applyCoopPrefFromQueryIfPresent();
+      applyCoopPrefToDomAndState();
+      if (en) {
+        en.addEventListener("change", () => {
+          persistCoopToolsPref(en.checked);
+          refreshCoopBallotUI();
+        });
+      }
       if (stance) stance.addEventListener("change", updateCoopApplyGate);
       if (start && disp) {
         start.addEventListener("click", () => {
@@ -1563,10 +1825,6 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           const idx = coopMajorityChoiceIndex();
           const st = document.getElementById("coopStanceOk");
           if (!st || !st.checked || idx < 0 || !list[idx]) return;
-          const cbx = document.getElementById("coopToolsEnable");
-          if (cbx) cbx.checked = false;
-          state.coopToolsEnabled = false;
-          refreshCoopBallotUI();
           commitChoice(list[idx]);
         });
       }
@@ -1594,6 +1852,25 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         h.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
       });
     })();
+
+    function wireGlossaryIcons() {
+      const map = typeof GLOSSARY_ICON_BY_KEY !== "undefined" ? GLOSSARY_ICON_BY_KEY : null;
+      const root = document.querySelector(".glossary-dl");
+      if (!map || !root) return;
+      root.querySelectorAll("dt[data-gloss-icon]").forEach((dt) => {
+        if (dt.querySelector(".glossary-term-ico")) return;
+        const k = dt.getAttribute("data-gloss-icon");
+        const svg = k && map[k];
+        if (!svg) return;
+        const wrap = document.createElement("span");
+        wrap.className = "glossary-term-ico";
+        wrap.setAttribute("aria-hidden", "true");
+        wrap.innerHTML = svg;
+        dt.insertBefore(wrap, dt.firstChild);
+      });
+    }
+
+    wireGlossaryIcons();
 
     refreshCoopBallotUI();
     renderScene();
