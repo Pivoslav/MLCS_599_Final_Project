@@ -85,7 +85,7 @@ Most rows below are **merged** in the bundle; demos stay as vanilla labs for Can
 | `mechanic-winter-crisis-lab.html` | **Shipped:** crisis recap + collapsible die table. | `crisisRollExplanationHtml`, `buildCrisisRecap`. |
 | `mechanic-path-deltas-and-hints.html` | **Shipped:** meter hints on choices + pedagogy `details`. | `.choice-btn` `title`, `.choice-pedagogy`. |
 | `mechanic-breadcrumb-tension.html` | **Shipped:** breadcrumb + tension spread. | `#salometry`, `updateSalometry()`, `data-tension="high"`. |
-| `mechanic-co-op-timer-ballot.html` | **Shipped:** story-column co-op card (gating + timer), **three seat cards**, choice buttons, reveal/stance/apply **under** the buttons. | `wireCoopTools`, `#coopMainBallotWrap`, `#coopToolsActionBar`, `state.coopToolsEnabled`. |
+| `mechanic-co-op-timer-ballot.html` | **Shipped:** story-column co-op card (gating + timer), **three seat cards**, choice buttons, reveal/stance/apply **under** the buttons (bar parks in `#coopToolsActionBarDock` when `#choices` is cleared). | `wireCoopTools`, `#coopMainBallotWrap`, `#coopToolsActionBar`, `state.coopToolsEnabled`. |
 | `mechanic-debrief-epilogues.html` | **Shipped:** compare three framings + read-only branch peek. | Epilogue HTML in `resolveEndingText`; `PEEK_TEXT`. |
 | `mechanic-achievement-flash.html` | **Shipped:** achievement toasts after checks. | `pushToast`, `ACH_TOAST`, `flushNewAchievementsToasts`. |
 | `mechanic-url-and-summary.html` | **Shipped:** `?scene=` deep link + run summary (course + run id). | `applySceneFromQuery`, `buildRunSummary`, `getRunId`. |

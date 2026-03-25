@@ -876,25 +876,15 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     const textEl = document.getElementById("text");
     const choicesEl = document.getElementById("choices");
 
-    /**
-     * After bar.remove(), getElementById no longer finds the node. Cache the element once it exists
-     * so stash/append/refreshCoopBallotUI keep working across detaches.
-     */
-    let coopActionBarElCache = null;
-    function getCoopActionBarEl() {
-      if (coopActionBarElCache) return coopActionBarElCache;
-      coopActionBarElCache = document.getElementById("coopToolsActionBar");
-      return coopActionBarElCache;
-    }
-
-    /** Detach before choicesEl.innerHTML = "" so the node is not destroyed; re-append after buttons. */
+    /** Park the bar in #coopToolsActionBarDock (still in document) so innerHTML never orphans it. */
     function stashCoopActionBarBeforeChoicesWipe() {
-      const bar = getCoopActionBarEl();
-      if (bar && bar.parentNode) bar.remove();
+      const bar = document.getElementById("coopToolsActionBar");
+      const dock = document.getElementById("coopToolsActionBarDock");
+      if (bar && dock) dock.appendChild(bar);
     }
 
     function appendCoopActionBarIntoChoices() {
-      const bar = getCoopActionBarEl();
+      const bar = document.getElementById("coopToolsActionBar");
       if (bar && choicesEl) choicesEl.appendChild(bar);
     }
 
@@ -959,7 +949,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
     function refreshCoopBallotUI() {
       const mount = document.getElementById("coopBallotMount");
       const discuss = document.getElementById("coopToolsDiscuss");
-      const actionBar = getCoopActionBarEl();
+      const actionBar = document.getElementById("coopToolsActionBar");
       const cb = document.getElementById("coopToolsEnable");
       const sumEl = document.getElementById("coopBallotSummary");
       const stance = document.getElementById("coopStanceOk");

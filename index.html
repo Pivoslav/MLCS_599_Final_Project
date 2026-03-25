@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Russia at the Crossroads: A Chaadaev Adventure</title>
   <!-- Bump ?v= on css/js when students may see stale copies (browser cache). -->
-  <link rel="stylesheet" href="css/game.css?v=20260326e" />
+  <link rel="stylesheet" href="css/game.css?v=20260326f" />
 </head>
 <body>
   <a href="#title" class="skip-link">Skip to story</a>
@@ -110,14 +110,17 @@
                   </div>
                 </div>
                 <div class="choices" id="choices"></div>
-                <div id="coopToolsActionBar" class="coop-tools-actions" hidden>
-                  <p class="coop-ballot-summary" id="coopBallotSummary" aria-live="polite"></p>
-                  <div class="coop-actions-row">
-                    <button type="button" class="ghost" id="coopRevealVotes">Reveal votes</button>
-                    <button type="button" class="ghost" id="coopHideVotes">Clear reveal</button>
+                <!-- Dock keeps #coopToolsActionBar in the document when choices are wiped (getElementById still works). -->
+                <div id="coopToolsActionBarDock" class="coop-tools-action-bar-dock" aria-hidden="true">
+                  <div id="coopToolsActionBar" class="coop-tools-actions" hidden>
+                    <p class="coop-ballot-summary" id="coopBallotSummary" aria-live="polite"></p>
+                    <div class="coop-actions-row">
+                      <button type="button" class="ghost" id="coopRevealVotes">Reveal votes</button>
+                      <button type="button" class="ghost" id="coopHideVotes">Clear reveal</button>
+                    </div>
+                    <label class="coop-stance-row"><input type="checkbox" id="coopStanceOk" /> We commit to the ballot outcome for this beat.</label>
+                    <button type="button" class="primary" id="coopApplyMajority" disabled>Apply winning choice</button>
                   </div>
-                  <label class="coop-stance-row"><input type="checkbox" id="coopStanceOk" /> We commit to the ballot outcome for this beat.</label>
-                  <button type="button" class="primary" id="coopApplyMajority" disabled>Apply winning choice</button>
                 </div>
                 <div id="endingBlock"></div>
                 <details class="scene-bg-source" id="sceneBgSource" hidden>
@@ -174,6 +177,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
   <script src="js/game-config.js?v=20260326"></script>
   <script src="js/game-scenes.js?v=20260326"></script>
-  <script src="js/game-app.js?v=20260326e"></script>
+  <script src="js/game-app.js?v=20260326f"></script>
 </body>
 </html>

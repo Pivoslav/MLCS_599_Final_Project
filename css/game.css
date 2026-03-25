@@ -876,9 +876,24 @@
 
     .choices { display: grid; gap: 10px; }
 
+    /* Off-screen parking: bar stays connected to document (never orphan via remove()) while #choices is cleared. */
+    .coop-tools-action-bar-dock {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+      pointer-events: none;
+    }
+
     /* Co-op reveal/apply bar is moved into #choices after buttons so it always stacks below them in DOM order. */
     .choices > .coop-tools-actions {
       grid-column: 1 / -1;
+      pointer-events: auto;
     }
 
     .choice-btn {
