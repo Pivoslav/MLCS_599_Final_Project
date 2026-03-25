@@ -574,7 +574,6 @@ Whether one column always swallowed the other, none would swear. The close chose
       const lean = state.finalLeanApplied || "order";
       const lastEv = state.lastEvent || "event_censor";
       const pathNarrPlain = htmlToPlain(recapPathNarrativeHtml(path));
-      const winterPlain = recapWinterSentencePlain(lastEv);
       const framingPlain = htmlToPlain(recapFramingHtml(lean));
       const bonusAtCrisis =
         state.lastRoll != null && state.lastWinterTotal != null ? state.lastWinterTotal - state.lastRoll : null;
@@ -590,9 +589,6 @@ Whether one column always swallowed the other, none would swear. The close chose
         "",
         "Path narrative (society and politics):",
         pathNarrPlain,
-        "",
-        "This winter in play:",
-        winterPlain,
         "",
         "Closing framing:",
         framingPlain,
@@ -660,12 +656,6 @@ Whether one column always swallowed the other, none would swear. The close chose
       return "<p>Narrative recap for this path is not loaded.</p>";
     }
 
-    function recapWinterSentencePlain(key) {
-      const W = typeof RUN_RECAP_WINTER_SENTENCE !== "undefined" ? RUN_RECAP_WINTER_SENTENCE : null;
-      if (W && W[key]) return W[key];
-      return "winter followed the path rules at the crisis roll.";
-    }
-
     function recapFramingHtml(lean) {
       const F = typeof RUN_RECAP_FRAMING_SENTENCE !== "undefined" ? RUN_RECAP_FRAMING_SENTENCE : null;
       if (F && F[lean]) return F[lean];
@@ -698,7 +688,6 @@ Whether one column always swallowed the other, none would swear. The close chose
       const pathLabels = { west: "Westernizing", slav: "Slavophile", statist: "Statist", med: "Mediator" };
       const path = state.pathId || "west";
       const lean = state.finalLeanApplied || "order";
-      const lastEv = state.lastEvent || "event_censor";
       const beats = buildRunRecapBeatTitles();
       const bonusAtCrisis =
         state.lastRoll != null && state.lastWinterTotal != null ? state.lastWinterTotal - state.lastRoll : null;
@@ -730,14 +719,11 @@ Whether one column always swallowed the other, none would swear. The close chose
           ? `<ol class="run-recap-list">${beats.map((t) => `<li>${escapeHtmlPlain(t)}</li>`).join("")}</ol>`
           : `<p class="run-recap-line run-recap-muted">No scene list recorded.</p>`;
       const pathNarr = recapPathNarrativeHtml(path);
-      const winterPlain = recapWinterSentencePlain(lastEv);
       const framingP = `<p class="run-recap-line run-recap-framing">${recapFramingHtml(lean)}</p>`;
 
       return `<!-- mlcs599-recap-narrative-v2 --><section class="run-recap" aria-labelledby="run-recap-h"><h4 id="run-recap-h">Your argument, in society and politics</h4><p class="run-recap-lead">Track: <strong>${escapeHtmlPlain(
         pathLabels[path] || path
-      )}</strong>. The ending below is one closing <em>lens</em> on the same winter. This box names what that track meant for Russian public life before the salon’s last scene.</p><div class="run-recap-path-narr">${pathNarr}</div><p class="run-recap-line"><strong>This winter in play:</strong> ${escapeHtmlPlain(
-        winterPlain
-      )}</p>${misfit}${framingP}${vera}${chorus}${lib}<details class="run-recap-details"><summary>Winter die (mechanics)</summary>${rollDetails}</details><details class="run-recap-details"><summary>Scene titles in play order (optional checklist)</summary>${list}</details></section>`;
+      )}</strong>. The ending below is one closing <em>lens</em> on the same winter. This box names what that track meant for Russian public life before the salon’s last scene.</p><div class="run-recap-path-narr">${pathNarr}</div>${misfit}${framingP}${vera}${chorus}${lib}<details class="run-recap-details"><summary>Winter die (mechanics)</summary>${rollDetails}</details><details class="run-recap-details"><summary>Scene titles in play order (optional checklist)</summary>${list}</details></section>`;
     }
 
     const clamp = (n) => Math.max(0, Math.min(100, n));

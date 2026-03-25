@@ -623,19 +623,6 @@
       med: `<p>Your path refused the clean duel between wholesale import and proud isolation. You chased <strong>hybrid</strong> schools, hybrid ledgers, capital technique with provincial accents, the bet that law can sound Russian in the yard while foreign words still sit on the page.</p><p>In political terms you always negotiate two jealousies: Petersburg’s fear of chaos, and the provinces’ fear of ornaments dropped from above. “Zemstvo-style” talk in this game names that quarrel as an argument, not a claim that the real institution already exists in 1836.</p><p>Chaadaev asked for moral depth inside borrowed forms; your winter asks whether compromise is a bridge or only rope beside stone until the next flood.</p>`
     };
 
-    /** One narrative sentence after “<strong>This winter in play:</strong> …” keyed by <code>state.lastEvent</code>. */
-    const RUN_RECAP_WINTER_SENTENCE = {
-      event_salon:
-        "the capital briefly allowed a sanctioned night: ideas could breathe in public form before the file closed again.",
-      event_flood_echo:
-        "northern water kept rewriting the argument: Peter’s plans met ordinary wet rooms and cold postscripts.",
-      event_censor: "the Third Section’s habit won out: torn proofs and sealed rooms decided what could travel beyond the table.",
-      event_rural_gentry:
-        "provincial gentry dragged ministry maps through local mud: central school dreams snagged on estate pride.",
-      event_zemstvo_clash:
-        "a struck pilot fund turned neighborly hope into a bruise everyone saw: local money met a chief’s veto in daylight."
-    };
-
     /** How the player chose to <em>frame</em> the epilogue (Order / Reform / People). */
     const RUN_RECAP_FRAMING_SENTENCE = {
       order:
