@@ -13,6 +13,8 @@ This document tracks the primary and secondary works used to build the **CYOA ga
 
 2. **Chaadaev, Peter (Pyotr).** *Philosophical Works of Peter Chaadaev*, ed./trans. **Raymond T. McNally** and **Richard Tempest** (Dordrecht: Springer, 1991; *Sovietica* 56). eBook **ISBN 978-94-011-3166-7**, DOI [10.1007/978-94-011-3166-7](https://doi.org/10.1007/978-94-011-3166-7). Full English translation of the letters, *Apologia*, and fragments; editorial analysis and notes.
 
+   **In this repo (presenter / verification):** `978-94-011-3166-7.pdf` (Springer PDF) and **`978-94-011-3166-7.txt`** (plain-text dump of that PDF with `--- PDF page N ---` markers, ~1 MB, for search and aligning read-along quotes). Copyright Springer Nature; use under your own access or license.
+
 ### Literary mirror in the game
 
 3. **Pushkin, Aleksandr S.** *The Bronze Horseman* (*Медный всадник*, 1833). English translation by **Walter Arndt** (1993), e.g. in the Penguin *Portable Nineteenth-Century Russian Reader* / Ardis editions cited in standard bibliographies. Branching scenes quote or gloss this wording (Petersburg, flood, Yevgeny vs. Peter’s statue). The CYOA does **not** incorporate *The Gypsies*.
