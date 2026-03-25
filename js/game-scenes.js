@@ -544,7 +544,7 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_order: {
         title: "Closing: The Weight of Order",
-        text: `The closing argument insists on legibility, ranks, and the survival of the state as such. The Bronze Horseman stands: Pushkin addresses him as “<strong>Destiny’s great potentate</strong>.” Yevgeny has no vote in the official story.`,
+        text: `The lamps are low. <strong>Andrei</strong> lays his hand flat: ranks have to read the same upstairs and down, or nothing else holds. In Pushkin’s poem the statue still hears destiny—“<strong>Destiny’s great potentate</strong>”—not Yevgeny; the clerk has no vote in the official story of the city.`,
         primaryRead: {
           title: "Read alongside: The Bronze Horseman",
           body: `<strong>Part Two (direct address to the statue):</strong> “Oh, Destiny’s great potentate! / Was it not thus, a towering idol…” (<em>The Bronze Horseman</em>, Part Two.)<br><span class="read-gloss">Pushkin addresses the statue as fate-like power. Saying yes here lets that majesty, not Yevgeny’s counter-voice, name the moral center of the tale you take out of the winter.</span>`
@@ -557,7 +557,7 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_reform: {
         title: "Closing: The Weight of Reform",
-        text: `The closing argument insists on law, schools, and Russia’s stake in a wider history. Chaadaev’s sting is treated as a program, not only a wound.`,
+        text: `<strong>Stepan</strong> speaks as if Chaadaev’s letter were a syllabus, not only a wound: law, schools, print, Russia doing mankind’s long homework in the open. The winter cost what it cost; he wants the close to name institutions, not only sighs.`,
         primaryRead: {
           title: "Read alongside: First Philosophical Letter (Letter I)",
           body: `<strong>Letter I (program):</strong> “…we must, in a certain sense, repeat the whole education of mankind.”<br><span class="read-gloss">“Repeat mankind’s education” is the banner for Stepan’s Reform frame: Russia’s long homework inside world history.</span><br><br><strong>Letter I (duty, justice, law, order):</strong> same theme in <em>The Reformist Circle</em> read-along.<br><span class="read-gloss">For Chaadaev, “education” includes duty and law breathed like air, not scandal headlines alone. That is what Stepan’s closing is claiming.</span>`
@@ -570,7 +570,7 @@ Below, three friends name <em>which of those two questions should close the stor
 
       final_route_people: {
         title: "Closing: The Weight of the People",
-        text: `The final argument rests on clerks, peasants, and everyone caught in the flood’s path. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the city outran; the Neva and the Admiralty’s needle share one lesson: the ledger must count bodies, not only ideas.`,
+        text: `<strong>Father Dimitri</strong> keeps returning to roofs and waterlines. Pushkin ends with a <strong>pauper’s grave</strong> for the “luckless knave” the granite story outran. He asks the table to let that burial sit in the last line—ordinary bodies on the ledger, not only emperors in bronze.`,
         primaryRead: {
           title: "Read alongside: Letter I and The Bronze Horseman",
           body: `<strong>Letter I (slave and master):</strong> “…from the highest strata of society to the slave who exists only for the pleasure of his master.”<br><span class="read-gloss">Chaadaev names the whole ladder from court to bonded laborer. Father Dimitri’s closing insists the bottom rung stay in sight, not an afterthought to granite and file.</span><br><br><strong><em>The Bronze Horseman</em>, Part Two (close):</strong> “…Here lay asprawl my luckless knave, / And here in charity they buried / The chill corpse in a pauper’s grave.” (<em>The Bronze Horseman</em>, Part Two, closing.)<br><span class="read-gloss">Yevgeny’s pauper grave is what triumphal history skips. Saying yes here keeps that burial in the tale’s last line, ordinary bodies before monuments.</span>`
