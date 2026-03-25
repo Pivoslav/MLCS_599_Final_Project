@@ -64,7 +64,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 - [x] **Playthrough smoke (static)** — `tools/verify-scenes.py` / `verify-scenes.js` validate `choice.next` targets, `RESOLVE_PATH_LEAD` keys, `SCENE_COLOR_SCHEME` scene ids. *Per-path manual runs still recommended for UX.*
 - [x] **Mobile / narrow** — Queue #9 (layout + touch targets in CSS; device spot-check still useful).
-- [ ] **GitHub Pages** — Verify demo hub links after each push.
+- [x] **GitHub Pages** — Verify demo hub links after each push. *Spot-check: site root + `canvas-interactive-demos/` return 200 (re-verify after major deploys).*
 
 ---
 
