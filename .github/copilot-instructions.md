@@ -15,7 +15,7 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 ## What this is
 
 - **Course artifact:** Interactive historical CYOA about Chaadaev’s *First Philosophical Letter* and Pushkin’s *The Bronze Horseman* (1830s Russian thought).
-- **Audience:** University students; often **three-player co-op** (fixed roles **Order**, **Reform**, **People**) on **one screen**; may ship inside **Canvas** (iframe / external link) or **GitHub Pages**.
+- **Audience:** University students; often **three-player co-op** (fixed roles **Order**, **Reform**, **People**) on **one screen**; Canvas delivery uses **`canvas-rce-embed-fragment.html`** (**new tab** to GitHub Pages by default).
 - **Tone:** Serious, historically grounded; **no** anachronistic meme voice. Salon is a **dramatization** of the letter’s epistolary form.
 
 ## Non-negotiables (game logic & copy)
@@ -32,7 +32,7 @@ Treat this file as the **canonical briefing** for this repository. Prefer it ove
 - **`js/game-app.js`** — State, rendering, crisis / epilogue logic (`EPILOGUE_TWELVE`, `pickCrisisEvent`, etc.). Primary **mechanics** surface.
 - **`js/game-config.js`** — Images, ambient keys, inventory labels, static tables.
 - **`canvas-interactive-demos/`** — **Vanilla** prototypes for UI/mechanics **before** merging into the game; no framework; no CDN. Hub: `canvas-interactive-demos/index.html`. Backlog: **`canvas-interactive-demos/PENDING-TASKS.md`**.
-- **`HOSTING-AND-INTEGRATION.md`** — Canvas, GitHub Pages, iframe sizing, merge roadmap.
+- **`HOSTING-AND-INTEGRATION.md`** — Canvas, GitHub Pages, optional iframe, merge roadmap.
 - **`DEMOS-AND-LLM-REPORT.md`** — Full demo/tool inventory, needs vs costs, design leverage, handoff block for agents.
 - **`GAMEPLAN.md`** — Phased delivery (Canvas + Pages + optional LLM-assisted character art pipeline).
 - **`BACKLOG.md`** — Ideas and overhauls not on the execution queue.

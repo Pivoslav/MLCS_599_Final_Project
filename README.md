@@ -1,6 +1,6 @@
 # Russia at the Crossroads (CYOA): Teaching notes
 
-**Hosting, Canvas embed, iframe sizing, and roadmap for merging demos into the game:** see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (on `main` for GitHub and collaborators).
+**Hosting, Canvas (new-tab fragment), and roadmap for merging demos into the game:** see **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)** (on `main` for GitHub and collaborators).
 
 **Presentation:** the shipped game uses the **View Transitions API** for scene changes (where supported), **GSAP** (jsDelivr) for a short choice-button stagger, a **breadcrumb** of recent scene titles, and a **realm spread** bar (max − min meter) in the header. All motion respects **`prefers-reduced-motion`**.
 
@@ -101,14 +101,14 @@ For demos, make-up play, or assigned entry points, append **`?scene=<sceneId>`**
 
 ## Embedding in Canvas
 
-Summary: wrapper + **`iframe`** (GitHub Pages or Canvas Files **`/preview`**) + **new-tab link**; never paste the whole game into the RCE. Full walkthrough, iframe sizing, and permissions: **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)**. Paste-ready markup: **`canvas-rce-embed-fragment.html`**.
+Paste **`canvas-rce-embed-fragment.html`** into a Canvas Page (HTML view): a **full-width hero** that opens the game in a **new tab** (full layout for meters and co-op). Never paste the whole `index.html` into the RCE. Optional iframe + Files **`/preview`**: **[HOSTING-AND-INTEGRATION.md](./HOSTING-AND-INTEGRATION.md)**.
 
 ## Files (public repo)
 
 - `co-op-cyoa-mechanics-report.html`: **Visual report** (effort vs payoff chart, flow diagram, per-mechanic bars + learning notes) for multiplayer CYOA ideas.
-- `HOSTING-AND-INTEGRATION.md`: **Canvas + GitHub Pages lessons**, iframe sizing tips, public-repo notes, **mechanics/integration roadmap** vs `canvas-interactive-demos/`.
+- `HOSTING-AND-INTEGRATION.md`: **Canvas + GitHub Pages lessons**, optional iframe notes, public-repo notes, **mechanics/integration roadmap** vs `canvas-interactive-demos/`.
 - `index.html` + `css/game.css` + `js/game-config.js`, `js/game-scenes.js`, `js/game-app.js`: shipped game (open `index.html` locally or host the whole `Final/` folder on GitHub Pages).
-- `canvas-rce-embed-fragment.html`: paste-ready **HTML fragment** for Canvas **Pages** (GitHub Pages URLs by default; swap for Canvas `/preview` if you have Files upload). Increase `height` on `<iframe>` if the embedded player feels small.
+- `canvas-rce-embed-fragment.html`: paste-ready **Canvas Page** fragment — **open in new tab** (full layout); no embedded iframe by default.
 - `SOURCES.md`: citations and editions.
 - `LICENSE`: MIT (redistribution; adjust copyright if your program requires a different notice).
 - `cyoa-structure-map.html`: branch map and teaching companion.

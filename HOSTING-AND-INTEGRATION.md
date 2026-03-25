@@ -16,11 +16,9 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 ### Canvas Pages (Rich Content Editor, HTML view)
 
 - **Do not** paste the full `index.html` into the RCE. Canvas **sanitizes** HTML and often **strips `<script>`**, which breaks the game.
-- **Do** use a **short wrapper** (inline styles, headings, callouts) plus either:
-  - an **`iframe`** whose `src` is the **GitHub Pages** URL, or
-  - an **`iframe`** whose `src` is a Canvas **Files** `…/preview` URL (when you have upload rights, same pattern as DSC interactive HTML).
-- **Always** include a prominent **“Open in new tab”** link to the same URL. Some institutions **block third-party iframes** while still allowing **external links**; the game remains playable.
-- **Paste source:** `canvas-rce-embed-fragment.html` — copy the outer `<div>…</div>` into **Page → Edit → HTML View**.
+- **Default paste:** `canvas-rce-embed-fragment.html` — a **full-width hero** with a single **“Open game in new tab”** control (no iframe). The CYOA needs horizontal space for realm meters, co-op seats, and text; a narrow Canvas column + small iframe was a poor fit.
+- **Optional:** If you still want an in-page embed, add your own `<iframe src="https://…GitHub Pages…/" …>` below the link and tune **`height`** / **`min-height`** (often **900–1100px**). Prefer **Canvas Files `…/preview`** or GitHub Pages as `src`. Many schools **block** third-party iframes; the new-tab link remains the reliable path.
+- **Paste:** copy the outer `<div>…</div>` from `canvas-rce-embed-fragment.html` into **Page → Edit → HTML View**.
 
 ### Canvas Page checklist (instructor)
 
@@ -29,16 +27,15 @@ This file is the **project memory** for how we ship the CYOA and how we plan to 
 3. **Edit** → open the **HTML / raw code** editor (Canvas labels vary: “HTML Editor,” “</>,” or “Switch to raw HTML editor”).
 4. Paste the **entire** contents of **`canvas-rce-embed-fragment.html`** (one outer `<div>…</div>` wrapper).
 5. **Save** (and **Publish** when ready).
-6. **Student View** (or an incognito window): confirm the green **Play the game (new tab)** link works; check whether the **iframe** renders or is blank (iframe block = use new-tab link only).
+6. **Student View** (or an incognito window): confirm the **Open game in new tab** control and the plain URL both reach the live game.
 7. Optional: add the page to a **Module** as a “Page” item, or create a **Module → External URL** item pointing at the same GitHub Pages root if you prefer not to use the RCE at all.
 
 See also **`teaching-notes.html`** (short TA summary with links to this file and the fragment).
 
-### Iframe size (common complaint: “windows a bit small”)
+### Optional iframe (if you add one yourself)
 
-- Default **`height`** in the fragment is a balance; **increase** the numeric `height` on each `<iframe>` (e.g. **900–1000** for the game, **700+** for demos) until it feels right in your course layout.
-- **`min-height` on the iframe** helps when the RCE wraps the frame oddly; students can still use **new tab** for full viewport.
-- Canvas **content column width** is fixed; true “full screen” inside the LMS is rare—**new tab** is the reliable fix.
+- Canvas **content column width** is fixed; the shipped fragment no longer includes an iframe so students default to a **full browser tab**.
+- If you paste an iframe: set **`width="100%"`**, **`height`** around **900–1100**, and optionally **`min-height`** in inline CSS; keep a **new-tab** link as fallback when iframes are blocked.
 
 ### `canvas-interactive-demos` self-test (LMS quirks)
 
@@ -49,7 +46,7 @@ See also **`teaching-notes.html`** (short TA summary with links to this file and
 ### Shipped game: iframe vs new tab (storage, co-op, run summary)
 
 - **`sessionStorage`:** Some LMS embeds block or partition storage for third-party iframes. **`getRunId()`** in `js/game-app.js` falls back to **`R-local`** in the copied run summary when storage throws; gameplay is unchanged.
-- **Co-op:** The three-seat ballot is usable in an iframe but **much easier** in a **full tab**; recommend **Open in new tab** for three-player sessions (see `canvas-rce-embed-fragment.html`).
+- **Co-op:** The three-seat ballot is **intended for a full tab**; the Canvas fragment sends students there by default (`canvas-rce-embed-fragment.html`).
 - **Phased delivery:** **`GAMEPLAN.md`** (Canvas + Pages + optional LLM-assisted art pipeline).
 
 ### Public repository hygiene
@@ -125,7 +122,7 @@ Use **`cyoa-structure-map.html`** and the **`BACKLOG`** comment above `EPILOGUE_
 | `js/game-config.js` | Inventory labels, scene image maps, ambient keys, `RESOLVE_PATH_LEAD` |
 | `js/game-scenes.js` | `scenes` object (all narrative nodes and choices) |
 | `js/game-app.js` | State, rendering, crisis logic, epilogues (`EPILOGUE_TWELVE`), UI wiring |
-| `canvas-rce-embed-fragment.html` | Paste into Canvas Page HTML view |
+| `canvas-rce-embed-fragment.html` | Paste into Canvas Page HTML view — **new-tab** hero (no default iframe) |
 | `canvas-interactive-demos/` | Prototypes before merge; hub lists all demos + **PENDING-TASKS.md** |
 | `README.md` | Teaching notes + short embed pointer |
 | `LICENSE` | MIT (course redistribution; adjust copyright if required) |

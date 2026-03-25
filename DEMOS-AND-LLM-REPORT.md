@@ -72,7 +72,7 @@ All live under `canvas-interactive-demos/demos/`. **Needs:** modern browser; ope
 |----------|--------|-------|----------------|
 | **co-op-cyoa-mechanics-report.html** | Browser | Read time | Phased rollout; **effort vs payoff** when arguing for new co-op features. |
 | **cyoa-structure-map.html** | Browser | Maintainer sync | After scene edits, **re-sync** per `PENDING-TASKS.md` §C. |
-| **canvas-rce-embed-fragment.html** | Canvas RCE access | Paste + iframe height tune | Primary LMS delivery path. |
+| **canvas-rce-embed-fragment.html** | Canvas RCE access | Paste (new-tab hero) | Primary LMS delivery path. |
 | **index.html** → **Art lab** link | Same origin as dev server | Student confusion if clicked on Pages | On static hosting, link may 404 API — acceptable if tooltip / README clarify **local only**. |
 
 ---
@@ -97,7 +97,7 @@ All live under `canvas-interactive-demos/demos/`. **Needs:** modern browser; ope
 
 **Strategic**  
 - If co-op is core identity, **solo mode** stays simple; **optional** panels stay gated.  
-- If Canvas Files are locked, **GitHub Pages + iframe + new tab** remains the default story — don’t assume a backend in production.
+- If Canvas Files are locked, **GitHub Pages + new tab** (via **`canvas-rce-embed-fragment.html`**) remains the default story — don’t assume a backend in production.
 
 ---
 
@@ -115,13 +115,13 @@ You are working on **Russia at the Crossroads** (MLCS 599 CYOA). Canonical repo 
 
 **Non-negotiables:** Realms **`order` / `reform` / `people`** (0–100); paths **`west` | `slav` | `statist` | `med`**; respect **`prefers-reduced-motion`**; no full copyrighted primary text in-repo (see **`SOURCES.md`**).
 
-**Hosting:** Students see **static** GitHub Pages and/or **Canvas iframe**; do not assume **`localStorage`**, full-screen iframe, or a secret backend. **`canvas-rce-embed-fragment.html`** is the LMS paste source.
+**Hosting:** Students see **static** GitHub Pages (default: **new tab** from **`canvas-rce-embed-fragment.html`**); optional Canvas iframe if instructors add one. Do not assume **`localStorage`**, full-screen iframe, or a secret backend.
 
 **LLM:** Author-facing only. **`tools/dev_server.py`** + **`Final/llm-lab.html`** + **`.env`** (`GITHUB_TOKEN`) — **local machine**. Never embed tokens in **`js/`** or ship them on Pages. GitHub Models **chat** works for our Grok art-direct flow; **image generations** on `models.github.ai` have been **404** in practice — treat image output as **external** or preview-only. Full inventory: **`Final/DEMOS-AND-LLM-REPORT.md`**.
 
 **Suggested next code task:** **§B** read-along pass (see **`PENDING-TASKS.md`** execution queue) or **`GAMEPLAN.md` Phase 2b** (static character art pipeline).
 
-**Suggested next ops task:** Canvas fragment height pass + **`canvas-self-test.html`** in the target LMS; **`cyoa-structure-map.html`** sync after any structural narrative edit.
+**Suggested next ops task:** **`canvas-self-test.html`** in the target LMS (if you use iframes anywhere); **`cyoa-structure-map.html`** sync after any structural narrative edit.
 
 ---
 

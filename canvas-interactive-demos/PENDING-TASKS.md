@@ -16,7 +16,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 4. [x] **`teaching-notes.html`** — Static TA page: embed fragment, new tab, `?scene=`, links to docs.
 5. [x] **Read-along pilot (intro)** — Edition pointer in first **Read alongside** block (McNally & Tempest; Arndt) per `SOURCES.md`.
 6. [x] **Read-along pass (rest of game)** — §B below. *Shipped: shared `READ_ALONG_EDITION_NOTE` (McNally & Tempest Letter I; Arndt Bronze Horseman; `SOURCES.md`) prepended to every `primaryRead.body` in `game-scenes.js`.*
-7. [x] **Canvas course Page** — Paste `canvas-rce-embed-fragment.html`; verify iframe + link in **your** LMS. *Fragment + `HOSTING-AND-INTEGRATION.md` checklist + `teaching-notes.html` steps updated; you still confirm once in live Student View.*
+7. [x] **Canvas course Page** — Paste `canvas-rce-embed-fragment.html`; verify link in **your** LMS. *Fragment is new-tab hero (no iframe); confirm in Student View.*
 8. [x] **Playthrough smoke** — One run per `pathId` after substantive changes (§F). *Automated graph check: `python tools/verify-scenes.py` (or `node tools/verify-scenes.js`); manual path runs still useful after big edits.*
 9. [x] **Mobile / narrow pass** — Co-op strip, realm budget panel, sidebar (§F). *Shipped: story-first column order ≤900px, safe-area padding/viewport-fit, realm budget stacks ≤560px, touch targets ≤480px, toasts respect safe area.*
 10. [x] **Accessibility spot-check** — Focus, contrast, live regions on new UI (§D). *Shipped: skip link → `#title`, `:focus-visible` on controls, copy summary uses `role="status"`.*
@@ -52,7 +52,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## D. Course / LMS operations
 
-- [x] **Canvas Page (authoring pack)** — Fragment, `HOSTING-AND-INTEGRATION.md` checklist, `teaching-notes.html` steps. *Confirm iframe vs new-tab in your live course (institution-specific).*
+- [x] **Canvas Page (authoring pack)** — Fragment (new-tab), checklist, `teaching-notes.html`. *Confirm link in Student View.*
 - [ ] **Module item** — External URL to Pages if preferred.
 - [x] **Accessibility (bundle spot-check)** — Skip link, keyboard focus rings, copy feedback live region (see queue #10). *Full WCAG audit still optional.*
 

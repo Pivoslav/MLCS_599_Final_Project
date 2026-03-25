@@ -6,7 +6,7 @@ Concise phased plan for **Russia at the Crossroads**. Canonical constraints and 
 
 ## Product stance
 
-- **Canvas:** compliant entry (iframe + paste fragment); assume embed quirks and unreliable `localStorage`.
+- **Canvas:** compliant entry (paste fragment → **new tab**); optional iframe if you add it; assume embed quirks and unreliable `localStorage` when iframed.
 - **Full play:** same **GitHub Pages** URL opened in a **new tab/window** — default for readability, co-op layout, and any feature that needs space or storage.
 - **Ship:** static files only; **no API keys or tokens** in anything students load (`js/`, Pages, Canvas RCE).
 
@@ -17,7 +17,7 @@ Concise phased plan for **Russia at the Crossroads**. Canonical constraints and 
 | Task | Detail | Done when |
 |------|--------|-----------|
 | **Commit & push** | `Final/` matches `main` and deploys to GitHub Pages. | Clean `git status`; live site matches repo. |
-| **Canvas fragment** | `canvas-rce-embed-fragment.html`: iframe `src` = Pages game; **prominent “Open in new tab”** to the same URL; **height** tuned (e.g. 900–1000px) in a real Canvas preview. | Acceptable in RCE; link works. |
+| **Canvas fragment** | `canvas-rce-embed-fragment.html`: **full-width new-tab hero** to Pages game (no default iframe). Optional: add your own iframe + height per `HOSTING-AND-INTEGRATION.md`. | Acceptable in RCE; link works in Student View. |
 | **LMS self-test** | Run `canvas-interactive-demos/demos/canvas-self-test.html` (or equivalent) **inside the target Canvas** once. | Quirks noted in `HOSTING-AND-INTEGRATION.md` or fragment comments. |
 
 ---
