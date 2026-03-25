@@ -1169,6 +1169,49 @@
       font-style: italic;
     }
 
+    .run-recap {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      background: color-mix(in srgb, #f0f4fb 92%, var(--dynamic-accent) 5%);
+      border: 1px solid color-mix(in srgb, var(--line) 78%, var(--dynamic-accent-2) 14%);
+      border-radius: 8px;
+      font-size: clamp(0.94rem, 0.9rem + 0.12vw, 1.02rem);
+      line-height: 1.55;
+      color: #1e293b;
+      max-width: min(80ch, 100%);
+    }
+
+    .run-recap h4 {
+      margin: 0 0 10px;
+      font-size: clamp(1.02rem, 0.98rem + 0.12vw, 1.1rem);
+      color: var(--dynamic-accent-2);
+    }
+
+    .run-recap-lead {
+      margin: 0 0 12px;
+      color: #334155;
+    }
+
+    .run-recap-sub {
+      margin: 12px 0 8px;
+      font-weight: 600;
+      color: #334155;
+      font-size: clamp(0.9rem, 0.86rem + 0.1vw, 0.98rem);
+    }
+
+    .run-recap-line {
+      margin: 0 0 8px;
+    }
+
+    .run-recap-list {
+      margin: 0 0 0 1.2rem;
+      padding: 0;
+    }
+
+    .run-recap-list li {
+      margin-bottom: 6px;
+    }
+
     .run-title-banner {
       margin-bottom: 12px;
       padding: 10px 14px;

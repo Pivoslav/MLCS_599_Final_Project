@@ -113,7 +113,9 @@
           }
         }
       }
-      if (railPick && railPick.src) {
+      if (entry.railsHidden) {
+        setSceneSideRails(null);
+      } else if (railPick && railPick.src) {
         setSceneSideRails(JSON.stringify(railPick.src), railPick.bgPos || "");
       } else {
         setSceneSideRails(null);
@@ -568,6 +570,7 @@ Whether one column always swallowed the other, none would swear. The close chose
       const pathLabels = { west: "Westernizing", slav: "Slavophile", statist: "Statist", med: "Mediator" };
       const visited = state.history.map((id) => (scenes[id] ? scenes[id].title : id)).join(" → ");
       const inv = Array.from(state.inventory).map((id) => ITEMS[id] || id).join("; ") || "(none)";
+      const recapBeats = buildRunRecapBeatTitles();
       const lines = [
         "Russia's Troubled Future Past (run summary)",
         "────────────────────────────",
@@ -580,14 +583,17 @@ Whether one column always swallowed the other, none would swear. The close chose
         `Winter event: ${rollOutcomeLabel(state.lastEvent || "event_censor")}`,
         `Winter misfit (wrong rumor): ${state.crisisMisfit ? state.crisisMisfitKind || "yes" : "no"}`,
         `Framing: ${state.finalLeanApplied || "(none)"}`,
-        `Evgeny chorus path: ${state.evgenyChorus ? "yes" : "no"}`,
+        `Evgeny chorus framing: ${state.evgenyChorus ? "yes (Vera’s one-reckoning close)" : "no"}`,
         `Run tags: ${state.runTags.size ? Array.from(state.runTags).join(", ") : "(none)"}`,
         `Scars: ${state.scars.size ? Array.from(state.scars).join(", ") : "(none)"}`,
         `Walkouts: ${state.walkouts.size ? Array.from(state.walkouts).join(", ") : "(none)"}`,
         "",
         "Library: " + inv,
         "",
-        "Scenes visited:",
+        "Beats you played through (scene titles, in order):",
+        recapBeats.length ? recapBeats.map((t, i) => `${i + 1}. ${t}`).join("\n") : "(none recorded)",
+        "",
+        "Scenes visited (ids):",
         visited || "(start only)"
       ];
       if (ep.ach && ep.ach.length) lines.push("", "Unlocked: " + ep.ach.join("; "));
@@ -604,6 +610,91 @@ Whether one column always swallowed the other, none would swear. The close chose
         event_zemstvo_clash: "Ministry vetoes the local pilot."
       };
       return labels[key] || key;
+    }
+
+    function stripSceneTitle(html) {
+      return String(html || "")
+        .replace(/<[^>]+>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function escapeHtmlPlain(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    /** Scene titles visited, in order (skips setup-only beats). Used for epilogue recap and copy summary. */
+    function buildRunRecapBeatTitles() {
+      const SKIP = new Set(["session_format"]);
+      const out = [];
+      for (let i = 0; i < state.history.length; i += 1) {
+        const id = state.history[i];
+        if (SKIP.has(id)) continue;
+        const sc = scenes[id];
+        if (!sc || !sc.title) continue;
+        out.push(stripSceneTitle(sc.title));
+      }
+      return out;
+    }
+
+    function epilogueVisualSceneId() {
+      const map = typeof EPILOGUE_SCENE_VISUALS !== "undefined" ? EPILOGUE_SCENE_VISUALS : {};
+      const path = state.pathId || "west";
+      const lean = state.finalLeanApplied || "order";
+      return map[`${path}_${lean}`] || "ending_computed";
+    }
+
+    function buildRunRecapHtml() {
+      const pathLabels = { west: "Westernizing", slav: "Slavophile", statist: "Statist", med: "Mediator" };
+      const leanLabels = {
+        order: "Order (stability, ranks, and the state as spine)",
+        reform: "Reform (law, schools, print, Chaadaev as program)",
+        people: "People (clerks, peasants, flood-side lives in the last word)"
+      };
+      const path = state.pathId || "west";
+      const lean = state.finalLeanApplied || "order";
+      const beats = buildRunRecapBeatTitles();
+      const bonusAtCrisis =
+        state.lastRoll != null && state.lastWinterTotal != null ? state.lastWinterTotal - state.lastRoll : null;
+      const rollBit =
+        bonusAtCrisis != null
+          ? `<p class="run-recap-line"><strong>Winter die:</strong> d6 = ${state.lastRoll}, Order bonus +${bonusAtCrisis}, table total <strong>${state.lastWinterTotal}</strong> (path rules at crisis).</p>`
+          : "";
+      const misfit =
+        state.crisisMisfit
+          ? `<p class="run-recap-line"><strong>Winter misfit:</strong> Fate handed you another track’s rumor; the table answered it anyway.</p>`
+          : "";
+      const vera =
+        state.walkouts.has("vera")
+          ? `<p class="run-recap-line"><strong>Circle change:</strong> Vera stopped coming after one hard debate.</p>`
+          : "";
+      const chorus =
+        state.evgenyChorus
+          ? `<p class="run-recap-line"><strong>Rare framing:</strong> You closed with Vera’s “one moral reckoning” for Chaadaev, Pushkin, and the clerk together.</p>`
+          : "";
+      const invPlain = Array.from(state.inventory)
+        .map((id) => stripSceneTitle(ITEMS[id] || id))
+        .filter(Boolean);
+      const lib =
+        invPlain.length > 0
+          ? `<p class="run-recap-line"><strong>Library satchel:</strong> ${escapeHtmlPlain(invPlain.join("; "))}.</p>`
+          : "";
+      const list =
+        beats.length > 0
+          ? `<ol class="run-recap-list">${beats.map((t) => `<li>${escapeHtmlPlain(t)}</li>`).join("")}</ol>`
+          : `<p class="run-recap-line">No scene list was recorded for this tab (try a fresh run from <em>At the table</em>).</p>`;
+
+      return `<section class="run-recap" aria-labelledby="run-recap-h"><h4 id="run-recap-h">What happened in your run</h4><p class="run-recap-lead">The ending below is a closing <em>lens</em> on the same winter. Here is the path your choices actually walked through.</p><p class="run-recap-line"><strong>Argument track:</strong> ${escapeHtmlPlain(
+        pathLabels[path] || path
+      )}.</p><p class="run-recap-line"><strong>Winter scene:</strong> ${escapeHtmlPlain(
+        stripSceneTitle(rollOutcomeLabel(state.lastEvent || "event_censor"))
+      )}</p>${rollBit}${misfit}<p class="run-recap-line"><strong>Final framing:</strong> ${escapeHtmlPlain(
+        leanLabels[lean] || lean
+      )}.</p>${vera}${chorus}${lib}<p class="run-recap-sub"><strong>Beats in order</strong> (each title is a scene you left by choosing):</p>${list}</section>`;
     }
 
     const clamp = (n) => Math.max(0, Math.min(100, n));
@@ -1448,16 +1539,24 @@ Whether one column always swallowed the other, none would swear. The close chose
         state.realmBudgetDraft = { order: 0, reform: 0, people: 0 };
       }
       syncAppChrome(state.current, scene);
-      updateSceneVisuals(state.current);
       endingBlock.innerHTML = "";
 
+      let ep = null;
       if (scene.computed) {
-        const ep = resolveEndingText();
+        ep = resolveEndingText();
         state.lastRunSummary = buildRunSummary(ep);
+        updateSceneVisuals(epilogueVisualSceneId());
+      } else {
+        updateSceneVisuals(state.current);
+      }
+
+      if (scene.computed) {
         titleEl.textContent = ep.title;
         updateSceneDialoguePortrait(state.current);
         textEl.innerHTML =
-          `<div class="run-title-banner"><strong>Session title:</strong> ${ep.runTitle}</div>` + sceneBodyHtml(ep.body);
+          buildRunRecapHtml() +
+          `<div class="run-title-banner"><strong>Session title:</strong> ${ep.runTitle}</div>` +
+          sceneBodyHtml(ep.body);
         let html = "";
         if (ep.secretHtml) html += ep.secretHtml;
         html += `<div class="ending-extra"><strong>Final scores</strong><br>Order ${state.stats.order} · Reform ${state.stats.reform} · People ${state.stats.people}<br><br>${ep.extras.join("<br>")}</div>`;
@@ -1605,7 +1704,6 @@ Whether one column always swallowed the other, none would swear. The close chose
         refreshCoopBallotUI();
         statBars();
         renderInventory();
-        updateSceneVisuals(state.current);
         updateSalometry();
         animateChoiceButtonsIfNeeded();
         state._prevSceneForBudget = state.current;

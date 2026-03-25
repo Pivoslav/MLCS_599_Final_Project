@@ -263,16 +263,16 @@
         bgPos: "50% 40%"
       },
       state_path: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/1/14/SVINYIN%281814%29_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
-        alt: "The Bronze Horseman monument (early 19th-century print).",
-        credit: "M. S. Viniychuk after F. P. Alexeyev, view of the monument to Peter the Great (plate from Stepan Pimenov, <em>Collection of the most remarkable places of St. Petersburg</em>, 1814).",
-        href: "https://commons.wikimedia.org/wiki/File:SVINYIN(1814)_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
-        bgPos: "50% 42%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Alekseev_Kremlin_palace-1800.jpg/1280px-Alekseev_Kremlin_palace-1800.jpg",
+        alt: "Painting of the Kremlin palace complex and cathedrals above the Moskva River.",
+        credit: "Fyodor Alexeyev, Kremlin palace view (shared with the next statist beat: vertical center, ministries, and the letter as case file).",
+        href: "https://commons.wikimedia.org/wiki/File:Alekseev_Kremlin_palace-1800.jpg",
+        bgPos: "50% 38%"
       },
       beat_statist_machine: {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Alekseev_Kremlin_palace-1800.jpg/1280px-Alekseev_Kremlin_palace-1800.jpg",
         alt: "Painting of the Kremlin palace complex and cathedrals above the Moskva River.",
-        credit: "Fyodor Alexeyev, Kremlin palace view (statist machine: vertical center and legible throne geography).",
+        credit: "Fyodor Alexeyev, Kremlin palace view (same plate as <em>Order Before Liberty</em>; files, uniforms, and the letter as case file).",
         href: "https://commons.wikimedia.org/wiki/File:Alekseev_Kremlin_palace-1800.jpg",
         bgPos: "50% 38%"
       },
@@ -368,11 +368,11 @@
         bgPos: "50% 42%"
       },
       resolve_endings: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/The_winter_Palace_%28North_facade%29_in_St._Petersburg_in_the_19th_century.jpg/1280px-The_winter_Palace_%28North_facade%29_in_St._Petersburg_in_the_19th_century.jpg",
-        alt: "Nineteenth-century lithograph of the Winter Palace north façade in snow, Saint Petersburg.",
-        credit: "Lithograph after Iosif Charlemagne, Winter Palace north façade in winter (sorting the outcome: capital in snow, no modern photograph).",
-        href: "https://commons.wikimedia.org/wiki/File:The_winter_Palace_(North_facade)_in_St._Petersburg_in_the_19th_century.jpg",
-        bgPos: "50% 42%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/PalaceSquare-Sadovnikov.jpg/1280px-PalaceSquare-Sadovnikov.jpg",
+        alt: "Watercolor of Palace Square and the Winter Palace in Saint Petersburg (19th century).",
+        credit: "Vasily Sadovnikov, Palace Square and the Winter Palace (19th c.; sorting the outcome: period painting, no modern street traffic).",
+        href: "https://commons.wikimedia.org/wiki/File:PalaceSquare-Sadovnikov.jpg",
+        bgPos: "52% 42%"
       },
       final_route_order: {
         src: "https://upload.wikimedia.org/wikipedia/commons/2/27/Palace_Embankment_near_Hermitage_Theatre_%28Beggrov%29.jpg",
@@ -401,7 +401,25 @@
         credit: "Karl Beggrov, view of Saint Isaac’s Cathedral (epilogue coda: monument, horizon, story fixed in stone).",
         href: "https://commons.wikimedia.org/wiki/File:Beggrov_Vid_na_Isaakij.jpg",
         bgPos: "50% 38%"
+      },
+      /** Statist + Order epilogue: single full-width plate (side rails off; see <code>railsHidden</code> in <code>updateSceneVisuals</code>). */
+      ending_statist_order: {
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg/1280px-Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg",
+        alt: "Painting of the Moscow Kremlin towers seen from the Foundling Hospital embankment.",
+        credit: "Fyodor Alexeyev, Kremlin from the Foundling Hospital (<em>Ending: The File Outlives the Salon</em>: one plate, dossier and vertical center).",
+        href: "https://commons.wikimedia.org/wiki/File:Vid_na_Kreml_ot_Vospitatelnogo_doma.jpg",
+        bgPos: "48% 40%",
+        railsHidden: true
       }
+    };
+
+    /**
+     * Optional override for epilogue background art (defaults to <code>ending_computed</code>).
+     * Keys are <code>pathId_finalLeanApplied</code>, e.g. <code>statist_order</code>.
+     * @type {Record<string, string>}
+     */
+    const EPILOGUE_SCENE_VISUALS = {
+      statist_order: "ending_statist_order"
     };
 
     /**
@@ -458,8 +476,8 @@
         bgPos: "52% 35%"
       },
       state_path: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Alekseev_Kremlin_palace-1800.jpg/1280px-Alekseev_Kremlin_palace-1800.jpg",
-        bgPos: "50% 38%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/1/14/SVINYIN%281814%29_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
+        bgPos: "50% 42%"
       },
       beat_statist_machine: {
         src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/PalaceSquare-Sadovnikov.jpg/1280px-PalaceSquare-Sadovnikov.jpg",
@@ -518,8 +536,8 @@
         bgPos: "55% 45%"
       },
       resolve_endings: {
-        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Anichkov_bridge.jpg/1280px-Anichkov_bridge.jpg",
-        bgPos: "55% 45%"
+        src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fontanka_beggrov.jpg/1280px-Fontanka_beggrov.jpg",
+        bgPos: "50% 45%"
       },
       final_route_order: {
         src: "https://upload.wikimedia.org/wikipedia/commons/1/14/SVINYIN%281814%29_p039_View_of_the_Monument_of_Peter_the_Great.jpg",
@@ -572,7 +590,8 @@
       final_route_order: "crown",
       final_route_reform: "print",
       final_route_people: "flood",
-      ending_computed: "finis"
+      ending_computed: "finis",
+      ending_statist_order: "finis"
     };
 
     /**
