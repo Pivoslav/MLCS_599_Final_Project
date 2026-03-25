@@ -18,8 +18,8 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 6. [ ] **Read-along pass (rest of game)** — §B below; scene-by-scene or scoped batches.
 7. [ ] **Canvas course Page** — Paste `canvas-rce-embed-fragment.html`; verify iframe + link in **your** LMS.
 8. [ ] **Playthrough smoke** — One run per `pathId` after substantive changes (§F).
-9. [ ] **Mobile / narrow pass** — Co-op strip, realm budget panel, sidebar (§F).
-10. [ ] **Accessibility spot-check** — Focus, contrast, live regions on new UI (§D).
+9. [x] **Mobile / narrow pass** — Co-op strip, realm budget panel, sidebar (§F). *Shipped: story-first column order ≤900px, safe-area padding/viewport-fit, realm budget stacks ≤560px, touch targets ≤480px, toasts respect safe area.*
+10. [x] **Accessibility spot-check** — Focus, contrast, live regions on new UI (§D). *Shipped: skip link → `#title`, `:focus-visible` on controls, copy summary uses `role="status"`.*
 
 ---
 
@@ -54,7 +54,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 - [ ] **Canvas Page** — Paste fragment; confirm in target course.
 - [ ] **Module item** — External URL to Pages if preferred.
-- [ ] **Accessibility** — WCAG-style pass (see queue #10).
+- [x] **Accessibility (bundle spot-check)** — Skip link, keyboard focus rings, copy feedback live region (see queue #10). *Full WCAG audit still optional.*
 
 ## E. Repository / legal (optional)
 
@@ -63,7 +63,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 ## F. Testing
 
 - [ ] **Playthrough smoke** — Queue #8.
-- [ ] **Mobile / narrow** — Queue #9.
+- [x] **Mobile / narrow** — Queue #9 (layout + touch targets in CSS; device spot-check still useful).
 - [ ] **GitHub Pages** — Verify demo hub links after each push.
 
 ---

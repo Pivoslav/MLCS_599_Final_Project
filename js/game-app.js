@@ -1166,7 +1166,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         if (ep.unresolvedHtml) {
           html += ep.unresolvedHtml;
         }
-        html += `<div class="ending-actions"><button type="button" class="ghost" id="copySummaryBtn">Copy run summary</button> <span class="copy-toast" id="copyToast" hidden>Copied.</span></div>`;
+        html += `<div class="ending-actions"><button type="button" class="ghost" id="copySummaryBtn">Copy run summary</button> <span class="copy-toast" id="copyToast" role="status" aria-live="polite" hidden>Copied.</span></div>`;
         const path = state.pathId || "west";
         const pack = EPILOGUE_TWELVE[path] || EPILOGUE_TWELVE.west;
         const cmp = (k, lab) => {
@@ -1538,6 +1538,18 @@ Whether one ledger always became footnote to the other, none would swear; the cl
         state.steps = 0;
         pushToast(`Deep link: scene “${q}” — default meters; not a full playthrough path.`);
       } catch (e) {}
+    })();
+
+    (function initSkipLink() {
+      const a = document.querySelector("a.skip-link");
+      const h = document.getElementById("title");
+      if (!a || !h) return;
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        h.focus({ preventScroll: true });
+        const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        h.scrollIntoView({ block: "start", behavior: reduce ? "auto" : "smooth" });
+      });
     })();
 
     refreshCoopBallotUI();
