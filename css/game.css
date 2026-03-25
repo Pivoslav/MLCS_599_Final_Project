@@ -1387,7 +1387,7 @@
     }
 
     .coop-tools-actions {
-      margin: 0 0 1rem;
+      margin: 1rem 0 1.25rem;
       max-width: min(88ch, 100%);
       padding: 1rem 1.1rem 1.15rem;
       border-radius: 12px;

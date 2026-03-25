@@ -1061,7 +1061,7 @@ Whether one ledger always became footnote to the other, none would swear; the cl
           : `${ico}<span class="choice-btn-main"><span class="main">${choice.text}</span>${fx ? `<span class="fx">${fx}</span>` : ""}</span>`;
         button.addEventListener("click", () => {
           if (state.coopToolsEnabled) {
-            pushToast("Co-op gating on: each seat votes above the buttons, then Reveal → commit → Apply winning choice.");
+            pushToast("Co-op gating on: each seat votes to match an option below, then Reveal → commit → Apply under the buttons.");
             return;
           }
           commitChoice(choice);

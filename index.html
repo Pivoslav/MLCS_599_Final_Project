@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Russia at the Crossroads: A Chaadaev Adventure</title>
   <!-- Bump ?v= on css/js when students may see stale copies (browser cache). -->
-  <link rel="stylesheet" href="css/game.css?v=20260326b" />
+  <link rel="stylesheet" href="css/game.css?v=20260326c" />
 </head>
 <body>
   <a href="#title" class="skip-link">Skip to story</a>
@@ -92,7 +92,7 @@
                 <p class="scene-text" id="text"></p>
                 <div class="coop-tools-panel coop-tools-panel--story" aria-label="Co-op gating and timer">
                   <h3 class="coop-story-tools-heading">Co-op (three players)</h3>
-                  <p class="coop-tools-lead">Turn on gating to show the three seats. Optional <strong>discussion timer</strong> below. After votes are locked, use <strong>Reveal votes</strong> (under the seats), confirm <strong>We commit…</strong>, then <strong>Apply winning choice</strong> right above the options.</p>
+                  <p class="coop-tools-lead">Turn on gating to show the three seats. Optional <strong>discussion timer</strong> below. Each seat picks an option; then use <strong>Reveal votes</strong> (under the choice buttons), confirm <strong>We commit…</strong>, and <strong>Apply winning choice</strong>.</p>
                   <label class="coop-enable-row coop-enable-row--prominent"><input type="checkbox" id="coopToolsEnable" /> Enable co-op gating on choice scenes</label>
                   <div id="coopToolsDiscuss" class="coop-tools-discuss" hidden>
                     <div class="coop-timer-row">
@@ -105,10 +105,11 @@
                 <div id="coopMainBallotWrap" class="coop-main-ballot-wrap" hidden>
                   <div class="coop-main-ballot-inner">
                     <h3 class="coop-seats-heading">Three seats — speak, then vote</h3>
-                    <p class="coop-seats-flow">Discussion order: <strong>Order</strong> speaks first, then <strong>Reform</strong>, then <strong>People</strong>. Each seat locks one vote for the options below. Use <strong>Reveal votes</strong> under this block if you want a blind first pass.</p>
+                    <p class="coop-seats-flow">Discussion order: <strong>Order</strong> speaks first, then <strong>Reform</strong>, then <strong>People</strong>. Each seat locks one vote matching an option below. After everyone has chosen, scroll past the buttons for <strong>Reveal votes</strong> if you want a blind first pass.</p>
                     <div id="coopBallotMount" class="coop-ballot-mount"></div>
                   </div>
                 </div>
+                <div class="choices" id="choices"></div>
                 <div id="coopToolsActionBar" class="coop-tools-actions" hidden>
                   <p class="coop-ballot-summary" id="coopBallotSummary" aria-live="polite"></p>
                   <div class="coop-actions-row">
@@ -118,7 +119,6 @@
                   <label class="coop-stance-row"><input type="checkbox" id="coopStanceOk" /> We commit to the ballot outcome for this beat.</label>
                   <button type="button" class="primary" id="coopApplyMajority" disabled>Apply winning choice</button>
                 </div>
-                <div class="choices" id="choices"></div>
                 <div id="endingBlock"></div>
                 <details class="scene-bg-source" id="sceneBgSource" hidden>
                   <summary>Illustration source</summary>
@@ -174,6 +174,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" crossorigin="anonymous"></script>
   <script src="js/game-config.js?v=20260326"></script>
   <script src="js/game-scenes.js?v=20260326"></script>
-  <script src="js/game-app.js?v=20260326b"></script>
+  <script src="js/game-app.js?v=20260326c"></script>
 </body>
 </html>
