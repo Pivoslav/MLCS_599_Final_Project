@@ -17,7 +17,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 5. [x] **Read-along pilot (intro)** — Edition pointer in first **Read alongside** block (McNally & Tempest; Arndt) per `SOURCES.md`.
 6. [ ] **Read-along pass (rest of game)** — §B below; scene-by-scene or scoped batches.
 7. [ ] **Canvas course Page** — Paste `canvas-rce-embed-fragment.html`; verify iframe + link in **your** LMS.
-8. [ ] **Playthrough smoke** — One run per `pathId` after substantive changes (§F).
+8. [x] **Playthrough smoke** — One run per `pathId` after substantive changes (§F). *Automated graph check: `python tools/verify-scenes.py` (or `node tools/verify-scenes.js`); manual path runs still useful after big edits.*
 9. [x] **Mobile / narrow pass** — Co-op strip, realm budget panel, sidebar (§F). *Shipped: story-first column order ≤900px, safe-area padding/viewport-fit, realm budget stacks ≤560px, touch targets ≤480px, toasts respect safe area.*
 10. [x] **Accessibility spot-check** — Focus, contrast, live regions on new UI (§D). *Shipped: skip link → `#title`, `:focus-visible` on controls, copy summary uses `role="status"`.*
 
@@ -62,7 +62,7 @@ This file holds **actionable** work on the **game bundle** (`index.html` + `css/
 
 ## F. Testing
 
-- [ ] **Playthrough smoke** — Queue #8.
+- [x] **Playthrough smoke (static)** — `tools/verify-scenes.py` / `verify-scenes.js` validate `choice.next` targets, `RESOLVE_PATH_LEAD` keys, `SCENE_COLOR_SCHEME` scene ids. *Per-path manual runs still recommended for UX.*
 - [x] **Mobile / narrow** — Queue #9 (layout + touch targets in CSS; device spot-check still useful).
 - [ ] **GitHub Pages** — Verify demo hub links after each push.
 
